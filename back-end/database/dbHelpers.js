@@ -55,10 +55,11 @@ module.exports = {
     WHERE id = $1
   `, [userId]),
 
-  getExerciseIdsFromExerciseWorkoutsByUserId: (userId) => db.any(`
-    SELECT exercise_ids FROM exercises_workouts
+  getExercisesFromExerciseWorkoutsByUserId: (userId) => db.any(`
+    SELECT exercises FROM exercises_workouts
     WHERE id_user = $1
   `, [userId]),
 
+  
 
 };
