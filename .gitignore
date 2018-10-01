@@ -37,3 +37,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
+=======
+
+# miscellaneous
+testFolder
+>>>>>>> d46a17f3a9c3e97f14ac34a1e58e31989c41fd4c
