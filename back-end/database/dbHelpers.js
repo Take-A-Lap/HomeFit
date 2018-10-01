@@ -69,6 +69,18 @@ module.exports = {
     (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals)
     VALUES
     ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9)
-  `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals])
+  `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals]),
+
+  getDietaryRestrictionsIdByName: (name) => db.any(`
+    SELECT id FROM dietary_restrictions
+    WHERE name = $1
+  `, [name]),
+
+  insertIntoUserDiet: (userId, dietId) => db.any(`
+    INSERT INTO user_dietary
+    (id_user, id_dietary_restrictions)
+    VALUES
+    ($1, $2)
+  `, [userId, dietId]),
 
 };
