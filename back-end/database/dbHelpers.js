@@ -116,13 +116,18 @@ module.exports = {
   `, [name]),
 
   updateCompStr: (completed, userId, date, reps) => db.any(`
-  UPDATE completed_str
-  SET
-  completed = $1
-  date = $3
-  reps = $4
-  WHERE
-  id_user = $2
+    UPDATE completed_str
+    SET
+    completed = $1
+    date = $3
+    reps = $4
+    WHERE
+    id_user = $2
   `, [completed, userId, date, reps]),
+
+  undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
+    DELETE FROM user_dietary
+    WHERE id_user = $1 AND id_dietary_restrictions = $2
+  `, [userId, dietId])
 
 };
