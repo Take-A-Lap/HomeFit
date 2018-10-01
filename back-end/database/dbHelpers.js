@@ -128,6 +128,10 @@ module.exports = {
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
     DELETE FROM user_dietary
     WHERE id_user = $1 AND id_dietary_restrictions = $2
-  `, [userId, dietId])
+  `, [userId, dietId]),
 
+  removeUserWorkout: (userId) => db.any(`
+    DELETE FROM exercises_workouts
+    WHERE id_user = $1
+  `, [userId]),
 };
