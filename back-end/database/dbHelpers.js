@@ -98,10 +98,31 @@ module.exports = {
     ($1, $2, $3, $4, $5, $6, $7)
   `, [userId, exerciseId, date, lastTotalTime, bpm, distance, completed]),
 
-  updateCompCardio: (completed) => db.any(`
+  updateCompCardio: (completed, userId, date, lastTotalTime, bpm) => db.any(`
     UPDATE completed_cardio
     SET
     completed = $1
-  `, []),
+    date = $3
+    last_tot_time = $4
+    avg_bpm = $5
+    WHERE
+    id_user = $2
+  `, [completed, userId, date, lastTotalTime, bpm]),
+
+  // need to grab the youtube link for the youtube api
+  getYoutubeLink: (name) => db.any(`
+    SELECT youtube_link FROM exercises
+    WHERE name = $1
+  `, [name]),
+
+  updateCompStr: (completed, userId, date, reps) => db.any(`
+  UPDATE completed_str
+  SET
+  completed = $1
+  date = $3
+  reps = $4
+  WHERE
+  id_user = $2
+  `, [completed, userId, date, reps]),
 
 };
