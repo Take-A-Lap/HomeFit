@@ -98,10 +98,10 @@ module.exports = {
     ($1, $2, $3, $4, $5, $6, $7)
   `, [userId, exerciseId, date, lastTotalTime, bpm, distance, completed]),
 
-  // updateCompCardio: (completed) => db.any(`
-  //   UPDATE completed_cardio
-  //   SET
-  //   completed = $1
-  // `, []),
+  updateCompCardio: (completed) => db.any(`
+    UPDATE completed_cardio
+    SET
+    completed = $1
+  `, []),
 
 };
