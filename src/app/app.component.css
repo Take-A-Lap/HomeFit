@@ -1,5 +1,22 @@
+.row {
+  margin-top: 100px
+}
+
+.HomeFit_logo {
+  display: inline-block;
+  text-align: center;
+}
+
 .google-button {
   border-radius: 5px;
   color: gray;
-  font-family: 'trebuchet MS'
+  font-family: 'trebuchet MS';
+}
+
+.alexa_logo {
+  margin-bottom: 0px;
+}
+
+.op_spark_logo {
+  margin-bottom: 0px;
 }
