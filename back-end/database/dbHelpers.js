@@ -75,12 +75,20 @@ module.exports = {
     SELECT id FROM dietary_restrictions
     WHERE name = $1
   `, [name]),
-
+  
+  // will most likely need to call this within a loop over the different diet ids
   insertIntoUserDiet: (userId, dietId) => db.any(`
     INSERT INTO user_dietary
     (id_user, id_dietary_restrictions)
     VALUES
     ($1, $2)
   `, [userId, dietId]),
+
+  insertIntoCompStr: (exerciseId, userId, reps, completed, date) => db.any(`
+  INSERT INTO completed_str
+  (id_exercise, id_user, reps, completed, date)
+  VALUES
+  ($!, $2, $3, $4, $5)
+  `, [exerciseId, userId, reps, completed, date]),
 
 };
