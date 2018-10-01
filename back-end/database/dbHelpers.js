@@ -60,6 +60,8 @@ module.exports = {
     WHERE id_user = $1
   `, [userId]),
 
-  
+  insertIntoExerciseWorkoutsByUserIdAndArrayOfJson: (userId, arrayOfJson) => db.any(`
+    INSERT INTO exercises_workouts (id_user, exercises) VALUES ( $1, array $2 ::json[])
+  `, [userId, arrayOfJson]),
 
 };
