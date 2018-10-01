@@ -85,10 +85,17 @@ module.exports = {
   `, [userId, dietId]),
 
   insertIntoCompStr: (exerciseId, userId, reps, completed, date) => db.any(`
-  INSERT INTO completed_str
-  (id_exercise, id_user, reps, completed, date)
-  VALUES
-  ($!, $2, $3, $4, $5)
+    INSERT INTO completed_str
+    (id_exercise, id_user, reps, completed, date)
+    VALUES
+    ($!, $2, $3, $4, $5)
   `, [exerciseId, userId, reps, completed, date]),
+
+  insertIntoCompCardio: (userId, exerciseId, date, lastTotalTime, bpm, distance, completed) => db.any(`
+    INSERT INTO completed_cardio
+    (id_user, id_exercise, date, last_tot_time, avg_bpm, distance, completed)
+    VALUES
+    ($1, $2, $3, $4, $5, $6, $7)
+  `, [userId, exerciseId, date, lastTotalTime, bpm, distance, completed]),
 
 };
