@@ -1,4 +1,4 @@
-const db = require('dbFunctions');
+const db = require('../../back-end/database/dbHelpers');
 
 const generateWorkoutLeg = function(difficulty){
   let upperLegExercises = [];
