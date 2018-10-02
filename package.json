@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve —-proxy-config proxy.conf.json",
+    "start": "ng serve --proxy-config proxy.config.json",
     "build": "ng build",
     "test": "jest",
     "lint": "ng lint",
@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@types/jest": "^23.3.2",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
     "express": "^4.16.3",
