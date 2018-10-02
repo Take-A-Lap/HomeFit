@@ -49,6 +49,17 @@ module.exports = {
     SELECT * FROM exercises
     WHERE id = $1
   `, [exerciseId]),
+  
+  getDietaryRestrictionsIdByName: (name) => db.any(`
+    SELECT id FROM dietary_restrictions
+    WHERE name = $1
+    `, [name]),
+
+  // need to grab the youtube link for the youtube api
+  getYoutubeLink: (name) => db.any(`
+    SELECT youtube_link FROM exercises
+    WHERE name = $1
+  `, [name]),
 
   getUserById: (userId) => db.any(`
     SELECT * FROM users
@@ -71,11 +82,6 @@ module.exports = {
     ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9)
   `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals]),
 
-  getDietaryRestrictionsIdByName: (name) => db.any(`
-    SELECT id FROM dietary_restrictions
-    WHERE name = $1
-  `, [name]),
-  
   // will most likely need to call this within a loop over the different diet ids
   insertIntoUserDiet: (userId, dietId) => db.any(`
     INSERT INTO user_dietary
@@ -109,12 +115,6 @@ module.exports = {
     id_user = $2
   `, [completed, userId, date, lastTotalTime, bpm]),
 
-  // need to grab the youtube link for the youtube api
-  getYoutubeLink: (name) => db.any(`
-    SELECT youtube_link FROM exercises
-    WHERE name = $1
-  `, [name]),
-
   updateCompStr: (completed, userId, date, reps) => db.any(`
     UPDATE completed_str
     SET
@@ -134,4 +134,6 @@ module.exports = {
     DELETE FROM exercises_workouts
     WHERE id_user = $1
   `, [userId]),
+
+
 };
