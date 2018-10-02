@@ -7,10 +7,8 @@
   text-align: center;
 }
 
-.google-button {
-  border-radius: 5px;
-  color: gray;
-  font-family: 'trebuchet MS';
+.g-signin2 {
+  display: inline-block;
 }
 
 .alexa_logo {

@@ -33,10 +33,14 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-
+.vscode
 # System Files
 .DS_Store
 Thumbs.db
 
 # miscellaneous
 testFolder
+
+back-end/config.js
+#api keys
+.env

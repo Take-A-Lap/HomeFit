@@ -1,4 +1,7 @@
 <div class="container-fluid">
+<!-- remove line once pages are properly switching -->
+  <a routerLink="/home"><button class="btn btn-success"> Home </button></a>
+  <a routerLink="/settings"><button class="btn btn-success"> Settings </button></a>
     <div class="row">
       <div class="col-md-4">    
       </div>
@@ -11,10 +14,7 @@
     <div class="row">
       <div class ="col-md-4"></div>
       <div class="col-md-4 text-center">
-        <button type="button" class="google-button">
-          <img src="/src/images/google_icon.png" />
-          Log in with Google
-        </button>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
       </div>
       <div class="col-md-4"></div>
     </div>
@@ -30,3 +30,4 @@
   </div>
 </div>
 
+<router-outlet></router-outlet>
