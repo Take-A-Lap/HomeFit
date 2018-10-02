@@ -1,12 +1,16 @@
 const express = require('express')
 const bodyParser = require('body-parser');
+
 const db = require('../database/dbHelpers');
 const app = express()
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
 const port = 3000
+app.use(express.static('dist/HomeFit'));
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
