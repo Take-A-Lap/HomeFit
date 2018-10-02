@@ -13,9 +13,9 @@ app.get('/', (req, res) => res.send('Hello World!'))
 // TODO: create routes that can be used if for nothing else testing
 
 app.get('/test', (req, res) => {
-  db.getUserById(1)
-  .then(({ userArr }) => {
-    send(userArr);
+  db.getExerciseByMuscleAndDiff(1, 1)
+  .then((userArr) => {
+    res.send(userArr);
   })
 });
 

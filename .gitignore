@@ -40,7 +40,7 @@ Thumbs.db
 
 # miscellaneous
 testFolder
-
+config.js
 back-end/config.js
 #api keys
 .env
