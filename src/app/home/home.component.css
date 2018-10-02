@@ -1,3 +1,29 @@
-.btn {
-  border-radius: 0px
+.nav-buttons {
+  border-radius: 0px;
+  background-color:#31cd32;
 }
+
+.cal_sun {
+  background-color:#31cd32
+}
+
+.imageContainer {
+  position: relative;
+  width:200px; 
+  height:200px; 
+  background-image: url('../../assets/img/new_orleans_placeholder.jpg')
+}
+
+/* h5 {
+  position: absolute; 
+   top: 200px; 
+   left: 0; 
+   width: 100%; 
+}
+
+h6 {
+  position: absolute; 
+   top: 220px; 
+   left: 0; 
+   width: 100%; 
+} */
