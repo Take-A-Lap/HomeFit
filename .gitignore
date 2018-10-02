@@ -37,10 +37,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+config.js
 
 # miscellaneous
 testFolder
-
+config.js
 back-end/config.js
 #api keys
 .env

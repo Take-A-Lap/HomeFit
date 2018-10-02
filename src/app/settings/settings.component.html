@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div id="google_translate_element"></div>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>User Agreement</h2>
+      <p>
+        Welcome to HomeFit with Alexa. By purchasing this app, you agree to all the terms of use for HomeFit as well as Alexa and
+        Amazon web services. Purchasing this app does not guarantee weight loss and exercise. The user must take control of their
+        own workouts.
+      </p>
+      <div class="row">
+        <div class="col-md-6">
+          <button type="button" class="button">I Agree</button>
+          <button type="button" class="button">I disagree</button>
+        </div>
+        <div class="col-md-6">
+          <a routerLink="/personalInfo"><button type="button" class="button">Next</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
+  selector: 'app-cardio',
+  templateUrl: './cardio.component.html',
   styles: []
 })
-export class SettingsComponent implements OnInit {
+export class CardioComponent implements OnInit {
 
   constructor() { }
 

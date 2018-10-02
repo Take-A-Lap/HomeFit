@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
+  selector: 'app-strength',
+  templateUrl: './strength.component.html',
   styles: []
 })
-export class SettingsComponent implements OnInit {
+export class StrengthComponent implements OnInit {
 
   constructor() { }
 
