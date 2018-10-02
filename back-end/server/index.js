@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const db = require('../database/dbHelpers');
 const app = express()
 
+const workout = require('../Algorithms/workout.js');
+const meal = require('../Algorithms/recipe.js');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -15,6 +18,12 @@ app.use(express.static('dist/HomeFit'));
 app.get('/', (req, res) => res.send('Hello World!'))
 
 // TODO: create routes that can be used if for nothing else testing
+  app.get('/cornTest', (req, res) => {
+    res.send(workout.generateWorkoutLeg(3))
+    // .then((workout)=>{
+    //   res.send(workout);
+    // })
+  })
 
 app.get('/test', (req, res) => {
   db.getYoutubeLink('Burpee')

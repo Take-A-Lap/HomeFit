@@ -2,12 +2,13 @@ const db = require('../../back-end/database/dbHelpers');
 
 module.exports = {
 
-  generateWorkoutLeg: function(difficulty){
+  generateWorkoutLeg: async function(difficulty){
   let upperLegExercises = [];
   let otherLegExercises = [];
   let abdominalExercises = [];
   let workout = [];
   
+  let legPromise = new Promise((resolve, reject)=>{
   //Insert db query which returns an array of all upperleg exercises within the difficulty range
   //Save array to resolve
   db.getExerciseByMuscleAndDiff(3, difficulty)
@@ -20,7 +21,6 @@ module.exports = {
     //Push object at indexes of random numbers into the workout array
     workout.push(upperLegExercises[firstIndex], upperLegExercises[secondIndex], upperLegExercises[thirdIndex]);
   })
-
   //Insert db query which returns an array of all otherleg exercises within the difficulty range
   //Save array to resolve
   db.getExerciseByMuscleAndDiff(4, difficulty)
@@ -44,7 +44,9 @@ module.exports = {
     //Push object at indexes of random numbers into the workout array
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex]);
   })
-  return workout;
+  setTimeout(() => resolve(workout), 3000);
+  })
+  
   },
 
   generateWorkoutBack: function(difficulty){
