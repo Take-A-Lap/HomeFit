@@ -2,7 +2,7 @@ const db = require('../../back-end/database/dbHelpers');
 
 module.exports = {
 
-  generateWorkoutLeg: async function(difficulty){
+  generateWorkoutLeg: async function(difficulty, callback){
   let upperLegExercises = [];
   let otherLegExercises = [];
   let abdominalExercises = [];
@@ -44,7 +44,7 @@ module.exports = {
     //Push object at indexes of random numbers into the workout array
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex]);
   })
-  setTimeout(() => resolve(workout), 3000);
+  setTimeout(() => callback(workout), 3000);
   })
   
   },
