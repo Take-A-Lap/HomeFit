@@ -8,6 +8,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
 import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
+import { StrengthComponent } from './strength/strength.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-res
     routingComponents,
     SignUpComponent,
     SettingsPersonalInfoComponent,
-    DietaryRestrictionsComponent
+    DietaryRestrictionsComponent,
+    StrengthComponent
   ],
   imports: [
     BrowserModule,
