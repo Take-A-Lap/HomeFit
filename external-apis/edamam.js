@@ -3,13 +3,23 @@ const { Edamam_id } = require('config.js');
 const { Edamam_KEY } = require('config.js');
 
 module.exports.getBreakfast = (calorieMin, calorieMax, dietaryRestrictions, callback) => {
+
+    const params = {
+      q:eggs|yogurt,
+      calories: `${calorieMin}-${calorieMax}`,
+      app_id: Edamam_id,
+      app_key: Edamam_KEY,
+    }
+
+    let endpoint = 'https://api.edamam.com/search'
+    dietaryRestrictions.forEach(restriction => {
+      endpoint += `Health=${restriction}&`
+    })
+
+    endpoint = endpoint.slice(0, endpoint.length-1);
+
     // make get request to edamam recipe api and add the restrictions, and calorie as params
-    axios.get('https://api.edamam.com/search', {
-        q: eggs|yogurt,
-        calories: `${calorieMin}-${calorieMax}`,
-        app_id: Edamam_id,
-        app_key: Edamam_KEY,
-      })
+    axios.get(endpoint, params)
       // on return of the request
       .then((response) => {
         // create an array for breakfast recipes
@@ -47,16 +57,16 @@ module.exports.getLunchOrDinner = (calorieMin, calorieMax, dietaryRestrictions, 
     app_id: Edamam_id,
     app_key: Edamam_KEY,
   }
+
+  let endpoint = 'https://api.edamam.com/search'
   dietaryRestrictions.forEach(restriction => {
-    params
+    endpoint += `Health=${restriction}&`
   })
+
+  endpoint = endpoint.slice(0, endpoint.length-1);
+
   // make get request to edamam recipe api and add the restrictions, and calorie as params
-  axios.get('https://api.edamam.com/search', {
-      q: eggs|yogurt,
-      calories: `${calorieMin}-${calorieMax}`,
-      app_id: Edamam_id,
-      app_key: Edamam_KEY,
-    })
+  axios.get(endpoint, params)
     // on return of the request
     .then((response) => {
       // create an array for breakfast recipes
@@ -79,7 +89,7 @@ module.exports.getLunchOrDinner = (calorieMin, calorieMax, dietaryRestrictions, 
         }
       }
       // call the callback on the now populated breakfast recipes array
-      callback(breakfastRecipes);
+      callback(lunchOrDinnerRecipes);
     })
     .catch(error => {
       console.log(error);
