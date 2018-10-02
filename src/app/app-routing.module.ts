@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
+import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
 
 const routes: Routes = [
   // { path: '', component: AppComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'settings', component: SettingsComponent},
   { path: 'personalInfo', component: SettingsPersonalInfoComponent},
+  { path: 'dietaryRestrictions', component: DietaryRestrictionsComponent},
   { path: "**", component: ErrorComponent}
 ];
 
@@ -28,6 +30,7 @@ export const routingComponents = [
   HomeComponent, 
   SignUpComponent, 
   SettingsComponent,
-  SettingsComponent, 
+  SettingsPersonalInfoComponent, 
+  DietaryRestrictionsComponent,
   ErrorComponent
 ]
