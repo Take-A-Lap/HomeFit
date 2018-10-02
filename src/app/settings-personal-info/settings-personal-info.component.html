@@ -2,10 +2,14 @@
   <div class="row">
     <div class="col-md-12">
       <div class="btn-group" role="group">
-        <a routerLink="/home"><button class="btn btn-secondary" type="button">Home</button></a>
+        <a routerLink="/home">
+          <button class="btn btn-secondary" type="button">Home</button>
+        </a>
         <button class="btn btn-secondary" type="button">Meal</button>
         <button class="btn btn-secondary" type="button">Workout</button>
-        <a routerLink="/"><button class="btn btn-secondary" type="button">Logout</button></a>
+        <a routerLink="/">
+          <button class="btn btn-secondary" type="button">Logout</button>
+        </a>
       </div>
       <form role="form">
         <div class="form-group">
@@ -68,7 +72,9 @@
           <input type="checkbox" /> Female
         </label>
       </div>
-      <button type="button" class="btn btn-success">Next</button>
+      <a routerLink="/dietaryRestrictions">
+        <button type="button" class="btn btn-success">Next</button>
+      </a>
     </div>
   </div>
 </div>
