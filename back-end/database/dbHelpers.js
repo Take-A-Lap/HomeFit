@@ -72,7 +72,7 @@ module.exports = {
   `, [userId]),
 
   insertIntoExerciseWorkoutsByUserIdAndArrayOfJson: (userId, arrayOfJson) => db.any(`
-    INSERT INTO exercises_workouts (id_user, exercises) VALUES ( $1, array $2 ::json[])
+    INSERT INTO exercises_workouts (id_user, exercises) VALUES ( $1, $2 ::json[])
   `, [userId, arrayOfJson]),
 
   addNewUser: (name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals) => db.any(`
