@@ -24,9 +24,16 @@ app.get('/test', (req, res) => {
 
 app.post('/test', (req, res) =>{
   // console.log(req.body);
-  const { userId } = req.body;
-  const { dietId } = req.body;
-  db.undoUserDietaryRestrictionByIds(userId, dietId)
+  const { name } = req.body;
+  const { weight } = req.body;
+  const { numPushUps } = req.body;
+  const { jogDist } = req.body;
+  const { age } = req.body;
+  const { sex } = req.body;
+  const { height } = req.body;
+  const { squatComf } = req.body;
+  const { goals } = req.body;
+  db.addNewUser(name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals)
   .then()
   .catch((err) => {
     console.error(err);
