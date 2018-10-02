@@ -2,32 +2,6 @@ const axios = require(axios);
 const { Edamam_id } = require('config.js');
 const { Edamam_KEY } = require('config.js');
 
-  // const getBreakfast = function (calorieMin, calorieMax, dietaryRestrictions) {
-  // //   let recipes = [];
-  // //   let breakfastRecipes = [];
-  //   let breakfastPromise = new Promise(function (resolve, reject) {
-  //     //api call to edamam returns appropriate recipes in an array
-  //     recipes = ''/*API call return*/;
-  //     if(recipes.length > 0) {
-  //       resolve('Recipes received');
-  //     } else {
-  //       reject('Trouble receiving recipes');
-  //     }
-  //   });
-  //   breakfastPromise.then(()=>{
-  //     let randomNumbers = {};
-  //     for(let i = 1; i <= 7; i++){
-  //       randomNumbers[i] = Math.floor(Math.random() * recipes.length);
-  //     }
-  //     let randomNumberArray = Object.values(randomNumbers);
-  //     randomNumberArray.forEach(randomNumber => {
-  //       breakfastRecipes.push(recipes[randomNumber]);
-  //     });
-  //     return breakfastRecipes;
-  //   });
-  // }
-
-
 module.exports.getBreakfast = (calorieMin, calorieMax, dietaryRestrictions, callback) => {
     // make get request to edamam recipe api and add the restrictions, and calorie as params
     axios.get('https://api.edamam.com/search', {
@@ -66,12 +40,22 @@ module.exports.getBreakfast = (calorieMin, calorieMax, dietaryRestrictions, call
 }
 
 module.exports.getLunchOrDinner = (calorieMin, calorieMax, dietaryRestrictions, callback) => {
-  // make get request to edamam recipe api and add the restrictions, and calorie as params
-  axios.get('https://api.edamam.com/search', {
-    q: eggs|yogurt,
+  // make an object for the params to pass to the get request
+  const params = {
+    q:eggs|yogurt,
     calories: `${calorieMin}-${calorieMax}`,
     app_id: Edamam_id,
     app_key: Edamam_KEY,
+  }
+  dietaryRestrictions.forEach(restriction => {
+    params
+  })
+  // make get request to edamam recipe api and add the restrictions, and calorie as params
+  axios.get('https://api.edamam.com/search', {
+      q: eggs|yogurt,
+      calories: `${calorieMin}-${calorieMax}`,
+      app_id: Edamam_id,
+      app_key: Edamam_KEY,
     })
     // on return of the request
     .then((response) => {
@@ -94,13 +78,6 @@ module.exports.getLunchOrDinner = (calorieMin, calorieMax, dietaryRestrictions, 
           randNums.push(randNum);
         }
       }
-      // for(let i = 1; i <= 7; i++){
-      //   // randomNumbers[i] = Math.floor(Math.random() * recipes.length);
-      // }
-      // let randomNumberArray = Object.values(randomNumbers);
-      // randomNumberArray.forEach(randomNumber => {
-      //   breakfastRecipes.push(recipes[randomNumber]);
-      // });
       // call the callback on the now populated breakfast recipes array
       callback(breakfastRecipes);
     })
@@ -108,3 +85,28 @@ module.exports.getLunchOrDinner = (calorieMin, calorieMax, dietaryRestrictions, 
       console.log(error);
     });
 }
+
+  // const getBreakfast = function (calorieMin, calorieMax, dietaryRestrictions) {
+  // //   let recipes = [];
+  // //   let breakfastRecipes = [];
+  //   let breakfastPromise = new Promise(function (resolve, reject) {
+  //     //api call to edamam returns appropriate recipes in an array
+  //     recipes = ''/*API call return*/;
+  //     if(recipes.length > 0) {
+  //       resolve('Recipes received');
+  //     } else {
+  //       reject('Trouble receiving recipes');
+  //     }
+  //   });
+  //   breakfastPromise.then(()=>{
+  //     let randomNumbers = {};
+  //     for(let i = 1; i <= 7; i++){
+  //       randomNumbers[i] = Math.floor(Math.random() * recipes.length);
+  //     }
+  //     let randomNumberArray = Object.values(randomNumbers);
+  //     randomNumberArray.forEach(randomNumber => {
+  //       breakfastRecipes.push(recipes[randomNumber]);
+  //     });
+  //     return breakfastRecipes;
+  //   });
+  // }
