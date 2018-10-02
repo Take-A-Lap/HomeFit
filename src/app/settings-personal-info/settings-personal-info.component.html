@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group" role="group">
+        <a routerLink="/home">
+          <button class="btn btn-secondary" type="button">Home</button>
+        </a>
+        <button class="btn btn-secondary" type="button">Meal</button>
+        <button class="btn btn-secondary" type="button">Workout</button>
+        <a routerLink="/">
+          <button class="btn btn-secondary" type="button">Logout</button>
+        </a>
+      </div>
+      <form role="form">
+        <div class="form-group">
+
+          <label for="ageInput">Age</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="age" 
+                  placeholder="Enter age in years"/>
+        </div>
+        <div class="form-group">
+          <label for="heightInput">Height</label>
+          <input  type="text" 
+                  class="form-control" 
+                  id="height" 
+                  placeholder="Enter height in inches"/>
+        </div>
+        <div class="form-group">
+          <label for="weightInput">Weight</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="weight" 
+                  placeholder="Enter weight in pounds"/>
+        </div>
+      </form>
+      <ul>
+        <div class="slidecontainer">
+          <li class="list-item">
+            Goals
+              <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </li>
+          <li class="list-item">
+            Workouts
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </li>
+          <li class="list-item">
+            How many push-ups can you do?
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </li>
+          <li class="list-item">
+            How do you feel about squats?
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </li>
+          <li class="list-item">
+            How far can you comfortably jog?
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </li>
+          <li class="list-item">
+            Full range of motion
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </li>
+        </div>
+      </ul>
+      <div class="checkbox">
+      
+        <label>
+          <input type="checkbox" /> Male
+        </label>
+        <label>
+          <input type="checkbox" /> Female
+        </label>
+      </div>
+      <a routerLink="/dietaryRestrictions">
+        <button type="button" class="btn btn-success">Next</button>
+      </a>
+    </div>
+  </div>
+</div>
