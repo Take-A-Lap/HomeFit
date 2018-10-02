@@ -2,25 +2,17 @@
   <div class="row">
     <div class="col-md-12">
       <div class="btn-group" role="group">
-        <button class="nav-buttons" type="button">
-          Meal
-        </button>
-        <button class="nav-buttons" type="button">
-          Workout
-        </button>
-        <button class="nav-buttons" type="button">
-          Settings
-        </button>
-        <a routerLink="/"><button class="nav-buttons" type="button">
-          Logout
-        </button></a>
+        <button class="nav-buttons" type="button">Meal</button>
+        <button class="nav-buttons" type="button">Workout</button>
+        <button class="nav-buttons" type="button">Settings</button>
+        <a routerLink="/"><button class="nav-buttons" type="button">Logout</button></a>
       </div>
       <div class="media">
-        <img class="responsive" alt="Location pic" src="../../assets/img/new_orleans_placeholder.jpg" />
-        <div class="media-body">
-          <h5 class="mt-0">
-            Current Weather
-          </h5> New Orleans, LA 75˚
+        <div class="imageContainer">
+          Current Weather: New Orleans, LA 75˚
+          <img alt="Location pic" src="../../assets/img/new_orleans_placeholder.jpg" />
+            <!-- <h5>Current Weather</h5>
+            <h6>New Orleans, LA 75˚</h6> -->
         </div>
       </div>
       <table class="table">
@@ -62,9 +54,18 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img class="d-block w-100" alt="Carousel Bootstrap First" src="../../assets/img/sesame_chili_pancakes.png" />
+            <div class="carousel-caption">
+            <h4>
+              Second Thumbnail label
+            </h4>
+            <p>
+              Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
+              metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+            </p>
+            </div>
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" alt="Carousel Bootstrap Second" src="./imgs/sesame_chili_pancakes.png" />
+            <img class="d-block w-100" alt="Carousel Bootstrap Second" src="../../assets/img/sesame_chili_pancakes.png" />
             <div class="carousel-caption">
               <h4>
                 Second Thumbnail label
