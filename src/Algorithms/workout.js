@@ -1,6 +1,8 @@
 const db = require('../../back-end/database/dbHelpers');
 
-const generateWorkoutLeg = function(difficulty){
+module.exports = {
+
+  generateWorkoutLeg: function(difficulty){
   let upperLegExercises = [];
   let otherLegExercises = [];
   let abdominalExercises = [];
@@ -43,9 +45,9 @@ const generateWorkoutLeg = function(difficulty){
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex]);
   })
   return workout;
-}
+  },
 
-const generateWorkoutBack = function(difficulty){
+  generateWorkoutBack: function(difficulty){
 let backExercises = [];
   let backArmExercises = [];
   let abdominalExercises = [];
@@ -89,9 +91,9 @@ let backExercises = [];
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex]);
   })
   return workout;
-}
+  },
 
-const generateWorkoutChest = function(difficulty){
+  generateWorkoutChest: function(difficulty){
   let chestExercises = [];
   let chestArmExercises = [];
   let abdominalExercises = [];
@@ -134,9 +136,9 @@ const generateWorkoutChest = function(difficulty){
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex]);
   })
   return workout;
-}
+  },
 
-const generateWorkoutCardio = function(difficulty){
+  generateWorkoutCardio: function(difficulty){
   let cardioExercises = [];
   let abdominalExercises = [];
   let workout = [];
@@ -171,9 +173,9 @@ const generateWorkoutCardio = function(difficulty){
   })
   
   return workout;
-}
+  },
 
-const generateWorkoutSignUp = function(difficulty){
+  generateWorkoutSignUp: function(difficulty){
   let clientWorkouts = [];
   //declare a promise to hold all async calls
   let newClientPromise = new Promise(function(resolve, reject){
@@ -195,6 +197,7 @@ const generateWorkoutSignUp = function(difficulty){
     clientWorkouts.push(chestOne, chestTwo, back, leg, cardioOne, cardioTwo, cardioThree);
   })
   return clientWorkouts;
-}
+  },
 
-const generateNextWorkout = function(difficulty){};
+  generateNextWorkout: function(difficulty){}
+}
