@@ -1,6 +1,6 @@
 // require pg-promise
 const pgp = require('pg-promise')();
-//require the config js to get the libpass
+//require the config js to get the libPass
 const { libPass } = require('../config');
 
 const connection = {
@@ -16,8 +16,8 @@ const db = pgp(connection);
 module.exports = {
   // get user information
   getUserInfoByName: (username) => db.any(`
-  SELECT * FROM users
-  WHERE name = $1
+    SELECT * FROM users
+    WHERE name = $1
   `, [username]),
 
   // gets the user dietary information based on the user id
@@ -44,7 +44,7 @@ module.exports = {
     WHERE id_user = $1
   `, [userId]),
 
-  // realised we may need to grab the exercises by their id as well
+  // realized we may need to grab the exercises by their id as well
   getExerciseById: (exerciseId) => db.any(`
     SELECT * FROM exercises
     WHERE id = $1
