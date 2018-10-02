@@ -25,8 +25,8 @@ app.get('/test', (req, res) => {
 app.post('/test', (req, res) =>{
   // console.log(req.body);
   const { userId } = req.body;
-  // const { arrayOfJson } = req.body;
-  db.removeUserWorkout(userId)
+  const { dietId } = req.body;
+  db.undoUserDietaryRestrictionByIds(userId, dietId)
   .then()
   .catch((err) => {
     console.error(err);
