@@ -6,12 +6,14 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { ErrorComponent } from './error/error.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    SignUpComponent
+    SignUpComponent,
+    SettingsPersonalInfoComponent
   ],
   imports: [
     BrowserModule,
