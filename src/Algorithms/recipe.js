@@ -21,6 +21,6 @@ const getBreakfast = function (calorieMin, calorieMax, dietaryRestrictions) {
     randomNumberArray.forEach(randomNumber => {
       breakfastRecipes.push(recipes[randomNumber]);
     });
+    return breakfastRecipes;
   })
-  return breakfastRecipes;
 }
