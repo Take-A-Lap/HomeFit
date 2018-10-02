@@ -9,6 +9,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
 import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
 import { StrengthComponent } from './strength/strength.component';
+import { CardioComponent } from './cardio/cardio.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { StrengthComponent } from './strength/strength.component';
     SignUpComponent,
     SettingsPersonalInfoComponent,
     DietaryRestrictionsComponent,
-    StrengthComponent
+    StrengthComponent,
+    CardioComponent
   ],
   imports: [
     BrowserModule,
