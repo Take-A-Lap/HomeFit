@@ -5,6 +5,7 @@ import { ErrorComponent } from './error/error.component';
 import { AppComponent } from './app.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
 
 const routes: Routes = [
   // { path: '', component: AppComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent},
   { path: 'home', component: HomeComponent},
   { path: 'settings', component: SettingsComponent},
+  { path: 'personalInfo', component: SettingsPersonalInfoComponent},
   { path: "**", component: ErrorComponent}
 ];
 
@@ -25,6 +27,7 @@ export class AppRoutingModule { }
 export const routingComponents = [
   HomeComponent, 
   SignUpComponent, 
+  SettingsComponent,
   SettingsComponent, 
   ErrorComponent
 ]
