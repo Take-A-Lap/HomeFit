@@ -1,4 +1,4 @@
-const db = require('dbFunctions');
+const db = require('../../back-end/database/dbHelpers');
 
 const generateWorkoutLeg = function(difficulty){
   let upperLegExercises = [];
@@ -9,7 +9,7 @@ const generateWorkoutLeg = function(difficulty){
   let upperLegPromise = new Promise(function(resolve, reject){
     //Insert db query which returns an array of all upperleg exercises within the difficulty range
     //Save array to resolve
-    upperLegExercises = db.getExercise(3, difficulty);
+    upperLegExercises = db.getExerciseByMuscleAndDiff(3, difficulty);
     if(upperLegExercises.length > 0){
       resolve('Upper leg exercises retrieved')
     } else {
@@ -19,7 +19,7 @@ const generateWorkoutLeg = function(difficulty){
   let otherLegPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all otherleg exercises within the difficulty range
     //Save array to resolve
-    otherLegExercises = db.getExercise(4, difficulty);
+    otherLegExercises = db.getExerciseByMuscleAndDiff(4, difficulty);
     if (otherLegExercises.length > 0) {
       resolve('Other leg exercises retrieved')
     } else {
@@ -29,7 +29,7 @@ const generateWorkoutLeg = function(difficulty){
   let abdominalPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all abdominal exercises within the difficulty range
     //Save array to resolve
-    abdominalExercises = db.getExercise(2, difficulty);
+    abdominalExercises = db.getExerciseByMuscleAndDiff(2, difficulty);
     if (abdominalExercises.length > 0) {
       resolve('Abdominal exercises retrieved')
     } else {
@@ -71,7 +71,7 @@ let backExercises = [];
   let backPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all upperleg exercises within the difficulty range
     //Save array to resolve
-    backExercises = db.getExercise(8, difficulty);
+    backExercises = db.getExerciseByMuscleAndDiff(8, difficulty);
     if (backExercises.length > 0) {
       resolve('Back exercises retrieved')
     } else {
@@ -81,7 +81,7 @@ let backExercises = [];
   let backArmPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all otherleg exercises within the difficulty range
     //Save array to resolve
-    backArmExercises = db.getExercise(7, difficulty);
+    backArmExercises = db.getExerciseByMuscleAndDiff(7, difficulty);
     if (backArmExercises.length > 0) {
       resolve('Bicep exercises retrieved')
     } else {
@@ -91,7 +91,7 @@ let backExercises = [];
   let abdominalPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all abdominal exercises within the difficulty range
     //Save array to resolve
-    abdominalExercises = db.getExercise(2, difficulty);
+    abdominalExercises = db.getExerciseByMuscleAndDiff(2, difficulty);
     if (abdominalExercises.length > 0) {
       resolve('Abdominal exercises retrieved')
     } else {
@@ -133,7 +133,7 @@ const generateWorkoutChest = function(difficulty){
   let chestPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all upperleg exercises within the difficulty range
     //Save array to resolve
-    chestExercises = db.getExercise(6, difficulty);
+    chestExercises = db.getExerciseByMuscleAndDiff(6, difficulty);
     if (chestExercises.length > 0) {
       resolve('Chest exercises retrieved')
     } else {
@@ -143,7 +143,7 @@ const generateWorkoutChest = function(difficulty){
   let chestArmPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all otherleg exercises within the difficulty range
     //Save array to resolve
-    chestArmExercises = db.getExercise(5, difficulty);
+    chestArmExercises = db.getExerciseByMuscleAndDiff(5, difficulty);
     if (chestArmExercises.length > 0) {
       resolve('Tricep exercises retrieved')
     } else {
@@ -153,7 +153,7 @@ const generateWorkoutChest = function(difficulty){
   let abdominalPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all abdominal exercises within the difficulty range
     //Save array to resolve
-    abdominalExercises = db.getExercise(2, difficulty);
+    abdominalExercises = db.getExerciseByMuscleAndDiff(2, difficulty);
     if (abdominalExercises.length > 0) {
       resolve('Abdominal exercises retrieved')
     } else {
@@ -194,7 +194,7 @@ const generateWorkoutCardio = function(difficulty){
   let cardioPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all upperleg exercises within the difficulty range
     //Save array to resolve
-    cardioExercises = db.getExercise(1, difficulty);
+    cardioExercises = db.getExerciseByMuscleAndDiff(1, difficulty);
     if (cardioExercises.length > 0) {
       resolve('Cardio exercises retrieved')
     } else {
@@ -204,7 +204,7 @@ const generateWorkoutCardio = function(difficulty){
   let abdominalPromise = new Promise(function (resolve, reject) {
     //Insert db query which returns an array of all abdominal exercises within the difficulty range
     //Save array to resolve
-    abdominalExercises = db.getExercise(2, difficulty);
+    abdominalExercises = db.getExerciseByMuscleAndDiff(2, difficulty);
     if (abdominalExercises.length > 0) {
       resolve('Abdominal exercises retrieved')
     } else {
