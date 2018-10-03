@@ -1,0 +1,1 @@
+yum -y install httpd > /var/log/installnode.out 2>&1
