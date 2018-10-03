@@ -7,21 +7,70 @@ const app = express()
 const workout = require('../Algorithms/workout.js');
 const meal = require('../Algorithms/recipe.js');
 
+const port = 3000
+app.use(express.static('dist/HomeFit'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-const port = 3000
-app.use(express.static('dist/HomeFit'));
-
 app.get('/', (req, res) => res.send('Hello World!'))
 
+app.get('/cornTest', (req,res)=>{
+  meal.getEggs(300,700,"alcohol-free", (meal)=>{
+    let result = JSON.parse(meal);
+    res.send(result);
+  })
+})
+
 // TODO: create routes that can be used if for nothing else testing
-  app.get('/cornTest', (req, res) => {
-    workout.generateWorkoutLeg(3, (workout)=> {
-      res.send(workout);
-    })
+  app.get('/breakfast', (req, res) => {
+      let meals = [];
+      let breakfastResponse = [];
+      meal.getBreakfast(300, 700, "alcohol-free", (meal) => {
+        let result = JSON.parse(meal);
+        let recipes = result.hits;
+        recipes.forEach(recipe => {
+          meals.push(recipe);
+        });
+      })
+     
+      meal.getYogurt(300, 700, "alcohol-free", (meal) => {
+        let result = JSON.parse(meal);
+        let recipes = result.hits;
+        recipes.forEach(recipe => {
+          meals.push(recipe);
+        });
+        // res.send(meals);
+      })
+      
+      function generateSeven(array){
+        let randScreen = [];
+        let randomNumbers = {};
+        for(let i = 1; i <= 7; i++){
+          let gen = Math.floor(Math.random() * array.length);
+          randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * array.length) : gen;
+        }
+        let randomNumberArray = Object.values(randomNumbers);
+        randomNumberArray.forEach(randomNumber => {
+          breakfastResponse.push(meals[randomNumber]);
+        });
+      }
+
+      meal.getEggs(300, 700, "alcohol-free", (meal) => {
+         let result = JSON.parse(meal);
+         let recipes = result.hits;
+         recipes.forEach(recipe => {
+           meals.push(recipe);
+         });
+         generateSeven(meals);
+         res.send(breakfastResponse);
+         // console.log(meals.length);
+       })
+    // workout.generateWorkoutSignUp(3, (workout)=> {
+    //   res.send(workout);
+    // })
     
   })
 
