@@ -15,12 +15,21 @@ const LaunchRequestHandler = {
   }
 };
 
-const StartWorkoutHandler ={
+const StartWorkoutHandler = {
   canHandle(handlerInput) {
 
   },
   handle(handlerInput) {
-    
+
+  }
+};
+
+const RecomendRecipeHandler = {
+  canHandle(handlerInput) {
+
+  },
+  handle(handlerInput) {
+
   }
 };
 
@@ -28,5 +37,7 @@ const StartWorkoutHandler ={
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     //handlers go here
-    LaunchRequestHandler
+    LaunchRequestHandler,
+    StartWorkoutHandler,
+    RecomendRecipeHandler
   ).create();
