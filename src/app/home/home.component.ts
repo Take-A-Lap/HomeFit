@@ -7,8 +7,9 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class HomeComponent implements OnInit {
-
+  test = 'hello world';
   ngOnInit() {
+
   }
 
 }
