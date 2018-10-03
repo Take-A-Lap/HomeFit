@@ -8,15 +8,6 @@ files:
   - source: /
     destination: /var/www/html/
 
-permissions:
-   - object: /var/www/html
-     pattern: "**"
-     owner: node
-     group: node
-     mode: 755
-     type:
-       - file
-
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies.sh
