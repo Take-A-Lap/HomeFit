@@ -200,7 +200,7 @@ module.exports = {
     this.generateWorkoutChest(difficulty, (wo) => {
       clientWorkouts.push(wo);
     });
-  setTimeout(() => callback(clientWorkouts), 2000);
+  setTimeout(() => callback(clientWorkouts), 3000);
   },
 
   generateNextWorkout: function(difficulty){}

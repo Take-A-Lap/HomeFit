@@ -27,51 +27,50 @@ module.exports = {
     })
   },
   getLunch: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
-    request(`https://api.edamam.com/search?q=lunch&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=3&calories=591-722&health=alcohol-free`, function (error, response, body) {
+    request(`https://api.edamam.com/search?q=lunch&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=30&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         callback(body);
       }
     })
   },
-    // breakfastPromise.then(()=>{
-    //   let randScreen = [];
-    //   let randomNumbers = {};
-    //   for(let i = 1; i <= 7; i++){
-    //     let gen = Math.floor(Math.random() * recipes.length);
-    //     randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * recipes.length) : gen;
-    //   }
-    //   let randomNumberArray = Object.values(randomNumbers);
-    //   randomNumberArray.forEach(randomNumber => {
-    //     breakfastRecipes.push(recipes[randomNumber]);
-    //   });
-    //   callback(breakfastRecipes);
-    // })
-  
-  getMeal: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
-    let recipes = [];
-    let submittedRecipes = [];
-    let mealPromise = new Promise(function (resolve, reject) {
-      //api call to edamam returns appropriate recipes in an array 
-      recipes = ''/*API call return*/;
-      if(recipes.length > 0){
-        resolve('Recipes received');
-      } else {
-        reject('Trouble receiving recipes');
+  getSteak: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=steak&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
       }
     })
-    mealPromise.then(()=>{
-      let randScreen = [];
-      let randomNumbers = {};
-      for(let i = 1; i <= 7; i++){
-        let gen = Math.floor(Math.random() * recipes.length);
-        randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * recipes.length) : gen;
+  },
+  getBeef: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=beef&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
       }
-      let randomNumberArray = Object.values(randomNumbers);
-      randomNumberArray.forEach(randomNumber => {
-        mealRecipes.push(recipes[randomNumber]);
-      });
-      callback(mealRecipes);
     })
-  }
-
+  },
+  getChicken: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=chicken&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getFish: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=fish&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  generateSeven: function(fromArray, toArray) {
+    let randScreen = [];
+    let randomNumbers = {};
+    for (let i = 1; i <= 7; i++) {
+      let gen = Math.floor(Math.random() * fromArray.length);
+      randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * fromArray.length) : gen;
+    }
+    let randomNumberArray = Object.values(randomNumbers);
+    randomNumberArray.forEach(randomNumber => {
+      toArray.push(fromArray[randomNumber]);
+    });
+  },
 }
