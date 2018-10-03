@@ -1,1 +1,1 @@
-service httpd start > /var/log/startapache.out 2>&1
+gservice httpd start > /var/log/startapache.out 2>&1
