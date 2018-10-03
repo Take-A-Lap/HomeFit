@@ -19,13 +19,13 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: scripts/installnode.sh
+    - location: ./scripts/installnode.sh
       runas: root
-    - location: scripts/startnode.sh
+    - location: ./scripts/startnode.sh
       runas: root
 
   AfterInstall:
-    - location:  scripts/restartnode.sh   
+    - location:  ./scripts/restartnode.sh   
       runas: root
 # During the ApplicationStart deployment lifecycle event, run the commands 
 #   in the script specified in "location".
