@@ -18,9 +18,12 @@ app.use(bodyParser.urlencoded({
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/cornTest', (req,res)=>{
-  meal.getEggs(300,700,"alcohol-free", (meal)=>{
-    let result = JSON.parse(meal);
-    res.send(result);
+  // meal.getEggs(300,700,"alcohol-free", (meal)=>{
+  //   let result = JSON.parse(meal);
+  //   res.send(result);
+  // })
+  workout.generateWorkoutSignUp(3, (workout)=> {
+    res.send(workout);
   })
 })
 
@@ -34,8 +37,7 @@ app.get('/cornTest', (req,res)=>{
         recipes.forEach(recipe => {
           meals.push(recipe);
         });
-      })
-     
+      })     
       meal.getYogurt(300, 700, "alcohol-free", (meal) => {
         let result = JSON.parse(meal);
         let recipes = result.hits;
@@ -57,7 +59,6 @@ app.get('/cornTest', (req,res)=>{
           breakfastResponse.push(meals[randomNumber]);
         });
       }
-
       meal.getEggs(300, 700, "alcohol-free", (meal) => {
          let result = JSON.parse(meal);
          let recipes = result.hits;
@@ -67,11 +68,7 @@ app.get('/cornTest', (req,res)=>{
          generateSeven(meals);
          res.send(breakfastResponse);
          // console.log(meals.length);
-       })
-    // workout.generateWorkoutSignUp(3, (workout)=> {
-    //   res.send(workout);
-    // })
-    
+       })    
   })
 
 app.get('/test', (req, res) => {
