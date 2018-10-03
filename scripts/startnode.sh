@@ -1,1 +1,0 @@
-service httpd start > /var/log/startnode.out 2>&1

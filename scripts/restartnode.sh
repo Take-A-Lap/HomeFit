@@ -1,1 +1,0 @@
-service httpd restart > /var/log/restartnode.out 2>&1
