@@ -75,6 +75,11 @@ module.exports = {
     INSERT INTO exercises_workouts (id_user, exercises) VALUES ( $1, $2 ::json[])
   `, [userId, arrayOfJson]),
 
+  addNewExercises: (name, rep_time, youtube_link, id_muscle_group, difficulty) => db.any(`
+    INSERT INTO exercises_workouts (name, rep_time, youtube_link, id_muscle_group, difficulty) 
+    VALUES ( $1, $2, $3, $4, $5)
+  `, [name, rep_time, youtube_link, id_muscle_group, difficulty]),
+
   addNewUser: (name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals) => db.any(`
     INSERT INTO users 
     (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals)

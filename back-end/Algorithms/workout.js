@@ -50,7 +50,7 @@ module.exports = {
   },
 
   generateWorkoutBack: function(difficulty, callback){
-let backExercises = [];
+  let backExercises = [];
   let backArmExercises = [];
   let abdominalExercises = [];
   let workout = [];

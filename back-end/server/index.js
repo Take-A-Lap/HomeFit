@@ -19,7 +19,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 // TODO: create routes that can be used if for nothing else testing
   app.get('/cornTest', (req, res) => {
-    workout.generateWorkoutLeg(3, (workout)=> {
+    workout.generateWorkoutSignUp(3, (workout)=> {
       res.send(workout);
     })
     
