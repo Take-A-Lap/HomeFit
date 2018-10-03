@@ -1,28 +1,76 @@
+// const axios = require('axios');
+var request = require('request');
+const express = require('express');
+const config = require('../../config.js');
+const app = express();
+
 module.exports = {
-  getBreakfast: function (calorieMin, calorieMax, dietaryRestrictions) {
-    let recipes = [];
-    let breakfastRecipes = [];
-    let breakfastPromise = new Promise(function (resolve, reject) {
-      //api call to edamam returns appropriate recipes in an array 
-      recipes = ''/*API call return*/;
-      if(recipes.length > 0){
-        resolve('Recipes received');
-      } else {
-        reject('Trouble receiving recipes');
+  getBreakfast: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=breakfast&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
       }
     })
-    breakfastPromise.then(()=>{
-      let randScreen = [];
-      let randomNumbers = {};
-      for(let i = 1; i <= 7; i++){
-        let gen = Math.floor(Math.random() * recipes.length);
-        randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * recipes.length) : gen;
+  },
+  getEggs: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=eggs&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=12&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
       }
-      let randomNumberArray = Object.values(randomNumbers);
-      randomNumberArray.forEach(randomNumber => {
-        breakfastRecipes.push(recipes[randomNumber]);
-      });
-      return breakfastRecipes;
     })
-  }
+  },
+  getYogurt: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=yogurt&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getLunch: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=lunch&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=30&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getSteak: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=steak&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getBeef: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=beef&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getChicken: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=chicken&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getFish: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=fish&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  generateSeven: function(fromArray, toArray) {
+    let randScreen = [];
+    let randomNumbers = {};
+    for (let i = 1; i <= 7; i++) {
+      let gen = Math.floor(Math.random() * fromArray.length);
+      randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * fromArray.length) : gen;
+    }
+    let randomNumberArray = Object.values(randomNumbers);
+    randomNumberArray.forEach(randomNumber => {
+      toArray.push(fromArray[randomNumber]);
+    });
+  },
 }

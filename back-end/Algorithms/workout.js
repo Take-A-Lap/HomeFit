@@ -2,13 +2,13 @@ const db = require('../../back-end/database/dbHelpers');
 
 module.exports = {
 
-  generateWorkoutLeg: async function(difficulty, callback){
+  generateWorkoutLeg: function(difficulty, callback){
   let upperLegExercises = [];
   let otherLegExercises = [];
   let abdominalExercises = [];
   let workout = [];
   
-  let legPromise = new Promise((resolve, reject)=>{
+  
   //Insert db query which returns an array of all upperleg exercises within the difficulty range
   //Save array to resolve
   db.getExerciseByMuscleAndDiff(3, difficulty)
@@ -44,13 +44,13 @@ module.exports = {
     //Push object at indexes of random numbers into the workout array
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex]);
   })
-  setTimeout(() => callback(workout), 3000);
-  })
+  setTimeout(() => callback(workout), 2000);
+  
   
   },
 
-  generateWorkoutBack: function(difficulty){
-let backExercises = [];
+  generateWorkoutBack: function(difficulty, callback){
+  let backExercises = [];
   let backArmExercises = [];
   let abdominalExercises = [];
   let workout = [];
@@ -92,10 +92,10 @@ let backExercises = [];
     //Push object at indexes of random numbers into the workout array
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex]);
   })
-  return workout;
+  setTimeout(() => callback(workout), 2000);
   },
 
-  generateWorkoutChest: function(difficulty){
+  generateWorkoutChest: function(difficulty, callback){
   let chestExercises = [];
   let chestArmExercises = [];
   let abdominalExercises = [];
@@ -137,10 +137,10 @@ let backExercises = [];
     //Push object at indexes of random numbers into the workout array
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex]);
   })
-  return workout;
+  setTimeout(() => callback(workout), 2000);
   },
 
-  generateWorkoutCardio: function(difficulty){
+  generateWorkoutCardio: function(difficulty, callback){
   let cardioExercises = [];
   let abdominalExercises = [];
   let workout = [];
@@ -173,32 +173,34 @@ let backExercises = [];
     //Push object at indexes of random numbers into the workout array
     workout.push(abdominalExercises[firstIndex], abdominalExercises[secondIndex], abdominalExercises[thirdIndex]); 
   })
-  
-  return workout;
+  setTimeout(() => callback(workout), 2000);
   },
 
-  generateWorkoutSignUp: function(difficulty){
+  generateWorkoutSignUp: function(difficulty, callback){
   let clientWorkouts = [];
   //declare a promise to hold all async calls
-  let newClientPromise = new Promise(function(resolve, reject){
-    let chestOne = generateWorkoutChest(difficulty);
-    let chestTwo = generateWorkoutChest(difficulty);
-    let back = generateWorkoutBack(difficulty);
-    let leg = generateWorkoutLeg(difficulty);
-    let cardioOne = generateWorkoutCardio(difficulty);
-    let cardioTwo = generateWorkoutCardio(difficulty);
-    let cardioThree = generateWorkoutCardio(difficulty);
-    if(cardioThree.length > 0){
-      resolve('New client\'s workouts created')
-    } else {
-      reject('Trouble creating new client\'s workout')
-    }
-  })
-  //push all async call results into an array
-  newClientPromise.then((chestOne, chestTwo, back, leg, cardioOne, cardioTwo, cardioThree)=>{
-    clientWorkouts.push(chestOne, chestTwo, back, leg, cardioOne, cardioTwo, cardioThree);
-  })
-  return clientWorkouts;
+    this.generateWorkoutChest(difficulty, (wo)=>{
+      clientWorkouts.push(wo);
+    });
+    this.generateWorkoutCardio(difficulty, (wo) => {
+      clientWorkouts.push(wo);
+    });
+    this.generateWorkoutBack(difficulty, (wo)=>{
+      clientWorkouts.push(wo);
+    });
+    this.generateWorkoutCardio(difficulty, (wo) => {
+      clientWorkouts.push(wo);
+    });
+    this.generateWorkoutLeg(difficulty, (wo) => {
+      clientWorkouts.push(wo);
+    });
+    this.generateWorkoutCardio(difficulty, (wo) => {
+      clientWorkouts.push(wo);
+    });
+    this.generateWorkoutChest(difficulty, (wo) => {
+      clientWorkouts.push(wo);
+    });
+  setTimeout(() => callback(clientWorkouts), 3000);
   },
 
   generateNextWorkout: function(difficulty){}

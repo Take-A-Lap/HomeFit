@@ -41,6 +41,7 @@ config.js
 
 # miscellaneous
 testFolder
+dataEntry.js
 config.js
 back-end/config.js
 #api keys
