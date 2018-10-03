@@ -33,6 +33,34 @@ module.exports = {
       }
     })
   },
+  getSteak: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=steak&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getBeef: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=beef&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getChicken: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=chicken&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
+  getFish: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+    request(`https://api.edamam.com/search?q=fish&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        callback(body);
+      }
+    })
+  },
   generateSeven: function(fromArray, toArray) {
     let randScreen = [];
     let randomNumbers = {};
@@ -45,31 +73,4 @@ module.exports = {
       toArray.push(fromArray[randomNumber]);
     });
   },
-  getMeal: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
-    let recipes = [];
-    let submittedRecipes = [];
-    let mealPromise = new Promise(function (resolve, reject) {
-      //api call to edamam returns appropriate recipes in an array 
-      recipes = ''/*API call return*/;
-      if(recipes.length > 0){
-        resolve('Recipes received');
-      } else {
-        reject('Trouble receiving recipes');
-      }
-    })
-    mealPromise.then(()=>{
-      let randScreen = [];
-      let randomNumbers = {};
-      for(let i = 1; i <= 7; i++){
-        let gen = Math.floor(Math.random() * recipes.length);
-        randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * recipes.length) : gen;
-      }
-      let randomNumberArray = Object.values(randomNumbers);
-      randomNumberArray.forEach(randomNumber => {
-        mealRecipes.push(recipes[randomNumber]);
-      });
-      callback(mealRecipes);
-    })
-  }
-
 }

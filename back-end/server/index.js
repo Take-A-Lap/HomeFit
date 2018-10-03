@@ -16,6 +16,52 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/dinner', (req,res)=>{
+  let meals = [];
+  let dinnerResponse = [];
+  meal.getChicken(300, 700, "alcohol-free", (meal) => {
+    let result = JSON.parse(meal);
+    let recipes = result.hits;
+    recipes.forEach(recipe => {
+      meals.push(recipe);
+    });
+  })
+  meal.getBeef(300, 700, "alcohol-free", (meal) => {
+    let result = JSON.parse(meal);
+    let recipes = result.hits;
+    recipes.forEach(recipe => {
+      meals.push(recipe);
+    });
+  })
+  meal.getFish(300, 700, "alcohol-free", (meal) => {
+    let result = JSON.parse(meal);
+    let recipes = result.hits;
+    recipes.forEach(recipe => {
+      meals.push(recipe);
+    });
+  })
+  function generateSeven(array) {
+    let randScreen = [];
+    let randomNumbers = {};
+    for (let i = 1; i <= 7; i++) {
+      let gen = Math.floor(Math.random() * array.length);
+      randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * array.length) : gen;
+    }
+    let randomNumberArray = Object.values(randomNumbers);
+    randomNumberArray.forEach(randomNumber => {
+      dinnerResponse.push(array[randomNumber]);
+    });
+  }
+  meal.getSteak(300, 700, "alcohol-free", (meal) => {
+    let result = JSON.parse(meal);
+    let recipes = result.hits;
+    recipes.forEach(recipe => {
+      meals.push(recipe);
+    });
+    generateSeven(meals);
+    res.send(dinnerResponse);
+  })
+})
 app.get('/lunch', (req,res)=>{
   let lunchRecipes = [];
   meal.getLunch(0,500,"alcohol-free", (meals)=>{
