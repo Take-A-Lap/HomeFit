@@ -24,7 +24,7 @@ const StartWorkoutHandler = {
   }
 };
 
-const RecomendRecipeHandler = {
+const RecommendRecipeHandler = {
   canHandle(handlerInput) {
 
   },
@@ -33,6 +33,14 @@ const RecomendRecipeHandler = {
   }
 };
 
+const ReadWorkoutStatusHandler = {
+  canHandle(handlerInput) {
+
+  },
+  handle(handlerInput) {
+
+  }
+};
 
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
