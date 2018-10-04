@@ -11,6 +11,33 @@ app.use('/alexa', alexaRouter)
 // request body, and express doesn't expose this on the request object
 alexaRouter.use(verifier)
 alexaRouter.use(bodyParser.json());
+alexaRouter.post('/fitnessTrainer', (req, res) => {
+  if (req.body.request.type === 'LaunchRequest') {
+    console.log(req.body.request, ' line 16 server index');
+    res.json(alexaHelp.invocationIntent());
+  } else if (req.body.request.type === 'SessionEndedRequest') {
+    console.log('SESSION ENDED');
+  } else if (req.body.request.type === 'IntentRequest') {
+    switch (req.body.request.intent.name) {
+      case 'AMAZON.CancelIntent':
+      case 'AMAZON.StopIntent':
+        //do some stuff
+        break;
+      case 'startWorkout':
+        //do some stuff
+        break;
+      case 'recommendRecipe':
+        //do some stuff
+        break;
+      case 'readWorkoutStatus':
+        //do stuff
+        break;
+      default:
+        console.log('we don\'t know what they said');
+
+    }
+  }
+});
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
 // Since this is attached to a router mounted at /alexa,
@@ -157,31 +184,5 @@ app.post('/test', (req, res) =>{
   res.end();
 });
 
-alexaRouter.post('/fitnessTrainer', (req, res) => {
-  if (req.body.request.type === 'LaunchRequest') {
-    res.json(alexaHelp.invocationIntent());
-  } else if (req.body.request.type === 'SessionEndedRequest') {
-    console.log('SESSION ENDED');
-  } else if (req.body.request.type === 'IntentRequest') {
-    switch (req.body.request.intent.name) {
-      case 'AMAZON.CancelIntent':
-      case 'AMAZON.StopIntent':
-        //do some stuff
-        break;
-      case 'startWorkout':
-        //do some stuff
-        break;
-      case 'recommendRecipe':
-        //do some stuff
-        break;
-      case 'readWorkoutStatus':
-        //do stuff
-        break;
-      default:
-        console.log('we don\'t know what they said');
-
-    }
-  }
-});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
