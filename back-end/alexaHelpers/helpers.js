@@ -1,4 +1,4 @@
-const SKILL_NAME = "Alexa Fitness Trainer";
+const SKILL_NAME = "Fitness Trainer";
 
 const buildResponse = (speechText, shouldSessionEnd, cardText) => {
 
@@ -65,6 +65,8 @@ module.exports = {
     return response;
   },
 
-  
+  startWorkout: () => {
+
+  }
 
 };
