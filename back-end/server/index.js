@@ -2,22 +2,20 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const verifier = require('alexa-verifier-middleware');
 const db = require('../database/dbHelpers');
+const alexaHelp = require('../alexaHelpers/helpers');
 const app = express()
-
 const alexaRouter = express.Router()
 app.use('/alexa', alexaRouter)
 
 // attach the verifier middleware first because it needs the entire
 // request body, and express doesn't expose this on the request object
 alexaRouter.use(verifier)
-////////////////////////
-// Routes that handle alexa traffic are now attached here.
-// Since this is attached to a router mounted at /alexa,
-// endpoints with alexa/blah blah will be caught at blah blah
+alexaRouter.use(bodyParser.json());
 alexaRouter.post('/fitnessTrainer', (req, res) => {
-  if (req.body.request.type === 'LaunchRequest'){
-    res.json('Whats up');
-  } else if (req.body.request.type === 'SessionEndedRequest'){
+  if (req.body.request.type === 'LaunchRequest') {
+    console.log(req.body.request, ' line 16 server index');
+    res.json(alexaHelp.invocationIntent());
+  } else if (req.body.request.type === 'SessionEndedRequest') {
     console.log('SESSION ENDED');
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
@@ -35,11 +33,16 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do stuff
         break;
       default:
-      console.log('we don\'t know what they said');
-      
+        console.log('we don\'t know what they said');
+
     }
   }
 });
+////////////////////////
+// Routes that handle alexa traffic are now attached here.
+// Since this is attached to a router mounted at /alexa,
+// endpoints with alexa/blah blah will be caught at blah blah
+
 const workout = require('../Algorithms/workout.js');
 const meal = require('../Algorithms/recipe.js');
 
@@ -180,5 +183,6 @@ app.post('/test', (req, res) =>{
   });
   res.end();
 });
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
