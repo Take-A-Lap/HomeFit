@@ -76,7 +76,9 @@ module.exports = {
   },
 
   linkAccount: () => {
-    
+    const speechOutput = "this is a test to see what we have inside of my request";
+    const response = buildResponse(speechOutput, false, "");
+    return response;
   }
 
 };

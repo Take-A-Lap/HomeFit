@@ -40,6 +40,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do stuff
         break;
       case 'linkAccount':
+        console.log(req.body, ' line 16 server index');
         res.json(alexaHelp.linkAccount());
         break;
       default:
