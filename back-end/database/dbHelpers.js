@@ -17,7 +17,7 @@ module.exports = {
 
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT name FROM users
-  WHERE alexaUserId = '$1'
+  WHERE alexa_user_id = '$1'
   `, [alexaId]),
   // get user information
   getUserInfoByName: (username) => db.any(`
@@ -85,12 +85,12 @@ module.exports = {
     VALUES ( $1, $2, $3, $4, $5)
   `, [name, rep_time, youtube_link, id_muscle_group, difficulty]),
 
-  addNewUser: (name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals) => db.any(`
+  addNewUser: (name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals, alexaId) => db.any(`
     INSERT INTO users 
-    (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals)
+    (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals, alexa_user_id)
     VALUES
-    ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9)
-  `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals]),
+    ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9, '$10')
+  `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals, alexaId]),
 
   // will most likely need to call this within a loop over the different diet ids
   insertIntoUserDiet: (userId, dietId) => db.any(`
