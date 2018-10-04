@@ -39,6 +39,9 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'readWorkoutStatus':
         //do stuff
         break;
+      case 'linkAccount':
+        //do stuff
+        break;
       default:
         console.log('we don\'t know what they said');
 
