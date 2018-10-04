@@ -39,6 +39,10 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'readWorkoutStatus':
         //do stuff
         break;
+      case 'linkAccount':
+        console.log(req.body, ' line 16 server index');
+        res.json(alexaHelp.linkAccount());
+        break;
       default:
         console.log('we don\'t know what they said');
 
@@ -61,7 +65,10 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/home', (req, res) => {
+  res.redirect('localhost:3000/signup')
+})
+
 app.get('/dinner', (req,res)=>{
   let meals = [];
   let dinnerResponse = [];
@@ -86,6 +93,7 @@ app.get('/dinner', (req,res)=>{
       meals.push(recipe);
     });
   })
+  
   function generateSeven(array) {
     let randScreen = [];
     let randomNumbers = {};
@@ -163,7 +171,7 @@ app.get('/breakfast', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-  console.log(req);
+  // console.log(req);
   
   db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
   .then(userArr => {

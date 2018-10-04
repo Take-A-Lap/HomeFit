@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node back-end/server/index.js",
-    "build": "ng build",
+    "build": "ng build --watch",
     "test": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e"
