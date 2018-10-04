@@ -7,7 +7,7 @@ const app = express()
 const workout = require('../Algorithms/workout.js');
 const meal = require('../Algorithms/recipe.js');
 
-const port = 3000
+const port = 81
 app.use(express.static('dist/HomeFit'));
 
 app.use(bodyParser.json());
