@@ -17,12 +17,12 @@ module.exports = {
 
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT name FROM users
-  WHERE alexaUserId = $1
+  WHERE alexaUserId = '$1'
   `, [alexaId]),
   // get user information
   getUserInfoByName: (username) => db.any(`
     SELECT * FROM users
-    WHERE name = $1
+    WHERE name = '$1'
   `, [username]),
 
   // gets the user dietary information based on the user id
@@ -57,13 +57,13 @@ module.exports = {
   
   getDietaryRestrictionsIdByName: (name) => db.any(`
     SELECT id FROM dietary_restrictions
-    WHERE name = $1
+    WHERE name = '$1'
     `, [name]),
 
   // need to grab the youtube link for the youtube api
   getYoutubeLink: (name) => db.any(`
     SELECT youtube_link FROM exercises
-    WHERE name = $1
+    WHERE name = '$1'
   `, [name]),
 
   getUserById: (userId) => db.any(`
