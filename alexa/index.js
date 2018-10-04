@@ -5,7 +5,7 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   handle(handlerInput) {
-    const speechText = 'Welcome, my name is Alexa and I will be your physical trainer for the day, let me know when you are ready to begin.';
+    const speechText = 'Welcome, my name is Alexa and I will be your physical trainer for the day, let me know when you are ready to begin';
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -17,7 +17,8 @@ const LaunchRequestHandler = {
 
 const StartWorkoutHandler = {
   canHandle(handlerInput) {
-
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.name === 'startWorkout';
   },
   handle(handlerInput) {
 
