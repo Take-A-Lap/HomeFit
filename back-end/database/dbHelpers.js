@@ -26,7 +26,7 @@ module.exports = {
   // get user information
   getUserInfoByName: (username) => db.any(`
     SELECT * FROM users
-    WHERE name = '$1'
+    WHERE name = $1
   `, [username]),
 
   // gets the user dietary information based on the user id
@@ -61,13 +61,13 @@ module.exports = {
   
   getDietaryRestrictionsIdByName: (name) => db.any(`
     SELECT id FROM dietary_restrictions
-    WHERE name = '$1'
+    WHERE name = $1
     `, [name]),
 
   // need to grab the youtube link for the youtube api
   getYoutubeLink: (name) => db.any(`
     SELECT youtube_link FROM exercises
-    WHERE name = '$1'
+    WHERE name = $1
   `, [name]),
 
   getUserById: (userId) => db.any(`
@@ -93,7 +93,7 @@ module.exports = {
     INSERT INTO users 
     (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals)
     VALUES
-    ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9, '$10')
+    ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9)
   `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals]),
 
   // will most likely need to call this within a loop over the different diet ids
@@ -142,9 +142,9 @@ module.exports = {
   updateAlexaId: (username, alexaId) => db.any(`
   UPDATE users
   SET
-  alexa_user_id = '$2'
+  alexa_user_id = $2
   WHERE
-  name = '$1'
+  name = $1
   `, [username, alexaId]),
 
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
