@@ -1,4 +1,4 @@
-const SKILL_NAME = "Alexa Fitness Trainer";
+const SKILL_NAME = "Fitness Trainer";
 
 const buildResponse = (speechText, shouldSessionEnd, cardText) => {
 
@@ -57,6 +57,16 @@ module.exports = {
     const response = buildResponseWithPrompt(greetingSpeech, false, "Welcome", "Are you ready?");
     console.log(response, ' line 58 alexa helper file');
     return response;
+  },
+
+  stopAndExit: () => {
+    const speechOutput = "Hope you enjoyed your workout experience, see you next time. Buh bye";
+    const response = buildResponse(speechOutput, true, "");
+    return response;
+  },
+
+  startWorkout: () => {
+
   }
 
 };
