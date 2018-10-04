@@ -12,6 +12,7 @@ import { StrengthComponent } from './strength/strength.component';
 import { CardioComponent } from './cardio/cardio.component';
 import { FoodService } from './food/food.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BreakfastComponent } from './breakfast/breakfast.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     SettingsPersonalInfoComponent,
     DietaryRestrictionsComponent,
     StrengthComponent,
-    CardioComponent
+    CardioComponent,
+    BreakfastComponent
   ],
   imports: [
     BrowserModule,

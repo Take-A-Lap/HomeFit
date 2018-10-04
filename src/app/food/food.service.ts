@@ -9,11 +9,20 @@ export class FoodService {
 
   constructor(private httpClient: HttpClient) { 
   }
-    getFood() {
-      return this.httpClient.get('/lunch')
-        // .subscribe(data => {
-        //   console.log('works', data);
-        // })
-    }
+
+  getBreakfast() {
+    return this.httpClient.get('/breakfast')
+  }
+
+  getLunch() {
+    return this.httpClient.get('/lunch')
+      // .subscribe(data => {
+      //   console.log('works', data);
+      // })
+  }
+
+  getDinner() {
+    return this.httpClient.get('/dinner');
+  }
   
 }

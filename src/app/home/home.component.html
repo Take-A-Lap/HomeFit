@@ -47,13 +47,94 @@
         </tbody>
       </table>
       <div class="col-md-4 text-center" >
-        <button (click)="getFood()">Breakfast</button>
-        <button (click)="getFood()">Lunch</button>
+        <button (click)="getBreakfast()">Breakfast</button>
+        <button (click)="getLunch()">Lunch</button>
+        <button (click)="getDinner()">Dinner</button>
       </div>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <table class="meal-list">
+            <table class="breakfast-list">
+              <thead>
+                <tr>
+                  <th>Name of Dish</th>
+                  <th>Image</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let meal of meals2">
+                <tr>
+                  <td>
+                    {{meal[0].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[0].recipe.url}}>
+                      <img src={{meal[0].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[1].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[1].recipe.url}}>
+                      <img src={{meal[1].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[2].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[2].recipe.url}}>
+                      <img src={{meal[2].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[3].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[3].recipe.url}}>
+                      <img src={{meal[3].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[4].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[4].recipe.url}}>
+                      <img src={{meal[4].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[5].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[5].recipe.url}}>
+                      <img src={{meal[5].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[6].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[6].recipe.url}}>
+                      <img src={{meal[6].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="lunch-list">
               <thead>
                 <tr>
                   <th>Name of Dish</th>
@@ -61,6 +142,86 @@
                 </tr>
               </thead>
               <tbody *ngFor="let meal of meals">
+                <tr>
+                  <td>
+                    {{meal[0].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[0].recipe.url}}>
+                      <img src={{meal[0].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[1].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[1].recipe.url}}>
+                      <img src={{meal[1].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[2].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[2].recipe.url}}>
+                      <img src={{meal[2].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[3].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[3].recipe.url}}>
+                      <img src={{meal[3].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[4].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[4].recipe.url}}>
+                      <img src={{meal[4].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[5].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[5].recipe.url}}>
+                      <img src={{meal[5].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[6].recipe.label}}
+                  </td>
+                  <td>
+                    <a href={{meal[6].recipe.url}}>
+                      <img src={{meal[6].recipe.image}}>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="dinner-list">
+              <thead>
+                <tr>
+                  <th>Name of Dish</th>
+                  <th>Image</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let meal of meals3">
                 <tr>
                   <td>
                     {{meal[0].recipe.label}}

@@ -12,18 +12,33 @@ import { FoodService } from '../food/food.service';
 export class HomeComponent implements OnInit {
 
   meals = [];
+  meals2 = [];
+  meals3 = [];
   title = 'Earl of Pillsbury';
   constructor(private foodService: FoodService) { }
   // getMeal() {
   //   console.log('Prep says &$*# Jan')
   // }
-  getFood() {
-    return this.foodService.getFood()
-      .subscribe(food => {
-        console.log(Array.isArray(food), food);
+
+  getBreakfast() {
+    return this.foodService.getBreakfast()
+      .subscribe(breakfastFood => {
+        this.meals2.push(breakfastFood)
+      })
+  }
+  getLunch() {
+    return this.foodService.getLunch()
+      .subscribe(lunchFood => {
+        console.log(Array.isArray(lunchFood), lunchFood);
         
-        this.meals.push(food);
-        // console.log('we got food', this.meals);
+        this.meals.push(lunchFood);
+        // console.log('we got lunchFood', this.meals);
+      })
+  }
+  getDinner() {
+    return this.foodService.getDinner()
+      .subscribe(dinnerFood => {
+        this.meals3.push(dinnerFood);
       })
   }
   ngOnInit() {
