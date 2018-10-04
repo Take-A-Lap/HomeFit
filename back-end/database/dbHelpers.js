@@ -18,7 +18,7 @@ module.exports = {
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT name FROM users
   WHERE alexa_user_id = '$1'
-  `, [alexaId]),
+  `, [alexaId.toString()]),
   // get user information
   getUserInfoByName: (username) => db.any(`
     SELECT * FROM users
