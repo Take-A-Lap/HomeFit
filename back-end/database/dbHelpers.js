@@ -10,15 +10,19 @@ const connection = {
   user: 'jeunwozz',
   password: libPass,
 };
-
+// let alexaId = 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY';
 const db = pgp(connection);
-
+// const sql = pgp.as.format(`
+//   SELECT name FROM users
+//   WHERE alexa_user_id = $1
+//   `, [alexaId]);
+// console.log('SQL: ', sql);
 module.exports = {
 
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT name FROM users
-  WHERE alexa_user_id = '$1'
-  `, [alexaId.toString()]),
+  WHERE alexa_user_id = $1
+  `, [alexaId]),
   // get user information
   getUserInfoByName: (username) => db.any(`
     SELECT * FROM users
