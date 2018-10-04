@@ -52,8 +52,8 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
 };
 
 module.exports = {
-  invocationIntent: () => {
-    const greetingSpeech = "Welcome to Alexa Fitness Trainer. When you are ready to begin your workout just let me know, or if you rather check out what I recommend you eat for the day you can ask me that as well. So what would you like to do?"
+  invocationIntent: (name) => {
+    const greetingSpeech = "Welcome back to Alexa Fitness Trainer " + name + ". When you are ready to begin your workout just let me know, or if you rather check out what I recommend you eat for the day you can ask me that as well. So what would you like to do?"
     const response = buildResponseWithPrompt(greetingSpeech, false, "Welcome", "Are you ready?");
     console.log(response, ' line 58 alexa helper file');
     return response;

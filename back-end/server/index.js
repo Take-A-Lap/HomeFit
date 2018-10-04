@@ -14,7 +14,14 @@ alexaRouter.use(bodyParser.json());
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     console.log(req.body, ' line 16 server index');
-    res.json(alexaHelp.invocationIntent());
+    db.getUserInfoByAlexUserId(req.body.session.user.userId)
+    .then((userArr)=>{
+      const passingName = userArr[0].name || "not linked yet";
+      res.json(alexaHelp.invocationIntent(passingName));
+    })
+    .catch(err => {
+      console.error(err);
+    });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     console.log('SESSION ENDED');
   } else if (req.body.request.type === 'IntentRequest') {
