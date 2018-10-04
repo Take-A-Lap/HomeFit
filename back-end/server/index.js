@@ -13,7 +13,7 @@ alexaRouter.use(verifier)
 alexaRouter.use(bodyParser.json());
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
-    console.log(req.body.request, ' line 16 server index');
+    console.log(req.body, ' line 16 server index');
     res.json(alexaHelp.invocationIntent());
   } else if (req.body.request.type === 'SessionEndedRequest') {
     console.log('SESSION ENDED');
@@ -21,7 +21,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
       case 'AMAZON.StopIntent':
-        //do some stuff
+        alexaHelp.stopAndExit();
         break;
       case 'startWorkout':
         //do some stuff
