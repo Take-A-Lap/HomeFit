@@ -16,7 +16,7 @@ alexaRouter.use(verifier)
 // endpoints with alexa/blah blah will be caught at blah blah
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest'){
-    // res.json(//toda method goes here);
+    res.json('Whats up');
   } else if (req.body.request.type === 'SessionEndedRequest'){
     console.log('SESSION ENDED');
   } else if (req.body.request.type === 'IntentRequest') {
