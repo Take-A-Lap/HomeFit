@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@types/jest": "^23.3.2",
+    "alexa-verifier-middleware": "^1.0.1",
+    "ask-sdk": "^2.0.10",
     "axios": "^0.18.0",
     "babel-preset-env": "^1.7.0",
     "body-parser": "^1.18.3",
