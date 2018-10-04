@@ -10,6 +10,7 @@ app.use('/alexa', alexaRouter)
 // attach the verifier middleware first because it needs the entire
 // request body, and express doesn't expose this on the request object
 alexaRouter.use(verifier)
+alexaRouter.use(bodyParser.json());
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
 // Since this is attached to a router mounted at /alexa,
