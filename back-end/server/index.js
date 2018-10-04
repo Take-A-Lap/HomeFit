@@ -159,7 +159,7 @@ app.post('/test', (req, res) =>{
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
-    res.json('Whats up');
+    res.json(alexaHelp.invocationIntent());
   } else if (req.body.request.type === 'SessionEndedRequest') {
     console.log('SESSION ENDED');
   } else if (req.body.request.type === 'IntentRequest') {
