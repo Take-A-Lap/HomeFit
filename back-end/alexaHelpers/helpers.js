@@ -1,9 +1,54 @@
+const SKILL_NAME = "Alexa Fitness Trainer";
+
 const buildResponse = (speechText, shouldSessionEnd, cardText) => {
   // TODO: create a way to build the response in json
+  const speechOutput = "<speak>" + speechText + "</speak>";
+  const jsonObj = {
+    "version": "1.0",
+    "response": {
+      "shouldEndSession": shouldSessionEnd,
+      "outputSpeech": {
+        "type": "SSML",
+        "ssml": speechOutput
+      }
+    },
+    "card": {
+      "type": "Simple",
+      "title": SKILL_NAME,
+      "content": cardText,
+      "text": cardText
+    },
+  }
+  return jsonObj;
 };
 
 const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, reprompt) => {
   // TODO: create a way to build the response with a prompt in json
+  const speechOutput = "<speak>" + speechText + "</speak>";
+  const jsonObj = {
+    "version": "1.0",
+    "response": {
+      "shouldEndSession": shouldSessionEnd,
+      "outputSpeech": {
+        "type": "SSML",
+        "ssml": speechOutput
+      }
+    },
+    "card": {
+      "type": "Simple",
+      "title": SKILL_NAME,
+      "content": cardText,
+      "text": cardText
+    },
+    "reprompt": {
+      "outputSpeech": {
+        "type": "PlainText",
+        "text": reprompt,
+        "ssml": reprompt
+      }
+    }
+  }
+  return jsonObj;
 };
 
 module.exports = {
