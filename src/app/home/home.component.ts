@@ -4,8 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FoodService } from '../food/food.service';
