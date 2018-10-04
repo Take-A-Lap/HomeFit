@@ -2,8 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const verifier = require('alexa-verifier-middleware');
 const db = require('../database/dbHelpers');
+const alexaHelp = require('../alexaHelpers/helpers');
 const app = express()
-
 const alexaRouter = express.Router()
 app.use('/alexa', alexaRouter)
 
