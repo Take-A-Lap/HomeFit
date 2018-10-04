@@ -73,6 +73,10 @@ module.exports = {
 
   startWorkout: () => {
 
+  },
+
+  linkAccount: () => {
+    
   }
 
 };
