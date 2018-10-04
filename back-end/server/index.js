@@ -66,6 +66,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', (req, res) => res.send('Hello World!'))
+
+app.get('/home', (req, res) => {
+  res.redirect('localhost:3000/signup')
+})
 app.get('/dinner', (req,res)=>{
   let meals = [];
   let dinnerResponse = [];
