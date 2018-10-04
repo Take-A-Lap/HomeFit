@@ -47,9 +47,17 @@
         </tbody>
       </table>
       <div class="col-md-4 text-center" >
-        <button >Lunch</button>
+        <button (click)="getFood()">Lunch</button>
       </div>
-      <div class="carousel slide" id="carousel-207426">
+      <div class="meal-list" >
+        <ul class="meals" *ngFor="let meal of meals">
+          <h1>{{dsfasdf}}</h1>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- <div class="carousel slide" id="carousel-207426">
         <ol class="carousel-indicators">
           <li data-slide-to="0" data-target="#carousel-207426" class="active">
           </li>
@@ -62,7 +70,7 @@
           <div class="carousel-item active">
             <img class="d-block w-100" alt="Carousel Bootstrap First" src="https://www.layoutit.com/img/sports-q-c-1600-500-2.jpg" />
             <div class="carousel-caption">
-            <h4>{{test}}</h4>
+             <h4>{{meal.recipe.source}}</h4>
             <p>
               Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
               metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
@@ -90,7 +98,4 @@
         </div> <a class="carousel-control-prev" href="#carousel-207426" data-slide="prev"><span class="carousel-control-prev-icon"></span>
           <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-207426" data-slide="next"><span
             class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
-      </div>
-    </div>
-  </div>
-</div>
+      </div> -->

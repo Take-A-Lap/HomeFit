@@ -10,6 +10,8 @@ import { SettingsPersonalInfoComponent } from './settings-personal-info/settings
 import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
 import { StrengthComponent } from './strength/strength.component';
 import { CardioComponent } from './cardio/cardio.component';
+import { FoodService } from './food/food.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,10 @@ import { CardioComponent } from './cardio/cardio.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FoodService],
   bootstrap: [AppComponent]
 })
 //
