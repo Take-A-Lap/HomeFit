@@ -7,6 +7,9 @@ const buildResponseWithPrompt = () => {
 };
 
 module.exports = {
-  
+  invocationIntent: () => {
+    // TODO: build this out to handle more
+    return buildResponseWithPrompt();
+  }
 
 };
