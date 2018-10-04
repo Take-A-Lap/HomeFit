@@ -49,10 +49,77 @@
       <div class="col-md-4 text-center" >
         <button (click)="getFood()">Lunch</button>
       </div>
-      <div class="meal-list" >
-        <ul class="meals" *ngFor="let meal of meals">
-          <h1>{{dsfasdf}}</h1>
-        </ul>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="meal-list">
+              <thead>
+                <tr>
+                  <th>Name of Dish</th>
+                  <th>Image</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let meal of meals">
+                <tr>
+                  <td>
+                    {{meal[0].recipe.label}}
+                  </td>
+                  <td>
+                    <img src={{meal[0].recipe.image}}>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[1].recipe.label}}
+                  </td>
+                  <td>
+                    <img src={{meal[1].recipe.image}}>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[2].recipe.label}}
+                  </td>
+                  <td>
+                    <img src={{meal[2].recipe.image}}>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[3].recipe.label}}
+                  </td>
+                  <td>
+                    <img src={{meal[3].recipe.image}}>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[4].recipe.label}}
+                  </td>
+                  <td>
+                    <img src={{meal[4].recipe.image}}>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[5].recipe.label}}
+                  </td>
+                  <td>
+                    <img src={{meal[5].recipe.image}}>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{meal[6].recipe.label}}
+                  </td>
+                  <td>
+                    <img src={{meal[6].recipe.image}}>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
