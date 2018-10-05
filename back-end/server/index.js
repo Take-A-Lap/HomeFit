@@ -65,6 +65,10 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         })
         res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
         break;
+      case 'changeView':
+        const view = req.body.request.intent.slots.view.value;
+        console.log(view, ' should be the value of the view slot');
+        res.json(alexaHelp.changeView(view));
       default:
         console.log('we don\'t know what they said');
     }
