@@ -86,6 +86,10 @@ export class CardioComponent implements OnInit {
     this.exercise = CARDIO[this.index];
   }
 
+  home(){
+    this.router.navigate(['/home']);
+  }
+  
   increment() {
     this.index++;
     if (this.index < 8) {
