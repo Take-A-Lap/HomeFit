@@ -1,0 +1,38 @@
+
+#   https://docs.aws.amazon.com/codedeploy/latest/userguide/app-spec-ref.html
+version: 0.0
+
+os: linux 
+
+files:
+  - source: /
+    destination: /var/www/html/
+
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      runas: root
+    - location: scripts/startserver.sh
+      runas: root
+
+  AfterInstall:
+    - location:  scripts/stopserver.sh   
+      runas: root
+# During the ApplicationStart deployment lifecycle event, run the commands 
+#   in the script specified in "location".
+  # ApplicationStart:
+  #   - location:     
+  #     timeout: 
+  #     runas:
+  #   - location: 
+  #     timeout:
+  #     runas:
+# During the ValidateService deployment lifecycle event, run the commands 
+#   in the script specified in "location".
+  # ValidateService:
+  #   - location:     
+  #     timeout: 
+  #     runas:
+  #   - location: 
+  #     timeout:
+  #     runas:

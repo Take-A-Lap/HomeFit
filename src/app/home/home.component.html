@@ -47,9 +47,86 @@
         </tbody>
       </table>
       <div class="col-md-4 text-center" >
-        <button >Lunch</button>
+        <button (click)="getBreakfast()">Breakfast</button>
+        <button (click)="getLunch()">Lunch</button>
+        <button (click)="getDinner()">Dinner</button>
       </div>
-      <div class="carousel slide" id="carousel-207426">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="lunch-list" cellpadding="10">
+              <tbody *ngFor="let meal of meals">
+                <tr>
+                  <!-- <th>Image</th> -->
+                  <td>
+                    <a href={{meal[0].recipe.url}}>
+                      <img src={{meal[0].recipe.image}} width="142" height="165">
+                    </a>
+                  </td>
+                  <td>
+                    <a href={{meal[1].recipe.url}}>
+                      <img src={{meal[1].recipe.image}} width="142" height="165">
+                    </a>
+                  </td>
+                  <td>
+                    <a href={{meal[2].recipe.url}}>
+                      <img src={{meal[2].recipe.image}} width="142" height="165">
+                    </a>
+                  </td>
+                  <td>
+                    <a href={{meal[3].recipe.url}}>
+                      <img src={{meal[3].recipe.image}} width="142" height="165">
+                    </a>
+                  </td>
+                  <td>
+                    <a href={{meal[4].recipe.url}}>
+                      <img src={{meal[4].recipe.image}} width="142" height="165">
+                    </a>
+                  </td>
+                  <td>
+                    <a href={{meal[5].recipe.url}}>
+                      <img src={{meal[5].recipe.image}} width="142" height="165">
+                    </a>
+                  </td>
+                  <td>
+                    <a href={{meal[6].recipe.url}}>
+                      <img src={{meal[6].recipe.image}} width="142" height="165">
+                    </a>
+                  </td>
+                </tr>          
+                <tr>
+                  <!-- <th>Name of Dish</th> -->
+                  <td>
+                    {{meal[0].recipe.label}}
+                  </td>
+                  <td>
+                    {{meal[1].recipe.label}}
+                  </td>
+                  <td>
+                    {{meal[2].recipe.label}}
+                  </td>
+                  <td>
+                    {{meal[3].recipe.label}}
+                  </td>
+                  <td>
+                    {{meal[4].recipe.label}}
+                  </td>
+                  <td>
+                    {{meal[5].recipe.label}}
+                  </td>
+                  <td>
+                    {{meal[6].recipe.label}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- <div class="carousel slide" id="carousel-207426">
         <ol class="carousel-indicators">
           <li data-slide-to="0" data-target="#carousel-207426" class="active">
           </li>
@@ -60,11 +137,9 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" alt="Carousel Bootstrap First" src="../../assets/img/sesame_chili_pancakes.png" />
+            <img class="d-block w-100" alt="Carousel Bootstrap First" src="https://www.layoutit.com/img/sports-q-c-1600-500-2.jpg" />
             <div class="carousel-caption">
-            <h4>
-              Second Thumbnail label
-            </h4>
+             <h4>{{meal.recipe.source}}</h4>
             <p>
               Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
               metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
@@ -92,7 +167,4 @@
         </div> <a class="carousel-control-prev" href="#carousel-207426" data-slide="prev"><span class="carousel-control-prev-icon"></span>
           <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-207426" data-slide="next"><span
             class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
-      </div>
-    </div>
-  </div>
-</div>
+      </div> -->
