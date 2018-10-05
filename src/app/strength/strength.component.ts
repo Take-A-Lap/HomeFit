@@ -14,10 +14,25 @@ import { STRENGTH } from '../mock-strength';
 export class StrengthComponent implements OnInit {
 
   exercises = STRENGTH;
+  index = 0;
+  exercise = STRENGTH[this.index];
+  completed = '';
 
   switchExercise() {
-
+    console.log(STRENGTH.length)
+    console.log(this.index);
+      this.exercise = STRENGTH[this.index];
   }
+
+  increment() {
+    this.index++;
+    if (this.index < 5) {
+      this.switchExercise();
+    } else {
+      this.completed = 'Workout Complete';
+    }
+  }
+
   constructor() { }
 
   ngOnInit() {

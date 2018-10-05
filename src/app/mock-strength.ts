@@ -10,22 +10,6 @@ export const STRENGTH: Strength[] = [
     difficulty: 2
   },
   {
-    id: 44,
-    name: "Tricep Pushup",
-    rep_time: 1200,
-    youtube_link: "https://www.youtube.com/embed/L99AyyEDBYA",
-    id_muscle_group: 5,
-    difficulty: 2
-  },
-  {
-    id: 22,
-    name: "LegRaises",
-    rep_time: 1400,
-    youtube_link: "https://www.youtube.com/embed/Wp4BlxcFTkE",
-    id_muscle_group: 2,
-    difficulty: 2
-  },
-  {
     id: 22,
     name: "LegRaises",
     rep_time: 1400,
@@ -48,14 +32,6 @@ export const STRENGTH: Strength[] = [
     youtube_link: "https://www.youtube.com/embed/WBmXffkfcXQ",
     id_muscle_group: 6,
     difficulty: 2
-  },
-  {
-    id: 47,
-    name: "Flies",
-    rep_time: 1800,
-    youtube_link: "https://www.youtube.com/embed/tJ2kaO29NDM",
-    id_muscle_group: 6,
-    difficulty: 1
   },
   {
     id: 47,
