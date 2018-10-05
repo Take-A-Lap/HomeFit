@@ -82,11 +82,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         console.log(req.body.request.intent.slots, ' line 82 server index');
         db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
         .then(() => {
-          res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
+          console.log('successful update to user');
         })
         .catch(err => {
           console.error(err);
         })
+        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
         break;
       case 'changeView':
         const view = req.body.request.intent.slots.view.value;
