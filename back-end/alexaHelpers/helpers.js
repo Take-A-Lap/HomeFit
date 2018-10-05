@@ -53,6 +53,7 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
 
 module.exports = {
   invocationIntent: (name) => {
+    console.log(name);
     let greetingSpeech = '';
     if (name === "not linked yet" || name === undefined){
       // says something to prompt the user to add their alexa id
