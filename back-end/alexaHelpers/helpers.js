@@ -82,7 +82,7 @@ module.exports = {
   },
 
   linkAccount: (username) => {    
-    const speechOutput = "It is a pleasure to meet you " + username + ". When you are ready to begin your workout, fel free to let me know. You can try saying begin workout";
+    const speechOutput = "It is a pleasure to meet you " + username + ". When you are ready to begin your workout, feel free to let me know. You can try saying begin workout";
     const response = buildResponse(speechOutput, false, "It is a pleasure to meet you");
     return response;
   },
