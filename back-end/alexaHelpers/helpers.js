@@ -88,6 +88,11 @@ module.exports = {
 
   readRecipe: () => {
 
+  },
+  changeView: (view) =>{
+    const speechOutput = "No problem, let me bring up the " + view + " page for you.";
+    const response = buildResponse(speechOutput);
+    return response;
   }
 
 };
