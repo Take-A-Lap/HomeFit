@@ -111,6 +111,11 @@ module.exports = {
     const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
     const response = buildResponse(speechOutput, false, "TODO");
     return response;
+  },
+  default: () => {
+    const speechOutput = "I'm sorry, i don't believe i heard you, could you try again?"
+    const response = buildResponse(speechOutput, false, "Oops, sorry");
+    return response;
   }
 
 };

@@ -103,6 +103,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         break;
       default:
         console.log('we don\'t know what they said');
+        res.json(alexaHelp.default());
     }
   }
 });
