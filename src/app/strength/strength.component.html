@@ -5,12 +5,13 @@
         <img class="mr-3" alt="Alexa_photo" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" >
       <p>
         I'm Alexa, I'll be your personal trainer today.
       </p>
       
-      <p>Current Exercise: Dead Lift</p>
+      <p>Current Exercise: {{exercise.name}}</p>
+      <button (click)="increment()">Next Exercise</button>
     </div>
   </div>
   <div class="row">
@@ -20,7 +21,7 @@
           Sets
         </h2>
         <p>
-          1
+          {{set}}
         </p>
         
       </div>
@@ -31,17 +32,16 @@
           Reps
         </h2>
         <p>
-          10
+          {{rep}}
         </p>
-        
+        <button (click)="switchRep()">Start Rep Count</button>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="media">
-        <img class="mr-3" alt="youTube link" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
-        
+        <iframe [src]="trustedUrl"></iframe>
       </div>
     </div>
   </div>

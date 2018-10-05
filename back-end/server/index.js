@@ -28,7 +28,7 @@ app.get('/events', (sseReq, sseRes) => {
 
   sseRes.sseSetup();
 
-  sseRes.sseSend("Hello This is a connection");
+  // sseRes.sseSend("Hello This is a connection");
   // sseRes.sseSend("Hey Again, I can connect more than once");
 
   // attach the verifier middleware first because it needs the entire
@@ -39,7 +39,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
     .then((userArr)=>{
-      const passingName = userArr[0].name || "not linked yet";
+      const passingName = (userArr[0] ? userArr[0].name : "not linked yet");
+      console.log(passingName, ' this should be a value or say not linked yet')
       res.json(alexaHelp.invocationIntent(passingName));
     })
     .catch(err => {
@@ -72,30 +73,42 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.startWorkout());
         break;
       case 'recommendRecipe':
-        //do some stuff
+        res.json(alexaHelp.readRecipe());
         break;
       case 'readWorkoutStatus':
-        //do stuff
+        res.json(alexaHelp.readWorkout());
         break;
       case 'linkAccount':
-        // console.log(req.body.request.intent.slots, ' line 43 server index');
-        db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
+        let link = req.body.request.intent.slots.accountName.value;
+        link = link.split(' ').join('@');
+        console.log(link, ' line 84 server index');
+        db.updateAlexaId(link, req.body.session.user.userId)
         .then(() => {
-          // console.log('account should be added to the database');
+          console.log('successful update to user');
         })
         .catch(err => {
           console.error(err);
         })
-        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
+        
+        res.json(alexaHelp.linkAccount(link));
         break;
       case 'changeView':
         const view = req.body.request.intent.slots.view.value;
         console.log(view, ' should be the value of the view slot');
+        sseRes.sseSend(view);
         res.json(alexaHelp.changeView(view));
+        break;
+      case 'nextWorkout':
+        res.json(alexaHelp.nextWorkout());
+        break;
       default:
         console.log('we don\'t know what they said');
+        console.log('req.body.request.intent');
+        // res.json(alexaHelp.default());
     }
-  });
+  }
+});
+
 });
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
@@ -245,7 +258,7 @@ app.get('/test', (req, res) => {
   })
 });
 
-app.post('/test', (req, res) =>{
+app.post('/personalInfo', (req, res) =>{
   // console.log(req.body);
   const { name } = req.body;
   const { weight } = req.body;

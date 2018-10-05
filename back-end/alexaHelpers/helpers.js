@@ -53,8 +53,9 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
 
 module.exports = {
   invocationIntent: (name) => {
+    console.log(name);
     let greetingSpeech = '';
-    if (name === "not linked yet"){
+    if (name === "not linked yet" || name === undefined){
       // says something to prompt the user to add their alexa id
       greetingSpeech = "It appears you have not linked your account yet. If you would like to link your account try saying, link my account followed by your username";
     } else {
@@ -71,27 +72,49 @@ module.exports = {
   },
 
   startWorkout: () => {
-    const speechOutput = "Why wont i give a prompt?"
-    const response = buildResponseWithPrompt(speechOutput, false, "Are you ready to begin your workout today?", "Are you ready to begin your workout today?")
+    let cadence = '';
+    for(let i = 1; i < 11; i++){
+      cadence += ' give me a ' + i + ' <break time="1200ms"/> ';
+    }
+    const speechOutput = "Let's begin your workout. I would then say something realted to the workout and help you pace yourself by count your reps. this is an example for Tricep Pushup's, " + cadence;
+    const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?")
     return response;
   },
 
   linkAccount: (username) => {    
-    const speechOutput = "It is a pleasure to meet you " + username + ". When you are ready to begin your workout, fel free to let me know. You can try saying begin workout";
+    const speechOutput = "It is a pleasure to meet you " + username + ". When you are ready to begin your workout, feel free to let me know. You can try saying begin workout";
     const response = buildResponse(speechOutput, false, "It is a pleasure to meet you");
     return response;
   },
 
   readWorkout: () => {
-
+    const speechOutput = "This is where i would be able to read you the results of the workout you had just performed";
+    response = buildResponse(speechOutput, false, "TODO")
+    return response;
   },
 
   readRecipe: () => {
-
+    const speechOutput = "This is where i would be able to read you the recommended recipe for the meal that is passed to me";
+    response = buildResponse(speechOutput, false, "TODO");
+    return response;
   },
   changeView: (view) =>{
     const speechOutput = "No problem, let me bring up the " + view + " page for you.";
-    const response = buildResponse(speechOutput);
+    const response = buildResponse(speechOutput, false, "TODO");
+    return response;
+  },
+  nextWorkout: () => {
+    let cadence = '';
+    for (let i = 1; i < 11; i++) {
+      cadence += ' give me a ' + i + ' <break time="1700ms"/> ';
+    }
+    const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
+    const response = buildResponse(speechOutput, false, "TODO");
+    return response;
+  },
+  default: () => {
+    const speechOutput = "I'm sorry, i don't believe i heard you, could you try again?"
+    const response = buildResponse(speechOutput, false, "Oops, sorry");
     return response;
   }
 
