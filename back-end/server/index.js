@@ -32,6 +32,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         break;
       case 'startWorkout':
         //do some stuff
+        res.json(alexaHelp.startWorkout());
         break;
       case 'recommendRecipe':
         //do some stuff

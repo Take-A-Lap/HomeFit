@@ -66,17 +66,18 @@ module.exports = {
 
   stopAndExit: () => {
     const speechOutput = "Hope you enjoyed your workout experience, see you next time. Buh bye";
-    const response = buildResponse(speechOutput, true, "");
+    const response = buildResponse(speechOutput, true, "Hope you enjoyed your workout experience, see you next time. Buh bye");
     return response;
   },
 
   startWorkout: () => {
-
+    const speechOutput = "this is another test to see how reprompts work."
+    const response = buildResponseWithPrompt(speechOutput, true, "test", "Would you like another?")
   },
 
   linkAccount: (username) => {    
     const speechOutput = "It is a pleasure to meet you " + username + ". When you are ready to begin your workout, fel free to let me know. You can try saying begin workout";
-    const response = buildResponse(speechOutput, false, "");
+    const response = buildResponse(speechOutput, false, "It is a pleasure to meet you");
     return response;
   },
 
