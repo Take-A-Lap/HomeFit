@@ -75,7 +75,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.readRecipe());
         break;
       case 'readWorkoutStatus':
-        
+        res.json(alexaHelp.readWorkout());
         break;
       case 'linkAccount':
         // console.log(req.body.request.intent.slots, ' line 43 server index');
