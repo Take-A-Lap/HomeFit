@@ -23,7 +23,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       console.error(err);
     });
   } else if (req.body.request.type === 'SessionEndedRequest') {
-    console.log('SESSION ENDED');
+    // console.log('SESSION ENDED');
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
@@ -40,10 +40,10 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do stuff
         break;
       case 'linkAccount':
-        console.log(req.body.request.intent.slots, ' line 43 server index');
+        // console.log(req.body.request.intent.slots, ' line 43 server index');
         db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
         .then(() => {
-          console.log('account should be added to the database');
+          // console.log('account should be added to the database');
         })
         .catch(err => {
           console.error(err);

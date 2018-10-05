@@ -81,6 +81,14 @@ module.exports = {
     const speechOutput = "It is a pleasure to meet you " + username + ". When you are ready to begin your workout, fel free to let me know. You can try saying begin workout";
     const response = buildResponse(speechOutput, false, "");
     return response;
+  },
+
+  readWorkout: () => {
+
+  },
+
+  readRecipe: () => {
+    
   }
 
 };
