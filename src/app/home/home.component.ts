@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FoodService } from '../food/food.service';
 
@@ -25,24 +24,26 @@ export class HomeComponent implements OnInit {
   // }
 
   getBreakfast() {
+    this.meals = [];
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
-        this.meals2.push(breakfastFood)
+        this.meals.push(breakfastFood)
       })
   }
   getLunch() {
+    this.meals = [];
     return this.foodService.getLunch()
       .subscribe(lunchFood => {
-        console.log(Array.isArray(lunchFood), lunchFood);
-        
+        // console.log(Array.isArray(lunchFood), lunchFood);
         this.meals.push(lunchFood);
         // console.log('we got lunchFood', this.meals);
       })
   }
   getDinner() {
+    this.meals = [];
     return this.foodService.getDinner()
       .subscribe(dinnerFood => {
-        this.meals3.push(dinnerFood);
+        this.meals.push(dinnerFood);
       })
 
   }

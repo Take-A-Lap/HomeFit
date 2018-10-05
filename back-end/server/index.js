@@ -14,7 +14,7 @@ alexaRouter.use(verifier)
 alexaRouter.use(bodyParser.json());
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
-    console.log(req.body, ' line 16 server index');
+    // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
     .then((userArr)=>{
       const passingName = userArr[0].name || "not linked yet";
@@ -24,15 +24,29 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       console.error(err);
     });
   } else if (req.body.request.type === 'SessionEndedRequest') {
-    console.log('SESSION ENDED');
+    // console.log('SESSION ENDED');
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
       case 'AMAZON.StopIntent':
-        alexaHelp.stopAndExit();
+        res.json(alexaHelp.stopAndExit());
         break;
       case 'startWorkout':
         //do some stuff
+        console.log(req.body.session.user.userId);
+        
+        db.getUserInfoByAlexUserId(req.body.session.user.userId)
+        .then(userArr => {
+          return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
+        })
+        .then(exerWorkArr => {
+          console.log(exerWorkArr[0], " the array of json");
+          
+        })
+        .catch(err => {
+          console.error(err);
+        });
+        res.json(alexaHelp.startWorkout());
         break;
       case 'recommendRecipe':
         //do some stuff
@@ -41,12 +55,18 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do stuff
         break;
       case 'linkAccount':
-        console.log(req.body, ' line 16 server index');
-        res.json(alexaHelp.linkAccount());
+        // console.log(req.body.request.intent.slots, ' line 43 server index');
+        db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
+        .then(() => {
+          // console.log('account should be added to the database');
+        })
+        .catch(err => {
+          console.error(err);
+        })
+        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
         break;
       default:
         console.log('we don\'t know what they said');
-
     }
   }
 });
