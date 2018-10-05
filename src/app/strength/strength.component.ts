@@ -38,6 +38,7 @@ export class StrengthComponent implements OnInit {
         } else {
           clearInterval(repIncrement);
           this.rep = 0;
+          this.set++;
         }
       }, this.exercise.rep_time)
     }
@@ -45,11 +46,21 @@ export class StrengthComponent implements OnInit {
     switchRep() {
       this.plus();
     }
+
+    inc(){
+      let setIncrement = setInterval(()=>{
+        if(this.set < 3){
+          this.switchRep();
+        } else {
+          clearInterval(setIncrement);
+          this.set = 0;
+        }
+      }, 4500);
+    }
     
     workinDatBody(){
-      while(this.set < 4){
-        
-      }
+      console.log('start');
+      this.inc();
     }
     
     switchExercise() {
