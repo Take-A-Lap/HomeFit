@@ -18,6 +18,21 @@
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
       }
+      
+      // Everything in this script below this line should happen after sign-up
+
+      // creates a basic http request to the /events endpoint to open a connection
+      var source = new EventSource('/events');
+      // listens for an event from the server (an sseRes.sseSEnd())
+      source.onmessage = function(e) {
+        console.log('i\'m connecting');
+      };
+      /** add an event listener for a workoutEvent use event.data or just destructure
+       * and then JSON.parse it to get the object sent from the backend
+      */ 
+      source.addEventListener('workOutEvent', (event) => {
+        console.log(event);
+      }, false);
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </app-root>
