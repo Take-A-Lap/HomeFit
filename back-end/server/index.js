@@ -40,6 +40,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
     .then((userArr)=>{
       const passingName = userArr[0].name || "not linked yet";
+      console.log(passingName, ' this should be a value or say not linked yet')
       res.json(alexaHelp.invocationIntent(passingName));
     })
     .catch(err => {
