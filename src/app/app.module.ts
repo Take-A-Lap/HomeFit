@@ -13,6 +13,7 @@ import { CardioComponent } from './cardio/cardio.component';
 import { FoodService } from './food/food.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BreakfastComponent } from './breakfast/breakfast.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BreakfastComponent } from './breakfast/breakfast.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [FoodService],
   bootstrap: [AppComponent]

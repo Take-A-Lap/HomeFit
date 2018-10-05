@@ -107,7 +107,7 @@ module.exports = {
     for (let i = 1; i < 11; i++) {
       cadence += ' give me a ' + i + ' <break time="1700ms"/> ';
     }
-    const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups cadence count " + cadence;
+    const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
     const response = buildResponse(speechOutput, false, "TODO");
     return response;
   }

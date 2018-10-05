@@ -6,65 +6,61 @@
           <button class="btn btn-secondary" type="button">Home</button>
         </a>
         <button class="btn btn-secondary" type="button">Meal</button>
-        <button class="btn btn-secondary" type="button">Workout</button>
+        <a routerLink="/strengthWorkout"><button class="btn btn-secondary" type="button">Workout</button></a>
         <a routerLink="/">
           <button class="btn btn-secondary" type="button">Logout</button>
         </a>
       </div>
       <form role="form">
         <div class="form-group">
-
           <label for="ageInput">Age</label>
           <input  type="number" 
                   class="form-control" 
                   id="age" 
-                  placeholder="Enter age in years"/>
+                  placeholder="Enter age in years"
+                  [value]="text"
+                  (input)="updateAge($event)"/>{{age}}
         </div>
         <div class="form-group">
           <label for="heightInput">Height</label>
           <input  type="text" 
                   class="form-control" 
                   id="height" 
-                  placeholder="Enter height in inches"/>
+                  placeholder="Enter height in inches"
+                  [value]="text"
+                  (input)="updateHeight($event)"/>{{height}}
         </div>
         <div class="form-group">
-          <label for="weightInput">Weight</label>
+          <label for="weightInput">Weight</label>{{weight}}
           <input  type="number" 
                   class="form-control" 
                   id="weight" 
-                  placeholder="Enter weight in pounds"/>
+                  placeholder="Enter weight in pounds"
+                  [value]="text"
+                  (input)="updateWeight($event)"/>
         </div>
       </form>
       <ul>
         <div class="slidecontainer">
           <li class="list-item">
             Goals
-              <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-          </li>
-          <li class="list-item">
-            Workouts
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+              <input type="range" min="1" max="3" value="2" class="slider" id="myRange" (input)="updateGoals($event)">
           </li>
           <li class="list-item">
             How many push-ups can you do?
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <input type="range" min="1" max="50" value="25" class="slider" id="myRange" (input)="updatePushUps($event)">
           </li>
           <li class="list-item">
             How do you feel about squats?
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <input type="range" min="1" max="3" value="2" class="slider" id="myRange" (input)="updateSquats($event)">
           </li>
           <li class="list-item">
-            How far can you comfortably jog?
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-          </li>
-          <li class="list-item">
-            Full range of motion
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            How far can you comfortably jog (in miles)?
+            <input type="range" min="1" max="10" value="5" class="slider" id="myRange" (input)="updateMiles($event)">
           </li>
         </div>
       </ul>
       <div class="checkbox">
-      
         <label>
           <input type="checkbox" /> Male
         </label>
@@ -73,7 +69,7 @@
         </label>
       </div>
       <a routerLink="/dietaryRestrictions">
-        <button type="button" class="btn btn-success">Next</button>
+        <button type="button" class="btn btn-success" (click)="addUser()">Next</button>
       </a>
     </div>
   </div>
