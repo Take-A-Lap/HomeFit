@@ -32,7 +32,7 @@
       */ 
       source.addEventListener('workOutEvent', (event) => {
         console.log(event);
-        const data = event.data;
+        const data = JSONE.parse(event.data);
         window.data = data;
       }, false);
     </script>
