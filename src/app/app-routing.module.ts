@@ -9,6 +9,7 @@ import { SettingsPersonalInfoComponent } from './settings-personal-info/settings
 import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
 import { StrengthComponent } from './strength/strength.component';
 import { CardioComponent } from './cardio/cardio.component';
+import { MealsComponent } from './meals/meals.component';
 
 const routes: Routes = [
   // { path: '', component: AppComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'dietaryRestrictions', component: DietaryRestrictionsComponent},
   { path: 'strengthWorkout', component: StrengthComponent},
   { path: 'cardioWorkout', component: CardioComponent},
+  { path: 'meals', component: MealsComponent},
   { path: "**", component: ErrorComponent}
 ];
 
@@ -38,5 +40,6 @@ export const routingComponents = [
   DietaryRestrictionsComponent,
   StrengthComponent,
   CardioComponent,
+  MealsComponent,
   ErrorComponent
 ]

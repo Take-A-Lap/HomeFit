@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private foodService: FoodService,
-    private weatherService: WeatherService) { }
+    private weatherService: WeatherService,
+    private router: Router) { }
   // getMeal() {
   //   console.log('Prep says &$*# Jan')
   // }
@@ -61,8 +62,12 @@ export class HomeComponent implements OnInit {
       })
 
   }
+
+  onSubmit() {
+    this.router.navigate(['/personalInfo']);
+  }
   ngOnInit() {
-//    this.getWeather();
+    // this.getWeather();
   }
 
   
