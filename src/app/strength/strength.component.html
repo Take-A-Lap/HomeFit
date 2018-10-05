@@ -5,12 +5,13 @@
         <img class="mr-3" alt="Alexa_photo" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" *ngFor="let exercise of exercises">
       <p>
         I'm Alexa, I'll be your personal trainer today.
       </p>
       
-      <p>Current Exercise: Dead Lift</p>
+      <p>Current Exercise: {{exercise.name}}</p>
+      <button (click)="switchExercise()">Next Exercise</button>
     </div>
   </div>
   <div class="row">
