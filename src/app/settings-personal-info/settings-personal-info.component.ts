@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings-personal-info.component.css']
 })
 export class SettingsPersonalInfoComponent implements OnInit {
+  
+  constructor(private httpClient: HttpClient) { }
 
   age = '';
   height = '';
@@ -17,22 +20,18 @@ export class SettingsPersonalInfoComponent implements OnInit {
 
   updateAge(e) {
     this.age = e.target.value;
-    console.log(this.age)
   }
 
   updateHeight(e) {
     this.height = e.target.value;
-    console.log(this.height)
   }
 
   updateWeight(e) {
     this.weight = e.target.value;
-    console.log(this.weight)
   }
   
   updateGoals(e) {
     this.updateGoals = e.target.value;
-    console.log(e.target.value);
   }
 
   updatePushUps(e) {
@@ -47,18 +46,34 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.miles = e.target.value;
   }
 
-  params = {
-    age: this.age,
-    height: this.height,
-    weight: this.weight,
-    goals: this.goals,
-    push_ups: this.push_ups,
-    squats: this.squats,
-    miles: this.miles
-  }
+  // params = {
+  //   age: this.age,
+  //   height: this.height,
+  //   weight: this.weight,
+  //   goals: this.goals,
+  //   push_ups: this.push_ups,
+  //   squats: this.squats,
+  //   miles: this.miles
+  // }
 
+  addUser() {
+    console.log(this.age)
+    this.httpClient.post('/personalInfo', {
+      age: this.age,
+      height: this.height,
+      weight: this.weight,
+      goals: this.goals,
+      push_ups: this.push_ups,
+      squats: this.squats,
+      miles: this.miles
+    })
+      .subscribe(
+        (data:any) => {
+          console.log(data);
+        }
+      )
+  }
   
-  constructor() { }
 
   ngOnInit() {
   }

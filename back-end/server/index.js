@@ -222,7 +222,7 @@ app.get('/test', (req, res) => {
   })
 });
 
-app.post('/test', (req, res) =>{
+app.post('/personalInfo', (req, res) =>{
   // console.log(req.body);
   const { name } = req.body;
   const { weight } = req.body;
