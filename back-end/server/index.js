@@ -32,7 +32,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         break;
       case 'startWorkout':
         //do some stuff
-        db.getUserInfoByAlexUserId(req.body.request.intent.slots.accountName.value)
+        db.getUserInfoByAlexUserId(req.body.session.user.userId)
         .then(userArr => {
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
