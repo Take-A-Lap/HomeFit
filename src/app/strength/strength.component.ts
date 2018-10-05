@@ -17,7 +17,30 @@ export class StrengthComponent implements OnInit {
   index = 0;
   exercise = STRENGTH[this.index];
   completed = '';
+  rep = 0;
+  set = 1;
 
+  plus(){
+    let repIncrement = setInterval(() => {
+    if (this.rep < 10) {
+      this.rep++;
+    } else {
+        clearInterval(repIncrement);
+        this.rep = 0;
+      }
+    }, this.exercise.rep_time)
+  }
+
+  switchRep() {
+    this.plus();
+  }
+
+  workinDatBody(){
+    while(this.set < 4){
+
+    }
+  }
+  
   switchExercise() {
     console.log(STRENGTH.length)
     console.log(this.index);
