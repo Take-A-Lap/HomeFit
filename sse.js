@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
 
     res.sseSend = function(data) {
         res.write("event: workOutEvent\n")
-        res.write("data: " + JSON.stringify(data) + "\n\n");
+        res.write(`data: ${JSON.stringify(data)}\n\n`);
     }
     next()
 };
