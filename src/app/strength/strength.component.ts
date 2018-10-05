@@ -60,7 +60,7 @@ export class StrengthComponent implements OnInit {
     }
     
     workinDatBody(){
-      console.log('start');
+      this.plus();
       this.inc();
 
     }
