@@ -79,15 +79,14 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.readWorkout());
         break;
       case 'linkAccount':
-        // console.log(req.body.request.intent.slots, ' line 43 server index');
+        console.log(req.body.request.intent.slots.accountName.value, ' line 82 server index');
         db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
         .then(() => {
-          // console.log('account should be added to the database');
+          res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
         })
         .catch(err => {
           console.error(err);
         })
-        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
         break;
       case 'changeView':
         const view = req.body.request.intent.slots.view.value;
