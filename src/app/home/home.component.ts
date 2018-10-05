@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FoodService } from '../food/food.service';
+import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-home-component',
@@ -18,12 +19,24 @@ export class HomeComponent implements OnInit {
   meals = [];
   meals2 = [];
   meals3 = [];
-  title = 'Earl of Pillsbury';
-  constructor(private foodService: FoodService) { }
+  currentWeather = [];
+
+  constructor(
+    private foodService: FoodService,
+    private weatherService: WeatherService) { }
   // getMeal() {
   //   console.log('Prep says &$*# Jan')
   // }
 
+  getWeather() {
+    return this.weatherService.getWeather()
+      .subscribe(currWeather => {
+        console.log('currWeather', currWeather);
+        this.currentWeather.push(currWeather)
+        console.log(this.currentWeather);
+      })  
+  }
+  
   getBreakfast() {
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
