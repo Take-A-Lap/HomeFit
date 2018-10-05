@@ -5,13 +5,35 @@ const db = require('../database/dbHelpers');
 const alexaHelp = require('../alexaHelpers/helpers');
 const weather = require('../weather/weatherHelpers');
 const app = express()
+const meal = require('../Algorithms/recipe.js');
+const workout = require('../Algorithms/workout.js');
 const alexaRouter = express.Router()
-app.use('/alexa', alexaRouter)
+const sse = require('../../sse');
 
-// attach the verifier middleware first because it needs the entire
-// request body, and express doesn't expose this on the request object
+app.use('/alexa', alexaRouter);
+app.use(express.static('dist/HomeFit'));
+
 alexaRouter.use(verifier)
 alexaRouter.use(bodyParser.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(sse);
+
+app.get('/events', (sseReq, sseRes) => {
+
+  console.log('I have a connection');
+
+  sseRes.sseSetup();
+
+  sseRes.sseSend("Hello This is a connection");
+  // sseRes.sseSend("Hey Again, I can connect more than once");
+
+  // attach the verifier middleware first because it needs the entire
+  // request body, and express doesn't expose this on the request object
+
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
@@ -41,7 +63,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr[0].exercise[0], " the array of json");
+          console.log(exerWorkArr[0].exercise, " the array of json");
           
         })
         .catch(err => {
@@ -73,17 +95,13 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       default:
         console.log('we don\'t know what they said');
     }
-  }
+  });
 });
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
 // Since this is attached to a router mounted at /alexa,
 // endpoints with alexa/blah blah will be caught at blah blah
 
-const workout = require('../Algorithms/workout.js');
-const meal = require('../Algorithms/recipe.js');
-
-const port = 81
 app.use(express.static('dist/HomeFit'));
 
 app.use(bodyParser.json());
@@ -186,10 +204,10 @@ app.get('/breakfast', (req, res) => {
   })     
   meal.getYogurt(300, 700, "alcohol-free", (meal) => {
     let result = JSON.parse(meal);
-      let recipes = result.hits;
-      recipes.forEach(recipe => {
-        meals.push(recipe);
-      });
+    let recipes = result.hits;
+    recipes.forEach(recipe => {
+      meals.push(recipe);
+    });
   })      
   function generateSeven(array){
     let randScreen = [];
@@ -246,5 +264,5 @@ app.post('/test', (req, res) =>{
   res.end();
 });
 
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+const port = 81;
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
