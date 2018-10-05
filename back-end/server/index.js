@@ -95,7 +95,9 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       default:
         console.log('we don\'t know what they said');
     }
-  });
+  }
+});
+
 });
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
