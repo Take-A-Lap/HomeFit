@@ -95,7 +95,12 @@ module.exports = {
   },
   changeView: (view) =>{
     const speechOutput = "No problem, let me bring up the " + view + " page for you.";
-    const response = buildResponse(speechOutput);
+    const response = buildResponse(speechOutput, false, "TODO");
+    return response;
+  },
+  nextWorkout: () => {
+    const speechOutput = "This is where i would then continue our workout to the next exercise";
+    const response = buildResponse(speechOutput, false, "TODO");
     return response;
   }
 
