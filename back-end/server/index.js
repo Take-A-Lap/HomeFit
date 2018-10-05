@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const verifier = require('alexa-verifier-middleware');
 const db = require('../database/dbHelpers');
 const alexaHelp = require('../alexaHelpers/helpers');
+const weather = require('../weather/weatherHelpers');
 const app = express()
 const meal = require('../Algorithms/recipe.js');
 const workout = require('../Algorithms/workout.js');
@@ -33,33 +34,66 @@ app.get('/events', (sseReq, sseRes) => {
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
 
-  alexaRouter.post('/fitnessTrainer', (req, res) => {
-    if (req.body.request.type === 'LaunchRequest') {
-      console.log(req.body.request, ' line 16 server index');
-      res.json(alexaHelp.invocationIntent());
-    } else if (req.body.request.type === 'SessionEndedRequest') {
-      console.log('SESSION ENDED');
-    } else if (req.body.request.type === 'IntentRequest') {
-      switch (req.body.request.intent.name) {
-        case 'AMAZON.CancelIntent':
-        case 'AMAZON.StopIntent':
+alexaRouter.post('/fitnessTrainer', (req, res) => {
+  if (req.body.request.type === 'LaunchRequest') {
+    // console.log(req.body, ' line 16 server index');
+    db.getUserInfoByAlexUserId(req.body.session.user.userId)
+    .then((userArr)=>{
+      const passingName = userArr[0].name || "not linked yet";
+      res.json(alexaHelp.invocationIntent(passingName));
+    })
+    .catch(err => {
+      console.error(err);
+    });
+  } else if (req.body.request.type === 'SessionEndedRequest') {
+    // console.log('SESSION ENDED');
+  } else if (req.body.request.type === 'IntentRequest') {
+    switch (req.body.request.intent.name) {
+      case 'AMAZON.CancelIntent':
+      case 'AMAZON.StopIntent':
+        res.json(alexaHelp.stopAndExit());
+        break;
+      case 'startWorkout':
+        //do some stuff
+        console.log(req.body.session.user.userId);
+        
+        db.getUserInfoByAlexUserId(req.body.session.user.userId)
+        .then(userArr => {
+          console.log(userArr, ' this needs to not be an empty array');
+          return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
+        })
+        .then(exerWorkArr => {
+          console.log(exerWorkArr, " the array of json");
+          
+        })
+        .catch(err => {
+          console.error(err);
+        });
+        res.json(alexaHelp.startWorkout());
+        break;
+      case 'recommendRecipe':
         //do some stuff
         break;
-        case 'startWorkout':
-          /** if the start workout intent is found you should be able to call 
-           *  the sseRes.sseSend(data) with the data to send to the front end
-          */
-          //do some stuff
-          break;
-          case 'recommendRecipe':
-          //do some stuff
-          break;
-          case 'readWorkoutStatus':
-          //do stuff
-          break;
-          default:
-          console.log('we don\'t know what they said');
-      }
+      case 'readWorkoutStatus':
+        //do stuff
+        break;
+      case 'linkAccount':
+        // console.log(req.body.request.intent.slots, ' line 43 server index');
+        db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
+        .then(() => {
+          // console.log('account should be added to the database');
+        })
+        .catch(err => {
+          console.error(err);
+        })
+        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
+        break;
+      case 'changeView':
+        const view = req.body.request.intent.slots.view.value;
+        console.log(view, ' should be the value of the view slot');
+        res.json(alexaHelp.changeView(view));
+      default:
+        console.log('we don\'t know what they said');
     }
   });
 });
@@ -75,7 +109,29 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/home', (req, res) => {
+  res.redirect('localhost:3000/signup')
+})
+
+app.get('/personalInfo', (req, res) => {
+  res.redirect('localhost:3000/signup')
+})
+
+//api call for weather
+app.get('/weather', (req, res) => {
+  weather.getWeather(body => {
+    const parsedBody = JSON.parse(body);
+    const weather = {
+      text: parsedBody[0].WeatherText,
+      city: 'New Orleans',
+      state: 'LA',
+      celsius: parsedBody[0].Temperature.Metric.Value,
+      fahrenheit: parsedBody[0].Temperature.Imperial.Value
+    }
+    res.send(weather);
+  })
+})
+
 app.get('/dinner', (req,res)=>{
   let meals = [];
   let dinnerResponse = [];
@@ -100,6 +156,7 @@ app.get('/dinner', (req,res)=>{
       meals.push(recipe);
     });
   })
+  
   function generateSeven(array) {
     let randScreen = [];
     let randomNumbers = {};
@@ -177,13 +234,15 @@ app.get('/breakfast', (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-  db.getYoutubeLink('Burpee')
-  .then((userArr) => {
+  // console.log(req);
+  
+  db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
+  .then(userArr => {
     res.send(userArr);
   })
-  .catch((err) =>{
+  .catch(err => {
     console.error(err);
-  });
+  })
 });
 
 app.post('/test', (req, res) =>{

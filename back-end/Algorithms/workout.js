@@ -198,9 +198,15 @@ module.exports = {
       clientWorkouts.push(wo);
     });
     this.generateWorkoutChest(difficulty, (wo) => {
-      clientWorkouts.push(wo);
+      // clientWorkouts.push(wo);
     });
-  setTimeout(() => callback(clientWorkouts), 3000);
+  setTimeout(() => {
+    let jsonWorkouts = [];
+    clientWorkouts.forEach((wo)=>{
+      jsonWorkouts.push(JSON.stringify(wo))
+    })
+    db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(7, jsonWorkouts);
+    callback(clientWorkouts)}, 3000);
   },
 
   generateNextWorkout: function(difficulty){}

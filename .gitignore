@@ -46,3 +46,4 @@ config.js
 back-end/config.js
 #api keys
 .env
+googleTranslation.json

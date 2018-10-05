@@ -3,9 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
-    "serve": "node back-end/server",
-    "build": "ng build",
+    "start": "node back-end/server/index.js",
+    "build": "ng build --watch",
     "test": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e"
