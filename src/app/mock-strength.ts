@@ -10,6 +10,14 @@ export const STRENGTH: Strength[] = [
     difficulty: 2
   },
   {
+    id: 54,
+    name: "Decline Pushups",
+    rep_time: 1700,
+    youtube_link: "https://www.youtube.com/embed/WBmXffkfcXQ",
+    id_muscle_group: 6,
+    difficulty: 2
+  },
+  {
     id: 22,
     name: "LegRaises",
     rep_time: 1400,
@@ -24,14 +32,6 @@ export const STRENGTH: Strength[] = [
     youtube_link: "https://www.youtube.com/embed/ZWdBqFLNljc",
     id_muscle_group: 6,
     difficulty: 1
-  },
-  {
-    id: 54,
-    name: "Decline Pushups",
-    rep_time: 1700,
-    youtube_link: "https://www.youtube.com/embed/WBmXffkfcXQ",
-    id_muscle_group: 6,
-    difficulty: 2
   },
   {
     id: 47,
