@@ -81,6 +81,7 @@ app.get('/weather', (req, res) => {
     const weather = {
       text: parsedBody[0].WeatherText,
       city: 'New Orleans',
+      state: 'LA',
       celsius: parsedBody[0].Temperature.Metric.Value,
       fahrenheit: parsedBody[0].Temperature.Imperial.Value
     }
