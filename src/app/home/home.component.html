@@ -11,7 +11,8 @@
       <div class="btn-group" role="group">
         <button class="nav-buttons" type="button">Meal</button>
         <a routerLink="/strengthWorkout"><button class="nav-buttons" type="button">Workout</button></a>
-        <a routerLink="/personalInfo"><button class="nav-buttons" type="button">Settings</button></a>
+        <!-- <a routerLink="/personalInfo"><button class="nav-buttons" type="button">Settings</button></a> -->
+        <button class="nav-buttons" type="button" (click)="onSubmit()">Settings</button>
         <a routerLink="/"><button class="nav-buttons" type="button">Logout</button></a>
       </div>
       <div class="media">
@@ -44,6 +45,7 @@
           <div class="col-md-12">
             <table class="lunch-list" cellpadding="10">
               <tbody *ngFor="let meal of meals">
+                <!-- <app-meals></app-meals> -->
                 <tr>
                   <!-- <th>Image</th> -->
                   <td>
@@ -52,32 +54,32 @@
                     </a>
                   </td>
                   <td>
-                    <a href={{meal[1].recipe.url}}>
+                    <a routerLink="/meals">
                       <img src={{meal[1].recipe.image}} width="142" height="165">
                     </a>
                   </td>
                   <td>
-                    <a href={{meal[2].recipe.url}}>
+                    <a routerLink="/meals">
                       <img src={{meal[2].recipe.image}} width="142" height="165">
                     </a>
                   </td>
                   <td>
-                    <a href={{meal[3].recipe.url}}>
+                    <a routerLink="/meals">
                       <img src={{meal[3].recipe.image}} width="142" height="165">
                     </a>
                   </td>
                   <td>
-                    <a href={{meal[4].recipe.url}}>
+                    <a routerLink="/meals">
                       <img src={{meal[4].recipe.image}} width="142" height="165">
                     </a>
                   </td>
                   <td>
-                    <a href={{meal[5].recipe.url}}>
+                    <a routerLink="/meals">
                       <img src={{meal[5].recipe.image}} width="142" height="165">
                     </a>
                   </td>
                   <td>
-                    <a href={{meal[6].recipe.url}}>
+                    <a routerLink="/meals">
                       <img src={{meal[6].recipe.image}} width="142" height="165">
                     </a>
                   </td>
