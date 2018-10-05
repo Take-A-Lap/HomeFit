@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const verifier = require('alexa-verifier-middleware');
 const db = require('../database/dbHelpers');
 const alexaHelp = require('../alexaHelpers/helpers');
+const weather = require('../weather/weatherHelpers');
 const app = express()
 const alexaRouter = express.Router()
 app.use('/alexa', alexaRouter)
@@ -39,7 +40,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr[0], " the array of json");
+          console.log(exerWorkArr, " the array of json");
           
         })
         .catch(err => {
@@ -87,6 +88,25 @@ app.use(bodyParser.urlencoded({
 
 app.get('/home', (req, res) => {
   res.redirect('localhost:3000/signup')
+})
+
+app.get('/personalInfo', (req, res) => {
+  res.redirect('localhost:3000/signup')
+})
+
+//api call for weather
+app.get('/weather', (req, res) => {
+  weather.getWeather(body => {
+    const parsedBody = JSON.parse(body);
+    const weather = {
+      text: parsedBody[0].WeatherText,
+      city: 'New Orleans',
+      state: 'LA',
+      celsius: parsedBody[0].Temperature.Metric.Value,
+      fahrenheit: parsedBody[0].Temperature.Imperial.Value
+    }
+    res.send(weather);
+  })
 })
 
 app.get('/dinner', (req,res)=>{
