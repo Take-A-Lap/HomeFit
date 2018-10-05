@@ -42,7 +42,9 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'linkAccount':
         console.log(req.body.request.intent.slots, ' line 43 server index');
         db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
-        .then()
+        .then(() => {
+          console.log('account should be added to the database');
+        })
         .catch(err => {
           console.error(err);
         })
@@ -50,7 +52,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         break;
       default:
         console.log('we don\'t know what they said');
-
     }
   }
 });
