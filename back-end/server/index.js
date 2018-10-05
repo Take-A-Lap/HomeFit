@@ -87,7 +87,9 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         .catch(err => {
           console.error(err);
         })
-        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
+        let link = req.body.request.intent.slots.accountName.value;
+        link = link.split(' ').join('@');
+        res.json(alexaHelp.linkAccount(link));
         break;
       case 'changeView':
         const view = req.body.request.intent.slots.view.value;
