@@ -1,23 +1,20 @@
+
+sudo: required
+addons:
+  chrome: stable
+
 language: node_js
 node_js:
-  - "7"
-dist: trusty # needs Ubuntu Trusty
-sudo: true  # needed for Chromium sandbox
-addons:
-  chrome: stable # have Travis install chrome stable.
-cache:
-  yarn: true
-  directories:
-    - node_modules
-before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-install:
-  - yarn
+  - "8"
+
+branches:
+  only:
+    - master
+
 before_script:
-  - npm install -g babel-cli
-  - babel . --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline
+  - npm install -g @angular/cli
+
 script:
-  - yarn test
-notifications:
-  webhooks: https://greenlight.operationspark.org/api/v2/webhooks/travisci
+  - ng build --prod --aot
+  - ng test
 
