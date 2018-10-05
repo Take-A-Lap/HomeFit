@@ -98,13 +98,15 @@ app.get('/personalInfo', (req, res) => {
 app.get('/weather', (req, res) => {
   weather.getWeather(body => {
     const parsedBody = JSON.parse(body);
-    console.log(parsedBody)
     const weather = {
       text: parsedBody[0].WeatherText,
-      
+      city: 'New Orleans',
+      state: 'LA',
+      celsius: parsedBody[0].Temperature.Metric.Value,
+      fahrenheit: parsedBody[0].Temperature.Imperial.Value
     }
+    res.send(weather);
   })
-  res.send(200);
 })
 
 app.get('/dinner', (req,res)=>{
