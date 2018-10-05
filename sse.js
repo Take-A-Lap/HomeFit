@@ -15,5 +15,10 @@ module.exports = function (req, res, next) {
         res.write("data: " + JSON.stringify(data) + "\n\n");
     }
 
+    res.sseChange = function(data) {
+        res.write("event: page-change\n")
+        res.write("data: " + JSON.stringify(data) + "\n\n");
+    }
+
     next()
 };
