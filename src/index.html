@@ -20,6 +20,20 @@
       }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+      var source = new EventSource('/events');
+      source.onmessage = function(e) {
+        // document.body.innerHTML += e.data + '<br>';
+        console.log('i\'m connecting');
+      };
+      // source.addEventListener('open', function(e) {
+      //   console.log('open')
+      // }, false);
+
+      source.addEventListener('change', (event) => {
+        console.log(event);
+      }, false);
+    </script>
   </app-root>
 </body>
 </html>
