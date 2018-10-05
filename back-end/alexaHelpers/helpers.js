@@ -72,7 +72,7 @@ module.exports = {
 
   startWorkout: () => {
     const speechOutput = "Let's begin your workout. I would then say something realted to the workout and help you pace yourself by count your reps."
-    const response = buildResponseWithPrompt(speechOutput, false, "Are you ready to begin your workout today?", "Are you ready to begin your workout today?")
+    const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?")
     return response;
   },
 
@@ -83,11 +83,15 @@ module.exports = {
   },
 
   readWorkout: () => {
-
+    const speechOutput = "This is where i would be able to read you the results of the workout you had just performed";
+    response = buildResponse(speechOutput, false, "TODO")
+    return response;
   },
 
   readRecipe: () => {
-
+    const speechOutput = "This is where i would be able to read you the recommended recipe for the meal that is passed to me";
+    response = buildResponse(speechOutput, false, "TODO");
+    return response;
   },
   changeView: (view) =>{
     const speechOutput = "No problem, let me bring up the " + view + " page for you.";
