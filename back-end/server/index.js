@@ -41,7 +41,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr, " the array of json");
+          console.log(exerWorkArr[0].exercise[0], " the array of json");
           
         })
         .catch(err => {
