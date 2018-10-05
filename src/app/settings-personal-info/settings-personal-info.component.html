@@ -13,26 +13,31 @@
       </div>
       <form role="form">
         <div class="form-group">
-
           <label for="ageInput">Age</label>
           <input  type="number" 
                   class="form-control" 
                   id="age" 
-                  placeholder="Enter age in years"/>
+                  placeholder="Enter age in years"
+                  [(ngModel)]="age"
+                  [ngModelOptions]="{standalone: true}"/>{{age}}
         </div>
         <div class="form-group">
           <label for="heightInput">Height</label>
           <input  type="text" 
                   class="form-control" 
                   id="height" 
-                  placeholder="Enter height in inches"/>
+                  placeholder="Enter height in inches"
+                  [(ngModel)]="height"
+                  [ngModelOptions]="{standalone: true}"/>{{height}}
         </div>
         <div class="form-group">
-          <label for="weightInput">Weight</label>
+          <label for="weightInput">Weight</label>{{weight}}
           <input  type="number" 
                   class="form-control" 
                   id="weight" 
-                  placeholder="Enter weight in pounds"/>
+                  placeholder="Enter weight in pounds"
+                  [(ngModel)]="weight"
+                  [ngModelOptions]="{standalone: true}"/>
         </div>
       </form>
       <ul>
