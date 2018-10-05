@@ -92,6 +92,10 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         const view = req.body.request.intent.slots.view.value;
         console.log(view, ' should be the value of the view slot');
         res.json(alexaHelp.changeView(view));
+        break;
+      case 'nextWorkout':
+        res.json();
+        break;
       default:
         console.log('we don\'t know what they said');
     }
