@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Strength } from '../strength';
-import { STRENGTH } from '../mock-strength';
+import { STRENGTH, CARDIO } from '../mock-strength';
+import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -15,7 +16,8 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 export class StrengthComponent implements OnInit {
 
   
-  exercises = STRENGTH;
+  masterIndex = 0;
+  exercises = STRENGTH;  
   index = 0;
   exercise = STRENGTH[this.index];
   completed = '';
@@ -25,8 +27,10 @@ export class StrengthComponent implements OnInit {
   youtube = this.exercise.youtube_link
   trustedUrl: SafeUrl;
   
-  constructor(private sanitizer: DomSanitizer) {
-  }
+  constructor(
+    private sanitizer: DomSanitizer, 
+    private router: Router
+    ) { }
   // sanitizeAndEmbedURL(link){
     //   this.sanitizer.bypassSecurityTrustUrl(link);
     // }
@@ -55,6 +59,17 @@ export class StrengthComponent implements OnInit {
           clearInterval(setIncrement);
           this.set = 1;
           this.increment();
+          this.masterIndex++;
+          //INSERT HTTP REQUEST TO POST THE 
+          //WORKOUT THAT WAS JUST COMPLETED
+          //AND THE DATE
+          if (this.masterIndex > 7){
+            this.router.navigate(['/home']);
+            // this.exercises = CARDIO;
+            // this.index = 0;
+            // this.exercise = CARDIO[this.index];
+          }
+
         }
       }, (4500 + 10*this.exercise.rep_time));
     }
@@ -73,7 +88,7 @@ export class StrengthComponent implements OnInit {
     
     increment() {
       this.index++;
-      if (this.index < 5) {
+      if (this.index < 8) {
         this.switchExercise();
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
