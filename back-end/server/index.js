@@ -32,6 +32,17 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         break;
       case 'startWorkout':
         //do some stuff
+        db.getUserInfoByAlexUserId(req.body.request.intent.slots.accountName.value)
+        .then(userArr => {
+          return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
+        })
+        .then(exerWorkArr => {
+          console.log(exerWorkArr[0], " the array of json");
+          
+        })
+        .catch(err => {
+          console.error(err);
+        });
         res.json(alexaHelp.startWorkout());
         break;
       case 'recommendRecipe':
