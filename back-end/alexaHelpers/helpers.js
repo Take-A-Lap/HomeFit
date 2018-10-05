@@ -53,8 +53,9 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
 
 module.exports = {
   invocationIntent: (name) => {
+    console.log(name);
     let greetingSpeech = '';
-    if (name === "not linked yet"){
+    if (name === "not linked yet" || name === undefined){
       // says something to prompt the user to add their alexa id
       greetingSpeech = "It appears you have not linked your account yet. If you would like to link your account try saying, link my account followed by your username";
     } else {
@@ -73,9 +74,9 @@ module.exports = {
   startWorkout: () => {
     let cadence = '';
     for(let i = 1; i < 11; i++){
-      cadence += ' give me a ' + i + ' <break time="2800ms"/> ';
+      cadence += ' give me a ' + i + ' <break time="1200ms"/> ';
     }
-    const speechOutput = "Let's begin your workout. I would then say something realted to the workout and help you pace yourself by count your reps. this is an example for burpee's, " + cadence;
+    const speechOutput = "Let's begin your workout. I would then say something realted to the workout and help you pace yourself by count your reps. this is an example for Tricep Pushup's, " + cadence;
     const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?")
     return response;
   },
@@ -107,7 +108,7 @@ module.exports = {
     for (let i = 1; i < 11; i++) {
       cadence += ' give me a ' + i + ' <break time="1700ms"/> ';
     }
-    const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups cadence count " + cadence;
+    const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
     const response = buildResponse(speechOutput, false, "TODO");
     return response;
   }
