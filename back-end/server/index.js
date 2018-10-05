@@ -72,10 +72,10 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.startWorkout());
         break;
       case 'recommendRecipe':
-        //do some stuff
+        res.json(alexaHelp.readRecipe());
         break;
       case 'readWorkoutStatus':
-        //do stuff
+        res.json(alexaHelp.readWorkout());
         break;
       case 'linkAccount':
         // console.log(req.body.request.intent.slots, ' line 43 server index');
@@ -92,6 +92,10 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         const view = req.body.request.intent.slots.view.value;
         console.log(view, ' should be the value of the view slot');
         res.json(alexaHelp.changeView(view));
+        break;
+      case 'nextWorkout':
+        res.json(alexaHelp.nextWorkout());
+        break;
       default:
         console.log('we don\'t know what they said');
     }
