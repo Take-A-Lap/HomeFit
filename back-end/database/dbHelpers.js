@@ -20,7 +20,7 @@ const db = pgp(connection);
 module.exports = {
 
   getUserInfoByAlexUserId: (alexaId) => db.any(`
-  SELECT name FROM users
+  SELECT * FROM users
   WHERE alexa_user_id = $1
   `, [alexaId]),
   // get user information
