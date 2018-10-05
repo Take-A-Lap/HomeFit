@@ -38,6 +38,7 @@ export class StrengthComponent implements OnInit {
         } else {
           clearInterval(repIncrement);
           this.rep = 0;
+          this.set++;
         }
       }, this.exercise.rep_time)
     }
@@ -45,11 +46,23 @@ export class StrengthComponent implements OnInit {
     switchRep() {
       this.plus();
     }
+
+    inc(){
+      let setIncrement = setInterval(()=>{
+        if(this.set <= 3){
+          this.switchRep();
+        } else {
+          clearInterval(setIncrement);
+          this.set = 1;
+          this.increment();
+        }
+      }, (4500 + 10*this.exercise.rep_time));
+    }
     
     workinDatBody(){
-      while(this.set < 4){
-        
-      }
+      console.log('start');
+      this.inc();
+
     }
     
     switchExercise() {
@@ -62,13 +75,15 @@ export class StrengthComponent implements OnInit {
       this.index++;
       if (this.index < 5) {
         this.switchExercise();
+        this.youtube = this.exercise.youtube_link;
+        this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
-        this.completed = 'Workout Complete';
+        // this.completed = 'Workout Complete';
       }
     }
     
     ngOnInit() {
-      this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtube);
+      this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
 }
 
 }
