@@ -25,9 +25,6 @@ export class HomeComponent implements OnInit {
     private foodService: FoodService,
     private weatherService: WeatherService,
     private router: Router) { }
-  // getMeal() {
-  //   console.log('Prep says &$*# Jan')
-  // }
 
   getWeather() {
     return this.weatherService.getWeather()
