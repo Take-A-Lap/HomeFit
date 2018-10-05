@@ -28,7 +28,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
       case 'AMAZON.StopIntent':
-        alexaHelp.stopAndExit();
+        res.json(alexaHelp.stopAndExit());
         break;
       case 'startWorkout':
         //do some stuff
