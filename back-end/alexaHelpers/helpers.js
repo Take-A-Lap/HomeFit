@@ -54,7 +54,7 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
 module.exports = {
   invocationIntent: (name) => {
     let greetingSpeech = '';
-    if (name === "not linked yet"){
+    if (name === "not linked yet" || name === undefined){
       // says something to prompt the user to add their alexa id
       greetingSpeech = "It appears you have not linked your account yet. If you would like to link your account try saying, link my account followed by your username";
     } else {
