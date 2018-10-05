@@ -32,20 +32,21 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
       "outputSpeech": {
         "type": "SSML",
         "ssml": speechOutput
+      },
+      "card": {
+        "type": "Simple",
+        "title": SKILL_NAME,
+        "content": cardText,
+        "text": cardText
+      },
+      "reprompt": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": reprompt,
+          "ssml": reprompt
+        }
       }
     },
-    "card": {
-      "type": "Simple",
-      "title": SKILL_NAME,
-      "content": cardText,
-      "text": cardText
-    },
-    "reprompt": {
-      "outputSpeech": {
-        "type": "SSML",
-        "ssml": reprompt
-      }
-    }
   }
   return jsonObj;
 };
