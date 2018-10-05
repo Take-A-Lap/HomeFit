@@ -32,21 +32,21 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
       "outputSpeech": {
         "type": "SSML",
         "ssml": speechOutput
+      },
+      "card": {
+        "type": "Simple",
+        "title": SKILL_NAME,
+        "content": cardText,
+        "text": cardText
+      },
+      "reprompt": {
+        "outputSpeech": {
+          "type": "PlainText",
+          "text": reprompt,
+          "ssml": reprompt
+        }
       }
     },
-    "card": {
-      "type": "Simple",
-      "title": SKILL_NAME,
-      "content": cardText,
-      "text": cardText
-    },
-    "reprompt": {
-      "outputSpeech": {
-        "type": "PlainText",
-        "text": reprompt,
-        "ssml": reprompt
-      }
-    }
   }
   return jsonObj;
 };
@@ -71,8 +71,8 @@ module.exports = {
   },
 
   startWorkout: () => {
-    const speechOutput = "this is another test to see how reprompts work."
-    const response = buildResponseWithPrompt(speechOutput, false, "test", "Would you like another?")
+    const speechOutput = "Why wont i give a prompt?"
+    const response = buildResponseWithPrompt(speechOutput, false, "Are you ready to begin your workout today?", "Are you ready to begin your workout today?")
     return response;
   },
 
@@ -88,6 +88,11 @@ module.exports = {
 
   readRecipe: () => {
 
+  },
+  changeView: (view) =>{
+    const speechOutput = "No problem, let me bring up the " + view + " page for you.";
+    const response = buildResponse(speechOutput);
+    return response;
   }
 
 };
