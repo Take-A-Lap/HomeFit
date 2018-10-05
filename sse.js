@@ -1,6 +1,6 @@
 // function to call to send data to the front end
 // once the front end recieves 
-module.exports.workOutEvent = function (req, res, next) {
+module.exports = function (req, res, next) {
     res.sseSetup = function() {
         res.writeHead(200, {
             'Content-Type': 'text/event-stream',
@@ -15,4 +15,4 @@ module.exports.workOutEvent = function (req, res, next) {
     }
 
     next()
-}
+};

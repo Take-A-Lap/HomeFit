@@ -22,44 +22,43 @@ app.use(bodyParser.urlencoded({
 app.use(sse);
 
 app.get('/events', (sseReq, sseRes) => {
-  // setInterval(function() {
-  console.log('I have a connection');
-  // }, 5000)
-  sseRes.sseSetup();
-  sseRes.sseSend("Hello This is a connection");
-  sseRes.sseSend("Hey Again, Ican connect more than once")
-// attach the verifier middleware first because it needs the entire
-// request body, and express doesn't expose this on the request object
 
-alexaRouter.post('/fitnessTrainer', (req, res) => {
-  if (req.body.request.type === 'LaunchRequest') {
-    console.log(req.body.request, ' line 16 server index');
-    res.json(alexaHelp.invocationIntent());
-  } else if (req.body.request.type === 'SessionEndedRequest') {
-    console.log('SESSION ENDED');
-  } else if (req.body.request.type === 'IntentRequest') {
-    switch (req.body.request.intent.name) {
-      case 'AMAZON.CancelIntent':
-      case 'AMAZON.StopIntent':
-      //do some stuff
-      break;
-      case 'startWorkout':
-      app.get('/events', (req, res) => {
-        // setInterval(function() {
-          console.log('I have a connection');
-          // }, 5000)
-        });
+  console.log('I have a connection');
+
+  sseRes.sseSetup();
+
+  sseRes.sseSend("Hello This is a connection");
+  // sseRes.sseSend("Hey Again, I can connect more than once");
+
+  // attach the verifier middleware first because it needs the entire
+  // request body, and express doesn't expose this on the request object
+
+  alexaRouter.post('/fitnessTrainer', (req, res) => {
+    if (req.body.request.type === 'LaunchRequest') {
+      console.log(req.body.request, ' line 16 server index');
+      res.json(alexaHelp.invocationIntent());
+    } else if (req.body.request.type === 'SessionEndedRequest') {
+      console.log('SESSION ENDED');
+    } else if (req.body.request.type === 'IntentRequest') {
+      switch (req.body.request.intent.name) {
+        case 'AMAZON.CancelIntent':
+        case 'AMAZON.StopIntent':
         //do some stuff
         break;
-        case 'recommendRecipe':
-        //do some stuff
-        break;
-        case 'readWorkoutStatus':
-        //do stuff
-        break;
-        default:
-        console.log('we don\'t know what they said');
-        
+        case 'startWorkout':
+          /** if the start workout intent is found you should be able to call 
+           *  the sseRes.sseSend(data) with the data to send to the front end
+          */
+          //do some stuff
+          break;
+          case 'recommendRecipe':
+          //do some stuff
+          break;
+          case 'readWorkoutStatus':
+          //do stuff
+          break;
+          default:
+          console.log('we don\'t know what they said');
       }
     }
   });
@@ -69,7 +68,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
 // Since this is attached to a router mounted at /alexa,
 // endpoints with alexa/blah blah will be caught at blah blah
 
-const port = 3000
 app.use(express.static('dist/HomeFit'));
 
 app.use(bodyParser.json());
