@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.getWeather();
+//    this.getWeather();
   }
 
   
