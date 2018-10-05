@@ -44,20 +44,20 @@
         <div class="slidecontainer">
           <li class="list-item">
             Goals
-              <input type="range" min="1" max="3" value="2" class="slider" id="myRange" [(ngModel)]="goals">
-          </li>{{goals}}
+              <input type="range" min="1" max="3" value="2" class="slider" id="myRange" (input)="updateGoals($event)">
+          </li>
           <li class="list-item">
             How many push-ups can you do?
-            <input type="range" min="1" max="50" value="25" class="slider" id="myRange" [(ngModel)]="push_ups">
-          </li>{{push_ups}}
+            <input type="range" min="1" max="50" value="25" class="slider" id="myRange" (input)="updatePushUps($event)">
+          </li>
           <li class="list-item">
             How do you feel about squats?
-            <input type="range" min="1" max="3" value="2" class="slider" id="myRange" [(ngModel)]="squats">
-          </li>{{squats}}
+            <input type="range" min="1" max="3" value="2" class="slider" id="myRange" (input)="updateSquats($event)">
+          </li>
           <li class="list-item">
             How far can you comfortably jog (in miles)?
-            <input type="range" min="1" max="10" value="5" class="slider" id="myRange" [(ngModel)]="miles">
-          </li>{{miles}}
+            <input type="range" min="1" max="10" value="5" class="slider" id="myRange" (input)="updateMiles($event)">
+          </li>
         </div>
       </ul>
       <div class="checkbox">
