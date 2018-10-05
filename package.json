@@ -30,6 +30,7 @@
     "express": "^4.16.3",
     "html": "^1.0.0",
     "jest-preset-angular": "^6.0.1",
+    "jquery": "^3.3.1",
     "pg-promise": "^8.4.6",
     "pug": "^2.0.3",
     "request": "^2.88.0",
