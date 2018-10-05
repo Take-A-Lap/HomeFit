@@ -94,7 +94,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.changeView(view));
         break;
       case 'nextWorkout':
-        res.json();
+        res.json(alexaHelp.nextWorkout());
         break;
       default:
         console.log('we don\'t know what they said');
