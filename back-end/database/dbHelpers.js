@@ -144,13 +144,13 @@ module.exports = {
     id_user = $2
   `, [completed, userId, date, reps]),
   
-  updateAlexaId: (username, alexaId) => db.any(`
+  updateAlexaId: (gmail, alexaId) => db.any(`
   UPDATE users
   SET
   alexa_user_id = $2
   WHERE
-  name = $1
-  `, [username, alexaId]),
+  user_email = $1
+  `, [gmail, alexaId]),
 
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
     DELETE FROM user_dietary
