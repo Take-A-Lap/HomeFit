@@ -75,14 +75,14 @@ export class StrengthComponent implements OnInit {
       if (this.index < 5) {
         this.switchExercise();
         this.youtube = this.exercise.youtube_link;
-        this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtube);
+        this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
         // this.completed = 'Workout Complete';
       }
     }
     
     ngOnInit() {
-      this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtube);
+      this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
 }
 
 }
