@@ -82,7 +82,7 @@ module.exports = {
   },
 
   linkAccount: (username) => {    
-    const speechOutput = "It is a pleasure to meet you " + username + ". When you are ready to begin your workout, fel free to let me know. You can try saying begin workout";
+    const speechOutput = "It is a pleasure to meet you " + username + ". When you are ready to begin your workout, feel free to let me know. You can try saying begin workout";
     const response = buildResponse(speechOutput, false, "It is a pleasure to meet you");
     return response;
   },
@@ -110,6 +110,11 @@ module.exports = {
     }
     const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
     const response = buildResponse(speechOutput, false, "TODO");
+    return response;
+  },
+  default: () => {
+    const speechOutput = "I'm sorry, i don't believe i heard you, could you try again?"
+    const response = buildResponse(speechOutput, false, "Oops, sorry");
     return response;
   }
 

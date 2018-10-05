@@ -28,7 +28,7 @@ app.get('/events', (sseReq, sseRes) => {
 
   sseRes.sseSetup();
 
-  sseRes.sseSend("Hello This is a connection");
+  // sseRes.sseSend("Hello This is a connection");
   // sseRes.sseSend("Hey Again, I can connect more than once");
 
   // attach the verifier middleware first because it needs the entire
@@ -79,19 +79,23 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.readWorkout());
         break;
       case 'linkAccount':
-        // console.log(req.body.request.intent.slots, ' line 43 server index');
-        db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
+        let link = req.body.request.intent.slots.accountName.value;
+        link = link.split(' ').join('@');
+        console.log(link, ' line 84 server index');
+        db.updateAlexaId(link, req.body.session.user.userId)
         .then(() => {
-          // console.log('account should be added to the database');
+          console.log('successful update to user');
         })
         .catch(err => {
           console.error(err);
         })
-        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
+        
+        res.json(alexaHelp.linkAccount(link));
         break;
       case 'changeView':
         const view = req.body.request.intent.slots.view.value;
         console.log(view, ' should be the value of the view slot');
+        sseRes.sseSend(view);
         res.json(alexaHelp.changeView(view));
         break;
       case 'nextWorkout':
@@ -99,6 +103,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         break;
       default:
         console.log('we don\'t know what they said');
+        console.log('req.body.request.intent');
+        // res.json(alexaHelp.default());
     }
   }
 });
