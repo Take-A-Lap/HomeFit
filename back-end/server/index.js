@@ -37,6 +37,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
         .then(userArr => {
+          console.log(userArr, ' this needs to not be an empty array');
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
