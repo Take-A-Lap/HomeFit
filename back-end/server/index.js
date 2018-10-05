@@ -51,6 +51,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
+        res.json(alexaHelp.stopAndExit());
+        break;
       case 'AMAZON.StopIntent':
         res.json(alexaHelp.stopAndExit());
         break;
