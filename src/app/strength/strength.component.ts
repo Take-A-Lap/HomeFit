@@ -49,13 +49,14 @@ export class StrengthComponent implements OnInit {
 
     inc(){
       let setIncrement = setInterval(()=>{
-        if(this.set < 3){
+        if(this.set <= 3){
           this.switchRep();
         } else {
           clearInterval(setIncrement);
-          this.set = 0;
+          this.set = 1;
+          this.increment();
         }
-      }, 4500);
+      }, (4500 + 10*this.exercise.rep_time));
     }
     
     workinDatBody(){
@@ -73,8 +74,10 @@ export class StrengthComponent implements OnInit {
       this.index++;
       if (this.index < 5) {
         this.switchExercise();
+        this.youtube = this.exercise.youtube_link;
+        this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.youtube);
       } else {
-        this.completed = 'Workout Complete';
+        // this.completed = 'Workout Complete';
       }
     }
     
