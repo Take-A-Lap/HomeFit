@@ -71,7 +71,7 @@ module.exports = {
   },
 
   startWorkout: () => {
-    const speechOutput = "this is another test to see how reprompts work."
+    const speechOutput = "Why wont i give a prompt?"
     const response = buildResponseWithPrompt(speechOutput, false, "Are you ready to begin your workout today?", "Are you ready to begin your workout today?")
     return response;
   },
