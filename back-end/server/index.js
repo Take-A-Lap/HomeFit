@@ -13,7 +13,7 @@ alexaRouter.use(verifier)
 alexaRouter.use(bodyParser.json());
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
-    console.log(req.body, ' line 16 server index');
+    // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
     .then((userArr)=>{
       const passingName = userArr[0].name || "not linked yet";
@@ -40,12 +40,18 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do stuff
         break;
       case 'linkAccount':
-        console.log(req.body, ' line 16 server index');
-        res.json(alexaHelp.linkAccount());
+        console.log(req.body.request.intent.slots, ' line 43 server index');
+        db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
+        .then(() => {
+          console.log('account should be added to the database');
+        })
+        .catch(err => {
+          console.error(err);
+        })
+        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
         break;
       default:
         console.log('we don\'t know what they said');
-
     }
   }
 });
