@@ -42,8 +42,7 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
     },
     "reprompt": {
       "outputSpeech": {
-        "type": "PlainText",
-        "text": reprompt,
+        "type": "SSML",
         "ssml": reprompt
       }
     }
