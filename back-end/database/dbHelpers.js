@@ -29,6 +29,11 @@ module.exports = {
     WHERE name = $1
   `, [username]),
 
+  getUserInfoByEmail: (email) => db.any(`
+    SELECT * FROM users
+    WHERE user_email = $1
+  `, [email]),
+
   // gets the user dietary information based on the user id
   getUserDietByUserId: (userId) => db.any(`
     SELECT name, type FROM dietary_restrictions 
@@ -89,12 +94,12 @@ module.exports = {
     VALUES ( $1, $2, $3, $4, $5)
   `, [name, rep_time, youtube_link, id_muscle_group, difficulty]),
 
-  addNewUser: (name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals) => db.any(`
+  addNewUser: (name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals, gmail) => db.any(`
     INSERT INTO users 
-    (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals)
+    (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals, user_email)
     VALUES
-    ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9)
-  `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals]),
+    ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9, $10)
+  `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals, gmail]),
 
   // will most likely need to call this within a loop over the different diet ids
   insertIntoUserDiet: (userId, dietId) => db.any(`
@@ -139,13 +144,13 @@ module.exports = {
     id_user = $2
   `, [completed, userId, date, reps]),
   
-  updateAlexaId: (username, alexaId) => db.any(`
+  updateAlexaId: (gmail, alexaId) => db.any(`
   UPDATE users
   SET
   alexa_user_id = $2
   WHERE
-  name = $1
-  `, [username, alexaId]),
+  user_email = $1
+  `, [gmail, alexaId]),
 
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
     DELETE FROM user_dietary
