@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   meals2 = [];
   meals3 = [];
   currentWeather = [];
+  time = 0;
 
   constructor(
     private foodService: FoodService,
@@ -62,11 +63,27 @@ export class HomeComponent implements OnInit {
 
   }
 
+  getTime(){
+    let d = new Date();
+    this.time = d.getMinutes();
+  }
+
+  displayMeal(){
+    if(this.time >= 21 || this.time < 10){
+      this.getBreakfast();
+    } else if(this.time >= 10 && this.time < 2){
+      this.getLunch();
+    } else {
+      this.getDinner();
+    }
+  }
+
   onSubmit() {
     this.router.navigate(['/personalInfo']);
   }
   ngOnInit() {
     // this.getWeather();
+    this.displayMeal();
   }
 
   
