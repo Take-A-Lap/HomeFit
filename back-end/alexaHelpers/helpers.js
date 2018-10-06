@@ -25,6 +25,7 @@ const buildResponse = (speechText, shouldSessionEnd, cardText) => {
 const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, reprompt) => {
 
   const speechOutput = "<speak>" + speechText + "</speak>";
+  reprompt = "<speak>" + reprompt + "</speak>";
   const jsonObj = {
     "version": "1.0",
     "response": {
@@ -42,7 +43,7 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
     },
     "reprompt": {
       "outputSpeech": {
-        "type": "PlainText",
+        "type": "SSML",
         "text": reprompt,
         "ssml": reprompt
       }
