@@ -69,9 +69,10 @@ export class HomeComponent implements OnInit {
   }
 
   displayMeal(){
+    this.getTime();
     if(this.time >= 21 || this.time < 10){
       this.getBreakfast();
-    } else if(this.time >= 10 && this.time < 2){
+    } else if(this.time >= 10 && this.time < 14){
       this.getLunch();
     } else {
       this.getDinner();
