@@ -1,27 +1,35 @@
-
-sudo: required
-addons:
-  chrome: stable
-
-language: node_js
-node_js:
-  - "8"
-cache:
-  directories:
-    - node_modules
-    
-before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-
-branches:
-  only:
-    - master
-    - sse
-
-before_script:
-  - npm install -g @angular/cli
-
-script:
-  - ng build
-  - jest
-  
+{
+  "os": "linux",
+  "dist": "trusty",
+  "sudo": "required",
+  "cache": {
+    "directories": [
+      "node_modules"
+    ]
+  },
+  "group": "stable",
+  "addons": {
+    "chrome": "stable"
+  },
+  "script": [
+    "ng build",
+    "jest"
+  ],
+  ".result": "configured",
+  "node_js": [
+    "8"
+  ],
+  "branches": {
+    "only": [
+      "master",
+      "sse"
+    ]
+  },
+  "language": "node_js",
+  "before_script": [
+    "npm install -g @angular/cli"
+  ],
+  "before_install": [
+    "google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &"
+  ]
+}
