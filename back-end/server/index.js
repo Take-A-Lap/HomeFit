@@ -51,6 +51,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
+        res.json(alexaHelp.stopAndExit());
+        break;
       case 'AMAZON.StopIntent':
         res.json(alexaHelp.stopAndExit());
         break;
@@ -79,18 +81,22 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.readWorkout());
         break;
       case 'linkAccount':
-        console.log(req.body.request.intent.slots, ' line 82 server index');
-        db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
+        let link = req.body.request.intent.slots.accountName.value;
+        link = link.split(' ').join('@');
+        console.log(link, ' line 84 server index');
+        db.updateAlexaId(link, req.body.session.user.userId)
         .then(() => {
           console.log('successful update to user');
         })
         .catch(err => {
           console.error(err);
         })
-        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
+        
+        res.json(alexaHelp.linkAccount(link));
         break;
       case 'changeView':
-        const view = req.body.request.intent.slots.view.value;
+        let view = req.body.request.intent.slots.view.value;
+        view = '/' + view.split(' ').join('');
         console.log(view, ' should be the value of the view slot');
         sseRes.sseSend(view);
         res.json(alexaHelp.changeView(view));
@@ -100,6 +106,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         break;
       default:
         console.log('we don\'t know what they said');
+        console.log('req.body.request.intent');
+        // res.json(alexaHelp.default());
     }
   }
 });

@@ -2,15 +2,16 @@
   <div class="row">
     <div class="col-md-6">
       <div class="media">
-        <img class="mr-3" alt="Alexa_photo" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
+        <img class="mr-3" alt="Alexa_photo" src="../../assets/img/Alexa_rebel.jpg" width=400 height=300 />
       </div>
+      <h3>I'm Alexa, I'll be your personal trainer today.</h3>
     </div>
     <div class="col-md-6">
-      <p>
-        I'm Alexa, I'll be your personal trainer today.
-      </p>
-
-      <p>Current Exercise: Dead Lift</p>
+      <div class="media">
+        <iframe [src]="trustedUrl" width=400 height=300></iframe>
+      </div>
+      <h3>{{exercise.name}}</h3>
+      <!-- <button (click)="increment()">Next Exercise</button> -->
     </div>
   </div>
   <div class="row">
@@ -20,37 +21,26 @@
           Sets
         </h2>
         <p>
-          1
+          {{set}}
         </p>
+
       </div>
     </div>
     <div class="col-md-6">
       <div class="jumbotron">
         <h2>
-          Beats per Minute
+          Reps
         </h2>
         <p>
-          10
+          {{rep}}
         </p>
-
-      </div>
-      <div class="jumbotron">
-        <h2>
-          Time
-        </h2>
-        <p>
-          :45
-        </p>
-      
+        <button (click)="workinDatBody()">Start Rep Count</button>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="media">
-        <img class="mr-3" alt="youTube link" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
-
-      </div>
+      <button (click)="home()">HOME</button>
     </div>
   </div>
 </div>
