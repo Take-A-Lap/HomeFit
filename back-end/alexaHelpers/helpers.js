@@ -114,6 +114,7 @@ module.exports = {
     return response;
   },
   default: () => {
+    // TODO: figure out how to implement
     const speechOutput = "I'm sorry, i don't believe i heard you, could you try again?"
     const response = buildResponse(speechOutput, false, "Oops, sorry");
     return response;
