@@ -34,7 +34,9 @@ import { MealsComponent } from './meals/meals.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [FoodService],
+  providers: [
+    FoodService
+  ],
   bootstrap: [AppComponent]
 })
 //

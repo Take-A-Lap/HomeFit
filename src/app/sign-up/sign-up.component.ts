@@ -10,6 +10,10 @@ export class SignUpComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  onSignIn() {
+    
+  }
+
   changePage() {
     this.router.navigate(['/home']);
   }

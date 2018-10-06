@@ -60,16 +60,16 @@ export class HomeComponent implements OnInit {
       .subscribe(dinnerFood => {
         this.meals.push(dinnerFood);
       })
-
   }
 
   getTime(){
     let d = new Date();
-    this.time = d.getMinutes();
+    this.time = d.getHours();
   }
 
   displayMeal(){
     this.getTime();
+    console.log(this.time);
     if(this.time >= 21 || this.time < 10){
       this.getBreakfast();
     } else if(this.time >= 10 && this.time < 14){
