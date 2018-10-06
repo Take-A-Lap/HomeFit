@@ -97,6 +97,10 @@ export class StrengthComponent implements OnInit {
       }
     }
     
+    home(){
+      this.router.navigate(['/home']);
+    }
+    
     ngOnInit() {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
 }
