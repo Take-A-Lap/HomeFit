@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WindowRef } from '../window-ref';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,9 +9,10 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private winRef: WindowRef) { }
 
   changePage() {
+    console.log(this.winRef.nativeWindow.data);
     this.router.navigate(['/home']);
   }
   ngOnInit() {

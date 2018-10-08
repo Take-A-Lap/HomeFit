@@ -11,6 +11,7 @@ import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-res
 import { StrengthComponent } from './strength/strength.component';
 import { CardioComponent } from './cardio/cardio.component';
 import { FoodService } from './food/food.service';
+import { WindowRef } from './window-ref';
 import { HttpClientModule } from '@angular/common/http';
 import { BreakfastComponent } from './breakfast/breakfast.component';
 import { FormsModule } from '@angular/forms';
@@ -34,8 +35,9 @@ import { MealsComponent } from './meals/meals.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [FoodService],
-  bootstrap: [AppComponent]
+  providers: [FoodService, WindowRef],
+  bootstrap: [AppComponent],
+
 })
 //
 export class AppModule { }

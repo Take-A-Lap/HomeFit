@@ -23,7 +23,7 @@
       // Everything in this script below this line should happen after sign-up
 
       // creates a basic http request to the /events endpoint to open a connection
-      var source = new EventSource('https://e.homefitdo.com/events');
+      var source = new EventSource('/events');
       // listens for an event from the server (an sseRes.sseSEnd())
       source.onmessage = function(e) {
         console.log('i\'m connecting');
