@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WindowRef } from '../window-ref';
 import {
   AuthService,
   FacebookLoginProvider,
@@ -13,7 +14,7 @@ import {
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private router: Router, private socialAuthService: AuthService) { }
+  constructor(private router: Router, private socialAuthService: AuthService, private winRef: WindowRef) { }
 
   onSignIn() {
     
@@ -40,6 +41,7 @@ export class SignUpComponent implements OnInit {
   }
   
   changePage() {
+    console.log(this.winRef.nativeWindow.data);
     this.router.navigate(['/home']);
   }
   ngOnInit() {
