@@ -15,7 +15,6 @@
   <app-root>
     <div id="google_translate_element"></div>
     <script type="text/javascript">
-      // const $ = require('jquery');
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
       }
@@ -23,7 +22,7 @@
       // Everything in this script below this line should happen after sign-up
 
       // creates a basic http request to the /events endpoint to open a connection
-      var source = new EventSource('/events');
+      var source = new EventSource('https://e.homefitdo.com/events');
       // listens for an event from the server (an sseRes.sseSEnd())
       source.onmessage = function(e) {
         console.log('i\'m connecting');
@@ -35,8 +34,6 @@
         console.log(event);
         const data = JSON.parse(event.data);
         window.data = data;
-        // let path = 'https://e.homefitdo.com' + data;
-        // $('#swap').click();
       }, false);
     </script>
     <!-- <a id="swap" href=${path}></a> -->
