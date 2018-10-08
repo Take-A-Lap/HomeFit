@@ -28,7 +28,6 @@ app.get('/events', (sseReq, sseRes) => {
 
   sseRes.sseSetup();
 
-  // sseRes.sseSend("Hello This is a connection");
   // sseRes.sseSend("Hey Again, I can connect more than once");
 
   // attach the verifier middleware first because it needs the entire
