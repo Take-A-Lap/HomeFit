@@ -36,7 +36,7 @@ import { MealsComponent } from './meals/meals.component';
     FormsModule
   ],
   providers: [FoodService, WindowRef],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 //
 export class AppModule { }
