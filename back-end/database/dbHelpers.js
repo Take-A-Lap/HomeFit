@@ -1,14 +1,14 @@
 // require pg-promise
 const pgp = require('pg-promise')();
 //require the config js to get the libPass
-// const { libPass } = require('../../config');
+const { libPass } = require('../../config');
 
 const connection = {
   host: 'pellefant.db.elephantsql.com', // server name or IP address;
   port: 5432,
   database: 'jeunwozz',
   user: 'jeunwozz',
-  password: process.env.libpass,
+  password: libPass,
 };
 // let alexaId = 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY';
 const db = pgp(connection);
