@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
   ngOnInit() {
-     this.getWeather();
+//     this.getWeather();
   }
 
   
