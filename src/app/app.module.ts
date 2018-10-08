@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "angular-6-social-login";
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { ErrorComponent } from './error/error.component';
@@ -16,6 +21,26 @@ import { BreakfastComponent } from './breakfast/breakfast.component';
 import { FormsModule } from '@angular/forms';
 import { MealsComponent } from './meals/meals.component';
 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+    [
+      // {
+      //   id: FacebookLoginProvider.PROVIDER_ID,
+      //   provider: new FacebookLoginProvider("Your-Facebook-app-id")
+      // },
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider("769076485717-aldiftq59isia5tai1hsirghmcbt8uis.apps.googleusercontent.com")
+      },
+      // {
+      //   id: LinkedinLoginProvider.PROVIDER_ID,
+      //   provider: new LinkedinLoginProvider("1098828800522-m2ig6bieilc3tpqvmlcpdvrpvn86q4ks.apps.googleusercontent.com")
+      // },
+    ]
+  );
+  return config;
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,12 +54,16 @@ import { MealsComponent } from './meals/meals.component';
     MealsComponent
   ],
   imports: [
+    SocialLoginModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [FoodService],
+  providers: [
+    FoodService,
+    {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
+  ],
   bootstrap: [AppComponent]
 })
 //
