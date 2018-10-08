@@ -163,9 +163,9 @@ module.exports = {
     WHERE id_user = $1
   `, [userId]),
   
-  removeUserByName: (name) => db.any(`
+  removeUserByEmail: (userEmail) => db.any(`
     DELETE FROM users
-    WHERE name = $1
-  `, [name]),
+    WHERE user_email = $1
+  `, [userEmail]),
 
 };
