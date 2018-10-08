@@ -162,6 +162,10 @@ module.exports = {
     DELETE FROM exercises_workouts
     WHERE id_user = $1
   `, [userId]),
-
+  
+  removeUserByName: (name) => db.any(`
+    DELETE FROM users
+    WHERE name = $1
+  `, [name]),
 
 };
