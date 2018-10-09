@@ -28,7 +28,8 @@ app.get('/events', (sseReq, sseRes) => {
 
   sseRes.sseSetup();
 
-  // sseRes.sseSend("Hey Again, I can connect more than once");
+  sseRes.sseSend("Hey Again, I can connect more than once");
+  sseRes.newEvent("We Got More Data");
 
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
