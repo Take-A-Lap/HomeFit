@@ -23,9 +23,10 @@ export class AppComponent {
       */ 
       source.addEventListener('workOutEvent', (event) => {
         console.log(event.data);
-        this.changePage("/home");
+        // uncomment for to fire off changePage function
+        // this.changePage("/home");
       }, false);
-      
+
       source.addEventListener('newEvent', (event) => {
         console.log(event.data);
       }, false);
