@@ -118,6 +118,12 @@ module.exports = {
     const speechOutput = "I'm sorry, i don't believe i heard you, could you try again?"
     const response = buildResponse(speechOutput, false, "Oops, sorry");
     return response;
+  },
+
+  endSession: () => {
+    const speechOutput = "Good bye";
+    const response = buildResponse(speechOutput, true, "Goodbye");
+    return response;
   }
 
 };

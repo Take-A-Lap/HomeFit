@@ -26,16 +26,9 @@ app.use(bodyParser.urlencoded({
 
 //   console.log('I have a connection');
 
-<<<<<<< HEAD
 //   sseRes.sseSetup();
 
   // sseRes.sseSend("Hey Again, I can connect more than once");
-=======
-  sseRes.sseSetup();
-  // fire off events
-  sseRes.sseSend("Hey Again, I can connect more than once");
-  // sseRes.newEvent("We Got More Data");
->>>>>>> 35bcfcca14ffd606cf8dba68f6a754625acecfdd
 
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
@@ -55,6 +48,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     // console.log('SESSION ENDED');
+    res.json(alexaHelp.endSession());
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
