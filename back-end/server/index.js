@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({
   // request body, and express doesn't expose this on the request object
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
-  const workouts = [];
+  let workouts = [];
   console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
@@ -65,48 +65,50 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
         .then(userArr => {
-          console.log(userArr, ' this needs to not be an empty array');
-          return db.getExercisesFromExerciseWorkoutsByUserId(7)
+          // console.log(userArr, ' this needs to not be an empty array');
+          return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr[0].exercises, " the array of json");
+          // console.log(exerWorkArr[0].exercises, " the array of json");
+          workouts = workouts.concat(exerWorkArr[0].exercises[0]);
+          console.log(workouts, ' this should be one days worrth of workouts');
+          res.json(alexaHelp.startWorkout(workouts[0], workouts.length));
           
         })
         .catch(err => {
           console.error(err);
         });
-        res.json(alexaHelp.startWorkout());
         break;
-      case 'recommendRecipe':
-        res.json(alexaHelp.readRecipe());
-        break;
-      case 'readWorkoutStatus':
-        res.json(alexaHelp.readWorkout());
-        break;
-      case 'linkAccount':
-        let link = req.body.request.intent.slots.accountName.value;
-        link = link.split(' ').join('@');
-        console.log(link, ' line 84 server index');
-        db.updateAlexaId(link, req.body.session.user.userId)
-        .then(() => {
-          console.log('successful update to user');
-        })
-        .catch(err => {
-          console.error(err);
-        })
-        
-        res.json(alexaHelp.linkAccount(link));
-        break;
-      case 'changeView':
-        let view = req.body.request.intent.slots.view.value;
-        view = '/' + view.split(' ').join('');
-        console.log(view, ' should be the value of the view slot');
-        // sseRes.sseSend(view);
-        res.json(alexaHelp.changeView(view));
-        break;
-      case 'nextWorkout':
-        res.json(alexaHelp.nextWorkout());
-        break;
+        case 'nextWorkout':
+          res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
+          break;
+        case 'recommendRecipe':
+          res.json(alexaHelp.readRecipe());
+          break;
+        case 'readWorkoutStatus':
+          res.json(alexaHelp.readWorkout());
+          break;
+        case 'linkAccount':
+          let link = req.body.request.intent.slots.accountName.value;
+          link = link.split(' ').join('@');
+          console.log(link, ' line 84 server index');
+          db.updateAlexaId(link, req.body.session.user.userId)
+          .then(() => {
+            console.log('successful update to user');
+          })
+          .catch(err => {
+            console.error(err);
+          })
+          
+          res.json(alexaHelp.linkAccount(link));
+          break;
+        case 'changeView':
+          let view = req.body.request.intent.slots.view.value;
+          view = '/' + view.split(' ').join('');
+          console.log(view, ' should be the value of the view slot');
+          // sseRes.sseSend(view);
+          res.json(alexaHelp.changeView(view));
+          break;
       default:
         console.log('we don\'t know what they said');
         console.log('req.body.request.intent');
