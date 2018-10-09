@@ -9,5 +9,6 @@ test('testing our test', ()=>{
     done();
   }).catch(err=>{
     console.error(err);
+    done();
   })
 })
