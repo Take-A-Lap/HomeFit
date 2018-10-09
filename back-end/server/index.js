@@ -22,14 +22,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(sse);
 
-// app.get('/events', (sseReq, sseRes) => {
-
-//   console.log('I have a connection');
-
-//   sseRes.sseSetup();
-
-  // sseRes.sseSend("Hey Again, I can connect more than once");
-
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
 
@@ -111,7 +103,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-// });
+
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
 // Since this is attached to a router mounted at /alexa,
