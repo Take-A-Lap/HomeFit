@@ -1,7 +1,7 @@
 // require pg-promise
 const pgp = require('pg-promise')();
 //require the config js to get the libPass
-const { libPass } = require('../../config');
+const { libPass } = process.env || require('../../config');
 
 const connection = {
   host: 'pellefant.db.elephantsql.com', // server name or IP address;
