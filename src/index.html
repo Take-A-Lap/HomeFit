@@ -15,7 +15,6 @@
   <app-root>
     <div id="google_translate_element"></div>
     <script type="text/javascript">
-      const $ = require('jquery');
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
       }
@@ -35,8 +34,6 @@
         console.log(event);
         const data = JSON.parse(event.data);
         window.data = data;
-        let path = 'https://e.homefitdo.com' + data;
-        // $('#swap').click();
       }, false);
     </script>
     <!-- <a id="swap" href=${path}></a> -->
