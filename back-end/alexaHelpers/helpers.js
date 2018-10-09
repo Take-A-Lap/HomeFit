@@ -72,20 +72,20 @@ module.exports = {
     return response;
   },
   // start workout and first exercise
-  startWorkout: () => {
-    let cadence = '';
-    for(let i = 1; i < 11; i++){
-      cadence += ' give me a ' + i + ' <break time="1200ms"/> ';
+  startWorkout: (workout, count) => {
+    if(typeof workout !== "string"){
+      return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s You can also check out your suggested recipes at e dot home fit do dot com");
     }
-    const speechOutput = "Let's begin your workout. I would then say something realted to the workout and help you pace yourself by count your reps. this is an example for Tricep Pushup's, " + cadence;
-    const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?")
+    const speechOutput = count !== 1 ? "<s>Let's begin the day with some " + workout.name + "</s> <p>I'll give you a moment to get ready. </p>" 
+      : '<s> Next up is ' + workout.name + '</s> <s> Let me know when you are ready to begin.</s>';
+    const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?");
     return response;
   },
   // move on to the next exercise
-  nextWorkout: () => {
+  nextWorkout: (workout) => {
     let cadence = '';
     for (let i = 1; i < 11; i++) {
-      cadence += ' give me a ' + i + ' <break time="1700ms"/> ';
+      cadence += ' give me a ' + i + ' <break time="' + workout.rep_time + 'ms"/> ';
     }
     const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
     const response = buildResponse(speechOutput, false, "TODO");
