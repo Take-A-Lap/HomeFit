@@ -49,6 +49,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     // console.log('SESSION ENDED');
+    res.json(alexaHelp.endSession());
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
