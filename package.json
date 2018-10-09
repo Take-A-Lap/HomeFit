@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@types/jest": "^23.3.2",
-    "@types/socket.io-client": "^1.4.32",
     "alexa-verifier-middleware": "^1.0.1",
     "angular-6-social-login": "^1.1.1",
     "angularx-social-login": "^1.2.3",
@@ -41,7 +40,6 @@
     "pug": "^2.0.3",
     "request": "^2.88.0",
     "rxjs": "~6.2.0",
-    "socket-io": "^1.0.0",
     "socket.io-client": "^2.1.1",
     "zone.js": "~0.8.26"
   },
