@@ -20,21 +20,28 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(sse);
+// app.use(sse);
 
-app.get('/events', (sseReq, sseRes) => {
+// app.get('/events', (sseReq, sseRes) => {
 
-  console.log('I have a connection');
+//   console.log('I have a connection');
 
+<<<<<<< HEAD
+//   sseRes.sseSetup();
+
+  // sseRes.sseSend("Hey Again, I can connect more than once");
+=======
   sseRes.sseSetup();
   // fire off events
   sseRes.sseSend("Hey Again, I can connect more than once");
   // sseRes.newEvent("We Got More Data");
+>>>>>>> 35bcfcca14ffd606cf8dba68f6a754625acecfdd
 
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
+  console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
@@ -112,7 +119,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-});
+// });
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
 // Since this is attached to a router mounted at /alexa,
