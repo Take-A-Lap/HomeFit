@@ -25,6 +25,7 @@ const buildResponse = (speechText, shouldSessionEnd, cardText) => {
 const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, reprompt) => {
 
   const speechOutput = "<speak>" + speechText + "</speak>";
+  reprompt = "<speak>" + reprompt + "</speak>";
   const jsonObj = {
     "version": "1.0",
     "response": {
@@ -33,20 +34,20 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
         "type": "SSML",
         "ssml": speechOutput
       },
-      "card": {
-        "type": "Simple",
-        "title": SKILL_NAME,
-        "content": cardText,
-        "text": cardText
-      },
-      "reprompt": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": reprompt,
-          "ssml": reprompt
-        }
-      }
     },
+    "card": {
+      "type": "Simple",
+      "title": SKILL_NAME,
+      "content": cardText,
+      "text": cardText
+    },
+    "reprompt": {
+      "outputSpeech": {
+        "type": "SSML",
+        "text": reprompt,
+        "ssml": reprompt
+      }
+    }
   }
   return jsonObj;
 };
@@ -113,6 +114,7 @@ module.exports = {
     return response;
   },
   default: () => {
+    // TODO: figure out how to implement
     const speechOutput = "I'm sorry, i don't believe i heard you, could you try again?"
     const response = buildResponse(speechOutput, false, "Oops, sorry");
     return response;

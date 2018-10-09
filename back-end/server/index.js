@@ -33,7 +33,7 @@ app.get('/events', (sseReq, sseRes) => {
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
 
-alexaRouter.post('/fitnessTrainer', (req, res) => {
+alexaRouter.post('/alexa/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)

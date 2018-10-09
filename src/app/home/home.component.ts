@@ -30,9 +30,7 @@ export class HomeComponent implements OnInit {
   getWeather() {
     return this.weatherService.getWeather()
       .subscribe(currWeather => {
-        console.log('currWeather', currWeather);
         this.currentWeather.push(currWeather)
-        console.log(this.currentWeather);
       })  
   }
   
@@ -67,7 +65,6 @@ export class HomeComponent implements OnInit {
 
   displayMeal(){
     this.getTime();
-    console.log(this.time);
     if(this.time >= 21 || this.time < 10){
       this.getBreakfast();
     } else if(this.time >= 10 && this.time < 14){
