@@ -21,13 +21,13 @@ export class AppComponent {
        * and then JSON.parse it to get the object sent from the backend
       */ 
       source.addEventListener('workOutEvent', (event) => {
-        console.log(event.data);
+       // console.log(event.data);
         // uncomment for to fire off changePage function
         // this.changePage("/home");
       }, false);
 
       source.addEventListener('newEvent', (event) => {
-        console.log(event.data);
+      //  console.log(event.data);
       }, false);
 
   }
