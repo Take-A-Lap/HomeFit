@@ -13,7 +13,7 @@ import { MealsComponent } from './meals/meals.component';
 
 const routes: Routes = [
   // { path: '', component: AppComponent},
-  { path: '', redirectTo: 'https://homefit.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=72a03puc8nodlimv52094anplc&redirect_uri=https://e.homefitdo.com/signup', pathMatch: 'full'},
+  { path: '', redirectTo: '/signup', pathMatch: 'full'},
   { path: 'signup', component: SignUpComponent},
   { path: 'home', component: HomeComponent},
   { path: 'settings', component: SettingsComponent},
