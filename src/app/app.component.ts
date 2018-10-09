@@ -32,4 +32,8 @@ export class AppComponent {
 
   }
   title = 'HomeFit';
+
+  onInit(){
+    window.alert('rrrebuffering');
+  }
 }

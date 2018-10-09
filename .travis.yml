@@ -1,27 +1,17 @@
-
-sudo: required
-addons:
-  chrome: stable
-
 language: node_js
+
 node_js:
   - "8"
+nvm: 
+  - "8.12.0"
+
+sudo: enabled
+
+before_install:
+  - npm i -g npm@6.4.1
+
 cache:
   directories:
-    - node_modules
-    
-before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-
-branches:
-  only:
-    - master
-    - sse
-
-before_script:
-  - npm install -g @angular/cli
-
-script:
-  - ng build
-  - jest
-  
+    - "node_modules"
+env:
+  - libPass=LIBPASS
