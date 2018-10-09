@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({
   // request body, and express doesn't expose this on the request object
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
+  const workouts = [];
   console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
@@ -62,13 +63,13 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do some stuff
         console.log(req.body.session.user.userId);
         
-        db.getUserInfoByAlexUserId(req.body.session.user.userId)
+        db.getUserInfoByAlexUserId(1)
         .then(userArr => {
           console.log(userArr, ' this needs to not be an empty array');
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr[0].exercise, " the array of json");
+          console.log(exerWorkArr[0].exercises, " the array of json");
           
         })
         .catch(err => {
@@ -100,7 +101,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         let view = req.body.request.intent.slots.view.value;
         view = '/' + view.split(' ').join('');
         console.log(view, ' should be the value of the view slot');
-        sseRes.sseSend(view);
+        // sseRes.sseSend(view);
         res.json(alexaHelp.changeView(view));
         break;
       case 'nextWorkout':
