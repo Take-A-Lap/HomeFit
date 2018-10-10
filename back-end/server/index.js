@@ -34,8 +34,8 @@ app.use(bodyParser.urlencoded({
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
 
-alexaRouter.post('/fitnessTrainer', (req, res) => {
   let workouts = [];
+alexaRouter.post('/fitnessTrainer', (req, res) => {
   console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
@@ -69,10 +69,13 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr[0].exercises, " the array of json");
+          // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json");
 
-          workouts = workouts[0].length > 0 ? workouts : workouts.concat(exerWorkArr[0].exercises[0].splice(0, 1));
-          console.log(workouts, ' this should be one days worth of workouts');
+          workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
+          if(workouts[0].length){
+            workouts = workouts[0];
+          }
+          // console.log(workouts, ' this should be one days worth of workouts');
           res.json(alexaHelp.startWorkout(workouts[0], 6 - workouts.length));
           return exerWorkArr[0];
         })
@@ -91,7 +94,37 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         });
         break;
         case 'nextWorkout':
-          res.json(alexaHelp.nextWorkout(workouts[0].splice(0, 1)));
+          // console.log(workouts, ' line 97 this should be an array of objects');
+        db.getUserInfoByAlexUserId(req.body.session.user.userId)
+          .then(userArr => {
+            // console.log(userArr, ' this needs to not be an empty array');
+            return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
+          })
+          .then(exerWorkArr => {
+            // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json the second one");
+
+            workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
+            if (workouts[0].length) {
+              workouts = workouts[0];
+            }
+            // console.log(workouts, ' this should be one days worth of workouts the second one');
+            res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
+            return exerWorkArr[0];
+          })
+          .then(exercises => {
+            // this would be a good place to generate the workouts as they are being taken off
+            if (!exercises.exercises.length || exercises === undefined) {
+              workout.generateWorkoutSignUp(3, (workoutArr) => {
+                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
+              });
+            } else {
+              db.updateWorkoutsByUserId(exercises.id_user, JSON.parse(JSON.stringify(exercises.exercises)));
+            }
+          })
+          .catch(err => {
+            console.error(err);
+          });
+          // res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
           break;
         case 'recommendRecipe':
           res.json(alexaHelp.readRecipe());
