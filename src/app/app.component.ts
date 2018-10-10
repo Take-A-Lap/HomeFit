@@ -32,7 +32,6 @@ export class AppComponent {
 
   }
   title = 'HomeFit';
-  constructor(){}
   onInit(){}
 
 }
