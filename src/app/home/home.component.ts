@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FoodService } from '../food/food.service';
 import { WeatherService } from '../weather.service';
@@ -25,9 +26,6 @@ export class HomeComponent implements OnInit {
     private foodService: FoodService,
     private weatherService: WeatherService,
     private router: Router) { }
-  // getMeal() {
-  //   console.log('Prep says &$*# Jan')
-  // }
 
   getWeather() {
     return this.weatherService.getWeather()

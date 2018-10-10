@@ -20,20 +20,23 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(sse);
+// app.use(sse);
 
-app.get('/events', (sseReq, sseRes) => {
+// app.get('/events', (sseReq, sseRes) => {
 
-  console.log('I have a connection');
+//   console.log('I have a connection');
 
-  sseRes.sseSetup();
-
-  // sseRes.sseSend("Hey Again, I can connect more than once");
+ // sseRes.sseSetup();
+  // fire off events
+ // sseRes.sseSend("Hey Again, I can connect more than once");
+  // sseRes.newEvent("We Got More Data");
 
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
+  let workouts = [];
+  console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
@@ -47,6 +50,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     // console.log('SESSION ENDED');
+    res.json(alexaHelp.endSession());
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
@@ -61,48 +65,61 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
         .then(userArr => {
-          console.log(userArr, ' this needs to not be an empty array');
+          // console.log(userArr, ' this needs to not be an empty array');
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr[0].exercise, " the array of json");
-          
+          console.log(exerWorkArr[0].exercises, " the array of json");
+
+          workouts = workouts[0].length > 0 ? workouts : workouts.concat(exerWorkArr[0].exercises[0].splice(0, 1));
+          console.log(workouts, ' this should be one days worth of workouts');
+          res.json(alexaHelp.startWorkout(workouts[0], 6 - workouts.length));
+          return exerWorkArr[0];
+        })
+        .then(exercises => {
+          // this would be a good place to generate the workouts as they are being taken off
+          if(!exercises.exercises.length || exercises === undefined) {
+            workout.generateWorkoutSignUp(3, (workoutArr) => {
+              db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
+            });
+          } else {
+            db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
+          }
         })
         .catch(err => {
           console.error(err);
         });
-        res.json(alexaHelp.startWorkout());
         break;
-      case 'recommendRecipe':
-        res.json(alexaHelp.readRecipe());
-        break;
-      case 'readWorkoutStatus':
-        res.json(alexaHelp.readWorkout());
-        break;
-      case 'linkAccount':
-        let link = req.body.request.intent.slots.accountName.value;
-        link = link.split(' ').join('@');
-        console.log(link, ' line 84 server index');
-        db.updateAlexaId(link, req.body.session.user.userId)
-        .then(() => {
-          console.log('successful update to user');
-        })
-        .catch(err => {
-          console.error(err);
-        })
-        
-        res.json(alexaHelp.linkAccount(link));
-        break;
-      case 'changeView':
-        let view = req.body.request.intent.slots.view.value;
-        view = '/' + view.split(' ').join('');
-        console.log(view, ' should be the value of the view slot');
-        sseRes.sseSend(view);
-        res.json(alexaHelp.changeView(view));
-        break;
-      case 'nextWorkout':
-        res.json(alexaHelp.nextWorkout());
-        break;
+        case 'nextWorkout':
+          res.json(alexaHelp.nextWorkout(workouts[0].splice(0, 1)));
+          break;
+        case 'recommendRecipe':
+          res.json(alexaHelp.readRecipe());
+          break;
+        case 'readWorkoutStatus':
+          res.json(alexaHelp.readWorkout());
+          break;
+        case 'linkAccount':
+          let link = req.body.request.intent.slots.accountName.value;
+          link = link.split(' ').join('@');
+          console.log(link, ' line 84 server index');
+          db.updateAlexaId(link, req.body.session.user.userId)
+          .then(() => {
+            console.log('successful update to user');
+          })
+          .catch(err => {
+            console.error(err);
+          })
+          
+          res.json(alexaHelp.linkAccount(link));
+          break;
+        case 'changeView':
+          let view = req.body.request.intent.slots.view.value;
+          view = '/' + view.split(' ').join('');
+          console.log(view, ' should be the value of the view slot');
+          // sseRes.sseSend(view);
+          res.json(alexaHelp.changeView(view));
+          break;
       default:
         console.log('we don\'t know what they said');
         console.log('req.body.request.intent');
@@ -111,7 +128,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-});
+// });
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
 // Since this is attached to a router mounted at /alexa,
@@ -250,7 +267,6 @@ app.get('/breakfast', (req, res) => {
 
 app.get('/test', (req, res) => {
   // console.log(req);
-  
   db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
   .then(userArr => {
     res.send(userArr);
@@ -259,6 +275,26 @@ app.get('/test', (req, res) => {
     console.error(err);
   })
 });
+
+app.post('/workinDatBody', (req, res)=> {
+  if(req.params.woType === "back"){
+    workout.generateWorkoutBack(3, (wo)=> {
+      res.send(wo);
+    })
+  } else if (req.params.woType === "chest"){
+    workout.generateWorkoutChest(3, (wo) => {
+      res.send(wo);
+    })
+  } else if (req.params.woType === "legs") {
+    workout.generateWorkoutLegs(3, (wo) => {
+      res.send(wo);
+    })
+  } else if (req.params.woType === "cardio") {
+    workout.generateWorkoutCardio(3, (wo) => {
+      res.send(wo);
+    })
+  }
+})
 
 app.post('/personalInfo', (req, res) =>{
   // console.log(req.body);
@@ -279,5 +315,8 @@ app.post('/personalInfo', (req, res) =>{
   res.end();
 });
 
-const port = 3000;
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+const port = 81;
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`);
+  app.keepAliveTimeout = 0;
+});
