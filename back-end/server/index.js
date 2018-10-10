@@ -94,6 +94,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         });
         break;
         case 'nextWorkout':
+          console.log(workouts, ' line 97 this should be an array of objects');
           res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
           break;
         case 'recommendRecipe':
