@@ -1,18 +1,30 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6">
-      <div class="media">
-        <img class="mr-3" alt="Alexa_photo" src="../../assets/img/Alexa_rebel.jpg" width=400 height=300 />
+    <div class="col-md-12">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/meals">Meals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/personalInfo">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Logout</a>
+        </li>
+      </ul>
       </div>
-      <h3>I'm Alexa, I'll be your personal trainer today.</h3>
+    </div>     
+  <div class="row">
+    <div class="col-md-12">
+      <div class="media">
+        <img class="mr-6" alt="Alexa_photo" src="../../assets/img/Alexa_rebel.jpg" />
+        <h3 class="mr-6" >I'm Alexa, I'll be your personal trainer today.</h3>
+      </div>
     </div>
-    <div class="col-md-6" >
-<div class="media">
-  <iframe [src]="trustedUrl" width=400 height=300></iframe>
-</div>
-      <h3>{{exercise.name}}</h3>
-      <!-- <button (click)="increment()">Next Exercise</button> -->
-    </div>
+    
   </div>
   <div class="row">
     <div class="col-md-6">
@@ -40,7 +52,11 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <button (click)="home()">HOME</button>
+      <div class="media">
+        <iframe [src]="trustedUrl" width=400 height=300></iframe>
+      </div>
+      <h3>{{exercise.name}}</h3>
+      <!-- <button (click)="increment()">Next Exercise</button> -->
     </div>
   </div>
 </div>
