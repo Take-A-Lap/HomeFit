@@ -87,7 +87,7 @@ module.exports = {
     if (typeof workout[0] !== "object") {
       return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
-    let cadence = '';
+    let cadence = '<s> The pace I will be counting your reps will be ' + workout[0].rep_time / 1000 + ' seconds </s>';
     for (let i = 1; i < 11; i++) {
       cadence += ' give me a ' + i + ' <break time="' + workout[0].rep_time + 'ms"/> ';
     }
