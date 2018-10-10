@@ -42,6 +42,7 @@ export class SignUpComponent implements OnInit {
   changePage() {
     this.router.navigate(['/home']);
   }
+  
   ngOnInit() {
   }
 

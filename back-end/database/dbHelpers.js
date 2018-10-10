@@ -10,13 +10,8 @@ const connection = {
   user: 'jeunwozz',
   password: libPass,
 };
-// let alexaId = 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY';
 const db = pgp(connection);
-// const sql = pgp.as.format(`
-//   SELECT name FROM users
-//   WHERE alexa_user_id = $1
-//   `, [alexaId]);
-// console.log('SQL: ', sql);
+
 module.exports = {
 
   getUserInfoByAlexUserId: (alexaId) => db.any(`
@@ -94,12 +89,12 @@ module.exports = {
     VALUES ( $1, $2, $3, $4, $5)
   `, [name, rep_time, youtube_link, id_muscle_group, difficulty]),
 
-  addNewUser: (name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals, gmail) => db.any(`
+  addNewUser: (name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, dob, preferredUsername) => db.any(`
     INSERT INTO users 
-    (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals, user_email)
+    (name, weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals, user_email, birthdate, preferred_username)
     VALUES
-    ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9, $10)
-  `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals, gmail]),
+    ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0, $9, $10, $11, $12)
+  `, [name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, dob, preferredUsername]),
 
   // will most likely need to call this within a loop over the different diet ids
   insertIntoUserDiet: (userId, dietId) => db.any(`
@@ -144,13 +139,21 @@ module.exports = {
     id_user = $2
   `, [completed, userId, date, reps]),
   
-  updateAlexaId: (gmail, alexaId) => db.any(`
+  updateAlexaId: (email, alexaId) => db.any(`
   UPDATE users
   SET
   alexa_user_id = $2
   WHERE
   user_email = $1
-  `, [gmail, alexaId]),
+  `, [email, alexaId]),
+
+  updateWorkoutsByUserId: (userId, workouts) => db.any(`
+  UPDATE exercises_workouts
+  SET
+  exercises = $2
+  WHERE
+  id_user = $1
+  `, [userId, workouts]),
 
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
     DELETE FROM user_dietary
@@ -162,6 +165,10 @@ module.exports = {
     DELETE FROM exercises_workouts
     WHERE id_user = $1
   `, [userId]),
-
+  
+  removeUserByEmail: (userEmail) => db.any(`
+    DELETE FROM users
+    WHERE user_email = $1
+  `, [userEmail]),
 
 };

@@ -25,6 +25,7 @@ const buildResponse = (speechText, shouldSessionEnd, cardText) => {
 const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, reprompt) => {
 
   const speechOutput = "<speak>" + speechText + "</speak>";
+  reprompt = "<speak>" + reprompt + "</speak>";
   const jsonObj = {
     "version": "1.0",
     "response": {
@@ -33,20 +34,20 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
         "type": "SSML",
         "ssml": speechOutput
       },
-      "card": {
-        "type": "Simple",
-        "title": SKILL_NAME,
-        "content": cardText,
-        "text": cardText
-      },
-      "reprompt": {
-        "outputSpeech": {
-          "type": "PlainText",
-          "text": reprompt,
-          "ssml": reprompt
-        }
-      }
     },
+    "card": {
+      "type": "Simple",
+      "title": SKILL_NAME,
+      "content": cardText,
+      "text": cardText
+    },
+    "reprompt": {
+      "outputSpeech": {
+        "type": "SSML",
+        "text": reprompt,
+        "ssml": reprompt
+      }
+    }
   }
   return jsonObj;
 };
@@ -70,14 +71,27 @@ module.exports = {
     const response = buildResponse(speechOutput, true, "Hope you enjoyed your workout experience, see you next time. Buh bye");
     return response;
   },
-
-  startWorkout: () => {
-    let cadence = '';
-    for(let i = 1; i < 11; i++){
-      cadence += ' give me a ' + i + ' <break time="1200ms"/> ';
+  // start workout and first exercise
+  startWorkout: (workout, count) => {
+    if(typeof workout !== "string"){
+      return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
-    const speechOutput = "Let's begin your workout. I would then say something realted to the workout and help you pace yourself by count your reps. this is an example for Tricep Pushup's, " + cadence;
-    const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?")
+    const speechOutput = count === 0 ? "<s>Let's begin the day with some " + workout.name + "</s> <p>I'll give you a moment to get ready. </p>" 
+      : '<s> Next up is ' + workout.name + '</s> <s> Let me know when you are ready to begin.</s>';
+    const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?");
+    return response;
+  },
+  // move on to the next exercise
+  nextWorkout: (workout) => {
+    if (typeof workout !== "string") {
+      return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
+    }
+    let cadence = '';
+    for (let i = 1; i < 11; i++) {
+      cadence += ' give me a ' + i + ' <break time="' + workout.rep_time + 'ms"/> ';
+    }
+    const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
+    const response = buildResponse(speechOutput, false, "TODO");
     return response;
   },
 
@@ -103,18 +117,16 @@ module.exports = {
     const response = buildResponse(speechOutput, false, "TODO");
     return response;
   },
-  nextWorkout: () => {
-    let cadence = '';
-    for (let i = 1; i < 11; i++) {
-      cadence += ' give me a ' + i + ' <break time="1700ms"/> ';
-    }
-    const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
-    const response = buildResponse(speechOutput, false, "TODO");
-    return response;
-  },
   default: () => {
+    // TODO: figure out how to implement
     const speechOutput = "I'm sorry, i don't believe i heard you, could you try again?"
     const response = buildResponse(speechOutput, false, "Oops, sorry");
+    return response;
+  },
+
+  endSession: () => {
+    const speechOutput = "Good bye";
+    const response = buildResponse(speechOutput, true, "Goodbye");
     return response;
   }
 
