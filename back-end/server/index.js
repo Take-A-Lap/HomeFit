@@ -69,11 +69,11 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr[0].exercises, " the array of json");
+          console.log(exerWorkArr[0].exercises[0].slice(0, 1), " the array of json");
 
-          workouts = workouts[0].length > 0 ? workouts : workouts.concat(exerWorkArr[0].exercises[0].splice(0, 1));
+          workouts = workouts.length > 0 ? workouts : workouts.concat(exerWorkArr[0].exercises[0].splice(0, 1));
           console.log(workouts, ' this should be one days worth of workouts');
-          res.json(alexaHelp.startWorkout(workouts[0], 6 - workouts.length));
+          res.json(alexaHelp.startWorkout(workouts, 6 - workouts.length));
           return exerWorkArr[0];
         })
         .then(exercises => {
@@ -91,7 +91,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         });
         break;
         case 'nextWorkout':
-          res.json(alexaHelp.nextWorkout(workouts[0].splice(0, 1)));
+          res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
           break;
         case 'recommendRecipe':
           res.json(alexaHelp.readRecipe());
