@@ -70,7 +70,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
     console.log(this.age)
     this.httpClient.post('/personalInfo', {
       email: this.email,
-      password: this.password;
+      password: this.password,
       age: this.age,
       height: this.height,
       weight: this.weight,
