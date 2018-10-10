@@ -1,0 +1,43 @@
+.nav {
+  border-radius: 0px;
+  background-color:#31cd32;
+  text-align: center
+}
+
+.nav a {
+  color: white
+}
+
+.nav a:hover {
+  color: grey;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* tr {
+  max-width: 100%;
+  max-height: 100%;
+} */
+
+.fa {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.mealDescription {
+  color: black;
+}
+
+h4 {
+  color: black;
+}
+
+.btn {
+  border-radius: 0px;
+  background-color:#31cd32;
+  color: white;
+  width: 100%
+}
