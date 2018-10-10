@@ -10,7 +10,7 @@ import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-home-component',
-  templateUrl: './home.component.html',
+  templateUrl: './home2.component.html',
   styles: []
 })
 export class HomeComponent implements OnInit {
