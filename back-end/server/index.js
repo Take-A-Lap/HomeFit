@@ -267,7 +267,6 @@ app.get('/breakfast', (req, res) => {
 
 app.get('/test', (req, res) => {
   // console.log(req);
-  
   db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
   .then(userArr => {
     res.send(userArr);
@@ -276,6 +275,26 @@ app.get('/test', (req, res) => {
     console.error(err);
   })
 });
+
+app.post('/workinDatBody', (req, res)=> {
+  if(req.params.woType === "back"){
+    workout.generateWorkoutBack(3, (wo)=> {
+      res.send(wo);
+    })
+  } else if (req.params.woType === "chest"){
+    workout.generateWorkoutChest(3, (wo) => {
+      res.send(wo);
+    })
+  } else if (req.params.woType === "legs") {
+    workout.generateWorkoutLegs(3, (wo) => {
+      res.send(wo);
+    })
+  } else if (req.params.woType === "cardio") {
+    workout.generateWorkoutCardio(3, (wo) => {
+      res.send(wo);
+    })
+  }
+})
 
 app.post('/personalInfo', (req, res) =>{
   // console.log(req.body);
