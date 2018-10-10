@@ -83,6 +83,7 @@ module.exports = {
   },
   // move on to the next exercise
   nextWorkout: (workout) => {
+    console.log(workout, ' --- what is this? alexa needs to know');
     if (typeof workout !== "object") {
       return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
