@@ -84,6 +84,11 @@ module.exports = {
   // move on to the next exercise
   coachExercise: (workout) => {
     console.log(workout, ' --- what is this? alexa needs to know');
+    if(workout === undefined){
+      const speechOutput = "<p> <s>That is it for this exercise.</s> Let me know when you want to start the next exercise. </p>";
+      const response = buildResponse(speechOutput, false, "Next exercise");
+      return response;
+    }
     if (typeof workout[0] !== "object") {
       return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }

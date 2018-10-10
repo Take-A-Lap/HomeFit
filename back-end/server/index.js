@@ -26,6 +26,8 @@ app.use(bodyParser.urlencoded({
   // request body, and express doesn't expose this on the request object
 
   let workouts = [];
+  let sets = 0;
+  let current;
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
@@ -98,8 +100,20 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             if (workouts[0].length) {
               workouts = workouts[0];
             }
+            if(current === undefined){
+              current = workouts.splice(0, 1);
+              sets++;
+            }
+            if(sets <= 3){
+              sets++;
+            } else {
+              console.log('this should mean that current and sets have been reset')
+              current === undefined;
+              sets = 0;
+            }
+            console.log(sets, " this should never be more than 3");
             // console.log(workouts, ' this should be one days worth of workouts the second one');
-            res.json(alexaHelp.coachExercise(workouts.splice(0, 1)));
+            res.json(alexaHelp.coachExercise(current));
             return exerWorkArr[0];
           })
           .then(exercises => {
