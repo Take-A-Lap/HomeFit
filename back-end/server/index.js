@@ -162,19 +162,20 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         console.log(req.body.request.intent, " ||||-----|||| this is skip exercise");
           res.json(alexaHelp.PLACEHOLDER());
           break;
-        case 'AMAZON.FallbackIntent':
-        console.log(req.body.request.intent, " ||||-----|||| this is the amazon fallback intent");
-          
+          case 'AMAZON.HelpIntent':
+          console.log(req.body.request.intent, "||||-----|||| this is the amazon help intent");
           res.json(alexaHelp.PLACEHOLDER());
           break;
-        case 'AMAZON.HelpIntent':
-        console.log(req.body.request.intent, "||||-----|||| this is the amazon help intent");
+          case 'AMAZON.NavigateHomeIntent':
+          console.log(req.body.request.intent, "||||-----|||| this is the amazon navigate home intent");
           res.json(alexaHelp.PLACEHOLDER());
           break;
-        case 'AMAZON.NavigateHomeIntent':
-        console.log(req.body.request.intent, "||||-----|||| this is the amazon navigate home intent");
-          res.json(alexaHelp.PLACEHOLDER());
-          break;
+          case 'AMAZON.FallbackIntent':
+            //this intent is a catch all
+            console.log(req.body.request.intent, " ||||-----|||| this is the amazon fallback intent");
+            
+            res.json(alexaHelp.PLACEHOLDER());
+            break;
       default:
         console.log('we don\'t know what they said');
         console.log('req.body.request.intent');
