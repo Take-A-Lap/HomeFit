@@ -1,0 +1,9 @@
+.nav {
+  border-radius: 0px;
+  background-color:#31cd32;
+  text-align: center;
+}
+
+.nav a {
+  color: white;
+}
