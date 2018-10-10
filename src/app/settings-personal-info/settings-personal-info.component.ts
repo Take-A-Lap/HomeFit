@@ -10,6 +10,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
   
   constructor(private httpClient: HttpClient) { }
 
+  email = '';
+  password = '';
   age = '';
   height = '';
   weight = '';
@@ -17,6 +19,14 @@ export class SettingsPersonalInfoComponent implements OnInit {
   push_ups = '';
   squats = '';
   miles = '';
+
+  updateEmail(e) {
+    this.email = e.target.value;
+  }
+
+  updatePassword(e) {
+    this.password = e.target.value;
+  }
 
   updateAge(e) {
     this.age = e.target.value;
