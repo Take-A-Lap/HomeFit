@@ -70,7 +70,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         })
         .then(exerWorkArr => {
           // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json");
-
+          console.log(workouts, ' this should not be an empty array ----- workouts------');
           workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
           if(workouts[0].length){
             workouts = workouts[0];
@@ -102,7 +102,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           })
           .then(exerWorkArr => {
             // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json the second one");
-
+            console.log(workouts, ' this should equal workouts from above')
             workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
             if (workouts[0].length) {
               workouts = workouts[0];
