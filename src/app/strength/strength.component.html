@@ -2,16 +2,16 @@
   <div class="row">
     <div class="col-md-6">
       <div class="media">
-        <img class="mr-3" alt="Alexa_photo" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
+        <img class="mr-3" alt="Alexa_photo" src="../../assets/img/Alexa_rebel.jpg" width=400 height=300 />
       </div>
+      <h3>I'm Alexa, I'll be your personal trainer today.</h3>
     </div>
     <div class="col-md-6" >
-      <p>
-        I'm Alexa, I'll be your personal trainer today.
-      </p>
-      
-      <p>Current Exercise: {{exercise.name}}</p>
-      <button (click)="increment()">Next Exercise</button>
+<div class="media">
+  <iframe [src]="trustedUrl" width=400 height=300></iframe>
+</div>
+      <h3>{{exercise.name}}</h3>
+      <!-- <button (click)="increment()">Next Exercise</button> -->
     </div>
   </div>
   <div class="row">
@@ -34,15 +34,13 @@
         <p>
           {{rep}}
         </p>
-        <button (click)="switchRep()">Start Rep Count</button>
+        <button (click)="workinDatBody()">Start Rep Count</button>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="media">
-        <iframe [src]="trustedUrl"></iframe>
-      </div>
+      <button (click)="home()">HOME</button>
     </div>
   </div>
 </div>

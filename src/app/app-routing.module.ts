@@ -13,7 +13,8 @@ import { MealsComponent } from './meals/meals.component';
 
 const routes: Routes = [
   // { path: '', component: AppComponent},
-  { path: '', redirectTo: '/signup', pathMatch: 'full'},
+  // { path: '', redirectTo: '/signup', pathMatch: 'full'},
+  { path: '', /*redirectTo: '/signup', pathMatch: 'full'*/ component: SignUpComponent},
   { path: 'signup', component: SignUpComponent},
   { path: 'home', component: HomeComponent},
   { path: 'settings', component: SettingsComponent},

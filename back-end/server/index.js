@@ -5,19 +5,44 @@ const db = require('../database/dbHelpers');
 const alexaHelp = require('../alexaHelpers/helpers');
 const weather = require('../weather/weatherHelpers');
 const app = express()
+const meal = require('../Algorithms/recipe.js');
+const workout = require('../Algorithms/workout.js');
 const alexaRouter = express.Router()
-app.use('/alexa', alexaRouter)
+const sse = require('../../sse');
 
-// attach the verifier middleware first because it needs the entire
-// request body, and express doesn't expose this on the request object
+app.use('/alexa', alexaRouter);
+app.use(express.static('dist/HomeFit'));
+
 alexaRouter.use(verifier)
 alexaRouter.use(bodyParser.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+// app.use(sse);
+
+// app.get('/events', (sseReq, sseRes) => {
+
+//   console.log('I have a connection');
+
+ // sseRes.sseSetup();
+  // fire off events
+ // sseRes.sseSend("Hey Again, I can connect more than once");
+  // sseRes.newEvent("We Got More Data");
+
+  // attach the verifier middleware first because it needs the entire
+  // request body, and express doesn't expose this on the request object
+
+  let workouts = [];
 alexaRouter.post('/fitnessTrainer', (req, res) => {
+  console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
     .then((userArr)=>{
-      const passingName = userArr[0].name || "not linked yet";
+      const passingName = (userArr[0] ? userArr[0].name : "not linked yet");
+      console.log(passingName, ' this should be a value or say not linked yet')
       res.json(alexaHelp.invocationIntent(passingName));
     })
     .catch(err => {
@@ -25,9 +50,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     // console.log('SESSION ENDED');
+    res.json(alexaHelp.endSession());
   } else if (req.body.request.type === 'IntentRequest') {
     switch (req.body.request.intent.name) {
       case 'AMAZON.CancelIntent':
+        res.json(alexaHelp.stopAndExit());
+        break;
       case 'AMAZON.StopIntent':
         res.json(alexaHelp.stopAndExit());
         break;
@@ -37,48 +65,108 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
         .then(userArr => {
+          // console.log(userArr, ' this needs to not be an empty array');
           return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
         })
         .then(exerWorkArr => {
-          console.log(exerWorkArr[0], " the array of json");
-          
+          // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json");
+
+          workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
+          if(workouts[0].length){
+            workouts = workouts[0];
+          }
+          // console.log(workouts, ' this should be one days worth of workouts');
+          res.json(alexaHelp.startWorkout(workouts[0], 6 - workouts.length));
+          return exerWorkArr[0];
+        })
+        .then(exercises => {
+          // this would be a good place to generate the workouts as they are being taken off
+          if(!exercises.exercises.length || exercises === undefined) {
+            workout.generateWorkoutSignUp(3, (workoutArr) => {
+              db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
+            });
+          } else {
+            db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
+          }
         })
         .catch(err => {
           console.error(err);
         });
-        res.json(alexaHelp.startWorkout());
         break;
-      case 'recommendRecipe':
-        //do some stuff
-        break;
-      case 'readWorkoutStatus':
-        //do stuff
-        break;
-      case 'linkAccount':
-        // console.log(req.body.request.intent.slots, ' line 43 server index');
-        db.updateAlexaId(req.body.request.intent.slots.accountName.value, req.body.session.user.userId)
-        .then(() => {
-          // console.log('account should be added to the database');
-        })
-        .catch(err => {
-          console.error(err);
-        })
-        res.json(alexaHelp.linkAccount(req.body.request.intent.slots.accountName.value));
-        break;
+        case 'nextWorkout':
+          // console.log(workouts, ' line 97 this should be an array of objects');
+        db.getUserInfoByAlexUserId(req.body.session.user.userId)
+          .then(userArr => {
+            // console.log(userArr, ' this needs to not be an empty array');
+            return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
+          })
+          .then(exerWorkArr => {
+            // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json the second one");
+
+            workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
+            if (workouts[0].length) {
+              workouts = workouts[0];
+            }
+            // console.log(workouts, ' this should be one days worth of workouts the second one');
+            res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
+            return exerWorkArr[0];
+          })
+          .then(exercises => {
+            // this would be a good place to generate the workouts as they are being taken off
+            if (!exercises.exercises.length || exercises === undefined) {
+              workout.generateWorkoutSignUp(3, (workoutArr) => {
+                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
+              });
+            } else {
+              db.updateWorkoutsByUserId(exercises.id_user, JSON.parse(JSON.stringify(exercises.exercises)));
+            }
+          })
+          .catch(err => {
+            console.error(err);
+          });
+          // res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
+          break;
+        case 'recommendRecipe':
+          res.json(alexaHelp.readRecipe());
+          break;
+        case 'readWorkoutStatus':
+          res.json(alexaHelp.readWorkout());
+          break;
+        case 'linkAccount':
+          let link = req.body.request.intent.slots.accountName.value;
+          link = link.split(' ').join('@');
+          console.log(link, ' line 84 server index');
+          db.updateAlexaId(link, req.body.session.user.userId)
+          .then(() => {
+            console.log('successful update to user');
+          })
+          .catch(err => {
+            console.error(err);
+          })
+          
+          res.json(alexaHelp.linkAccount(link));
+          break;
+        case 'changeView':
+          let view = req.body.request.intent.slots.view.value;
+          view = '/' + view.split(' ').join('');
+          console.log(view, ' should be the value of the view slot');
+          // sseRes.sseSend(view);
+          res.json(alexaHelp.changeView(view));
+          break;
       default:
         console.log('we don\'t know what they said');
+        console.log('req.body.request.intent');
+        // res.json(alexaHelp.default());
     }
   }
 });
+
+// });
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
 // Since this is attached to a router mounted at /alexa,
 // endpoints with alexa/blah blah will be caught at blah blah
 
-const workout = require('../Algorithms/workout.js');
-const meal = require('../Algorithms/recipe.js');
-
-const port = 3000
 app.use(express.static('dist/HomeFit'));
 
 app.use(bodyParser.json());
@@ -181,10 +269,10 @@ app.get('/breakfast', (req, res) => {
   })     
   meal.getYogurt(300, 700, "alcohol-free", (meal) => {
     let result = JSON.parse(meal);
-      let recipes = result.hits;
-      recipes.forEach(recipe => {
-        meals.push(recipe);
-      });
+    let recipes = result.hits;
+    recipes.forEach(recipe => {
+      meals.push(recipe);
+    });
   })      
   function generateSeven(array){
     let randScreen = [];
@@ -241,5 +329,8 @@ app.post('/personalInfo', (req, res) =>{
   res.end();
 });
 
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+const port = 81;
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`);
+  app.keepAliveTimeout = 0;
+});

@@ -1,23 +1,17 @@
 language: node_js
-node_js:
-  - "7"
-dist: trusty # needs Ubuntu Trusty
-sudo: true  # needed for Chromium sandbox
-addons:
-  chrome: stable # have Travis install chrome stable.
-cache:
-  yarn: true
-  directories:
-    - node_modules
-before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-install:
-  - yarn
-before_script:
-  - npm install -g babel-cli
-  - babel . --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline
-script:
-  - yarn test
-notifications:
-  webhooks: https://greenlight.operationspark.org/api/v2/webhooks/travisci
 
+node_js:
+  - "8"
+nvm: 
+  - "8.12.0"
+
+sudo: enabled
+
+before_install:
+  - npm i -g npm@6.4.1
+
+cache:
+  directories:
+    - "node_modules"
+env:
+  - libPass=LIBPASS
