@@ -34,8 +34,8 @@ app.use(bodyParser.urlencoded({
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
 
-alexaRouter.post('/fitnessTrainer', (req, res) => {
   let workouts = [];
+alexaRouter.post('/fitnessTrainer', (req, res) => {
   console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
