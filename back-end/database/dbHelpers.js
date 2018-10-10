@@ -147,7 +147,7 @@ module.exports = {
   user_email = $1
   `, [email, alexaId]),
 
-  updateWorkoutsByUserId: (userId, workouts) = db.any(`
+  updateWorkoutsByUserId: (userId, workouts) => db.any(`
   UPDATE exercises_workouts
   SET
   exercises = $2
