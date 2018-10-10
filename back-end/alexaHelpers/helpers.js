@@ -76,7 +76,7 @@ module.exports = {
     if(typeof workout !== "string"){
       return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s You can also check out your suggested recipes at e dot home fit do dot com");
     }
-    const speechOutput = count !== 1 ? "<s>Let's begin the day with some " + workout.name + "</s> <p>I'll give you a moment to get ready. </p>" 
+    const speechOutput = count === 0 ? "<s>Let's begin the day with some " + workout.name + "</s> <p>I'll give you a moment to get ready. </p>" 
       : '<s> Next up is ' + workout.name + '</s> <s> Let me know when you are ready to begin.</s>';
     const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?");
     return response;
