@@ -329,7 +329,7 @@ app.post('/personalInfo', (req, res) =>{
   res.end();
 });
 
-const port = 81;
+const port = 80;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
   app.keepAliveTimeout = 0;
