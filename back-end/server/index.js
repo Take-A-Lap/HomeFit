@@ -118,7 +118,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
                 db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
               });
             } else {
-              db.updateWorkoutsByUserId(exercises.id_user, JSON.stringify(exercises.exercises));
+              db.updateWorkoutsByUserId(exercises.id_user, JSON.parse(JSON.stringify(exercises.exercises)));
             }
           })
           .catch(err => {
