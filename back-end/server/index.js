@@ -186,7 +186,7 @@ app.get('/personalInfo', (req, res) => {
 })
 
 //api call for weather
-app.get('/api/weather', (req, res) => {
+app.get('/weather', (req, res) => {
   weather.getWeather(body => {
     const parsedBody = JSON.parse(body);
     const weather = {
@@ -199,7 +199,8 @@ app.get('/api/weather', (req, res) => {
     res.send(weather);
   })
 })
-app.get('/api/dinner', (req,res)=>{
+
+app.get('/dinner', (req,res)=>{
   let meals = [];
   let dinnerResponse = [];
   meal.getChicken(300, 700, "alcohol-free", (meal) => {
@@ -246,7 +247,7 @@ app.get('/api/dinner', (req,res)=>{
     res.send(dinnerResponse);
   })
 })
-app.get('/api/lunch', (req,res)=>{
+app.get('/lunch', (req,res)=>{
   let lunchRecipes = [];
   meal.getLunch(0,500,"alcohol-free", (meals)=>{
     let result = JSON.parse(meals);
@@ -254,12 +255,12 @@ app.get('/api/lunch', (req,res)=>{
     res.send(lunchRecipes);
   })
 })
-app.get('/api/signupWO', (req,res)=>{
+app.get('/signupWO', (req,res)=>{
   workout.generateWorkoutSignUp(3, (workout)=> {
     res.send(workout);
   })
 })
-app.get('/api/breakfast', (req, res) => {
+app.get('/breakfast', (req, res) => {
   let meals = [];
   let breakfastResponse = [];
   meal.getBreakfast(300, 700, "alcohol-free", (meal) => {
@@ -302,6 +303,7 @@ app.get('/api/breakfast', (req, res) => {
 
 app.get('/test', (req, res) => {
   // console.log(req);
+  
   db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
   .then(userArr => {
     res.send(userArr);
@@ -311,38 +313,21 @@ app.get('/test', (req, res) => {
   })
 });
 
-app.post('/workinDatBody', (req, res)=> {
-  if(req.params.woType === "back"){
-    workout.generateWorkoutBack(3, (wo)=> {
-      res.send(wo);
-    })
-  } else if (req.params.woType === "chest"){
-    workout.generateWorkoutChest(3, (wo) => {
-      res.send(wo);
-    })
-  } else if (req.params.woType === "legs") {
-    workout.generateWorkoutLegs(3, (wo) => {
-      res.send(wo);
-    })
-  } else if (req.params.woType === "cardio") {
-    workout.generateWorkoutCardio(3, (wo) => {
-      res.send(wo);
-    })
-  }
-})
-
 app.post('/personalInfo', (req, res) =>{
-  // console.log(req.body);
-  const { name } = req.body;
-  const { weight } = req.body;
-  const { numPushUps } = req.body;
-  const { jogDist } = req.body;
-  const { age } = req.body;
-  const { sex } = req.body;
-  const { height } = req.body;
-  const { squatComf } = req.body;
-  const { goals } = req.body;
-  db.addNewUser(name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals)
+  let email  = req.body.params.email;
+  let weight = req.body.params.weight;
+  let numPushUps = req.body.params.push_ups;
+  let jogDist = req.body.params.miles;
+  let age = req.body.params.age;
+  let sex = req.body.params.sex;
+  let height = req.body.params.height;
+  let squatComf = req.body.params.squats;
+  let goals  = req.body.params.goals;
+  let username = req.body.params.userName;
+  let password = req.body.params.password;
+  let sets = ????
+  
+  db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredName)
   .then()
   .catch((err) => {
     console.error(err);
