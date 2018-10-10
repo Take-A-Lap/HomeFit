@@ -109,7 +109,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             }
             console.log(workouts, ' this should be one days worth of workouts the second one');
             res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
-            return exerWorkArrg[0];
+            return exerWorkArr[0];
           })
           .then(exercises => {
             // this would be a good place to generate the workouts as they are being taken off
