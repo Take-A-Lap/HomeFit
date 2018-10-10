@@ -20,16 +20,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// app.use(sse);
 
-// app.get('/events', (sseReq, sseRes) => {
-
-//   console.log('I have a connection');
-
- // sseRes.sseSetup();
-  // fire off events
- // sseRes.sseSend("Hey Again, I can connect more than once");
-  // sseRes.newEvent("We Got More Data");
 
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
@@ -124,7 +115,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           .catch(err => {
             console.error(err);
           });
-          // res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
           break;
         case 'readWorkoutStatus':
           res.json(alexaHelp.readWorkout());
@@ -147,13 +137,14 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           let view = req.body.request.intent.slots.view.value;
           view = '/' + view.split(' ').join('');
           console.log(view, ' should be the value of the view slot');
-          // sseRes.sseSend(view);
           res.json(alexaHelp.changeView(view));
+          break;
+        case 'skipExercise':
+          res.json(alexaHelp.PLACEHOLDER());
           break;
       default:
         console.log('we don\'t know what they said');
         console.log('req.body.request.intent');
-        // res.json(alexaHelp.default());
     }
   }
 });
