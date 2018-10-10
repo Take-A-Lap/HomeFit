@@ -76,7 +76,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             workouts = workouts[0];
           }
           // console.log(workouts, ' this should be one days worth of workouts');
-          res.json(alexaHelp.initWorkout(workouts[0], 6 - workouts.length));
+          res.json(alexaHelp.initWorkout(workouts[0], 8 - workouts.length));
           return exerWorkArr[0];
         })
         .then(exercises => {
