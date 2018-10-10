@@ -14,6 +14,24 @@
       </div>
       <form role="form">
         <div class="form-group">
+          <label for="username">Preferred Name</label>
+          <input  type="text" 
+                  class="form-control" 
+                  id="username" 
+                  placeholder="What do you go by?"
+                  [value]="text"
+                  (input)="updateUsername($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="sex">Sex</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="sex" 
+                  placeholder="Enter a sex binary"
+                  [value]="number"
+                  (input)="updateMiles($event)"/>
+        </div>
+        <div class="form-group">
           <label for="emailInput">Email</label>
           <input  type="text" 
                   class="form-control" 

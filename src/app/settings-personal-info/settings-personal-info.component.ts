@@ -19,6 +19,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   push_ups = '';
   squats = '';
   miles = '';
+  username = '';
   sex = '';
 
   updateSex(e) {
@@ -61,6 +62,10 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.miles = e.target.value;
   }
 
+  updateUsername(e) {
+    this.username = e.target.value;
+  }
+
   // params = {
   //   age: this.age,
   //   height: this.height,
@@ -74,15 +79,17 @@ export class SettingsPersonalInfoComponent implements OnInit {
   addUser() {
     this.httpClient.post('/personalInfo', {
       params: {
-        email: this.email,
-        password: this.password,
-        age: this.age,
-        height: this.height,
         weight: this.weight,
-        goals: this.goals,
         push_ups: this.push_ups,
+        miles: this.miles,
+        age: this.age,
+        sex: this.sex,
+        height: this.height,
         squats: this.squats,
-        miles: this.miles
+        goals: this.goals,
+        email: this.email,
+        userName: this.username,
+        password: this.password,
       }
     })
       .subscribe(
