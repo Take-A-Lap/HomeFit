@@ -11,13 +11,13 @@ enableProdMode();
 //File imports
 import bodyParser from  'body-parser';
 const verifier = require('alexa-verifier-middleware');
-const db = require('./back-end/database');
-const alexaHelp = require('./back-end/alexaHelpers')
-const weather = require('./back-end/weather');
-const meal = require('./back-end/Algorithms');
-const workout = require('./back-end/Algorithms');
+const db = require('./back-end/database/dbHelpers');
+const alexaHelp = require('./back-end/alexaHelpers/helpers')
+const weather = require('./back-end/weather/weatherHelpers');
+const meal = require('./back-end/Algorithms/recipe');
+const workout = require('./back-end/Algorithms/workout');
 const alexaRouter = express.Router()
-const sse = require('../../sse');
+const sse = require('./sse');
 
 // Express server
 const app = express();
