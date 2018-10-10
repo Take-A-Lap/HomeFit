@@ -118,16 +118,13 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
                 db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
               });
             } else {
-              db.updateWorkoutsByUserId(exercises.id_user, JSON.parse(JSON.stringify(exercises.exercises)));
+              db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
             }
           })
           .catch(err => {
             console.error(err);
           });
           // res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
-          break;
-        case 'recommendRecipe':
-          res.json(alexaHelp.readRecipe());
           break;
         case 'readWorkoutStatus':
           res.json(alexaHelp.readWorkout());
