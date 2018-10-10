@@ -69,7 +69,6 @@ export function getAuthServiceConfigs() {
   providers: [
     FoodService,
     { provide: APP_BASE_HREF, useValue: '/my/app' },
-    {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
     {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs},
     WindowRef
   ],

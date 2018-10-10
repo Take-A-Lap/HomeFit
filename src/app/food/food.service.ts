@@ -11,18 +11,18 @@ export class FoodService {
   }
 
   getBreakfast() {
-    return this.httpClient.get('/breakfast')
+    return this.httpClient.get('/api/breakfast')
   }
 
   getLunch() {
-    return this.httpClient.get('/lunch')
+    return this.httpClient.get('/api/lunch')
       // .subscribe(data => {
       //   console.log('works', data);
       // })
   }
 
   getDinner() {
-    return this.httpClient.get('/dinner');
+    return this.httpClient.get('/api/dinner');
   }
   
 }
