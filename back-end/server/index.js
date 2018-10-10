@@ -77,6 +77,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           return exerWorkArr[0];
         })
         .then(exercises => {
+          // this would be a good place to generate the workouts as they are being taken off
           db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
         })
         .catch(err => {
