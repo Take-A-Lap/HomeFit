@@ -72,9 +72,9 @@ module.exports = {
     return response;
   },
   // start workout and first exercise
-  startWorkout: (workout, count) => {
-    if(typeof workout !== "string"){
-      return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s You can also check out your suggested recipes at e dot home fit do dot com");
+  initWorkout: (workout, count) => {
+    if(typeof workout !== "object"){
+      return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
     const speechOutput = count === 0 ? "<s>Let's begin the day with some " + workout.name + "</s> <p>I'll give you a moment to get ready. </p>" 
       : '<s> Next up is ' + workout.name + '</s> <s> Let me know when you are ready to begin.</s>';
@@ -82,15 +82,21 @@ module.exports = {
     return response;
   },
   // move on to the next exercise
-  nextWorkout: (workout) => {
-    if (typeof workout !== "string") {
+  coachExercise: (workout) => {
+    console.log(workout, ' --- what is this? alexa needs to know');
+    if(workout === undefined){
+      const speechOutput = "<p> <s>That is it for this exercise.</s> Let me know when you want to start the next exercise. </p>";
+      const response = buildResponse(speechOutput, false, "Next exercise");
+      return response;
+    }
+    if (typeof workout[0] !== "object") {
       return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
-    let cadence = '';
+    let cadence = '<s> The pace I will be counting your reps will be ' + workout[0].rep_time / 1000 + ' seconds </s>';
     for (let i = 1; i < 11; i++) {
-      cadence += ' give me a ' + i + ' <break time="' + workout.rep_time + 'ms"/> ';
+      cadence += ' give me a ' + i + ' <break time="' + workout[0].rep_time + 'ms"/> ';
     }
-    const speechOutput = "This is where i would then continue our workout to the next exercise. here is an example of Decline Pushups i will count the reps, " + cadence;
+    const speechOutput = "<p> I will count the reps,</p> " + cadence;
     const response = buildResponse(speechOutput, false, "TODO");
     return response;
   },
@@ -127,6 +133,12 @@ module.exports = {
   endSession: () => {
     const speechOutput = "Good bye";
     const response = buildResponse(speechOutput, true, "Goodbye");
+    return response;
+  },
+
+  PLACEHOLDER: () => {
+    const speechOutput = "This is a place holder for testing purposes";
+    const response = buildResponse(speechOutput, false, "This is a test");
     return response;
   }
 

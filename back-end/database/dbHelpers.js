@@ -150,9 +150,9 @@ module.exports = {
   updateWorkoutsByUserId: (userId, workouts) => db.any(`
   UPDATE exercises_workouts
   SET
-  exercises = $2
+  exercises = $2 ::json[]
   WHERE
-  id_user = $1
+  id_user = $1 
   `, [userId, workouts]),
 
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
