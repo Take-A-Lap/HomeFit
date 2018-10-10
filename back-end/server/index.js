@@ -20,21 +20,14 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// app.use(sse);
 
-// app.get('/events', (sseReq, sseRes) => {
-
-//   console.log('I have a connection');
-
- // sseRes.sseSetup();
-  // fire off events
- // sseRes.sseSend("Hey Again, I can connect more than once");
-  // sseRes.newEvent("We Got More Data");
 
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
 
   let workouts = [];
+  let sets = 0;
+  let current;
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   console.log(req.body.request.type, " this si the type of the request body")
   if (req.body.request.type === 'LaunchRequest') {
@@ -59,7 +52,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'AMAZON.StopIntent':
         res.json(alexaHelp.stopAndExit());
         break;
-      case 'startWorkout':
+      case 'initWorkout':
         //do some stuff
         console.log(req.body.session.user.userId);
         
@@ -70,13 +63,13 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         })
         .then(exerWorkArr => {
           // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json");
-
+          console.log(workouts, ' this should not be an empty array ----- workouts------');
           workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
           if(workouts[0].length){
             workouts = workouts[0];
           }
           // console.log(workouts, ' this should be one days worth of workouts');
-          res.json(alexaHelp.startWorkout(workouts[0], 6 - workouts.length));
+          res.json(alexaHelp.initWorkout(workouts[0], 8 - workouts.length));
           return exerWorkArr[0];
         })
         .then(exercises => {
@@ -93,7 +86,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           console.error(err);
         });
         break;
-        case 'nextWorkout':
+      case 'coachExercise':
           // console.log(workouts, ' line 97 this should be an array of objects');
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(userArr => {
@@ -102,13 +95,25 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           })
           .then(exerWorkArr => {
             // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json the second one");
-
+            console.log(workouts, ' this should equal workouts from above')
             workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
             if (workouts[0].length) {
               workouts = workouts[0];
             }
+            if(current === undefined){
+              current = workouts.splice(0, 1);
+              sets++;
+            }
+            if(sets <= 3){
+              sets++;
+            } else {
+              console.log('this should mean that current and sets have been reset')
+              current === undefined;
+              sets = 0;
+            }
+            console.log(sets, " this should never be more than 3");
             // console.log(workouts, ' this should be one days worth of workouts the second one');
-            res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
+            res.json(alexaHelp.coachExercise(current));
             return exerWorkArr[0];
           })
           .then(exercises => {
@@ -118,16 +123,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
                 db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
               });
             } else {
-              db.updateWorkoutsByUserId(exercises.id_user, JSON.parse(JSON.stringify(exercises.exercises)));
+              db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
             }
           })
           .catch(err => {
             console.error(err);
           });
-          // res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
-          break;
-        case 'recommendRecipe':
-          res.json(alexaHelp.readRecipe());
           break;
         case 'readWorkoutStatus':
           res.json(alexaHelp.readWorkout());
@@ -150,13 +151,15 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           let view = req.body.request.intent.slots.view.value;
           view = '/' + view.split(' ').join('');
           console.log(view, ' should be the value of the view slot');
-          // sseRes.sseSend(view);
           res.json(alexaHelp.changeView(view));
+          break;
+        case 'skipExercise':
+          console.log(worouts, " this should hold the list of workouts that are left incase we wish to skip to the next workout")
+          res.json(alexaHelp.PLACEHOLDER());
           break;
       default:
         console.log('we don\'t know what they said');
         console.log('req.body.request.intent');
-        // res.json(alexaHelp.default());
     }
   }
 });
