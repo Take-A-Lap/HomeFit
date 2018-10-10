@@ -10,8 +10,7 @@ export class AppComponent {
   // constructor(private http: Http) {}
   // ngOnInit() {}
   title = 'HomeFit';
+  constructor(){}
+  onInit(){}
 
-  onInit(){
-    window.alert('rrrebuffering');
-  }
 }

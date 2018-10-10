@@ -20,6 +20,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BreakfastComponent } from './breakfast/breakfast.component';
 import { FormsModule } from '@angular/forms';
 import { MealsComponent } from './meals/meals.component';
+import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { APP_BASE_HREF } from '@angular/common';
+
+
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -55,16 +60,25 @@ export function getAuthServiceConfigs() {
   ],
   imports: [
     SocialLoginModule,
-    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserModule.withServerTransition({ appId: 'HomeFit' }),
   ],
   providers: [
     FoodService,
+    { provide: APP_BASE_HREF, useValue: '/my/app' },
     {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs}
   ],
   bootstrap: [AppComponent]
 })
 //
-export class AppModule { }
+export class AppModule {
+    constructor(
+      @Inject(PLATFORM_ID) private platformId: Object,
+      @Inject(APP_ID) private appId: string) {
+      const platform = isPlatformBrowser(platformId) ?
+        'in the browser' : 'on the server';
+      console.log(`Running ${platform} with appId=${appId}`);
+    } 
+  }
