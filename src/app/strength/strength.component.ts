@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 @Component({
   selector: 'app-strength',
   templateUrl: 'strength.component.html',
-  styles: ['./strength.component.css']
+  styleUrls: ['strength.component.css']
 })
 
 // const exercises = [

@@ -17,15 +17,40 @@
       </ul>
       </div>
     </div>     
-  <div class="row">
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="media">
+          <img src="../../assets/img/alexa.jpeg" alt="Alexa photo">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div>
+            <p>
+              I'm Alexa, I'll be your personal trainer today.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div>
+            <h3>{{exercise.name}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- <div class="row">
     <div class="col-md-12">
       <div class="media">
-        <img class="mr-6" alt="Alexa_photo" src="../../assets/img/Alexa_rebel.jpg" />
-        <h3 class="mr-6" >I'm Alexa, I'll be your personal trainer today.</h3>
+        <img class="mr-6" alt="Alexa_photo" src="../../assets/img/alexa.jpeg" />
+        <p class="mr-6">I'm Alexa, I'll be your personal trainer today.</p>
       </div>
     </div>
     
-  </div>
+  </div> -->
+  <br>
   <div class="row">
     <div class="col-md-6">
       <div class="jumbotron">
@@ -53,7 +78,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="media">
-        <iframe [src]="trustedUrl" width=400 height=300></iframe>
+        <iframe class="video" [src]="trustedUrl"></iframe>
       </div>
       <h3>{{exercise.name}}</h3>
       <!-- <button (click)="increment()">Next Exercise</button> -->
