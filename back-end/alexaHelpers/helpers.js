@@ -84,7 +84,7 @@ module.exports = {
   // move on to the next exercise
   nextWorkout: (workout) => {
     if (typeof workout !== "string") {
-      return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s You can also check out your suggested recipes at e dot home fit do dot com");
+      return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
     let cadence = '';
     for (let i = 1; i < 11; i++) {
