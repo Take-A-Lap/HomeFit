@@ -90,12 +90,12 @@ module.exports = {
   `, [name, rep_time, youtube_link, id_muscle_group, difficulty]),
 
 
-  addNewUser: (weight, numPushUps, jogDist, age, sex, height, squatComf, sets, goals, email, preferredUsername) => db.any(`
+  addNewUser: (weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredUsername, password) => db.any(`
     INSERT INTO users 
-    (weight, num_push_ups, jog_dist, age, sex, height, squat_comf, all_sets, workout_completes, goals, user_email, preferred_username)
+    (weight, num_push_ups, jog_dist, age, sex, height, squat_comf, workout_completes, goals, user_email, preferred_username, password)
     VALUES
-    ($1, $2, $3, $4, $5, $6, $7, $8, 0, $9, $10, $11)
-  `, [weight, numPushUps, jogDist, age, sex, height, squatComf, sets, goals, email, preferredUsername]),
+    ($1, $2, $3, $4, $5, $6, $7, 0, $8, $9, $10, $11)
+  `, [weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredUsername, password]),
 
 
   // will most likely need to call this within a loop over the different diet ids
