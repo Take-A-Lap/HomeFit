@@ -15,6 +15,6 @@ export class WeatherService {
    }
 
   getWeather() {
-    return this.http.get('/weather');
+    return this.http.get('/api/weather');
   }
 }

@@ -150,7 +150,7 @@ app.get('/personalInfo', (req, res) => {
 })
 
 //api call for weather
-app.get('/weather', (req, res) => {
+app.get('/api/weather', (req, res) => {
   weather.getWeather(body => {
     const parsedBody = JSON.parse(body);
     const weather = {
@@ -163,8 +163,7 @@ app.get('/weather', (req, res) => {
     res.send(weather);
   })
 })
-
-app.get('/dinner', (req,res)=>{
+app.get('/api/dinner', (req,res)=>{
   let meals = [];
   let dinnerResponse = [];
   meal.getChicken(300, 700, "alcohol-free", (meal) => {
@@ -211,7 +210,7 @@ app.get('/dinner', (req,res)=>{
     res.send(dinnerResponse);
   })
 })
-app.get('/lunch', (req,res)=>{
+app.get('/api/lunch', (req,res)=>{
   let lunchRecipes = [];
   meal.getLunch(0,500,"alcohol-free", (meals)=>{
     let result = JSON.parse(meals);
@@ -219,12 +218,12 @@ app.get('/lunch', (req,res)=>{
     res.send(lunchRecipes);
   })
 })
-app.get('/signupWO', (req,res)=>{
+app.get('/api/signupWO', (req,res)=>{
   workout.generateWorkoutSignUp(3, (workout)=> {
     res.send(workout);
   })
 })
-app.get('/breakfast', (req, res) => {
+app.get('/api/breakfast', (req, res) => {
   let meals = [];
   let breakfastResponse = [];
   meal.getBreakfast(300, 700, "alcohol-free", (meal) => {
