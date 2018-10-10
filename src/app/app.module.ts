@@ -26,6 +26,27 @@ import { isPlatformBrowser } from '@angular/common';
 import { APP_BASE_HREF } from '@angular/common';
 
 
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+    [
+      // {
+      //   id: FacebookLoginProvider.PROVIDER_ID,
+      //   provider: new FacebookLoginProvider("Your-Facebook-app-id")
+      // },
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider("769076485717-aldiftq59isia5tai1hsirghmcbt8uis.apps.googleusercontent.com")
+      },
+      // {
+      //   id: LinkedinLoginProvider.PROVIDER_ID,
+      //   provider: new LinkedinLoginProvider("1098828800522-m2ig6bieilc3tpqvmlcpdvrpvn86q4ks.apps.googleusercontent.com")
+      // },
+    ]
+  );
+  return config;
+}
+
 @NgModule({
   declarations: [
     AppComponent,
