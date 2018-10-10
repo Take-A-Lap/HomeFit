@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
 const verifier = require('alexa-verifier-middleware');
 const db = require('../database/dbHelpers');
@@ -9,6 +9,7 @@ const meal = require('../Algorithms/recipe.js');
 const workout = require('../Algorithms/workout.js');
 const alexaRouter = express.Router()
 const sse = require('../../sse');
+const fs = require('fs');
 
 app.use('/alexa', alexaRouter);
 app.use(express.static('dist/HomeFit'));
@@ -24,6 +25,9 @@ app.use(bodyParser.urlencoded({
 
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
+app.get('/.well-known/pki-validation/7BACD9E3D66343D40FE18A33C2899CB3.txt', (req, res) => {
+  res.send(fs.readFileSync('../../7BACD9E3D66343D40FE18A33C2899CB3.txt'));
+});
 
   let workouts = [];
   let sets = 0;
