@@ -19,6 +19,11 @@ export class SettingsPersonalInfoComponent implements OnInit {
   push_ups = '';
   squats = '';
   miles = '';
+  sex = '';
+
+  updateSex(e) {
+    this.sex = e.options[e.selectedIndex].value;
+  }
 
   updateEmail(e) {
     this.email = e.target.value;
@@ -41,7 +46,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
   
   updateGoals(e) {
-    this.updateGoals = e.target.value;
+    this.goals = e.target.value;
   }
 
   updatePushUps(e) {
@@ -67,17 +72,18 @@ export class SettingsPersonalInfoComponent implements OnInit {
   // }
 
   addUser() {
-    console.log(this.age)
     this.httpClient.post('/personalInfo', {
-      email: this.email,
-      password: this.password,
-      age: this.age,
-      height: this.height,
-      weight: this.weight,
-      goals: this.goals,
-      push_ups: this.push_ups,
-      squats: this.squats,
-      miles: this.miles
+      params: {
+        email: this.email,
+        password: this.password,
+        age: this.age,
+        height: this.height,
+        weight: this.weight,
+        goals: this.goals,
+        push_ups: this.push_ups,
+        squats: this.squats,
+        miles: this.miles
+      }
     })
       .subscribe(
         (data:any) => {
@@ -91,3 +97,5 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
 
 }
+
+

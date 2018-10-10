@@ -311,17 +311,20 @@ app.get('/test', (req, res) => {
 });
 
 app.post('/personalInfo', (req, res) =>{
-  // console.log(req.body);
-  const { name } = req.body;
-  const { weight } = req.body;
-  const { numPushUps } = req.body;
-  const { jogDist } = req.body;
-  const { age } = req.body;
-  const { sex } = req.body;
-  const { height } = req.body;
-  const { squatComf } = req.body;
-  const { goals } = req.body;
-  db.addNewUser(name, weight, numPushUps, jogDist, age, sex, height, squatComf, goals)
+  let email  = req.body.params.email;
+  let weight = req.body.params.weight;
+  let numPushUps = req.body.params.push_ups;
+  let jogDist = req.body.params.miles;
+  let age = req.body.params.age;
+  let sex = req.body.params.sex;
+  let height = req.body.params.height;
+  let squatComf = req.body.params.squats;
+  let goals  = req.body.params.goals;
+  let username = req.body.params.userName;
+  let password = req.body.params.password;
+  let sets = ????
+  
+  db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredName)
   .then()
   .catch((err) => {
     console.error(err);
