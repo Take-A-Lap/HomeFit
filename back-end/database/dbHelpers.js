@@ -21,7 +21,7 @@ module.exports = {
   // get user information
   getUserInfoByName: (username) => db.any(`
     SELECT * FROM users
-    WHERE name = $1
+    WHERE preferred_username = $1
   `, [username]),
 
   getUserInfoByEmail: (email) => db.any(`
