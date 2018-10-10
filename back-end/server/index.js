@@ -161,6 +161,15 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           console.log(worouts, " this should hold the list of workouts that are left incase we wish to skip to the next workout")
           res.json(alexaHelp.PLACEHOLDER());
           break;
+        case 'AMAZON.FallbackIntent':
+          res.json(alexaHelp.PLACEHOLDER());
+          break;
+        case 'AMAZON.HelpIntent':
+          res.json(alexaHelp.PLACEHOLDER());
+          break;
+        case 'AMAZON.NavigateHomeIntent':
+          res.json(alexaHelp.PLACEHOLDER());
+          break;
       default:
         console.log('we don\'t know what they said');
         console.log('req.body.request.intent');
