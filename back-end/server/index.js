@@ -158,7 +158,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           res.json(alexaHelp.changeView(view));
           break;
         case 'skipExercise':
-          console.log(workouts, " this should hold the list of workouts that are left incase we wish to skip to the next workout")
+          console.log(workouts, " this should hold the list of workouts that are left incase we wish to skip to the next workout");
         console.log(req.body.request.intent, " ||||-----|||| this is skip exercise");
           res.json(alexaHelp.PLACEHOLDER());
           break;
