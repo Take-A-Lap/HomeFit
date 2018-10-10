@@ -70,9 +70,10 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         })
         .then(exerWorkArr => {
           // console.log(exerWorkArr[0].exercises, " the array of json");
-          workouts = workouts.concat(exerWorkArr[0].exercises[0]);
+
+          workouts = workouts.length > 0 ? workouts : workouts.concat(exerWorkArr[0].exercises.splice(0, 1));
           console.log(workouts, ' this should be one days worrth of workouts');
-          res.json(alexaHelp.startWorkout(workouts[0], workouts.length));
+          res.json(alexaHelp.startWorkout(workouts[0], 6 - workouts.length));
           
         })
         .catch(err => {
