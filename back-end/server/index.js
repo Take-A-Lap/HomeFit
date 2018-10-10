@@ -59,7 +59,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'AMAZON.StopIntent':
         res.json(alexaHelp.stopAndExit());
         break;
-      case 'startWorkout':
+      case 'initWorkout':
         //do some stuff
         console.log(req.body.session.user.userId);
         
@@ -76,7 +76,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             workouts = workouts[0];
           }
           // console.log(workouts, ' this should be one days worth of workouts');
-          res.json(alexaHelp.startWorkout(workouts[0], 6 - workouts.length));
+          res.json(alexaHelp.initWorkout(workouts[0], 6 - workouts.length));
           return exerWorkArr[0];
         })
         .then(exercises => {
@@ -93,7 +93,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           console.error(err);
         });
         break;
-        case 'nextWorkout':
+      case 'coachExercise':
           // console.log(workouts, ' line 97 this should be an array of objects');
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(userArr => {
@@ -108,7 +108,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
               workouts = workouts[0];
             }
             // console.log(workouts, ' this should be one days worth of workouts the second one');
-            res.json(alexaHelp.nextWorkout(workouts.splice(0, 1)));
+            res.json(alexaHelp.coachExercise(workouts.splice(0, 1)));
             return exerWorkArr[0];
           })
           .then(exercises => {
