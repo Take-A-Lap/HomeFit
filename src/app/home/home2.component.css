@@ -24,6 +24,11 @@
   color: grey;
 }
 
+.jumbotron {
+  background-image: url('../../assets/img/new_orleans_placeholder.jpg');
+  border-radius: 0px;
+}
+
 img {
   max-width: 100%;
   max-height: 100%;
@@ -55,5 +60,5 @@ h4 {
 }
 
 p {
-  color: #31cd32;
+  color: navy;
 }

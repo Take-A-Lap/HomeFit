@@ -43,6 +43,7 @@ iframe {
   max-height: 100%;
   text-align: center;
   align-items: center;
+  border-radius: 0px;
 }
 h2 {
   color: #31cd32;
