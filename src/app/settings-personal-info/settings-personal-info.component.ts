@@ -77,7 +77,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
   // }
 
   addUser() {
-    this.httpClient.post('/personalInfo', {
+    let user;
+    this.httpClient.post('/signUp', {
       params: {
         weight: this.weight,
         push_ups: this.push_ups,
@@ -91,12 +92,21 @@ export class SettingsPersonalInfoComponent implements OnInit {
         userName: this.username,
         password: this.password,
       }
-    })
+    
+    }).subscribe()
+    let getClient = setInterval(()=>{
+      this.httpClient.get('/signupWO', {
+        params: {
+          email: this.email
+        }
+      })
       .subscribe(
         (data:any) => {
-          console.log(data);
+          user = data;
+          clearInterval(getClient);
         }
       )
+    }, 200)
   }
   
 
