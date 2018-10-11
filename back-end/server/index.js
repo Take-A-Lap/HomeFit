@@ -256,8 +256,23 @@ app.get('/lunch', (req,res)=>{
   })
 })
 app.get('/signupWO', (req,res)=>{
-  workout.generateWorkoutSignUp(3, (workout)=> {
-    res.send(workout);
+  console.log(req.query)
+  let user;
+  let regimen;
+  db.getUserInfoByEmail(req.query.email)
+  .then((data)=>{
+    // console.log(data);
+    workout.generateWorkoutSignUp(3, (workout) => {
+      regimen = workout;
+      // console.log(regimen, user);
+      let addRegimen = setInterval(() => {
+        // console.log(Array.isArray(data));
+        // console.log(regimen);
+        console.log(data[0].id)
+        db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(data[0].id, regimen);
+        clearInterval(addRegimen);
+      }, 200)
+    })
   })
 })
 app.get('/breakfast', (req, res) => {
@@ -300,7 +315,9 @@ app.get('/breakfast', (req, res) => {
     // console.log(meals.length);
   })    
 })
-
+app.post('/saveWO', (req, res)=> {
+  console.log(req);
+})
 app.get('/test', (req, res) => {
   // console.log(req);
   
@@ -313,8 +330,8 @@ app.get('/test', (req, res) => {
   })
 });
 
-app.post('/personalInfo', (req, res) =>{
-  
+app.post('/signUp', (req, res) =>{
+  // console.log(req);
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;
   let jogDist = req.body.params.miles;
@@ -327,7 +344,7 @@ app.post('/personalInfo', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
-  console.log(username);
+  console.log(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
   .then()
   .catch((err) => {
