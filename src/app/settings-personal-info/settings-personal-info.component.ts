@@ -10,7 +10,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   
   constructor(private httpClient: HttpClient) { }
 
-  email = 'Enter email';
+  email = '';
   password = '';
   age = '';
   height = '';
@@ -19,8 +19,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
   push_ups = '';
   squats = '';
   miles = '';
-  username = 'What name do you go by?';
-  sex = 'Enter sex';
+  username = '';
+  sex = '';
 
   updateSex(e) {
     this.sex = e.options[e.selectedIndex].value;
@@ -84,16 +84,6 @@ export class SettingsPersonalInfoComponent implements OnInit {
       }
     
     }).subscribe()
-    this.httpClient.get('/signupWO', {
-      params: {
-        email: this.email
-      }
-    })
-    .subscribe(
-      (data:any) => {
-        user = data;
-      }
-    )
   }
   
 
