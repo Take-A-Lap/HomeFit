@@ -349,7 +349,9 @@ app.get('/test', (req, res) => {
     console.error(err);
   })
 });
+app.get('/recallWOs', (req, res)=>{
 
+});
 app.post('/signUp', (req, res) =>{
   // console.log(req);
   let weight = req.body.params.weight;
