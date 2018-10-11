@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-md-12">
       <ul class="nav">
         <li class="nav-item">
           <a class="nav-link active" routerLink="/home">Home</a>
@@ -19,27 +19,26 @@
     </div>     
     <br>
     <div class="row">
-      <div class="col-md-12">
-        <h1>{{exercise.name}}</h1>
+      <div class="col-xs-12 col-md-12">
+        <h2>Current Exercise: {{exercise.name}}</h2>
         <div class="media">
           <iframe class="video" [src]="trustedUrl"></iframe>
         </div>
-        <!-- <button (click)="increment()">Next Exercise</button> -->
       </div>
     </div>
-  <br>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-6 col-md-6">
       <h2>Set</h2>
       <div class="jumbotron">
         <h3>{{set}}</h3>
       </div>
     </div>
-    <div class="col-md-6">
-      <h2>Reps</h2>
+    <div class="col-xs-6 col-md-6">
+        <!-- <h2>Reps</h2> -->
+        <h2 class="reps_title">Reps</h2>
+        <button class="rep_button" (click)="workinDatBody()">Start Rep Count</button>
       <div class="jumbotron">
         <h3>{{rep}}</h3>
-        <button class="rep_button" (click)="workinDatBody()">Start Rep Count</button>
       </div>
     </div>
   </div>
