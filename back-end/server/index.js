@@ -268,10 +268,11 @@ app.get('/signupWO', (req,res)=>{
       let addRegimen = setInterval(() => {
         // console.log(Array.isArray(data));
         // console.log(regimen);
-        console.log(data[0].id)
+        // console.log(data[0].id)
         db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(data[0].id, regimen);
         clearInterval(addRegimen);
       }, 200)
+      
     })
   })
 })
