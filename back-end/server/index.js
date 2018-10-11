@@ -174,7 +174,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             //this intent is a catch all
             console.log(req.body.request.intent, " ||||-----|||| this is the amazon fallback intent");
             
-            res.json(alexaHelp.PLACEHOLDER());
+            res.json(alexaHelp.default());
             break;
       default:
         console.log('we don\'t know what they said');
