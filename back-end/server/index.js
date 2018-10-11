@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
 const verifier = require('alexa-verifier-middleware');
 const db = require('../database/dbHelpers');
@@ -9,6 +9,7 @@ const meal = require('../Algorithms/recipe.js');
 const workout = require('../Algorithms/workout.js');
 const alexaRouter = express.Router()
 const sse = require('../../sse');
+const fs = require('fs');
 
 app.use('/alexa', alexaRouter);
 app.use(express.static('dist/HomeFit'));
@@ -24,12 +25,15 @@ app.use(bodyParser.urlencoded({
 
   // attach the verifier middleware first because it needs the entire
   // request body, and express doesn't expose this on the request object
+app.get('/.well-known/pki-validation/7BACD9E3D66343D40FE18A33C2899CB3.txt', (req, res) => {
+  res.send(fs.readFileSync('../../7BACD9E3D66343D40FE18A33C2899CB3.txt'));
+});
 
   let workouts = [];
   let sets = 0;
   let current;
 alexaRouter.post('/fitnessTrainer', (req, res) => {
-  console.log(req.body.request.type, " this si the type of the request body")
+  console.log(req.body.request.type, " this us the type of request")
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
@@ -154,9 +158,24 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           res.json(alexaHelp.changeView(view));
           break;
         case 'skipExercise':
-          console.log(worouts, " this should hold the list of workouts that are left incase we wish to skip to the next workout")
+          console.log(workouts, " this should hold the list of workouts that are left incase we wish to skip to the next workout");
+        console.log(req.body.request.intent, " ||||-----|||| this is skip exercise");
           res.json(alexaHelp.PLACEHOLDER());
           break;
+          case 'AMAZON.HelpIntent':
+          console.log(req.body.request.intent, "||||-----|||| this is the amazon help intent");
+          res.json(alexaHelp.PLACEHOLDER());
+          break;
+          case 'AMAZON.NavigateHomeIntent':
+          console.log(req.body.request.intent, "||||-----|||| this is the amazon navigate home intent");
+          res.json(alexaHelp.PLACEHOLDER());
+          break;
+          case 'AMAZON.FallbackIntent':
+            //this intent is a catch all
+            console.log(req.body.request.intent, " ||||-----|||| this is the amazon fallback intent");
+            
+            res.json(alexaHelp.PLACEHOLDER());
+            break;
       default:
         console.log('we don\'t know what they said');
         console.log('req.body.request.intent');
@@ -336,7 +355,7 @@ app.post('/personalInfo', (req, res) =>{
   res.end();
 });
 
-const port = 81;
+const port = 3000;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
   app.keepAliveTimeout = 0;
