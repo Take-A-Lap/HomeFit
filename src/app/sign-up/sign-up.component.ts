@@ -9,7 +9,7 @@ import {
 @Component({
   selector: 'app-sign-up',
   templateUrl: './signUp.component.html',
-  styles: [/*'./signin.component.css'*/]
+  styleUrls: ['./signin.component.css']
 })
 export class SignUpComponent implements OnInit {
 
