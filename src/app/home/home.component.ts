@@ -11,8 +11,8 @@ import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-home-component',
-  templateUrl: './home.component.html',
-  styles: []
+  templateUrl: 'home2.component.html',
+  styleUrls: ['home2.component.css']
 })
 export class HomeComponent implements OnInit {
 
