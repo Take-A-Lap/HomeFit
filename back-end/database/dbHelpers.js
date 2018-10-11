@@ -40,7 +40,7 @@ module.exports = {
   getExerciseByMuscleAndDiff: (muscleId, difficulty) => db.any(`
     SELECT * FROM exercises
     WHERE id_muscle_group = $1 AND difficulty < $2
-    `, [muscleId, difficulty + 1]).then(([exercise]) => exercise),
+    `, [muscleId, difficulty + 1]),
 
   // need to get the completed exercises first cardio then i will do str will be basically the same
   getCompCardioByUserId: (userId) => db.any(`
