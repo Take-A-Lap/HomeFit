@@ -20,7 +20,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   squats = '';
   miles = '';
   username = 'What name do you go by?';
-  sex = '';
+  sex = 'Enter sex';
 
   updateSex(e) {
     this.sex = e.options[e.selectedIndex].value;
