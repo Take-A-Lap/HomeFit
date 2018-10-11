@@ -81,50 +81,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           if(!exercises.exercises.length || exercises === undefined) {
             workout.generateWorkoutSignUp(3, (workoutArr) => {
               db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
-            });
-          } else {
-            db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
-          }
-        })
-        .catch(err => {
-          console.error(err);
-        });
-        break;
-      case 'coachExercise':
-          // console.log(workouts, ' line 97 this should be an array of objects');
-        db.getUserInfoByAlexUserId(req.body.session.user.userId)
-          .then(userArr => {
-            // console.log(userArr, ' this needs to not be an empty array');
-            return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
-          })
-          .then(exerWorkArr => {
-            // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json the second one");
-            console.log(workouts, ' this should equal workouts from above')
-            workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
-            if (workouts[0].length) {
-              workouts = workouts[0];
-            }
-            if(current === undefined){
-              current = workouts.splice(0, 1);
-              sets++;
-            }
-            if(sets <= 3){
-              sets++;
-            } else {
-              console.log('this should mean that current and sets have been reset')
-              current === undefined;
-              sets = 0;
-            }
-            console.log(sets, " this should never be more than 3");
-            // console.log(workouts, ' this should be one days worth of workouts the second one');
-            res.json(alexaHelp.coachExercise(current));
-            return exerWorkArr[0];
-          })
-          .then(exercises => {
-            // this would be a good place to generate the workouts as they are being taken off
-            if (!exercises.exercises.length || exercises === undefined) {
-              workout.generateWorkoutSignUp(3, (workoutArr) => {
-                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
               });
             } else {
               db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
@@ -134,47 +90,90 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             console.error(err);
           });
           break;
-        case 'readWorkoutStatus':
-          res.json(alexaHelp.readWorkout());
-          break;
-        case 'linkAccount':
-          let link = req.body.request.intent.slots.accountName.value;
-          link = link.split(' ').join('@');
-          console.log(link, ' line 84 server index');
-          db.updateAlexaId(link, req.body.session.user.userId)
-          .then(() => {
-            console.log('successful update to user');
-          })
-          .catch(err => {
-            console.error(err);
-          })
-          
-          res.json(alexaHelp.linkAccount(link));
-          break;
-        case 'changeView':
-          let view = req.body.request.intent.slots.view.value;
-          view = '/' + view.split(' ').join('');
-          console.log(view, ' should be the value of the view slot');
-          res.json(alexaHelp.changeView(view));
-          break;
-        case 'skipExercise':
-          console.log(workouts, " this should hold the list of workouts that are left incase we wish to skip to the next workout");
-        console.log(req.body.request.intent, " ||||-----|||| this is skip exercise");
-          res.json(alexaHelp.PLACEHOLDER());
-          break;
+        case 'coachExercise':
+            // console.log(workouts, ' line 97 this should be an array of objects');
+          db.getUserInfoByAlexUserId(req.body.session.user.userId)
+            .then(userArr => {
+              // console.log(userArr, ' this needs to not be an empty array');
+              return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
+            })
+            .then(exerWorkArr => {
+              // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json the second one");
+              console.log(workouts, ' this should equal workouts from above')
+              workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
+              if (workouts[0].length) {
+                workouts = workouts[0];
+              }
+              if(current === undefined){
+                current = workouts.splice(0, 1);
+                sets++;
+              }
+            if(sets <= 3){
+                sets++;
+              } else {
+                console.log('this should mean that current and sets have been reset')
+                current === undefined;
+                sets = 0;
+              }
+              console.log(sets, " this should never be more than 3");
+              // console.log(workouts, ' this should be one days worth of workouts the second one');
+              res.json(alexaHelp.coachExercise(current));
+              return exerWorkArr[0];
+            })
+            .then(exercises => {
+              // this would be a good place to generate the workouts as they are being taken off
+              if (!exercises.exercises.length || exercises === undefined) {
+                workout.generateWorkoutSignUp(3, (workoutArr) => {
+                  db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
+                });
+              } else {
+                db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
+              }
+            })
+            .catch(err => {
+              console.error(err);
+            });
+            break;
+          case 'readWorkoutStatus':
+            res.json(alexaHelp.readWorkout());
+            break;
+          case 'linkAccount':
+            let link = req.body.request.intent.slots.accountName.value;
+            link = link.split(' ').join('@');
+            console.log(link, ' line 84 server index');
+            db.updateAlexaId(link, req.body.session.user.userId)
+            .then(() => {
+              console.log('successful update to user');
+            })
+            .catch(err => {
+              console.error(err);
+            })
+            res.json(alexaHelp.linkAccount(link));
+            break;
+          case 'changeView':
+            let view = req.body.request.intent.slots.view.value;
+            view = '/' + view.split(' ').join('');
+            console.log(view, ' should be the value of the view slot');
+            res.json(alexaHelp.changeView(view));
+            break;
+          case 'skipExercise':
+            console.log(workouts, " this should hold the list of workouts that are left incase we wish to skip to the next workout");
+            console.log(req.body.request.intent, " ||||-----|||| this is skip exercise");
+            res.json(alexaHelp.PLACEHOLDER());
+            break;
           case 'AMAZON.HelpIntent':
-          console.log(req.body.request.intent, "||||-----|||| this is the amazon help intent");
-          res.json(alexaHelp.PLACEHOLDER());
-          break;
+            console.log(req.body.request.intent, "||||-----|||| this is the amazon help intent");
+            res.json(alexaHelp.PLACEHOLDER());
+            break;
           case 'AMAZON.NavigateHomeIntent':
-          console.log(req.body.request.intent, "||||-----|||| this is the amazon navigate home intent");
-          res.json(alexaHelp.PLACEHOLDER());
-          break;
+            console.log(req.body.request.intent, "||||-----|||| this is the amazon navigate home intent");
+            res.json(alexaHelp.PLACEHOLDER());
+            break;
           case 'AMAZON.FallbackIntent':
             //this intent is a catch all
             console.log(req.body.request.intent, " ||||-----|||| this is the amazon fallback intent");
             
-            res.json(alexaHelp.PLACEHOLDER());
+            res.json(alexaHelp.default());
             break;
       default:
         console.log('we don\'t know what they said');
