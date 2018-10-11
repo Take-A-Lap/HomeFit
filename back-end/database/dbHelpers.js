@@ -62,7 +62,7 @@ module.exports = {
   getDietaryRestrictionsIdByName: (name) => db.any(`
     SELECT id FROM dietary_restrictions
     WHERE name = $1
-    `, [name]),
+    `, [name]).then(([dietRestrictions]) => dietRestrictions),
 
   // need to grab the youtube link for the youtube api
   getYoutubeLink: (name) => db.any(`
