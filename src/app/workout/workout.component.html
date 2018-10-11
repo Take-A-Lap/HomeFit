@@ -23,7 +23,7 @@
         <div class="media">
           <iframe class="video" [src]="trustedUrl"></iframe>
         </div>
-        <h3>{{exercise.name}}</h3>
+        <h1>{{exercise.name}}</h1>
         <!-- <button (click)="increment()">Next Exercise</button> -->
       </div>
     </div>
@@ -40,24 +40,15 @@
   <div class="row">
     <div class="col-md-6">
       <div class="jumbotron">
-        <h2>
-          Sets
-        </h2>
-        <p>
-          {{set}}
-        </p>
-        
+        <h2>Set</h2>
+        <h3>{{set}}</h3>
       </div>
     </div>
     <div class="col-md-6">
       <div class="jumbotron">
-        <h2>
-          Reps
-        </h2>
-        <p>
-          {{rep}}
-        </p>
-        <button (click)="workinDatBody()">Start Rep Count</button>
+        <h2>Reps</h2>
+        <h3>{{rep}}</h3>
+        <button class="rep_button" (click)="workinDatBody()">Start Rep Count</button>
       </div>
     </div>
   </div>
