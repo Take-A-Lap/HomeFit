@@ -266,26 +266,20 @@ app.get('/lunch', (req,res)=>{
   })
 })
 app.get('/signupWO', (req,res)=>{
-  console.log(req.query)
-  let user;
   let regimen;
+  let user;
   db.getUserInfoByEmail(req.query.email)
   .then((data)=>{
-    // console.log(data);
+    user = data;
+    console.log(Array.isArray(user));
     workout.generateWorkoutSignUp(3, (workout) => {
       regimen = workout;
-      // console.log(regimen, user);
-      
-        // console.log(Array.isArray(data));
-        // console.log(regimen);
-        // console.log(data[0].id)
-        db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(data[0].id, regimen);
-    
-
-      
+      console.log(user);
+      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user[0].id, regimen);
     })
   })
 })
+
 app.get('/breakfast', (req, res) => {
   let meals = [];
   let breakfastResponse = [];
