@@ -21,14 +21,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-
-
-  // attach the verifier middleware first because it needs the entire
-  // request body, and express doesn't expose this on the request object
-app.get('/.well-known/pki-validation/7BACD9E3D66343D40FE18A33C2899CB3.txt', (req, res) => {
-  res.send(fs.readFileSync('../../7BACD9E3D66343D40FE18A33C2899CB3.txt'));
-});
-
   let workouts = [];
   let sets = 0;
   let current;
@@ -196,11 +188,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/home', (req, res) => {
-  res.redirect('localhost:3000/signup')
+  res.redirect('localhost:81/signup')
 })
 
 app.get('/personalInfo', (req, res) => {
-  res.redirect('localhost:3000/signup')
+  res.redirect('localhost:81/signup')
 })
 
 //api call for weather
@@ -374,7 +366,7 @@ app.post('/signUp', (req, res) =>{
   res.end();
 });
 
-const port = 3000;
+const port = 81;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
   app.keepAliveTimeout = 0;
