@@ -275,19 +275,25 @@ app.get('/lunch', (req,res)=>{
   })
 })
 app.get('/signupWO', (req,res)=>{
-  let regimen;
-  let user;
-  db.getUserInfoByEmail(req.query.email)
-  .then((data)=>{
-    user = data;
-    console.log(Array.isArray(user));
-    workout.generateWorkoutSignUp(3, (workout) => {
-      regimen = workout;
-      console.log(user);
-      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user[0].id, regimen);
-    })
+  return Promise.all([
+    db.getUs, 
+    workout.generateWorkoutSignUp(3)
+  ])
+  .then(([ user, regimen])=>{
+      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, regimen);
   })
+  .catch((err)=>{
+    console.error(err);
+  });
 })
+app.get('/cornTest', (req,res)=>{
+  workout.generateWorkoutBack(3)
+  .then(result => {
+    res.send(result);
+  })
+  .catch((err)=>console.error(err))
+})
+
 
 app.get('/breakfast', (req, res) => {
   let meals = [];
