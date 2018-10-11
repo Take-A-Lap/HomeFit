@@ -286,7 +286,7 @@ app.get('/signupWO', (req,res)=>{
   });
 })
 app.get('/cornTest', (req,res)=>{
-  workout.generateWorkoutSignUp(3)
+  workout.generateWorkoutBack(3)
   .then(result => {
     res.send(result);
   })
@@ -374,7 +374,7 @@ app.post('/signUp', (req, res) =>{
     regimen.forEach(exer=>{
       ins.push(JSON.stringify(exer))
     })
-    db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user[0].id, ins)
+    db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
   })
   .catch(err=>console.error(err));
   res.end();
