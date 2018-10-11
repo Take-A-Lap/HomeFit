@@ -15,11 +15,10 @@
       <form role="form">
         <div class="form-group">
           <label for="username">Preferred Name</label>
-          <input  type="text" 
+          <input  type="text"
                   class="form-control" 
-                  id="username" 
-                  placeholder="What do you go by?"
-                  [value]="text"
+                  id="username"
+                  [value]="username"
                   (input)="updateUsername($event)"/>
         </div>
         <div class="form-group">
@@ -27,17 +26,15 @@
           <input  type="number" 
                   class="form-control" 
                   id="sex" 
-                  placeholder="Enter a sex binary"
                   [value]="number"
                   (input)="updateMiles($event)"/>
         </div>
         <div class="form-group">
           <label for="emailInput">Email</label>
-          <input  type="text" 
+          <input  type="email" 
                   class="form-control" 
                   id="email" 
-                  placeholder="Enter email"
-                  [value]="text"
+                  [value]="email"
                   (input)="updateEmail($event)"/>
         </div>
         <div class="form-group">
@@ -45,7 +42,6 @@
           <input  type="password" 
                   class="form-control" 
                   id="password" 
-                  placeholder="Enter password"
                   [value]="text"
                   (input)="updatePassword($event)"/>
         </div>
@@ -54,17 +50,15 @@
           <input  type="number" 
                   class="form-control" 
                   id="age" 
-                  placeholder="Enter age in years"
                   [value]="text"
                   (input)="updateAge($event)"/>
         </div>
         <div class="form-group">
           <label for="heightInput">Height</label>
-          <input  type="text" 
+          <input  type="number" 
                   class="form-control" 
                   id="height" 
-                  placeholder="Enter height in inches"
-                  [value]="text"
+                  [value]="number"
                   (input)="updateHeight($event)"/>
         </div>
         <div class="form-group">
@@ -72,7 +66,6 @@
           <input  type="number" 
                   class="form-control" 
                   id="weight" 
-                  placeholder="Enter weight in pounds"
                   [value]="text"
                   (input)="updateWeight($event)"/>
         </div>
@@ -81,7 +74,6 @@
           <input  type="number" 
                   class="form-control" 
                   id="goal" 
-                  placeholder="Enter goal integer"
                   [value]="text"
                   (input)="updateGoals($event)"/>
         </div>
@@ -90,7 +82,6 @@
           <input  type="number" 
                   class="form-control" 
                   id="pushups" 
-                  placeholder="How many pushups can you do?"
                   [value]="text"
                   (input)="updatePushUps($event)"/>
         </div>
@@ -99,7 +90,6 @@
           <input  type="number" 
                   class="form-control" 
                   id="squats" 
-                  placeholder="How comfortable are you with squats?"
                   [value]="text"
                   (input)="updateSquats($event)"/>
         </div>
@@ -107,8 +97,7 @@
           <label for="miles">Jogging</label>
           <input  type="number" 
                   class="form-control" 
-                  id="miles" 
-                  placeholder="How far are you comfortable jogging?"
+                  id="miles"
                   [value]="text"
                   (input)="updateMiles($event)"/>
         </div>
