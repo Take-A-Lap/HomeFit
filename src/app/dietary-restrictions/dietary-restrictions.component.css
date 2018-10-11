@@ -1,0 +1,21 @@
+.container {
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.nav {
+  border-radius: 0px;
+  background-color:#31cd32;
+  text-align: center;
+}
+
+.nav a {
+  color: white;
+}
+
+.submit_button {
+  width: 100%;
+  background-color: #31cd32;
+  text-align: center;
+  color: white;
+}

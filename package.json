@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node back-end/server/index.js",
-    "dev-start": "nodemon back-end/server/index.js",
-    "build": "ng build",
+    "dev:start": "nodemon back-end/server/index.js",
+    "build": "ng build --watch",
     "test": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -20,7 +20,9 @@
     "@angular/http": "^6.1.0",
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
+    "@angular/platform-server": "^6.1.10",
     "@angular/router": "^6.1.0",
+    "@nguniversal/module-map-ngfactory-loader": "^6.1.0",
     "@types/jest": "^23.3.2",
     "alexa-verifier-middleware": "^1.0.1",
     "angular-6-social-login": "^1.1.1",

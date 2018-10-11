@@ -14,13 +14,49 @@
       </div>
       <form role="form">
         <div class="form-group">
+          <label for="username">Preferred Name</label>
+          <input  type="text" 
+                  class="form-control" 
+                  id="username" 
+                  placeholder="What do you go by?"
+                  [value]="text"
+                  (input)="updateUsername($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="sex">Sex</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="sex" 
+                  placeholder="Enter a sex binary"
+                  [value]="number"
+                  (input)="updateMiles($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="emailInput">Email</label>
+          <input  type="text" 
+                  class="form-control" 
+                  id="email" 
+                  placeholder="Enter email"
+                  [value]="text"
+                  (input)="updateEmail($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input  type="password" 
+                  class="form-control" 
+                  id="password" 
+                  placeholder="Enter password"
+                  [value]="text"
+                  (input)="updatePassword($event)"/>
+        </div>
+        <div class="form-group">
           <label for="ageInput">Age</label>
           <input  type="number" 
                   class="form-control" 
                   id="age" 
                   placeholder="Enter age in years"
                   [value]="text"
-                  (input)="updateAge($event)"/>{{age}}
+                  (input)="updateAge($event)"/>
         </div>
         <div class="form-group">
           <label for="heightInput">Height</label>
@@ -29,10 +65,10 @@
                   id="height" 
                   placeholder="Enter height in inches"
                   [value]="text"
-                  (input)="updateHeight($event)"/>{{height}}
+                  (input)="updateHeight($event)"/>
         </div>
         <div class="form-group">
-          <label for="weightInput">Weight</label>{{weight}}
+          <label for="weightInput">Weight</label>
           <input  type="number" 
                   class="form-control" 
                   id="weight" 
@@ -40,12 +76,50 @@
                   [value]="text"
                   (input)="updateWeight($event)"/>
         </div>
+         <div class="form-group">
+          <label for="goals">Goal</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="goal" 
+                  placeholder="Enter goal integer"
+                  [value]="text"
+                  (input)="updateGoals($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="pushups">Pushups</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="pushups" 
+                  placeholder="How many pushups can you do?"
+                  [value]="text"
+                  (input)="updatePushUps($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="squats">Squats</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="squats" 
+                  placeholder="How comfortable are you with squats?"
+                  [value]="text"
+                  (input)="updateSquats($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="miles">Jogging</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="miles" 
+                  placeholder="How far are you comfortable jogging?"
+                  [value]="text"
+                  (input)="updateMiles($event)"/>
+        </div>
       </form>
-      <ul>
+      <!-- <ul>
         <div class="slidecontainer">
           <li class="list-item">
             Goals
-              <input type="range" min="1" max="3" value="2" class="slider" id="myRange" (input)="updateGoals($event)">
+              <input type="range" min="1" max="3" value="2" class="slider" id="myRange">
+              <output id="goals"></output>
+              <p>{{this.goals}}</p>
           </li>
           <li class="list-item">
             How many push-ups can you do?
@@ -59,16 +133,16 @@
             How far can you comfortably jog (in miles)?
             <input type="range" min="1" max="10" value="5" class="slider" id="myRange" (input)="updateMiles($event)">
           </li>
+          <li class="pulldown">
+            <select (input)="updateHeight($event)">
+              <option value="male"> Male </option>
+              <option value="female"> Female </option>
+            </select>
+            <p>{{this.sex}}</p>
+          </li>
         </div>
-      </ul>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" /> Male
-        </label>
-        <label>
-          <input type="checkbox" /> Female
-        </label>
-      </div>
+      </ul> -->
+      
       <a routerLink="/dietaryRestrictions">
         <button type="button" class="btn btn-success" (click)="addUser()">Next</button>
       </a>

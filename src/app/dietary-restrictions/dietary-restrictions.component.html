@@ -1,108 +1,200 @@
-<div class="checkbox">
-<ul>
-
-  <label>
-    <input type="checkbox" /> Balanced
-  </label>
-  <label>
-    <input type="checkbox" /> High-Fiber
-  </label>
-  <label>
-    <input type="checkbox" /> High-Protein
-  </label>
-  <label>
-    <input type="checkbox" /> Low-Carb
-  </label>
-  <label>
-    <input type="checkbox" /> Low-Sodium
-  </label>
-  <label>
-    <input type="checkbox" /> Alcohol-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Celery-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Crustacean-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Dairy-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Egg-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Fish-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Gluten-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Kidney-Friendly
-  </label>
-  <label>
-    <input type="checkbox" /> Kosher
-  </label>
-  <label>
-    <input type="checkbox" /> Low-Potassium
-  </label>
-  <label>
-    <input type="checkbox" /> Lupine-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Mustard-Free
-  </label>
-  <label>
-    <input type="checkbox" /> No-Added-Oil
-  </label>
-  <label>
-    <input type="checkbox" /> Low-Sugar
-  </label>
-  <label>
-    <input type="checkbox" /> Paleo
-  </label>
-  <label>
-    <input type="checkbox" /> Peanut-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Pescatarian
-  </label>
-  <label>
-    <input type="checkbox" /> Pork-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Red-Meat-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Sesame-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Shellfish-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Soy-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Sugar-Conscious
-  </label>
-  <label>
-    <input type="checkbox" /> Tree-Nut-Free
-  </label>
-  <label>
-    <input type="checkbox" /> Vegan
-  </label>
-  <label>
-    <input type="checkbox" /> Balanced
-  </label>
-  <label>
-    <input type="checkbox" /> Vegetarian
-  </label>
-  <label>
-    <input type="checkbox" /> Wheat-Free
-  </label>
-</ul>
-  <div>
-    <a routerLink="/home"><button type="text" class="btn btn-success">Submit</button></a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12g">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/meals">Meals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/strengthWorkout">Workout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/personalInfo">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Logout</a>
+        </li>
+      </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Dietary Restrictions</h1>
+        <p>Choose what types of food to exclude from your dietary recommendations</p>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><input type="checkbox" /> Balanced</td>
+              <td><input type="checkbox" /> High-Protein</td>
+              <td><input type="checkbox" /> Sesame-Free</td>    
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> High-Fiber</td>
+              <td><input type="checkbox" /> Low-Carb</td>
+              <td><input type="checkbox" /> High-Carb</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Low-sodium</td>
+              <td><input type="checkbox" /> Alcohol-Free</td>
+              <td><input type="checkbox" /> Pork-Free</td>
+             
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Celery-Free</td>
+              <td><input type="checkbox" /> Crustacean-Free</td>
+              <td><input type="checkbox" /> Red-Meat-Free</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Shellfish-Free</td>
+              <td><input type="checkbox" /> Lactose-Free</td>
+              <td><input type="checkbox" /> Peanut-Free</td>
+              
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Soy-Free</td>
+              <td><input type="checkbox" /> Tree-Nut-Free</td>
+              <td><input type="checkbox" /> Pescatarian</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Sugar-Conscious</td>
+              <td><input type="checkbox" /> Wheat-Free</td>
+              <td><input type="checkbox" /> Low-Sugar</td>
+              
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Vegan</td>
+              <td><input type="checkbox" /> Vegetarian</td>
+              <td><input type="checkbox" /> Paleo</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Egg-Free</td>
+              <td><input type="checkbox" /> Fish-Free</td>
+              <td><input type="checkbox" /> Mustard-Free</td>
+              
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Gluten-Free</td>
+              <td><input type="checkbox" /> Kidney-Friendly</td>
+              <td><input type="checkbox" /> No-Oil-Added</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" /> Kosher</td>
+              <td><input type="checkbox" /> Low-Potassium</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="submit_button">Submit</button>
+      </div>
+    </div>
   </div>
-
-</div>
+  <!-- <div class="row">
+    <div class="col-md-6">
+      <ul>
+        <li class="list-item">
+          <input type="checkbox" />Balanced
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />High-Fiber
+        </li>
+        <li class="list-item">
+        <input type="checkbox" />High-Protein
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Low-Carb
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Low-Sodium
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Alcohol-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Celery-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Crustacean-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Shellfish-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Soy-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Tree-Nut-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Sugar-Conscious
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Wheat-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Vegan-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Vegetarian
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <ul>
+        <li class="list-item">
+        <input type="checkbox" />Dairy-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Egg-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Fish-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Gluten-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Kidney-Friendly
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Kosher
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Low-Potassium
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Mustard-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />No-Add-Oil
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Low-Sugar
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Paleo
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Peanut-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Pescatarian
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Pork-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Red-Meat-Free
+        </li>
+        <li class="list-item">
+          <input type="checkbox" />Sesame-Free
+        </li>
+      </ul>
+      <button type="button" class="btn btn-success">
+        Button
+      </button>
+    </div>
+  </div>
+</div> -->

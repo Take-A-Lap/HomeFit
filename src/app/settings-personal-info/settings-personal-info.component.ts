@@ -10,6 +10,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
   
   constructor(private httpClient: HttpClient) { }
 
+  email = '';
+  password = '';
   age = '';
   height = '';
   weight = '';
@@ -17,6 +19,20 @@ export class SettingsPersonalInfoComponent implements OnInit {
   push_ups = '';
   squats = '';
   miles = '';
+  username = '';
+  sex = '';
+
+  updateSex(e) {
+    this.sex = e.options[e.selectedIndex].value;
+  }
+
+  updateEmail(e) {
+    this.email = e.target.value;
+  }
+
+  updatePassword(e) {
+    this.password = e.target.value;
+  }
 
   updateAge(e) {
     this.age = e.target.value;
@@ -31,7 +47,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
   
   updateGoals(e) {
-    this.updateGoals = e.target.value;
+    this.goals = e.target.value;
   }
 
   updatePushUps(e) {
@@ -46,32 +62,41 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.miles = e.target.value;
   }
 
-  // params = {
-  //   age: this.age,
-  //   height: this.height,
-  //   weight: this.weight,
-  //   goals: this.goals,
-  //   push_ups: this.push_ups,
-  //   squats: this.squats,
-  //   miles: this.miles
-  // }
+  updateUsername(e) {
+    this.username = e.target.value;
+  }
 
   addUser() {
-    console.log(this.age)
-    this.httpClient.post('/personalInfo', {
-      age: this.age,
-      height: this.height,
-      weight: this.weight,
-      goals: this.goals,
-      push_ups: this.push_ups,
-      squats: this.squats,
-      miles: this.miles
-    })
+    let user;
+    this.httpClient.post('/signUp', {
+      params: {
+        weight: this.weight,
+        push_ups: this.push_ups,
+        miles: this.miles,
+        age: this.age,
+        sex: this.sex,
+        height: this.height,
+        squats: this.squats,
+        goals: this.goals,
+        email: this.email,
+        userName: this.username,
+        password: this.password,
+      }
+    
+    }).subscribe()
+    let getClient = setInterval(()=>{
+      this.httpClient.get('/signupWO', {
+        params: {
+          email: this.email
+        }
+      })
       .subscribe(
         (data:any) => {
-          console.log(data);
+          user = data;
+          clearInterval(getClient);
         }
       )
+    }, 200)
   }
   
 
@@ -79,3 +104,5 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
 
 }
+
+
