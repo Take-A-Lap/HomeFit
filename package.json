@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node back-end/server/index.js",
-    "dev-start": "nodemon back-end/server/index.js",
-    "build": "ng build",
+    "dev:start": "nodemon back-end/server/index.js",
+    "build": "ng build --watch",
     "test": "jest",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -1,6 +1,10 @@
-.nav-buttons {
+.nav {
   border-radius: 0px;
   background-color:#31cd32;
+}
+
+.btn {
+  color: red
 }
 
 .cal_sun {
