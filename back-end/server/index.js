@@ -279,7 +279,7 @@ app.get('/signupWO', (req,res)=>{
     db.getUs, 
     workout.generateWorkoutSignUp(3)
   ])
-  .then(([ user, regimen])=>{
+  .then(([user, regimen])=>{
       db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, regimen);
   })
   .catch((err)=>{
@@ -293,8 +293,6 @@ app.get('/cornTest', (req,res)=>{
   })
   .catch((err)=>console.error(err))
 })
-
-
 app.get('/breakfast', (req, res) => {
   let meals = [];
   let breakfastResponse = [];
@@ -366,12 +364,20 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
-  console.log(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
+  console.log(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password);
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
-  .then()
-  .catch((err) => {
-    console.error(err);
-  });
+  .then(()=>{
+    return Promise.all([db.getUserIdByEmail(email), workout.generateWorkoutSignUp(squatComf)])
+      .catch(err=>console.error(err));
+  })
+  .then(([user,regimen])=> {
+    const ins = [];
+    regimen.forEach(exer=>{
+      ins.push(JSON.stringify(exer))
+    })
+    db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user[0].id, ins)
+  })
+  .catch(err=>console.error(err));
   res.end();
 });
 
