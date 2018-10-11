@@ -13,7 +13,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
 import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
-import { StrengthComponent } from './strength/strength.component';
+import { WorkoutComponent } from './workout/workout.component';
 import { CardioComponent } from './cardio/cardio.component';
 import { FoodService } from './food/food.service';
 import { WindowRef } from './window-ref';
@@ -49,7 +49,7 @@ export function getAuthServiceConfigs() {
     SignUpComponent,
     SettingsPersonalInfoComponent,
     DietaryRestrictionsComponent,
-    StrengthComponent,
+    WorkoutComponent,
     CardioComponent,
     BreakfastComponent,
     MealsComponent

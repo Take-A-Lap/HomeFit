@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Strength } from '../strength';
-import { STRENGTH, CARDIO } from '../mock-strength';
+import { Workout } from '../workout';
+import { WORKOUT, CARDIO } from '../mock-workout';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-strength',
-  templateUrl: 'strength.component.html',
-  styleUrls: ['strength.component.css']
+  selector: 'app-workout',
+  templateUrl: 'workout.component.html',
+  styleUrls: ['workout.component.css']
 })
 
 // const exercises = [
 //   {},
 // ];
-export class StrengthComponent implements OnInit {
+export class WorkoutComponent implements OnInit {
 
   
   masterIndex = 0;
-  exercises = STRENGTH;  
+  exercises = WORKOUT;  
   index = 0;
-  exercise = STRENGTH[this.index];
+  exercise = WORKOUT[this.index];
   completed = '';
   rep = 0;
   set = 1;
@@ -81,9 +81,9 @@ export class StrengthComponent implements OnInit {
     }
     
     switchExercise() {
-      console.log(STRENGTH.length)
+      console.log(WORKOUT.length)
       console.log(this.index);
-      this.exercise = STRENGTH[this.index];
+      this.exercise = WORKOUT[this.index];
     }
     
     increment() {
