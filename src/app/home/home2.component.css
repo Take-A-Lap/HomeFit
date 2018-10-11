@@ -6,6 +6,10 @@
     }
 }
 
+.container {
+  background-color: black;
+}
+
 .nav {
   border-radius: 0px;
   background-color:#31cd32;
@@ -36,11 +40,11 @@ img {
 }
 
 .mealDescription {
-  color: black;
+  color: #31cd32;
 }
 
 h4 {
-  color: black;
+  color: #31cd32;
 }
 
 .btn {
@@ -48,4 +52,8 @@ h4 {
   background-color:#31cd32;
   color: white;
   width: 100%
+}
+
+p {
+  color: #31cd32;
 }

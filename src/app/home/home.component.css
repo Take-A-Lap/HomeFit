@@ -6,6 +6,10 @@
     }
 }
 
+.container {
+  background-color: black;
+}
+
 .nav {
   border-radius: 0px;
   background-color:#31cd32;
