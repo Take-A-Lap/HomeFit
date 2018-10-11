@@ -1,8 +1,24 @@
 <router-outlet></router-outlet>
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="btn-group" role="group">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/meals">Meals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/strengthWorkout">Workout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/personalInfo">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Logout</a>
+        </li>
+      </ul>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <div class="btn-group" role="group">
         <a routerLink="/home">
           <button class="btn btn-secondary" type="button">Home</button>
         </a>
@@ -11,7 +27,7 @@
         <a routerLink="/">
           <button class="btn btn-secondary" type="button">Logout</button>
         </a>
-      </div>
+      </div> -->
       <form role="form">
         <div class="form-group">
           <label for="username">Preferred Name</label>
