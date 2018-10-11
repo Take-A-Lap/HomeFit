@@ -10,7 +10,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   
   constructor(private httpClient: HttpClient) { }
 
-  email = '';
+  email = 'Enter email';
   password = '';
   age = '';
   height = '';
@@ -19,8 +19,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
   push_ups = '';
   squats = '';
   miles = '';
-  username = '';
-  sex = '';
+  username = 'What name do you go by?';
+  sex = 'Enter sex';
 
   updateSex(e) {
     this.sex = e.options[e.selectedIndex].value;
@@ -66,18 +66,9 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.username = e.target.value;
   }
 
-  // params = {
-  //   age: this.age,
-  //   height: this.height,
-  //   weight: this.weight,
-  //   goals: this.goals,
-  //   push_ups: this.push_ups,
-  //   squats: this.squats,
-  //   miles: this.miles
-  // }
-
   addUser() {
-    this.httpClient.post('/personalInfo', {
+    let user;
+    this.httpClient.post('/signUp', {
       params: {
         weight: this.weight,
         push_ups: this.push_ups,
@@ -87,16 +78,22 @@ export class SettingsPersonalInfoComponent implements OnInit {
         height: this.height,
         squats: this.squats,
         goals: this.goals,
-        email: this.email,
-        userName: this.username,
+        email: this.email === 'Enter email' ? '' : this.email,
+        userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
       }
+    
+    }).subscribe()
+    this.httpClient.get('/signupWO', {
+      params: {
+        email: this.email
+      }
     })
-      .subscribe(
-        (data:any) => {
-          console.log(data);
-        }
-      )
+    .subscribe(
+      (data:any) => {
+        user = data;
+      }
+    )
   }
   
 

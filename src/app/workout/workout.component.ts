@@ -3,7 +3,8 @@ import { Workout } from '../workout';
 import { WORKOUT, CARDIO } from '../mock-workout';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { WorkoutService } from '../workout.service';
 @Component({
   selector: 'app-workout',
   templateUrl: 'workout.component.html',
@@ -16,8 +17,9 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 export class WorkoutComponent implements OnInit {
 
   
+  userID;
   masterIndex = 0;
-  exercises = WORKOUT;  
+  exercises;  
   index = 0;
   exercise = WORKOUT[this.index];
   completed = '';
@@ -29,11 +31,9 @@ export class WorkoutComponent implements OnInit {
   
   constructor(
     private sanitizer: DomSanitizer, 
-    private router: Router
+    private router: Router,
+    private workoutService: WorkoutService,
     ) { }
-  // sanitizeAndEmbedURL(link){
-    //   this.sanitizer.bypassSecurityTrustUrl(link);
-    // }
     
     plus(){
       let repIncrement = setInterval(() => {
@@ -69,11 +69,18 @@ export class WorkoutComponent implements OnInit {
             // this.index = 0;
             // this.exercise = CARDIO[this.index];
           }
-
         }
       }, (4500 + 10*this.exercise.rep_time));
     }
     
+    getRegimen() {
+      return this.workoutService.getRegimenFromDB(this.userID)
+      .subscribe(regimen => {
+        this.exercises = regimen; 
+        console.log(this.exercises);
+      })
+    }
+
     workinDatBody(){
       this.plus();
       this.inc();
@@ -103,6 +110,7 @@ export class WorkoutComponent implements OnInit {
     
     ngOnInit() {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-}
+      this.getRegimen();      
+    }
 
 }
