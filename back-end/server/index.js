@@ -163,7 +163,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             break;
           case 'AMAZON.HelpIntent':
             console.log(req.body.request.intent, "||||-----|||| this is the amazon help intent");
-            res.json(alexaHelp.PLACEHOLDER());
+            res.json(alexaHelp.help());
             break;
           case 'AMAZON.NavigateHomeIntent':
             console.log(req.body.request.intent, "||||-----|||| this is the amazon navigate home intent");
