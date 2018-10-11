@@ -75,6 +75,11 @@ module.exports = {
     WHERE id = $1
   `, [userId]),
 
+  getUserIdByEmail: (email) => db.any(`
+    SELECT id FROM users
+    WHERE user_email = $1
+  `, [email]),
+
   getExercisesFromExerciseWorkoutsByUserId: (userId) => db.any(`
     SELECT exercises FROM exercises_workouts
     WHERE id_user = $1
