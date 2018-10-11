@@ -10,7 +10,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   
   constructor(private httpClient: HttpClient) { }
 
-  email = '';
+  email = 'Enter email';
   password = '';
   age = '';
   height = '';
@@ -19,7 +19,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   push_ups = '';
   squats = '';
   miles = '';
-  username = '';
+  username = 'What name do you go by?';
   sex = '';
 
   updateSex(e) {
@@ -78,25 +78,22 @@ export class SettingsPersonalInfoComponent implements OnInit {
         height: this.height,
         squats: this.squats,
         goals: this.goals,
-        email: this.email,
-        userName: this.username,
+        email: this.email === 'Enter email' ? '' : this.email,
+        userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
       }
     
     }).subscribe()
-    let getClient = setInterval(()=>{
-      this.httpClient.get('/signupWO', {
-        params: {
-          email: this.email
-        }
-      })
-      .subscribe(
-        (data:any) => {
-          user = data;
-          clearInterval(getClient);
-        }
-      )
-    }, 200)
+    this.httpClient.get('/signupWO', {
+      params: {
+        email: this.email
+      }
+    })
+    .subscribe(
+      (data:any) => {
+        user = data;
+      }
+    )
   }
   
 
