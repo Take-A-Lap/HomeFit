@@ -84,19 +84,16 @@ export class SettingsPersonalInfoComponent implements OnInit {
       }
     
     }).subscribe()
-    let getClient = setInterval(()=>{
-      this.httpClient.get('/signupWO', {
-        params: {
-          email: this.email
-        }
-      })
-      .subscribe(
-        (data:any) => {
-          user = data;
-          clearInterval(getClient);
-        }
-      )
-    }, 200)
+    this.httpClient.get('/signupWO', {
+      params: {
+        email: this.email
+      }
+    })
+    .subscribe(
+      (data:any) => {
+        user = data;
+      }
+    )
   }
   
 
