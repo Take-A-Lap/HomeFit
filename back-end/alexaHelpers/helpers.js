@@ -136,6 +136,10 @@ module.exports = {
     return response;
   },
 
+  help: () => {
+    const speechOutput = "<p>If you want me to begin our workout together try says </p> <p> I would like to begin my workout </p"
+  },
+
   PLACEHOLDER: () => {
     const speechOutput = "This is a place holder for testing purposes";
     const response = buildResponse(speechOutput, false, "This is a test");
