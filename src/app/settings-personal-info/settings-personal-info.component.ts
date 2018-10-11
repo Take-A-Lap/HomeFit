@@ -66,16 +66,6 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.username = e.target.value;
   }
 
-  // params = {
-  //   age: this.age,
-  //   height: this.height,
-  //   weight: this.weight,
-  //   goals: this.goals,
-  //   push_ups: this.push_ups,
-  //   squats: this.squats,
-  //   miles: this.miles
-  // }
-
   addUser() {
     let user;
     this.httpClient.post('/signUp', {

@@ -205,7 +205,6 @@ module.exports = {
     clientWorkouts.forEach((wo)=>{
       jsonWorkouts.push(JSON.stringify(wo))
     })
-    db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(7, jsonWorkouts);
     callback(clientWorkouts)}, 3000);
   },
 
