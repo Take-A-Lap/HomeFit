@@ -137,7 +137,9 @@ module.exports = {
   },
 
   help: () => {
-    const speechOutput = "<p>If you want me to begin our workout together try says </p> <p> I would like to begin my workout </p"
+    const speechOutput = "<p>If you want me to begin our workout together try says </p> <p> I would like to begin my workout </p>";
+    const response = buildResponse(speechOutput, false, "How can I help?");
+    return response;
   },
 
   PLACEHOLDER: () => {
