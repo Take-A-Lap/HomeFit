@@ -291,6 +291,7 @@ app.get('/signupWO', (req,res)=>{
         clearInterval(addRegimen);
       }, 200)
       
+      
     })
   })
 })
