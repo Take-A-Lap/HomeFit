@@ -143,7 +143,7 @@ module.exports = {
   },
 
   PLACEHOLDER: () => {
-    const speechOutput = "This is a place holder for testing purposes";
+    const speechOutput = "<s>As this skill is currently in beta test mode,</s><s> some features are still being worked on.</s> Feel free to continue to use me for your workout needs while my developers continue to improve me.";
     const response = buildResponse(speechOutput, false, "This is a test");
     return response;
   }
