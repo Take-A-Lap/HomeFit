@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DietaryRestrictionsComponent } from '../dietary-restrictions/dietary-restrictions.component';
+import { UsernameService } from '../username.service';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -8,22 +8,21 @@ import { DietaryRestrictionsComponent } from '../dietary-restrictions/dietary-re
   styleUrls: ['./settings-personal-info.component.css']
 })
 export class SettingsPersonalInfoComponent implements OnInit {
-  
-  @ViewChild(DietaryRestrictionsComponent) child;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private data: UsernameService) { }
 
-  email = '';
-  password = '';
-  age = '';
-  height = '';
-  weight = '';
-  goals = '';
-  push_ups = '';
-  squats = '';
-  miles = '';
-  username = '';
-  sex = '';
+  email: string;
+  password: string;
+  age: string;
+  height: string;
+  weight: string;
+  goals: string;
+  push_ups: string;
+  squats: string;
+  miles: string;
+  username: string;
+  sex: string;
 
   updateSex(e) {
     this.sex = e.options[e.selectedIndex].value;
@@ -102,13 +101,17 @@ export class SettingsPersonalInfoComponent implements OnInit {
       )
   }
   
-  ngAfterViewInit() {
-    // this.user
-  }
+  // ngAfterViewInit() {
+  //   this.username = this.child.username;
+  // }
 
   ngOnInit() {
+    this.data.currentUsername.subscribe(username => this.username = username);
   }
 
+  newUsername() {
+    this.data.changeUsername(this.username);
+  }
 }
 
 
