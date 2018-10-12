@@ -4,7 +4,7 @@
     <div class="col-md-12">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/meals">Meals</a>
+          <a class="nav-link active" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/workout">Workout</a>
@@ -148,8 +148,12 @@
         </div>
       </ul> -->
       
-      <a routerLink="/dietaryRestrictions" >
-        <button type="button" class="btn btn-success" (click)="addUser()">Next</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <a routerLink="/dietaryRestrictions">
+        <button type="button" class="next_button" (click)="addUser()" (click)="newUsername()">Next</button>
       </a>
     </div>
   </div>

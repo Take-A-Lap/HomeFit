@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Cardio } from '../strength';
-// import { STRENGTH, CARDIO } from '../mock-strength';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
