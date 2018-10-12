@@ -62,9 +62,6 @@ export class WorkoutComponent implements OnInit {
           //AND THE DATE
           if (this.masterIndex > 7){
             this.router.navigate(['/home']);
-            // this.exercises = CARDIO;
-            // this.index = 0;
-            // this.exercise = CARDIO[this.index];
           }
         }
       }, (4500 + 10*this.exercise.rep_time));

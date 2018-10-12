@@ -203,7 +203,7 @@ app.use(bodyParser.urlencoded({
 //   res.redirect('localhost:3000/signup')
 // })
 
-app.get('/homeFitAuth', (req, res) => {
+app.get('/homeFitAuth*', (req, res) => {
   // console.log(req.query.email);
   db.getPasswordByEmail(req.query.email)
   .then(password=> res.send(password))
