@@ -12,8 +12,8 @@ import { WorkoutService } from '../workout.service';
 
 export class WorkoutComponent implements OnInit {
 
-  
-  userID;
+  id;
+  user;
   name;
   exercise;
   masterIndex = 0;
@@ -88,16 +88,23 @@ export class WorkoutComponent implements OnInit {
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
         // this.completed = 'Workout Complete';
-        this.workouts.shift();
-        // this.httpClient.post('/updateWorkouts', {
-        //   params: {
-        //     userID: '???',
-        //     WOs: this.workouts
-        //   }
-        // }).subscribe()
+        this.updateWorkout();
         this.home()
 
       }
+    }
+
+    updateWorkout(){
+      console.log(this.workout.length);
+      this.workouts.shift();
+      this.workout = this.workout;
+      console.log(this.workout.length);
+      this.httpClient.post('/updateWorkouts', {
+        params: {
+          userId: this.id,
+          WOs: this.workouts
+        }
+      }).subscribe();
     }
     
     testClick(){
@@ -115,6 +122,7 @@ export class WorkoutComponent implements OnInit {
     }
 
     getWorkoutInfo(){
+      this.getCookieInfo();
       this.httpClient.get('/getMyWorkOut', {
         params: {email: this.email}
       }).subscribe((workouts)=>{
@@ -136,18 +144,23 @@ export class WorkoutComponent implements OnInit {
     home(){
       this.router.navigate(['/home']);
     }
-    
+
     getUserInfo(){
+      this.getCookieInfo();
       this.httpClient.get('/getUser', { 
         params: { email: this.email }
-      }).subscribe();
+      }).subscribe(profile=>{
+        // console.log(profile.id);
+        this.user = profile
+        this.id = this.user.id;
+        // console.log(this.userID);
+      });
     }
 
-    ngOnInit() {
-      this.getCookieInfo();
-      this.getUserInfo();
-      this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+    ngOnInit() {        
       this.getWorkoutInfo();
+      this.getUserInfo();  
+      this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
         
     }
 

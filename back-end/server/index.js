@@ -41,7 +41,9 @@ app.get('/cornTest', (req, res) => {
     .catch((err) => console.error(err))
 })
 app.get('/getUser', (req, res) => {
-  console.log(req);
+  console.log(req.query.email);
+  db.getUserInfoByEmail(req.query.email)
+  .then(profile=>res.send(profile))
 })
 app.get('/homeFitAuth', (req, res) => {
   console.log(req);
@@ -59,8 +61,10 @@ app.get('/getMyWorkOut', (req,res)=>{
   })
 })
 app.post('/updateWorkouts', (req, res)=>{
-  console.log(req);
-  // db.updateWorkoutsByUserId()
+  console.log(req.body.params.userId);
+  db.updateWorkoutsByUserId(req.body.params.userId, req.body.params.WOs)
+  .then(()=>res.send('success'))
+  .catch(err=>console.error(err));
 })
 app.get('/weather', (req, res) => {
   weather.getWeather(body => {
