@@ -100,7 +100,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
                 current = workouts.splice(0, 1);
                 sets++;
               }
-            if(sets <= 3){
+              if(sets <= 3){
                 sets++;
               } else {
                 console.log('this should mean that current and sets have been reset')
@@ -109,7 +109,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
               }
               console.log(sets, " this should never be more than 3");
               // console.log(workouts, ' this should be one days worth of workouts the second one');
-              res.json(alexaHelp.coachExercise(current));
+              //TODO the set's are still not working will need to review the logs
+              res.json(alexaHelp.coachExercise(workouts.splice(0, 1)));
               return exerWork;
             })
             .then(exercises => {
@@ -124,6 +125,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             })
             .catch(err => {
               console.error(err);
+              res.json(alexaHelp.PLACEHOLDER());
             });
             break;
           case 'readWorkoutStatus':
