@@ -1,6 +1,6 @@
-import { Strength, Cardio } from './strength';
+import { Workout, Cardio } from './workout';
 
-export const STRENGTH: Strength[] = [
+export const WORKOUT: Workout[] = [
   {
     "id": 45,
     "name": "Cobra",

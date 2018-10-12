@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Strength } from '../strength';
-import { STRENGTH, CARDIO } from '../mock-strength';
+import { Workout } from '../workout';
+import { WORKOUT, CARDIO } from '../mock-workout';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WorkoutService } from '../workout.service';
 @Component({
-  selector: 'app-strength',
-  templateUrl: 'strength.component.html',
-  styleUrls: ['strength.component.css']
+  selector: 'app-workout',
+  templateUrl: 'workout.component.html',
+  styleUrls: ['workout.component.css']
 })
 
-export class StrengthComponent implements OnInit {
+// const exercise = [
+//   {},
+// ];
+export class WorkoutComponent implements OnInit {
+
   
   userID;
   name;
@@ -75,8 +79,8 @@ export class StrengthComponent implements OnInit {
     getRegimen() {
       return this.workoutService.getRegimenFromDB(this.userID)
       .subscribe(regimen => {
-        this.workouts = regimen; 
-        console.log(this.workouts);
+        this.exercise = regimen; 
+        console.log(this.exercise);
       })
     }
 
@@ -87,7 +91,7 @@ export class StrengthComponent implements OnInit {
     }
     
     switchExercise() {
-      console.log(STRENGTH.length)
+      console.log(WORKOUT.length)
       console.log(this.index);
       this.workout = this.workouts[this.index];
     }
@@ -134,6 +138,7 @@ export class StrengthComponent implements OnInit {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       this.getRegimen();  
       this.getWorkoutInfo();    
+      console.log(this.exercise)
     }
 
 }
