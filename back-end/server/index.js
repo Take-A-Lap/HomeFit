@@ -29,8 +29,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     // console.log(req.body, ' line 16 server index');
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
-    .then((userArr)=>{
-      const passingName = (userArr[0] ? userArr[0].name : "not linked yet");
+    .then((user)=>{
+      const passingName = (user ? user.name : "not linked yet");
       console.log(passingName, ' this should be a value or say not linked yet')
       res.json(alexaHelp.invocationIntent(passingName));
     })
@@ -53,20 +53,20 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         console.log(req.body.session.user.userId);
         
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
-        .then(userArr => {
-          // console.log(userArr, ' this needs to not be an empty array');
-          return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
+        .then(user => {
+          // console.log(user, ' this needs to not be an empty array');
+          return db.getExercisesFromExerciseWorkoutsByUserId(user.id)
         })
-        .then(exerWorkArr => {
-          // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json");
+        .then(exerWork => {
+          // console.log(exerWork[0].exercises.slice(0, 1), " the array of json");
           console.log(workouts, ' this should not be an empty array ----- workouts------');
-          workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
+          workouts = workouts.length > 0 ? workouts : [].concat(exerWork.exercises.splice(0, 1));
           if(workouts[0].length){
             workouts = workouts[0];
           }
           // console.log(workouts, ' this should be one days worth of workouts');
           res.json(alexaHelp.initWorkout(workouts[0], 8 - workouts.length));
-          return exerWorkArr[0];
+          return exerWork;
         })
         .then(exercises => {
           // this would be a good place to generate the workouts as they are being taken off
@@ -85,14 +85,14 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         case 'coachExercise':
             // console.log(workouts, ' line 97 this should be an array of objects');
           db.getUserInfoByAlexUserId(req.body.session.user.userId)
-            .then(userArr => {
+            .then(user => {
               // console.log(userArr, ' this needs to not be an empty array');
-              return db.getExercisesFromExerciseWorkoutsByUserId(userArr[0].id)
+              return db.getExercisesFromExerciseWorkoutsByUserId(user.id)
             })
-            .then(exerWorkArr => {
-              // console.log(exerWorkArr[0].exercises.slice(0, 1), " the array of json the second one");
+            .then(exerWork => {
+              // console.log(exerWork[0].exercises.slice(0, 1), " the array of json the second one");
               console.log(workouts, ' this should equal workouts from above')
-              workouts = workouts.length > 0 ? workouts : [].concat(exerWorkArr[0].exercises.splice(0, 1));
+              workouts = workouts.length > 0 ? workouts : [].concat(exerWork.exercises.splice(0, 1));
               if (workouts[0].length) {
                 workouts = workouts[0];
               }
@@ -110,7 +110,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
               console.log(sets, " this should never be more than 3");
               // console.log(workouts, ' this should be one days worth of workouts the second one');
               res.json(alexaHelp.coachExercise(current));
-              return exerWorkArr[0];
+              return exerWork;
             })
             .then(exercises => {
               // this would be a good place to generate the workouts as they are being taken off
@@ -155,7 +155,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             break;
           case 'AMAZON.HelpIntent':
             console.log(req.body.request.intent, "||||-----|||| this is the amazon help intent");
-            res.json(alexaHelp.PLACEHOLDER());
+            res.json(alexaHelp.help());
             break;
           case 'AMAZON.NavigateHomeIntent':
             console.log(req.body.request.intent, "||||-----|||| this is the amazon navigate home intent");
@@ -187,24 +187,46 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.get('/home', (req, res) => {
-  res.redirect('localhost:81/signup')
+// app.get('/home', (req, res) => {
+//   res.redirect('localhost:3000/signup')
+// })
+
+// app.get('/personalInfo', (req, res) => {
+//   res.redirect('localhost:3000/signup')
+// })
+
+app.get('/homeFitAuth', (req, res) => {
+  // console.log(req.query.email);
+  db.getPasswordByEmail(req.query.email)
+  .then(password=> res.send(password))
 })
 
-app.get('/personalInfo', (req, res) => {
-  res.redirect('localhost:81/signup')
-})
+app.get('/getMyWorkOut', (req,res)=>{
+  console.log(req.query.email);
+  db.getUserIdByEmail(req.query.email)
+  .then((id)=>{
+    console.log(id.id);
+    db.getWorkoutsByUserID(id.id)
+    .then((workouts) => {
+      chorl = workouts[0].exercises
+      res.send(chorl)
+    })
+  })
+  
 
+})
 //api call for weather
 app.get('/weather', (req, res) => {
   weather.getWeather(body => {
     const parsedBody = JSON.parse(body);
+    console.log(parsedBody)
     const weather = {
       text: parsedBody[0].WeatherText,
       city: 'New Orleans',
       state: 'LA',
       celsius: parsedBody[0].Temperature.Metric.Value,
-      fahrenheit: parsedBody[0].Temperature.Imperial.Value
+      fahrenheit: parsedBody[0].Temperature.Imperial.Value,
+      isDayTime: parsedBody[0].IsDayTime
     }
     res.send(weather);
   })
@@ -268,21 +290,25 @@ app.get('/lunch', (req,res) => {
     res.send(lunchRecipes);
   })
 })
-app.get('/signupWO', (req,res) => {
-  let regimen;
-  let user;
-  db.getUserInfoByEmail(req.query.email)
-  .then((data)=>{
-    user = data;
-    console.log(Array.isArray(user));
-    workout.generateWorkoutSignUp(3, (workout) => {
-      regimen = workout;
-      console.log(user);
-      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user[0].id, regimen);
-    })
+app.get('/signupWO', (req,res)=>{
+  return Promise.all([
+    db.getUs, 
+    workout.generateWorkoutSignUp(3)
+  ])
+  .then(([user, regimen])=>{
+      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, regimen);
   })
+  .catch((err)=>{
+    console.error(err);
+  });
 })
-
+app.get('/cornTest', (req,res)=>{
+  workout.generateWorkoutBack(3)
+  .then(result => {
+    res.send(result);
+  })
+  .catch((err)=>console.error(err))
+})
 app.get('/breakfast', (req, res) => {
   let meals = [];
   let breakfastResponse = [];
@@ -354,17 +380,27 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
-  console.log(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
+  console.log(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password);
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
-  .then()
-  .catch((err) => {
-    console.error(err);
-  });
+  .then(()=>{
+    return Promise.all([db.getUserIdByEmail(email), workout.generateWorkoutSignUp(squatComf)])
+      .catch(err=>console.error(err));
+  })
+  .then(([user,regimen])=> {
+    const ins = [];
+    regimen.forEach(exer=>{
+      ins.push(JSON.stringify(exer))
+    })
+    db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
+  })
+  .catch(err=>console.error(err));
   res.end();
 });
 
+
+
+
 const port = 3000;
-// const port = 81;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
   app.keepAliveTimeout = 0;

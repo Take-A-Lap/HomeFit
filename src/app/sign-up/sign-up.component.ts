@@ -9,14 +9,16 @@ import {
 @Component({
   selector: 'app-sign-up',
   templateUrl: './signUp.component.html',
-  styles: [/*'./signin.component.css'*/]
+  styleUrls: ['./signin.component.css']
 })
 export class SignUpComponent implements OnInit {
 
   constructor(private router: Router, private socialAuthService: AuthService) { }
 
   onSignIn() {
-    
+  }
+  printWindow(){
+    console.log(this);
   }
 
   socialSignIn(/*socialPlatform: string*/) {
@@ -42,7 +44,9 @@ export class SignUpComponent implements OnInit {
   changePage() {
     this.router.navigate(['/home']);
   }
-  
+  login(){
+    this.router.navigate(['/login']);
+  }
   ngOnInit() {
   }
 

@@ -11,8 +11,8 @@ import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-home-component',
-  templateUrl: 'home2.component.html',
-  styleUrls: ['home2.component.css']
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
 
@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
   meals2 = [];
   meals3 = [];
   currentWeather = [];
-  time = 0;
+  time: number;
+  timeStamp: Date;
 
   constructor(
     private foodService: FoodService,
@@ -28,9 +29,11 @@ export class HomeComponent implements OnInit {
     private router: Router) { }
 
   getWeather() {
+    this.timeStamp = new Date();
     return this.weatherService.getWeather()
       .subscribe(currWeather => {
-        this.currentWeather.push(currWeather)
+        this.currentWeather.push(currWeather, this.timeStamp.toString())
+        console.log(this.currentWeather[1])
       })  
   }
   
@@ -42,6 +45,7 @@ export class HomeComponent implements OnInit {
         console.log(this.meals);
       })
   }
+
   getLunch() {
     this.meals = [];
     return this.foodService.getLunch()
@@ -66,7 +70,14 @@ export class HomeComponent implements OnInit {
     this.time = d.getHours();
   }
 
-  displayMeal() {
+  testClick(){
+    let cookie = document.cookie;
+    let emailArr = cookie.split('=')
+    let email = emailArr[1]
+    console.log(email);
+  }
+
+  displayMeal(){
     this.getTime();
     if (this.time >= 21 || this.time < 11) {
       this.getBreakfast();

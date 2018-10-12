@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UsernameService } from '../username.service';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -7,20 +8,21 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./settings-personal-info.component.css']
 })
 export class SettingsPersonalInfoComponent implements OnInit {
-  
-  constructor(private httpClient: HttpClient) { }
 
-  email = 'Enter email';
-  password = '';
-  age = '';
-  height = '';
-  weight = '';
-  goals = '';
-  push_ups = '';
-  squats = '';
-  miles = '';
-  username = 'What name do you go by?';
-  sex = '';
+  constructor(private httpClient: HttpClient,
+              private data: UsernameService) { }
+
+  email: string;
+  password: string;
+  age: string;
+  height: string;
+  weight: string;
+  goals: string;
+  push_ups: string;
+  squats: string;
+  miles: string;
+  username: string;
+  sex: string;
 
   updateSex(e) {
     this.sex = e.options[e.selectedIndex].value;
@@ -84,22 +86,19 @@ export class SettingsPersonalInfoComponent implements OnInit {
       }
     
     }).subscribe()
-    this.httpClient.get('/signupWO', {
-      params: {
-        email: this.email
-      }
-    })
-    .subscribe(
-      (data:any) => {
-        user = data;
-      }
-    )
   }
   
+  // ngAfterViewInit() {
+  //   this.username = this.child.username;
+  // }
 
   ngOnInit() {
+    this.data.currentUsername.subscribe(username => this.username = username);
   }
 
+  newUsername() {
+    this.data.changeUsername(this.username);
+  }
 }
 
 
