@@ -4,8 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { IImage } from 'ng-simple-slideshow';
 import { FoodService } from '../food/food.service';
 import { WeatherService } from '../weather.service';
 
@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
         this.meals.push(breakfastFood)
+        console.log(this.meals);
       })
   }
   getLunch() {
@@ -47,27 +48,29 @@ export class HomeComponent implements OnInit {
       .subscribe(lunchFood => {
         // console.log(Array.isArray(lunchFood), lunchFood);
         this.meals.push(lunchFood);
-        // console.log('we got lunchFood', this.meals);
+        console.log('we got lunchFood', this.meals);
       })
   }
   getDinner() {
+    console.log('Getting Dinner');
     this.meals = [];
     return this.foodService.getDinner()
       .subscribe(dinnerFood => {
         this.meals.push(dinnerFood);
-      })
+        console.log(this.meals);
+      });
   }
 
-  getTime(){
+  getTime() {
     let d = new Date();
     this.time = d.getHours();
   }
 
-  displayMeal(){
+  displayMeal() {
     this.getTime();
-    if(this.time >= 21 || this.time < 10){
+    if (this.time >= 21 || this.time < 11) {
       this.getBreakfast();
-    } else if(this.time >= 10 && this.time < 14){
+    } else if (this.time > 10 && this.time < 14) {
       this.getLunch();
     } else {
       this.getDinner();

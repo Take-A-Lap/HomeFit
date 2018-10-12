@@ -210,7 +210,7 @@ app.get('/weather', (req, res) => {
   })
 })
 
-app.get('/dinner', (req,res)=>{
+app.get('/dinner', (req,res)=> {
   let meals = [];
   let dinnerResponse = [];
   meal.getChicken(300, 700, "alcohol-free", (meal) => {
@@ -247,6 +247,7 @@ app.get('/dinner', (req,res)=>{
       dinnerResponse.push(array[randomNumber]);
     });
   }
+
   meal.getSteak(300, 700, "alcohol-free", (meal) => {
     let result = JSON.parse(meal);
     let recipes = result.hits;
@@ -254,18 +255,20 @@ app.get('/dinner', (req,res)=>{
       meals.push(recipe);
     });
     generateSeven(meals);
+    dinnerResponse = dinnerResponse.map(dinner => dinner.recipe)
     res.send(dinnerResponse);
-  })
-})
-app.get('/lunch', (req,res)=>{
+  });
+});
+
+app.get('/lunch', (req,res) => {
   let lunchRecipes = [];
-  meal.getLunch(0,500,"alcohol-free", (meals)=>{
+  meal.getLunch(0,500,"alcohol-free", (meals) => {
     let result = JSON.parse(meals);
     meal.generateSeven(result.hits, lunchRecipes);
     res.send(lunchRecipes);
   })
 })
-app.get('/signupWO', (req,res)=>{
+app.get('/signupWO', (req,res) => {
   let regimen;
   let user;
   db.getUserInfoByEmail(req.query.email)

@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BreakfastComponent } from './breakfast/breakfast.component';
 import { FormsModule } from '@angular/forms';
 import { MealsComponent } from './meals/meals.component';
+import {SlideshowModule} from 'ng-simple-slideshow';
+
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -59,7 +61,8 @@ export function getAuthServiceConfigs() {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SlideshowModule
   ],
   providers: [
     FoodService,
