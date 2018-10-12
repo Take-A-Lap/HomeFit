@@ -10,6 +10,7 @@ export class DietaryRestrictionsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('theta')
   }
 
 }

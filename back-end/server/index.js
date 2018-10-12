@@ -196,11 +196,17 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/home', (req, res) => {
-  res.redirect('localhost:3000/signup')
+  res.redirect('/signup')
 })
 
 app.get('/personalInfo', (req, res) => {
-  res.redirect('localhost:3000/signup')
+  res.redirect('/signup')
+})
+
+app.get('/homeFitAuth', (req, res) => {
+  // console.log(req.query.email);
+  db.getPasswordByEmail(req.query.email)
+  .then(password=> res.send(password))
 })
 
 //api call for weather
@@ -381,6 +387,7 @@ app.post('/signUp', (req, res) =>{
 });
 
 const port = 81;
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
   app.keepAliveTimeout = 0;
