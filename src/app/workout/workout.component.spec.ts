@@ -1,28 +1,29 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { Component } from './workout.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// describe('StrengthComponent', () => {
-//   let component: StrengthComponent;
-//   let fixture: ComponentFixture<StrengthComponent>;
+import { WorkoutComponent } from './workout.component';
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ StrengthComponent ]
-//     })
-//     .compileComponents();
-//   }));
+describe('WorkoutComponent', () => {
+  let component: WorkoutComponent;
+  let fixture: ComponentFixture<WorkoutComponent>;
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(StrengthComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ WorkoutComponent ]
+    })
+    .compileComponents();
+  }));
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(WorkoutComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
 
 // const sum = require("../../../sum");
 // test('adds 1 + 2 to equal 3', () => {

@@ -9,7 +9,9 @@ import { WorkoutService } from '../workout.service';
   styleUrls: ['workout.component.css']
 })
 
+
 export class WorkoutComponent implements OnInit {
+
   
   userID;
   name;
@@ -70,8 +72,8 @@ export class WorkoutComponent implements OnInit {
     getRegimen() {
       return this.workoutService.getRegimenFromDB(this.userID)
       .subscribe(regimen => {
-        this.workouts = regimen; 
-        console.log(this.workouts);
+        this.exercise = regimen; 
+        console.log(this.exercise);
       })
     }
 
@@ -116,7 +118,6 @@ export class WorkoutComponent implements OnInit {
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
         this.name = this.exercise.name;
-        console.log(this.exercise);
       });
     }
 
