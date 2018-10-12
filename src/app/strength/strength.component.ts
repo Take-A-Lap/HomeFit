@@ -118,11 +118,12 @@ export class StrengthComponent implements OnInit {
         params: {email: email}
       }).subscribe((workouts)=>{
         this.workouts = workouts;
-        this.workout = workouts[0]
+        this.workout = workouts[0];
         this.exercise = this.workout[this.index];
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
         this.name = this.exercise.name;
+        console.log(this.exercise);
       });
     }
 
@@ -133,7 +134,7 @@ export class StrengthComponent implements OnInit {
     ngOnInit() {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       this.getRegimen();  
-      this.getWorkoutInfo();    
+      this.getWorkoutInfo();  
     }
 
 }
