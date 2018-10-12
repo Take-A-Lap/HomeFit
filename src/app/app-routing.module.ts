@@ -8,7 +8,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
 import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
 import { WorkoutComponent } from './workout/workout.component';
-import { CardioComponent } from './cardio/cardio.component';
 import { MealsComponent } from './meals/meals.component';
 import { LoginComponent } from './login/login.component'
 
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: 'personalInfo', component: SettingsPersonalInfoComponent},
   { path: 'dietaryRestrictions', component: DietaryRestrictionsComponent},
   { path: 'workout', component: WorkoutComponent},
-  { path: 'cardioWorkout', component: CardioComponent},
   { path: 'meals', component: MealsComponent},
   { path: 'login', component: LoginComponent},
   { path: "**", component: ErrorComponent}
@@ -42,7 +40,6 @@ export const routingComponents = [
   SettingsPersonalInfoComponent, 
   DietaryRestrictionsComponent,
   WorkoutComponent,
-  CardioComponent,
   MealsComponent,
   ErrorComponent,
   LoginComponent
