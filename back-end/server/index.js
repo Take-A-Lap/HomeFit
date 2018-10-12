@@ -36,6 +36,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      res.json(alexaHelp.PLACEHOLDER());
     });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     // console.log('SESSION ENDED');
@@ -80,6 +81,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER());
           });
           break;
         case 'coachExercise':
@@ -138,11 +140,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             db.updateAlexaId(link, req.body.session.user.userId)
             .then(() => {
               console.log('successful update to user');
+              res.json(alexaHelp.linkAccount(link));
             })
             .catch(err => {
               console.error(err);
+              res.json(alexaHelp.PLACEHOLDER());
             })
-            res.json(alexaHelp.linkAccount(link));
             break;
           case 'changeView':
             let view = req.body.request.intent.slots.view.value;
@@ -302,7 +305,7 @@ app.get('/signupWO', (req,res)=>{
   });
 })
 app.get('/cornTest', (req,res)=>{
-  workout.generateWorkoutSignUp(3)
+  workout.generateWorkoutBack(3)
   .then(result => {
     res.send(result);
   })
