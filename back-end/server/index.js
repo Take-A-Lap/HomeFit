@@ -210,8 +210,6 @@ app.get('/getMyWorkOut', (req,res)=>{
       res.send(chorl)
     })
   })
-  
-
 })
 //api call for weather
 app.get('/weather', (req, res) => {
