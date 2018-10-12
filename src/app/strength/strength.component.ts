@@ -14,6 +14,7 @@ import { WorkoutService } from '../workout.service';
 export class StrengthComponent implements OnInit {
   
   userID;
+  name;
   exercise;
   masterIndex = 0;
   workouts;
@@ -121,6 +122,7 @@ export class StrengthComponent implements OnInit {
         this.exercise = this.workout[this.index];
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+        this.name = this.exercise.name;
       });
     }
 
