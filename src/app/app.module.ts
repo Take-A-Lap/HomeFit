@@ -14,7 +14,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
 import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
 import { WorkoutComponent } from './workout/workout.component';
-import { CardioComponent } from './cardio/cardio.component';
 import { FoodService } from './food/food.service';
 import { WindowRef } from './window-ref';
 import { HttpClientModule } from '@angular/common/http';
@@ -51,7 +50,6 @@ export function getAuthServiceConfigs() {
     SettingsPersonalInfoComponent,
     DietaryRestrictionsComponent,
     WorkoutComponent,
-    CardioComponent,
     BreakfastComponent,
     MealsComponent,
     LoginComponent
