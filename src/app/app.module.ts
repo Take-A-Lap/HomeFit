@@ -13,7 +13,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsPersonalInfoComponent } from './settings-personal-info/settings-personal-info.component';
 import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-restrictions.component';
-import { StrengthComponent } from './strength/strength.component';
+import { WorkoutComponent } from './workout/workout.component';
 import { CardioComponent } from './cardio/cardio.component';
 import { FoodService } from './food/food.service';
 import { WindowRef } from './window-ref';
@@ -22,6 +22,7 @@ import { BreakfastComponent } from './breakfast/breakfast.component';
 import { FormsModule } from '@angular/forms';
 import { MealsComponent } from './meals/meals.component';
 import { LoginComponent } from './login/login.component'
+import { UsernameService } from './username.service';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -50,7 +51,7 @@ export function getAuthServiceConfigs() {
     SignUpComponent,
     SettingsPersonalInfoComponent,
     DietaryRestrictionsComponent,
-    StrengthComponent,
+    WorkoutComponent,
     CardioComponent,
     BreakfastComponent,
     MealsComponent,
@@ -65,6 +66,7 @@ export function getAuthServiceConfigs() {
   ],
   providers: [
     FoodService,
+    UsernameService,
     {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs},
     WindowRef
   ],

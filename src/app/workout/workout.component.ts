@@ -1,31 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { Strength } from '../strength';
-import { STRENGTH, CARDIO } from '../mock-strength';
+import { Workout } from '../workout';
+import { WORKOUT, CARDIO } from '../mock-workout';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WorkoutService } from '../workout.service';
 @Component({
-  selector: 'app-strength',
-  templateUrl: 'strength.component.html',
-  styleUrls: ['strength.component.css']
+  selector: 'app-workout',
+  templateUrl: 'workout.component.html',
+  styleUrls: ['workout.component.css']
 })
 
-export class StrengthComponent implements OnInit {
+// const exercise = [
+//   {},
+// ];
+export class WorkoutComponent implements OnInit {
+
   
   userID;
+  name;
+  exercise;
   masterIndex = 0;
   workouts;
   index = 0;
-  workout = this.workouts[this.index];
+  workout = '';
   completed = '';
   rep = 0;
   set = 1;
   
-  youtube = this.workout.youtube_link
+  youtube = ''
   trustedUrl: SafeUrl;
   
   constructor(
+    private httpClient: HttpClient,
     private sanitizer: DomSanitizer, 
     private router: Router,
     private workoutService: WorkoutService,
@@ -40,7 +47,7 @@ export class StrengthComponent implements OnInit {
           this.rep = 0;
           this.set++;
         }
-      }, this.workout.rep_time)
+      }, this.exercise.rep_time)
     }
     
     switchRep() {
@@ -66,14 +73,14 @@ export class StrengthComponent implements OnInit {
             // this.exercise = CARDIO[this.index];
           }
         }
-      }, (4500 + 10*this.workout.rep_time));
+      }, (4500 + 10*this.exercise.rep_time));
     }
     
     getRegimen() {
       return this.workoutService.getRegimenFromDB(this.userID)
       .subscribe(regimen => {
-        this.workouts = regimen; 
-        console.log(this.workouts);
+        this.exercise = regimen; 
+        console.log(this.exercise);
       })
     }
 
@@ -84,7 +91,7 @@ export class StrengthComponent implements OnInit {
     }
     
     switchExercise() {
-      console.log(STRENGTH.length)
+      console.log(WORKOUT.length)
       console.log(this.index);
       this.workout = this.workouts[this.index];
     }
@@ -93,20 +100,45 @@ export class StrengthComponent implements OnInit {
       this.index++;
       if (this.index < 8) {
         this.switchExercise();
-        this.youtube = this.workout.youtube_link;
+        this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
         // this.completed = 'Workout Complete';
       }
     }
     
+    testClick(){
+      let cookie = document.cookie;
+      let emailArr = cookie.split('=')
+      let email = emailArr[1]
+      console.log(email);
+    }
+
+    getWorkoutInfo(){
+      let cookie = document.cookie;
+      let emailArr = cookie.split('=')
+      let email = emailArr[1]
+      this.httpClient.get('/getMyWorkOut', {
+        params: {email: email}
+      }).subscribe((workouts)=>{
+        this.workouts = workouts;
+        this.workout = workouts[0]
+        this.exercise = this.workout[this.index];
+        this.youtube = this.exercise.youtube_link;
+        this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+        this.name = this.exercise.name;
+      });
+    }
+
     home(){
       this.router.navigate(['/home']);
     }
     
     ngOnInit() {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-      this.getRegimen();      
+      this.getRegimen();  
+      this.getWorkoutInfo();    
+      console.log(this.exercise)
     }
 
 }

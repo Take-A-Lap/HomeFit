@@ -1,4 +1,4 @@
-export class Strength {
+export class Workout {
   id: number;
   name: string;
   rep_time: number;
@@ -14,8 +14,4 @@ export class Cardio {
   youtube_link: string;
   id_muscle_group: number;
   difficulty: number;
-}
-
-export class Workout {
-  
 }

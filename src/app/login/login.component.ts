@@ -31,15 +31,13 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(){
-    console.log(this.email, this.password)
-    const email = this.email;
-    const password = this.password;
     this.httpClient.get('/homeFitAuth', {
       params: { email: this.email }
     }).subscribe(password=>{
       const value = Object.values(password)
        console.log(value[0]);
       if(value[0] === this.password){
+        document.cookie = `homeFit=${this.email}`;
         this.goHome();
       } else {
         this.joinUs();
