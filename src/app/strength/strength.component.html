@@ -21,22 +21,18 @@
     <div class="row">
       <div class="col-md-6">
         <div class="media">
-          <img src="../../assets/img/alexa.jpeg" alt="Alexa photo">
+          <iframe class="video" [src]="youtube" ng-if="youtube"></iframe>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div>
-            <p>
-              I'm Alexa, I'll be your personal trainer today.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div>
-            <h3>{{exercise.name}}</h3>
+            <h3 nf-if="name">{{name}}</h3>
           </div>
         </div>
       </div>
@@ -78,9 +74,14 @@
   <div class="row">
     <div class="col-md-12">
       <div class="media">
-        <iframe class="video" [src]="trustedUrl"></iframe>
+        <img src="../../assets/img/alexa.jpeg" alt="Alexa photo">
       </div>
-      <h3>{{exercise.name}}</h3>
+      <div>
+        <p>
+          I'm Alexa, I'll be your personal trainer today.
+        </p>
+      </div>
+      <!-- <h3>{{exercise.name}}</h3> -->
       <!-- <button (click)="increment()">Next Exercise</button> -->
     </div>
   </div>
