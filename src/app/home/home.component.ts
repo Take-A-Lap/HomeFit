@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
         this.meals.push(breakfastFood)
       })
   }
+
   getLunch() {
     this.meals = [];
     return this.foodService.getLunch()
@@ -64,6 +65,13 @@ export class HomeComponent implements OnInit {
   getTime(){
     let d = new Date();
     this.time = d.getHours();
+  }
+
+  testClick(){
+    let cookie = document.cookie;
+    let emailArr = cookie.split('=')
+    let email = emailArr[1]
+    console.log(email);
   }
 
   displayMeal(){

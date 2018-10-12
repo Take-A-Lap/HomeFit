@@ -3,29 +3,34 @@
     <div class="col-md-12">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/home">Home</a>
+          <a class="nav-link active" routerLink="/meals">Meals</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/workout">Workout</a>
+          <a class="nav-link" routerLink="/strengthWorkout">Workout</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/personalInfo" (click)="onSubmit()">Settings</a>
+          <a class="nav-link" routerLink="/personalInfo">Settings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Logout</a>
+          <a class="nav-link" >Logout</a>
+        </li>
+        <li>
+          <button class="test" id="test-buttton" (click)="testClick()">Test</button>
         </li>
       </ul>
-      <div class="jumbotron">
-        <p>
-          Fri Oct 12 2018 00:53
-          <!-- {{currentWeather[1].slice(0, 24)}} -->
-          Current Weather: 
-          New Orleans, LA 72˚ Clear}
-          <!-- New Orleans, LA {{currentWeather[0].fahrenheit}}˚ {{currentWeather[0].text}} -->
-        </p>
+      <!-- <div class="btn-group" role="group">
+        <button class="btn" type="button">Meals</button>
+        <button class="btn" type="button">Workout</button>
+        <button class="btn" type="button">Settings</button>
+        <button class="btn" type="button">Logout</button>
+      </div> -->
+      
+      <p>
+        Current Weather: New Orleans, LA 75˚ Partly Sunny
+      </p>
+      <img src="../../assets/img/new_orleans_placeholder.jpg">
     </div>
   </div>
-</div>
   <div class="row">
     <div class="col-md-12">
       <table class="table" cellpadding="15">
