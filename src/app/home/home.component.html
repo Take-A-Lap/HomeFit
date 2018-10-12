@@ -1,33 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/workout">Workout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/personalInfo" (click)="onSubmit()">Settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">Logout</a>
-        </li>
-      </ul>
-      <div class="jumbotron">
-        <p>
-          Fri Oct 12 2018 00:53
-          <!-- {{currentWeather[1].slice(0, 24)}} -->
-          Current Weather: 
-          New Orleans, LA 72˚ Clear
-          <!-- New Orleans, LA {{currentWeather[0].fahrenheit}}˚ {{currentWeather[0].text}} -->
-        </p>
-    </div>
-  </div>
-</div>
-  <div class="row">
-    <div class="col-md-12">
+      <div class="btn-group" role="group">
+        <a routerLink="/workout"><button class="nav-buttons" type="button">Workout</button></a>
+        <button class="nav-buttons" type="button" (click)="onSubmit()">Settings</button>
+        <a routerLink="/"><button class="nav-buttons" type="button">Logout</button></a>
+      </div>
+      <div class="media">
+        <div class="imageContainer">
+          Current Weather: {{currentWeather[0].city}}, LA {{currentWeather[0].fahrenheit}}˚ {{currentWeather[0].text}}
+          <img alt="Location pic" src="../../assets/img/new_orleans_placeholder.jpg" />
+        </div>
+      </div>
       <table class="table" cellpadding="15">
         <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <thead>

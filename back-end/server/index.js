@@ -301,7 +301,7 @@ app.get('/signupWO', (req,res)=>{
   });
 })
 app.get('/cornTest', (req,res)=>{
-  workout.generateWorkoutBack(3)
+  workout.generateWorkoutSignUp(3)
   .then(result => {
     res.send(result);
   })

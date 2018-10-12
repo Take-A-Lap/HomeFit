@@ -187,6 +187,7 @@ module.exports = {
 
   generateWorkoutLeg: function(difficulty){
     return Promise.all([generateQuadExercises(difficulty), generateLegExercises(difficulty), generateTwoAbExercises(difficulty)])
+      .then(results => results.reduce((final, curr) => final.concat(curr)))
       .catch((err)=>{
         console.error(err)
       })
@@ -194,6 +195,7 @@ module.exports = {
 
   generateWorkoutBack: function(difficulty){
     return Promise.all([generateBackExercises(difficulty), generateBackArmExercises(difficulty), generateTwoAbExercises(difficulty)])
+      .then(results => results.reduce((final, curr) => final.concat(curr)))
       .catch((err) => {
         console.error(err)
       })
@@ -201,6 +203,7 @@ module.exports = {
 
   generateWorkoutChest: function(difficulty){
     return Promise.all([generateChestExercises(difficulty), generateTricepExercises(difficulty), generateTwoAbExercises(difficulty)])
+      .then(results => results.reduce((final, curr) => final.concat(curr)))
       .catch((err) => {
         console.error(err)
       })
@@ -208,12 +211,13 @@ module.exports = {
 
   generateWorkoutCardio: function(difficulty){
     return Promise.all([generateCardioExercises(difficulty), generateThreeAbExercises(difficulty)])
-      .catch(err=>console.error(err));
+    .then(results=>results.reduce((final,curr)=>final.concat(curr)))  
+    .catch(err=>console.error(err));
   },
 
   generateWorkoutSignUp: function(difficulty){
     return Promise.all([this.generateWorkoutChest(difficulty), this.generateWorkoutCardio(difficulty), this.generateWorkoutLeg(difficulty), this.generateWorkoutCardio(difficulty), this.generateWorkoutBack(difficulty), this.generateWorkoutCardio(difficulty)])
-      .catch(err=>console.error(err));
+    .catch(err=>console.error(err));
   },
 
   generateNextWorkout: function(difficulty){}
