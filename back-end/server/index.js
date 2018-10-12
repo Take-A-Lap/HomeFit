@@ -36,6 +36,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     })
     .catch(err => {
       console.error(err);
+      res.json(alexaHelp.PLACEHOLDER());
     });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     // console.log('SESSION ENDED');
@@ -80,6 +81,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER());
           });
           break;
         case 'coachExercise':
@@ -100,7 +102,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
                 current = workouts.splice(0, 1);
                 sets++;
               }
-            if(sets <= 3){
+              if(sets <= 3){
                 sets++;
               } else {
                 console.log('this should mean that current and sets have been reset')
@@ -109,7 +111,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
               }
               console.log(sets, " this should never be more than 3");
               // console.log(workouts, ' this should be one days worth of workouts the second one');
-              res.json(alexaHelp.coachExercise(current));
+              //TODO the set's are still not working will need to review the logs
+              res.json(alexaHelp.coachExercise(workouts.splice(0, 1)));
               return exerWork;
             })
             .then(exercises => {
@@ -124,6 +127,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             })
             .catch(err => {
               console.error(err);
+              res.json(alexaHelp.PLACEHOLDER());
             });
             break;
           case 'readWorkoutStatus':
@@ -136,11 +140,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             db.updateAlexaId(link, req.body.session.user.userId)
             .then(() => {
               console.log('successful update to user');
+              res.json(alexaHelp.linkAccount(link));
             })
             .catch(err => {
               console.error(err);
+              res.json(alexaHelp.PLACEHOLDER());
             })
-            res.json(alexaHelp.linkAccount(link));
             break;
           case 'changeView':
             let view = req.body.request.intent.slots.view.value;
@@ -298,6 +303,7 @@ app.get('/signupWO', (req,res)=>{
 app.get('/cornTest', (req,res)=>{
   // workout.generateWorkoutSignUp(3)
   db.getExercisesFromExerciseWorkoutsByUserId(81)
+
   .then(result => {
     res.send(result);
   })
