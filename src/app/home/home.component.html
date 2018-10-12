@@ -83,7 +83,7 @@
       </div>
     </div>
   </div> -->
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12">
       <div id="home-page-slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -137,5 +137,19 @@
           <span class="sr-only">Next</span></a>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        {{meals[0][0].recipe.label}}
+      </div>
+      <slideshow 
+        [imageUrls]=mappedMeals
+        [height]="height"
+        [minHeight]="'200px'"
+      ></slideshow>
+    </div>
+  </div>  
+
 </div>
