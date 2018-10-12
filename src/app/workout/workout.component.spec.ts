@@ -1,6 +1,6 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { StrengthComponent } from './strength.component';
+// import { Component } from './workout.component';
 
 // describe('StrengthComponent', () => {
 //   let component: StrengthComponent;
