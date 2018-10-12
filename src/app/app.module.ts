@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BreakfastComponent } from './breakfast/breakfast.component';
 import { FormsModule } from '@angular/forms';
 import { MealsComponent } from './meals/meals.component';
+import { LoginComponent } from './login/login.component'
+import { UsernameService } from './username.service';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -52,7 +54,8 @@ export function getAuthServiceConfigs() {
     WorkoutComponent,
     CardioComponent,
     BreakfastComponent,
-    MealsComponent
+    MealsComponent,
+    LoginComponent
   ],
   imports: [
     SocialLoginModule,
@@ -63,6 +66,7 @@ export function getAuthServiceConfigs() {
   ],
   providers: [
     FoodService,
+    UsernameService,
     {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs},
     WindowRef
   ],

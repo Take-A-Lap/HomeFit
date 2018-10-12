@@ -11,25 +11,28 @@ import { WorkoutService } from '../workout.service';
   styleUrls: ['workout.component.css']
 })
 
-// const exercises = [
+// const exercise = [
 //   {},
 // ];
 export class WorkoutComponent implements OnInit {
 
   
   userID;
+  name;
+  exercise;
   masterIndex = 0;
-  exercises;  
+  workouts;
   index = 0;
-  exercise = WORKOUT[this.index];
+  workout = '';
   completed = '';
   rep = 0;
   set = 1;
   
-  youtube = this.exercise.youtube_link
+  youtube = ''
   trustedUrl: SafeUrl;
   
   constructor(
+    private httpClient: HttpClient,
     private sanitizer: DomSanitizer, 
     private router: Router,
     private workoutService: WorkoutService,
@@ -76,8 +79,8 @@ export class WorkoutComponent implements OnInit {
     getRegimen() {
       return this.workoutService.getRegimenFromDB(this.userID)
       .subscribe(regimen => {
-        this.exercises = regimen; 
-        console.log(this.exercises);
+        this.exercise = regimen; 
+        console.log(this.exercise);
       })
     }
 
@@ -90,7 +93,7 @@ export class WorkoutComponent implements OnInit {
     switchExercise() {
       console.log(WORKOUT.length)
       console.log(this.index);
-      this.exercise = WORKOUT[this.index];
+      this.workout = this.workouts[this.index];
     }
     
     increment() {
@@ -104,13 +107,37 @@ export class WorkoutComponent implements OnInit {
       }
     }
     
+    testClick(){
+      let cookie = document.cookie;
+      let emailArr = cookie.split('=')
+      let email = emailArr[1]
+      console.log(email);
+    }
+
+    getWorkoutInfo(){
+      let cookie = document.cookie;
+      let emailArr = cookie.split('=')
+      let email = emailArr[1]
+      this.httpClient.get('/getMyWorkOut', {
+        params: {email: email}
+      }).subscribe((workouts)=>{
+        this.workouts = workouts;
+        this.workout = workouts[0]
+        this.exercise = this.workout[this.index];
+        this.youtube = this.exercise.youtube_link;
+        this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+        this.name = this.exercise.name;
+      });
+    }
+
     home(){
       this.router.navigate(['/home']);
     }
     
     ngOnInit() {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-      this.getRegimen();      
+      this.getRegimen();  
+      this.getWorkoutInfo();    
     }
 
 }

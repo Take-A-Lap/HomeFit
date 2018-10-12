@@ -6,36 +6,60 @@
     }
 }
 
+.container {
+  background-color: black;
+}
+
 .nav {
   border-radius: 0px;
-  background-color:#31cd32;
+  background-color: #FAA24A;
+  /* background-color:#31cd32; */
+  text-align: center
+}
+
+.nav a {
+  color: white
+}
+
+.nav a:hover {
+  color: grey;
+}
+
+.jumbotron {
+  background-image: url('../../assets/img/new_orleans_placeholder.jpg');
+  border-radius: 0px;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* tr {
+  max-width: 100%;
+  max-height: 100%;
+} */
+
+.fa {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.mealDescription {
+  color: #FAA24A;
+}
+
+h4 {
+  color: #FAA24A;
 }
 
 .btn {
-  color: red
+  border-radius: 0px;
+  background-color:#FAA24A;
+  color: white;
+  width: 100%
 }
 
-.cal_sun {
-  background-color:#31cd32
+p {
+  color: navy;
 }
-
-.imageContainer {
-  position: relative;
-  width:200px; 
-  height:200px; 
-  background-image: url('../../assets/img/new_orleans_placeholder.jpg')
-}
-
-/* h5 {
-  position: absolute; 
-   top: 200px; 
-   left: 0; 
-   width: 100%; 
-}
-
-h6 {
-  position: absolute; 
-   top: 220px; 
-   left: 0; 
-   width: 100%; 
-} */
