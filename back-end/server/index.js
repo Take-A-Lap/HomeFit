@@ -21,14 +21,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-
-
-  // attach the verifier middleware first because it needs the entire
-  // request body, and express doesn't expose this on the request object
-app.get('/.well-known/pki-validation/7BACD9E3D66343D40FE18A33C2899CB3.txt', (req, res) => {
-  res.send(fs.readFileSync('../../7BACD9E3D66343D40FE18A33C2899CB3.txt'));
-});
-
   let workouts = [];
   let sets = 0;
   let current;
@@ -227,12 +219,14 @@ app.get('/getMyWorkOut', (req,res)=>{
 app.get('/weather', (req, res) => {
   weather.getWeather(body => {
     const parsedBody = JSON.parse(body);
+    console.log(parsedBody)
     const weather = {
       text: parsedBody[0].WeatherText,
       city: 'New Orleans',
       state: 'LA',
       celsius: parsedBody[0].Temperature.Metric.Value,
-      fahrenheit: parsedBody[0].Temperature.Imperial.Value
+      fahrenheit: parsedBody[0].Temperature.Imperial.Value,
+      isDayTime: parsedBody[0].IsDayTime
     }
     res.send(weather);
   })
