@@ -144,6 +144,17 @@ app.get('/signupWO', (req,res)=>{
     console.error(err);
   });
 })
+
+app.get('/cornTest', (req,res)=>{
+  // workout.generateWorkoutSignUp(3)
+  db.getExercisesFromExerciseWorkoutsByUserId(81)
+
+  .then(result => {
+    res.send(result);
+  })
+  .catch((err)=>console.error(err))
+})
+
 app.get('/breakfast', (req, res) => {
   let meals = [];
   let breakfastResponse = [];
