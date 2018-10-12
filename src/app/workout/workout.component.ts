@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Workout } from '../workout';
-import { WORKOUT, CARDIO } from '../mock-workout';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -11,9 +9,7 @@ import { WorkoutService } from '../workout.service';
   styleUrls: ['workout.component.css']
 })
 
-// const exercise = [
-//   {},
-// ];
+
 export class WorkoutComponent implements OnInit {
 
   
@@ -91,8 +87,6 @@ export class WorkoutComponent implements OnInit {
     }
     
     switchExercise() {
-      console.log(WORKOUT.length)
-      console.log(this.index);
       this.workout = this.workouts[this.index];
     }
     
@@ -122,7 +116,7 @@ export class WorkoutComponent implements OnInit {
         params: {email: email}
       }).subscribe((workouts)=>{
         this.workouts = workouts;
-        this.workout = workouts[0]
+        this.workout = workouts[0];
         this.exercise = this.workout[this.index];
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
@@ -137,8 +131,7 @@ export class WorkoutComponent implements OnInit {
     ngOnInit() {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       this.getRegimen();  
-      this.getWorkoutInfo();    
-      console.log(this.exercise)
+      this.getWorkoutInfo();  
     }
 
 }
