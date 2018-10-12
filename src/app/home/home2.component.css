@@ -12,7 +12,8 @@
 
 .nav {
   border-radius: 0px;
-  background-color:#31cd32;
+  background-color: #FAA24A;
+  /* background-color:#31cd32; */
   text-align: center
 }
 
@@ -45,16 +46,16 @@ img {
 }
 
 .mealDescription {
-  color: #31cd32;
+  color: #FAA24A;
 }
 
 h4 {
-  color: #31cd32;
+  color: #FAA24A;
 }
 
 .btn {
   border-radius: 0px;
-  background-color:#31cd32;
+  background-color:#FAA24A;
   color: white;
   width: 100%
 }

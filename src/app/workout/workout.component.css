@@ -17,7 +17,7 @@
 
 .nav {
   border-radius: 0px;
-  background-color:#31cd32;
+  background-color:#FAA24A;
   text-align: center;
 }
 
@@ -46,20 +46,20 @@ iframe {
   border-radius: 0px;
 }
 h2 {
-  color: #31cd32;
+  color: #FAA24A;
   font-family: sans-serif;
 }
 h3 {
   font-family: digital;
   font-size: 75px;
-  color: #31cd32;
+  color: #FAA24A;
 }
 
 .reps_title {
   float: left;
 }
 .rep_button {
-  background-color: #31cd32;
+  background-color: #FAA24A;
   color: white;
   position: absolute;
 }

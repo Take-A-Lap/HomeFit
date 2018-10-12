@@ -6,9 +6,13 @@
     }
 }
 
+.container {
+  background-color: black;
+}
+
 .nav {
   border-radius: 0px;
-  background-color:#31cd32;
+  background-color:#FAA24A;
   text-align: center;
 }
 
@@ -16,9 +20,20 @@
   color: white;
 }
 
+h1 {
+  color: #FAA24A;
+}
+
+p {
+  color: #FAA24A;
+}
+td {
+  color: #FAA24A;
+}
+
 .submit_button {
   width: 100%;
-  background-color: #31cd32;
+  background-color: #FAA24A;
   text-align: center;
   color: white;
 }

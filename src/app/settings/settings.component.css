@@ -6,3 +6,27 @@
       border: 5px;
     }
 }
+
+.container {
+  background-color: black;
+}
+
+h2 {
+  color: #FAA24A;
+}
+
+p {
+  color: #FAA24A;
+}
+
+
+.button {
+  background-color: #FAA24A;
+  color: #FFFFFF;
+}
+
+.next_button {
+  background-color: #FAA24A;
+  color: #FFFFFF;
+  width: 100%;
+}
