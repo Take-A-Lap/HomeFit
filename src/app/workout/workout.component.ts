@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Workout } from '../workout';
-import { WORKOUT, CARDIO } from '../mock-workout';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -11,9 +9,7 @@ import { WorkoutService } from '../workout.service';
   styleUrls: ['workout.component.css']
 })
 
-// const exercise = [
-//   {},
-// ];
+
 export class WorkoutComponent implements OnInit {
 
   
@@ -27,6 +23,7 @@ export class WorkoutComponent implements OnInit {
   completed = '';
   rep = 0;
   set = 1;
+  email;
   
   youtube = ''
   trustedUrl: SafeUrl;
@@ -62,26 +59,15 @@ export class WorkoutComponent implements OnInit {
           clearInterval(setIncrement);
           this.set = 1;
           this.increment();
-          this.masterIndex++;
+          // this.masterIndex++;
           //INSERT HTTP REQUEST TO POST THE 
           //WORKOUT THAT WAS JUST COMPLETED
           //AND THE DATE
-          if (this.masterIndex > 7){
-            this.router.navigate(['/home']);
-            // this.exercises = CARDIO;
-            // this.index = 0;
-            // this.exercise = CARDIO[this.index];
-          }
+          // if (this.masterIndex > 6){
+          //   this.router.navigate(['/home']);
+          // }
         }
       }, (4500 + 10*this.exercise.rep_time));
-    }
-    
-    getRegimen() {
-      return this.workoutService.getRegimenFromDB(this.userID)
-      .subscribe(regimen => {
-        this.exercise = regimen; 
-        console.log(this.exercise);
-      })
     }
 
     workinDatBody(){
@@ -91,19 +77,26 @@ export class WorkoutComponent implements OnInit {
     }
     
     switchExercise() {
-      console.log(WORKOUT.length)
-      console.log(this.index);
-      this.workout = this.workouts[this.index];
+      this.index++;
+      this.exercise = this.workout[this.index];
     }
     
     increment() {
-      this.index++;
-      if (this.index < 8) {
+      if (this.index < 7) {
         this.switchExercise();
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
         // this.completed = 'Workout Complete';
+        this.workouts.shift();
+        // this.httpClient.post('/updateWorkouts', {
+        //   params: {
+        //     userID: '???',
+        //     WOs: this.workouts
+        //   }
+        // }).subscribe()
+        this.home()
+
       }
     }
     
@@ -114,15 +107,19 @@ export class WorkoutComponent implements OnInit {
       console.log(email);
     }
 
-    getWorkoutInfo(){
+    getCookieInfo(){
       let cookie = document.cookie;
-      let emailArr = cookie.split('=')
-      let email = emailArr[1]
+      let emailArr = cookie.split('=');
+      this.email = emailArr[1];
+      console.log(this.email);
+    }
+
+    getWorkoutInfo(){
       this.httpClient.get('/getMyWorkOut', {
-        params: {email: email}
+        params: {email: this.email}
       }).subscribe((workouts)=>{
         this.workouts = workouts;
-        this.workout = workouts[0]
+        this.workout = workouts[0];
         this.exercise = this.workout[this.index];
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
@@ -130,15 +127,28 @@ export class WorkoutComponent implements OnInit {
       });
     }
 
+    printIt(){
+      console.log(this.exercise);
+      console.log(this.workout[0]);
+      console.log(this.workout[1]);
+    }
+
     home(){
       this.router.navigate(['/home']);
     }
     
+    getUserInfo(){
+      this.httpClient.get('/getUser', { 
+        params: { email: this.email }
+      }).subscribe();
+    }
+
     ngOnInit() {
+      this.getCookieInfo();
+      this.getUserInfo();
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-      this.getRegimen();  
-      this.getWorkoutInfo();    
-      console.log(this.exercise)
+      this.getWorkoutInfo();
+        
     }
 
 }
