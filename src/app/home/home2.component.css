@@ -1,3 +1,4 @@
+
 @media (min-width: 769px) {
     /* CSS in here for desktop only */
     .container {
@@ -30,9 +31,35 @@ img {
   max-height: 100%;
 } */
 
-.fa {
-  max-width: 100%;
-  max-height: 100%;
+table { width: 100%; box-sizing: border-box; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1); font-family: 'Ubuntu'; /*border-collapse: collapse;*/ border-spacing: 0; background-color: #333333; }
+
+th, td { border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
+
+th { text-transform: uppercase; font-size:10px; font-weight:700; padding: 10px 0; color: rgba(255,255,255,0.5); background-color: #292929; letter-spacing: 1px; }
+
+td { width: 14.285%; transition: all 0.3s; font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 400; font-size: 14px; padding: 1.5% 1.5% 5%; vertical-align: initial; padding: 1.5% 0 ; height: 75px; }
+
+.day:hover { background-color: rgba(0,0,0,0.1); cursor:pointer; }
+
+.today { color: #FFF; background-color: rgba(0,0,0,.25) !important; }
+
+span.number { margin-left: 10% }
+
+span.event { height: 4px; background-color: rgba(0,0,0,.3); display: block; margin: 5px 10%; border-radius: 2px; background-color: #91c33b; }
+
+span.event-multiday { margin: 5px -2px; border-radius: 0; }
+span.event-multiday-start { margin-right: -4px;  }
+span.event-multiday-finish { margin-left: -4px;  }
+.day-name {
+  text-align: center;
+}
+span.event-ghost { background-color:transparent; }
+
+.checkmark {
+  position: relative;
+  margin-left: 25px;
+  margin-bottom: 35px;
+  color: #31cd32
 }
 
 .mealDescription {
@@ -49,3 +76,54 @@ h4 {
   color: white;
   width: 100%
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .carousel_activator:nth-of-type(1):checked ~ .carousel_slide:nth-of-type(1) {
+  display: block;
+  animation: showSlide 0.5s;
+}
+
+.carousel_activator:nth-of-type(1):checked ~ .carousel_controls:nth-of-type(1) {
+  display: block;
+}
+
+.carousel_slide {
+  height: 100%;
+  right: 0;
+  position: absolute;
+  display: none;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+}
+
+.carousel_indicator {
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  display: inline-block;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.35;
+  margin: 0 2.5px 0 2.5px;
+}
+.carousel_indicator:hover {
+  opacity: 0.75;
+}
+.carousel_activator:nth-of-type(1):checked ~ .carousel_indicators
+.carousel_indicator:nth-of-type(1) {
+  opacity: 1;
+} */
