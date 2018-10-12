@@ -15,13 +15,13 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   meals = [];
   meals2 = [];
   meals3 = [];
   currentWeather = [];
   time: number;
   timeStamp: Date;
+  dates = Array(7);
 
   constructor(
     private foodService: FoodService,
@@ -34,7 +34,8 @@ export class HomeComponent implements OnInit {
       .subscribe(currWeather => {
         this.currentWeather.push(currWeather, this.timeStamp.toString())
         console.log(this.currentWeather[1])
-      })  
+      })
+    console.log(this.timeStamp);  
   }
   
   getBreakfast() {
@@ -42,7 +43,6 @@ export class HomeComponent implements OnInit {
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
         this.meals.push(breakfastFood)
-        console.log(this.meals);
       })
   }
 
@@ -68,6 +68,17 @@ export class HomeComponent implements OnInit {
   getTime() {
     let d = new Date();
     this.time = d.getHours();
+    let day = d.getDay();
+    let date = d.getDate();
+    this.dates[day] = date;
+    for (let i = 0; i < day; i++) {
+      // the date for the current day of the week is
+      this.dates[i] = date - (day - i); 
+    }
+    for (let i = day + 1; i < this.dates.length; i++) {
+      this.dates[i] = date + (this.dates.length - i);
+    }
+    console.log(this.dates);
   }
 
   testClick(){
