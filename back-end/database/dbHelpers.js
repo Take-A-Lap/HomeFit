@@ -18,11 +18,18 @@ module.exports = {
   SELECT * FROM users
   WHERE alexa_user_id = $1
   `, [alexaId]).then(([user]) => user),
+  
   // get user information
   getUserInfoByName: (username) => db.any(`
     SELECT * FROM users
     WHERE preferred_username = $1
   `, [username]).then(([user])=> user),
+
+  //get password to authenticate
+  getPasswordByEmail: (email)=> db.any(`
+    SELECT password FROM users
+    WHERE user_email = $1
+  `, [email]).then(([password])=> password), 
 
   getUserInfoByEmail: (email) => db.any(`
     SELECT * FROM users
