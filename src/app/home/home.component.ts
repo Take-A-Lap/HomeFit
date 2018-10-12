@@ -68,17 +68,19 @@ export class HomeComponent implements OnInit {
   getTime() {
     let d = new Date();
     this.time = d.getHours();
+    // the current day of the week is
     let day = d.getDay();
+    // the date for the current day of the week is
     let date = d.getDate();
+    // Set today's date
     this.dates[day] = date;
+    // Fill in other dates based on today's
     for (let i = 0; i < day; i++) {
-      // the date for the current day of the week is
       this.dates[i] = date - (day - i); 
     }
     for (let i = day + 1; i < this.dates.length; i++) {
       this.dates[i] = date + (this.dates.length - i);
     }
-    console.log(this.dates);
   }
 
   testClick(){
