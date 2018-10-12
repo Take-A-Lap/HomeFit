@@ -203,9 +203,10 @@ app.get('/personalInfo', (req, res) => {
   res.redirect('localhost:3000/signup')
 })
 
-app.post('/homeFitAuth', (req, res) => {
-  // console.log(req.body.params.email);
-  
+app.get('/homeFitAuth', (req, res) => {
+  // console.log(req.query.email);
+  db.getPasswordByEmail(req.query.email)
+  .then(password=> res.send(password))
 })
 
 //api call for weather
