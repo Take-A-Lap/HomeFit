@@ -203,6 +203,12 @@ app.get('/personalInfo', (req, res) => {
   res.redirect('localhost:3000/signup')
 })
 
+app.get('/homeFitAuth', (req, res) => {
+  // console.log(req.query.email);
+  db.getPasswordByEmail(req.query.email)
+  .then(password=> res.send(password))
+})
+
 //api call for weather
 app.get('/weather', (req, res) => {
   weather.getWeather(body => {
@@ -379,6 +385,9 @@ app.post('/signUp', (req, res) =>{
   .catch(err=>console.error(err));
   res.end();
 });
+
+
+
 
 const port = 3000;
 app.listen(port, () => {
