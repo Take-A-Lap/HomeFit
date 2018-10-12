@@ -3,7 +3,8 @@ import { Workout } from '../workout';
 import { WORKOUT, CARDIO } from '../mock-workout';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { WorkoutService } from '../workout.service';
 @Component({
   selector: 'app-workout',
   templateUrl: 'workout.component.html',
@@ -16,24 +17,23 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 export class WorkoutComponent implements OnInit {
 
   
+  userID;
   masterIndex = 0;
-  exercises = WORKOUT;  
+  workouts;
   index = 0;
-  exercise = WORKOUT[this.index];
+  workout = this.workouts[this.index];
   completed = '';
   rep = 0;
   set = 1;
   
-  youtube = this.exercise.youtube_link
+  youtube = this.workout.youtube_link
   trustedUrl: SafeUrl;
   
   constructor(
     private sanitizer: DomSanitizer, 
-    private router: Router
+    private router: Router,
+    private workoutService: WorkoutService,
     ) { }
-  // sanitizeAndEmbedURL(link){
-    //   this.sanitizer.bypassSecurityTrustUrl(link);
-    // }
     
     plus(){
       let repIncrement = setInterval(() => {
@@ -44,7 +44,7 @@ export class WorkoutComponent implements OnInit {
           this.rep = 0;
           this.set++;
         }
-      }, this.exercise.rep_time)
+      }, this.workout.rep_time)
     }
     
     switchRep() {
@@ -69,11 +69,18 @@ export class WorkoutComponent implements OnInit {
             // this.index = 0;
             // this.exercise = CARDIO[this.index];
           }
-
         }
-      }, (4500 + 10*this.exercise.rep_time));
+      }, (4500 + 10*this.workout.rep_time));
     }
     
+    getRegimen() {
+      return this.workoutService.getRegimenFromDB(this.userID)
+      .subscribe(regimen => {
+        this.workouts = regimen; 
+        console.log(this.workouts);
+      })
+    }
+
     workinDatBody(){
       this.plus();
       this.inc();
@@ -83,14 +90,14 @@ export class WorkoutComponent implements OnInit {
     switchExercise() {
       console.log(WORKOUT.length)
       console.log(this.index);
-      this.exercise = WORKOUT[this.index];
+      this.workout = this.workouts[this.index];
     }
     
     increment() {
       this.index++;
       if (this.index < 8) {
         this.switchExercise();
-        this.youtube = this.exercise.youtube_link;
+        this.youtube = this.workout.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
         // this.completed = 'Workout Complete';
@@ -103,6 +110,7 @@ export class WorkoutComponent implements OnInit {
     
     ngOnInit() {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-}
+      this.getRegimen();      
+    }
 
 }

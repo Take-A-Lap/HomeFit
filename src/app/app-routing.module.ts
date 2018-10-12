@@ -10,6 +10,7 @@ import { DietaryRestrictionsComponent } from './dietary-restrictions/dietary-res
 import { WorkoutComponent } from './workout/workout.component';
 import { CardioComponent } from './cardio/cardio.component';
 import { MealsComponent } from './meals/meals.component';
+import { LoginComponent } from './login/login.component'
 
 const routes: Routes = [
   // { path: '', component: AppComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'workout', component: WorkoutComponent},
   { path: 'cardioWorkout', component: CardioComponent},
   { path: 'meals', component: MealsComponent},
+  { path: 'login', component: LoginComponent},
   { path: "**", component: ErrorComponent}
 ];
 
@@ -42,5 +44,6 @@ export const routingComponents = [
   WorkoutComponent,
   CardioComponent,
   MealsComponent,
-  ErrorComponent
+  ErrorComponent,
+  LoginComponent
 ]

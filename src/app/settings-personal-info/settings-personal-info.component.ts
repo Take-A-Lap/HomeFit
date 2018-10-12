@@ -66,18 +66,9 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.username = e.target.value;
   }
 
-  // params = {
-  //   age: this.age,
-  //   height: this.height,
-  //   weight: this.weight,
-  //   goals: this.goals,
-  //   push_ups: this.push_ups,
-  //   squats: this.squats,
-  //   miles: this.miles
-  // }
-
   addUser() {
-    this.httpClient.post('/personalInfo', {
+    let user;
+    this.httpClient.post('/signUp', {
       params: {
         weight: this.weight,
         push_ups: this.push_ups,
@@ -87,16 +78,12 @@ export class SettingsPersonalInfoComponent implements OnInit {
         height: this.height,
         squats: this.squats,
         goals: this.goals,
-        email: this.email,
-        userName: this.username,
+        email: this.email === 'Enter email' ? '' : this.email,
+        userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
       }
-    })
-      .subscribe(
-        (data:any) => {
-          console.log(data);
-        }
-      )
+    
+    }).subscribe()
   }
   
 
