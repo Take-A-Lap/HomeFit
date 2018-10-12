@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Strength } from '../strength';
-import { STRENGTH, CARDIO } from '../mock-strength';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WorkoutService } from '../workout.service';
 @Component({
-  selector: 'app-strength',
-  templateUrl: 'strength.component.html',
-  styleUrls: ['strength.component.css']
+  selector: 'app-workout',
+  templateUrl: 'workout.component.html',
+  styleUrls: ['workout.component.css']
 })
 
-export class StrengthComponent implements OnInit {
+export class WorkoutComponent implements OnInit {
   
   userID;
   name;
@@ -87,8 +85,6 @@ export class StrengthComponent implements OnInit {
     }
     
     switchExercise() {
-      console.log(STRENGTH.length)
-      console.log(this.index);
       this.workout = this.workouts[this.index];
     }
     
