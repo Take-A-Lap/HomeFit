@@ -62,11 +62,8 @@ export class WorkoutComponent implements OnInit {
           //INSERT HTTP REQUEST TO POST THE 
           //WORKOUT THAT WAS JUST COMPLETED
           //AND THE DATE
-          if (this.masterIndex > 7){
+          if (this.masterIndex > 6){
             this.router.navigate(['/home']);
-            // this.exercises = CARDIO;
-            // this.index = 0;
-            // this.exercise = CARDIO[this.index];
           }
         }
       }, (4500 + 10*this.exercise.rep_time));
@@ -87,11 +84,11 @@ export class WorkoutComponent implements OnInit {
     }
     
     switchExercise() {
-      this.workout = this.workouts[this.index];
+      this.index++;
+      this.exercise = this.workout[this.index];
     }
     
     increment() {
-      this.index++;
       if (this.index < 8) {
         this.switchExercise();
         this.youtube = this.exercise.youtube_link;
@@ -124,14 +121,21 @@ export class WorkoutComponent implements OnInit {
       });
     }
 
+    printIt(){
+      console.log(this.exercise);
+      console.log(this.workout[0]);
+      console.log(this.workout[1]);
+    }
+
     home(){
       this.router.navigate(['/home']);
     }
     
     ngOnInit() {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-      this.getRegimen();  
-      this.getWorkoutInfo();  
+      // this.getRegimen();  
+      this.getWorkoutInfo();
+      this.printIt();  
     }
 
 }

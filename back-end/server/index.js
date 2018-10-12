@@ -201,24 +201,20 @@ app.use(bodyParser.urlencoded({
 // })
 
 app.get('/homeFitAuth', (req, res) => {
-  // console.log(req.query.email);
+  console.log(req);
   db.getPasswordByEmail(req.query.email)
   .then(password=> res.send(password))
 })
 
 app.get('/getMyWorkOut', (req,res)=>{
-  console.log(req.query.email);
   db.getUserIdByEmail(req.query.email)
   .then((id)=>{
-    console.log(id.id);
     db.getWorkoutsByUserID(id.id)
     .then((workouts) => {
       chorl = workouts[0].exercises
       res.send(chorl)
     })
   })
-  
-
 })
 //api call for weather
 app.get('/weather', (req, res) => {
@@ -305,7 +301,9 @@ app.get('/signupWO', (req,res)=>{
   });
 })
 app.get('/cornTest', (req,res)=>{
-  workout.generateWorkoutBack(3)
+  // workout.generateWorkoutSignUp(3)
+  db.getExercisesFromExerciseWorkoutsByUserId(81)
+
   .then(result => {
     res.send(result);
   })
