@@ -138,6 +138,7 @@ export class WorkoutComponent implements OnInit {
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       this.getRegimen();  
       this.getWorkoutInfo();    
+      console.log(this.exercise)
     }
 
 }
