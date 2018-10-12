@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dietary-restrictions',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DietaryRestrictionsComponent implements OnInit {
 
+  @Input() username: string;
   constructor() { }
 
   ngOnInit() {

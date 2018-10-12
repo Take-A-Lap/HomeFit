@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DietaryRestrictionsComponent } from '../dietary-restrictions/dietary-restrictions.component';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -8,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SettingsPersonalInfoComponent implements OnInit {
   
+  @ViewChild(DietaryRestrictionsComponent) child;
+
   constructor(private httpClient: HttpClient) { }
 
   email = '';
@@ -99,6 +102,9 @@ export class SettingsPersonalInfoComponent implements OnInit {
       )
   }
   
+  ngAfterViewInit() {
+    // this.user
+  }
 
   ngOnInit() {
   }
