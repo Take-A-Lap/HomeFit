@@ -17,24 +17,24 @@ module.exports = {
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT * FROM users
   WHERE alexa_user_id = $1
-  `, [alexaId]),
+  `, [alexaId]).then(([user]) => user),
   // get user information
   getUserInfoByName: (username) => db.any(`
     SELECT * FROM users
     WHERE preferred_username = $1
-  `, [username]),
+  `, [username]).then(([user])=> user),
 
   getUserInfoByEmail: (email) => db.any(`
     SELECT * FROM users
     WHERE user_email = $1
-  `, [email]),
+  `, [email]).then(([user]) => user),
 
   // gets the user dietary information based on the user id
   getUserDietByUserId: (userId) => db.any(`
     SELECT name, type FROM dietary_restrictions 
     INNER JOIN user_dietary ON (dietary_restrictions.id = user_dietary.id_dietary_restrictions 
     AND user_dietary.id_user = $1)
-    `, [userId]),
+    `, [userId]).then(([userDiet]) => userDiet),
 
   // need to get the exercises
   getExerciseByMuscleAndDiff: (muscleId, difficulty) => db.any(`
@@ -46,44 +46,44 @@ module.exports = {
   getCompCardioByUserId: (userId) => db.any(`
     SELECT * FROM completed_cardio
     WHERE id_user = $1
-  `, [userId]),
+  `, [userId]).then(([compCardio]) => compCardio),
 
   getCompStrByUserId: (userId) => db.any(`
     SELECT * FROM completed_str
     WHERE id_user = $1
-  `, [userId]),
+  `, [userId]).then(([compStr]) => compStr),
 
   // realized we may need to grab the exercises by their id as well
   getExerciseById: (exerciseId) => db.any(`
     SELECT * FROM exercises
     WHERE id = $1
-  `, [exerciseId]),
+  `, [exerciseId]).then(([exercise]) => exercise),
   
   getDietaryRestrictionsIdByName: (name) => db.any(`
     SELECT id FROM dietary_restrictions
     WHERE name = $1
-    `, [name]),
+    `, [name]).then(([dietRestrictions]) => dietRestrictions),
 
   // need to grab the youtube link for the youtube api
   getYoutubeLink: (name) => db.any(`
     SELECT youtube_link FROM exercises
     WHERE name = $1
-  `, [name]),
+  `, [name]).then(([link]) => link),
 
   getUserById: (userId) => db.any(`
     SELECT * FROM users
     WHERE id = $1
-  `, [userId]),
+  `, [userId]).then(([user]) => user),
 
   getUserIdByEmail: (email) => db.any(`
     SELECT id FROM users
     WHERE user_email = $1
-  `, [email]),
+  `, [email]).then(([id]) => id),
 
   getExercisesFromExerciseWorkoutsByUserId: (userId) => db.any(`
     SELECT exercises FROM exercises_workouts
     WHERE id_user = $1
-  `, [userId]),
+  `, [userId]).then(([workouts]) => workouts),
 
   insertIntoExerciseWorkoutsByUserIdAndArrayOfJson: (userId, arrayOfJson) => db.any(`
     INSERT INTO exercises_workouts (id_user, exercises) VALUES ( $1, $2 ::json[])
