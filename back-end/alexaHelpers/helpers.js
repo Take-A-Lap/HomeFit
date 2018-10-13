@@ -72,29 +72,29 @@ module.exports = {
     return response;
   },
   // start workout and first exercise
-  initWorkout: (workout, count) => {
-    if(typeof workout !== "object"){
+  initWorkout: (exercise, count) => {
+    if(typeof exercise !== "object"){
       return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
-    const speechOutput = count === 0 ? "<s>Let's begin the day with some " + workout.name + "</s> <p>I'll give you a moment to get ready. </p>" 
-      : '<s> Next up is ' + workout.name + '</s> <s> Let me know when you are ready to begin.</s>';
-    const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your workout today?");
+    const speechOutput = count === 0 ? "<s>Let's begin the day with some " + exercise.name + "</s> <p>I'll give you a moment to get ready. </p>" 
+      : '<s> Next up is ' + exercise.name + '</s> <s> Let me know when you are ready to begin.</s>';
+    const response = buildResponseWithPrompt(speechOutput, false, "TODO", "Are you ready to begin your exercise today?");
     return response;
   },
   // move on to the next exercise
-  coachExercise: (workout) => {
-    console.log(workout, ' --- what is this? alexa needs to know');
-    if(workout === undefined){
+  coachExercise: (exercise) => {
+    console.log(exercise, ' --- what is this? alexa needs to know');
+    if(exercise === undefined){
       const speechOutput = "<p> <s>That is it for this exercise.</s> Let me know when you want to start the next exercise. </p>";
       const response = buildResponse(speechOutput, false, "Next exercise");
       return response;
     }
-    if (typeof workout[0] !== "object") {
+    if (typeof exercise !== "object") {
       return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
-    let cadence = '<s> The pace I will be counting your reps will be ' + workout[0].rep_time / 1000 + ' seconds </s>';
+    let cadence = '<s> The pace I will be counting your reps will be ' + exercise.rep_time / 1000 + ' seconds </s>';
     for (let i = 1; i < 11; i++) {
-      cadence += ' give me a ' + i + ' <break time="' + workout[0].rep_time + 'ms"/> ';
+      cadence += ' give me a ' + i + ' <break time="' + exercise.rep_time + 'ms"/> ';
     }
     const speechOutput = "<p> I will count the reps,</p> " + cadence;
     const response = buildResponse(speechOutput, false, "TODO");

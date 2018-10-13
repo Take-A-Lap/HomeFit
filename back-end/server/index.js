@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-  let workouts = [];
+  let alexaWorkout = [];
   let sets = 0;
   let current;
 
@@ -286,8 +286,16 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
             // console.log(user, ' this needs to not be an empty array');
-
-            return 
+            const squatComf = user.squat_comf;
+            const numWorkouts = user.workout_completes;
+            return workout.generateWorkout(numWorkouts, squatComf)
+          })
+          .then(genWorkout => {
+            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
+            return alexaWorkout.splice(0, 1);
+          }).then(currentExercise => {
+            current = currentExercise;
+            alexaHelp.initWorkout(current);
           })
           .catch(err => {
             console.error(err);
