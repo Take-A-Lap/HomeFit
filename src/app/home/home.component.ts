@@ -32,9 +32,10 @@ export class HomeComponent implements OnInit {
     private httpClient: HttpClient) { }
 
     
-    getWeather2() {
-      this.weatherService.getWeather()
-    }
+    // getWeather2() {
+    //   console.log('lijfie')
+    //   // this.weatherService.getWeatherData()
+    // }
     
     getCurrentTime() {
       this.timeStamp = new Date();
@@ -60,36 +61,39 @@ export class HomeComponent implements OnInit {
         }
       }
                 
-    sendWeather() {
-      this.httpClient.get('/weather', {
-        params: {
-          latitude: this.latitude,
-          longitude: this.longitude
-        }
-      })
-    }
+    // sendWeather() {
+    //   this.httpClient.get('/weather', {
+    //     params: {
+    //       latitude: this.latitude,
+    //       longitude: this.longitude
+    //     }
+    //   })
+    //   .subscribe()
+    // }
     
     getWeather() {
-      return this.weatherService.getWeather()
+      console.log('test')
+       this.weatherService.getWeatherData()
         .subscribe(currWeather => {
           console.log(currWeather, 'line 99')
           this.currentWeather.push(currWeather)
           console.log(this.currentWeather)
         })
     }
-
-    // return this.httpClient.post('/weather', {
-    //   params: {
-    //     info: this.
-    //   }
-    // }, { responseType: 'text' })
-    // .subscribe(data => {
-    //   console.log('success', data);
-    // },
-    //   error => {
-    //     console.log('error', error);
-    //   });
-  // }
+  sendWeather1() {
+    return this.httpClient.post('/weather', {
+      params: {
+        latitude: this.latitude,
+        longitude: this.longitude
+      }
+    }, { responseType: 'text' })
+    .subscribe(data => {
+      console.log('success', data);
+    },
+      error => {
+        console.log('error', error);
+      });
+  }
 
   getBreakfast() {
     this.meals = [];
@@ -157,21 +161,17 @@ export class HomeComponent implements OnInit {
   onSubmit() {
     this.router.navigate(['/personalInfo']);
   }
+
   ngOnInit() {
     this.getLocation();
-    setTimeout(() => {
-      this.sendWeather();
-    }, 2000)
+    this.getWeather();
+    // setTimeout(() => {
+    //   this.sendWeather1();
+    // }, 4000)
     // setTimeout(() => {
     //   this.getWeather();
-    // }, 3500)
-    // setTimeout(() => {
-
-    //   this.getWeather();
-    // }, 3000)
-    // this.getWeather();
+    // }, 4500)
     this.getCurrentTime();
-    // this.getLocation();
     this.displayMeal();
   }
 
