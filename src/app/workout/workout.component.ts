@@ -89,15 +89,16 @@ export class WorkoutComponent implements OnInit {
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
         // this.completed = 'Workout Complete';
+        console.log(this.workouts.length);
         this.workouts.shift();
-        // this.httpClient.post('/updateWorkouts', {
-        //   params: {
-        //     userID: '???',
-        //     WOs: this.workouts
-        //   }
-        // }).subscribe()
-        this.home()
-
+        console.log(this.workouts.length);
+        this.httpClient.post('/updateWorkouts', {
+          params: {
+            userID: this.id,
+            WOs: this.workouts
+          }
+        }).subscribe()
+        this.home();
       }
     }
     
