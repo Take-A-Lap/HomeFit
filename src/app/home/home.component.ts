@@ -18,7 +18,7 @@ import { IImage } from './iImage';
 export class HomeComponent implements OnInit {
   imageUrls: (string | IImage)[] = [];
   mealImages = [];
-  meals = [];
+  meals;
   meals2 = [];
   meals3 = [];
   currentWeather = [];
@@ -106,30 +106,35 @@ export class HomeComponent implements OnInit {
   }
 
   getBreakfast() {
-    this.meals = [];
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
-        this.meals.push(breakfastFood)
+        this.meals = breakfastFood
         // console.log(this.meals);
-        this.mealImages = this.meals[0].map(meal => meal.recipe.image)
+        this.imageUrls = this.meals.map(meal => {
+          let proof = () => {
+            window.open(meal.url);
+          }
+          return {
+            url: meal.image,
+            href: meal.url,
+            clickAction: proof
+          }
+        })
       })
   }
 
   getLunch() {
-    this.meals = [];
     return this.foodService.getLunch()
       .subscribe(lunchFood => {
         // console.log(Array.isArray(lunchFood), lunchFood);
-        this.meals.push(lunchFood);
-        console.log('we got lunchFood', this.meals);
-        // this.mealImages = this.meals[0].map(meal => meal.recipe.image)
-        this.imageUrls = this.meals[0].map(meal => {
+        this.meals = lunchFood;
+        this.imageUrls = this.meals.map(meal => {
           let proof = () => {
-            window.open(meal.recipe.url);
+            window.open(meal.url);
           }
           return {
-            url: meal.recipe.image,
-            href: meal.recipe.url,
+            url: meal.image,
+            href: meal.url,
             clickAction: proof
           }
         })
@@ -139,12 +144,19 @@ export class HomeComponent implements OnInit {
 
   getDinner() {
     console.log('Getting Dinner');
-    this.meals = [];
     return this.foodService.getDinner()
       .subscribe(dinnerFood => {
-        this.meals.push(dinnerFood);
-        // console.log(this.meals);
-        this.mealImages = this.meals[0].map(meal => meal.recipe.image)
+        this.meals = dinnerFood;
+        this.imageUrls = this.meals.map(meal => {
+          let proof = () => {
+            window.open(meal.url);
+          }
+          return {
+            url: meal.image,
+            href: meal.url,
+            clickAction: proof
+          }
+        })
       });
   }
 
@@ -190,7 +202,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getLocation();
+    // this.getLocation();
     // this.getWeather();
     // setTimeout(() => {
     //   this.sendWeather1();
@@ -198,7 +210,7 @@ export class HomeComponent implements OnInit {
     // setTimeout(() => {
     //   this.getWeather();
     // }, 4500)
-    this.getCurrentTime();
+    // this.getCurrentTime();
     this.displayMeal();
   }
 
