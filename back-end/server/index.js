@@ -400,7 +400,31 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.changeView(view));
         break;
       case 'skipExercise':
-        res.json(alexaHelp.PLACEHOLDER());
+        const former = current;
+        db.getUserInfoByAlexUserId(req.body.session.user.userId)
+          .then(user => {
+            // console.log(user, ' this needs to not be an empty array');
+            const squatComf = user.squat_comf;
+            const numWorkouts = user.workout_completes;
+            return workout.generateWorkout(numWorkouts, squatComf)
+          })
+          .then(genWorkout => {
+            if (alexaWorkout.length === 0 && sets !== 0) {
+              db.getUserInfoByAlexUserId(req.body.session.user.userId)
+                .then(user => {
+                  return db.updateNoWO(user.id, user.workout_completes + 1);
+                })
+            }
+            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
+            return alexaWorkout.splice(0, 1);
+          }).then(currentExercise => {
+            current = currentExercise;
+            alexaHelp.skip(former, current);
+          })
+          .catch(err => {
+            console.error(err);
+          });
+        // res.json(alexaHelp.PLACEHOLDER());
         break;
       case 'AMAZON.HelpIntent':
         res.json(alexaHelp.help());
