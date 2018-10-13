@@ -52,6 +52,38 @@ app.get('/getUserId', (req, res) => {
     .catch(err => console.error(err));
 })
 
+app.get('/getUser', (req, res) => {
+  console.log(req.query.email)
+  db.getUserInfoByEmail(req.query.email)
+    .then((id)=>res.send(id))
+    .catch(err=>console.error(err));
+})
+
+app.get('/getCompletedWO', (req, res) => {
+  console.log(req.query.email)
+  db.getUserInfoByEmail(req.query.email)
+    .then((userInfo)=> {
+      return userInfo;
+    })
+    .then(({ id }) => {
+      // use the id to query the completed str and cardio tables
+      let completedWorkouts = [];
+      db.getCompCardioByUserId(id)
+        .then(compCardio => {
+          completedWorkouts.push(compCardio);
+          db.getCompStrByUserId(id)
+            .then(compStr => {
+              completedWorkouts.push(compStr);
+              return completedWorkouts;
+            })
+        })
+    })
+    .then(completedWorkouts => {
+      res.send(completedWorkouts);
+    })
+    .catch(err=>console.error(err));
+});
+
 app.get('/homeFitAuth', (req, res) => {
   db.getPasswordByEmail(req.query.email)
   .then(password=> {
@@ -218,9 +250,11 @@ app.get('/breakfast', (req, res) => {
     res.send(breakfastResponse);
   })    
 })
+
 app.post('/saveWO', (req, res)=> {
   console.log(req);
 })
+
 app.get('/test', (req, res) => {  
   db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
   .then(userArr => {
@@ -230,9 +264,11 @@ app.get('/test', (req, res) => {
     console.error(err);
   })
 });
+
 app.get('/recallWOs', (req, res)=>{
 
 });
+
 app.post('/signUp', (req, res) =>{
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;

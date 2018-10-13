@@ -86,6 +86,9 @@ h4 {
   margin: auto;
 }
 
+.slides {
+  object-fit: cover;
+}
 
 
 
