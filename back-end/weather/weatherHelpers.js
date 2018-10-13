@@ -13,11 +13,19 @@ module.exports = {
   },
 
   //Dark Sky API call
-  getWeatherDarkSky: function(latitude, longitude, callback) {
-    request(`https://api.darksky.net/forecast/${config.DARKSKY_API_KEY}/${latitude}, ${longitude}`, function(error, response, body) {
-      if (!error && response.statusCode === 200) {
-        callback(body);
-      }
-    })
-  }
+  getWeatherDarkSky: (latitude, longitude, callback) => {
+    let options = {
+      method: 'GET',
+      url: `https://api.darksky.net/forecast/${config.DARKSKY_API_KEY}/${latitude},${longitude}`
+    }
+    request(options, callback);
+  },
+
+  // getWeatherDarkSky: function(latitude, longitude, callback) {
+  //   request(`https://api.darksky.net/forecast/${config.DARKSKY_API_KEY}/${latitude},${longitude}`, function(error, response, body) {
+  //     if (!error && response.statusCode === 200) {
+  //       callback(body);
+  //     }
+  //   })
+  // }
 }

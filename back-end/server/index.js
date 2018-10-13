@@ -62,6 +62,26 @@ app.post('/updateWorkouts', (req, res)=>{
   console.log(req);
   // db.updateWorkoutsByUserId()
 })
+
+// app.post('/weather', (req, res) => {
+//   // console.log(req.body);
+//   res.send(201);
+//   res.end();
+// })
+app.get('/weather', (req, res) => {
+  console.log(req.query, 'hola');
+  // weather.getWeatherDarkSky(req.body.query.latitude, req.body.query.longitude, body => {
+  //   const parsedBody = JSON.parse(body);
+  //   const weatherInfo = {
+  //     text: parsedBody.currently.summary,
+  //     temp: parsedBody.currently.temperature,
+  //     apparentTemp: parsedBody.currently.apparentTemperature,
+  //     humidity: parsedBody.currently.humidity,
+  //     icon: parsedBody.currently.icon
+  //   }
+  //   res.send(weatherInfo);
+  // })
+})
 // app.get('/weather', (req, res) => {
 //   weather.getWeather(body => {
 //     const parsedBody = JSON.parse(body);
@@ -78,33 +98,31 @@ app.post('/updateWorkouts', (req, res)=>{
 //   })
 // })
 
-app.post('/weather', (req, res) => {
-  console.log(req.body, 'work pretty please');
-  weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, res, body) => {
-  //   // console.log(body);
-    const weatherInfo = {};
-    if (err) {
-      console.error(err);
-    } else {
-      const parsedBody = JSON.parse(body);
-      console.log(JSON.parse(parsedBody));
-      weatherInfo = {
-        text: parsedBody.currently.summary,
-        temp: parsedBody.currently.temperature,
-        apparentTemp: parsedBody.currently.apparentTemperature,
-        humidity: parsedBody.currently.humidity,
-        icon: parsedBody.currently.icon
-      }
-      // console.log(weatherInfo)
-    }
-  // res.send(weatherInfo);
-  })
-  res.sendStatus(201);
-  res.end();
-})
+// app.post('/weather', (req, res) => {
+//   console.log(req.body.params.latitude, req.body.params.longitude, 'work pretty please');
+//   weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, res, body) => {  
+//   //   const weatherInfo = {};
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       const parsedBody = JSON.parse(body);
+//       const weatherInfo = {
+//         text: parsedBody.currently.summary,
+//         temp: parsedBody.currently.temperature,
+//         apparentTemp: parsedBody.currently.apparentTemperature,
+//         humidity: parsedBody.currently.humidity,
+//         icon: parsedBody.currently.icon
+//       }
+//       console.log(weatherInfo)
+//       res.send(weatherInfo);
+//     }
+//   })
+//   res.sendStatus(201);
+//   res.end();
+// })
 
-app.get('/weather', (req, res) => {
-  console.log(req, 'work')
+// app.get('/weather', (req, res) => {
+//   console.log(req, 'work')
   // weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitdue, (err, res, body) => {
   //   const parsedBody = JSON.parse(body);
   //   const weatherInfo = {
@@ -117,7 +135,7 @@ app.get('/weather', (req, res) => {
     // console.log(weatherInfo)
     // res.send(200);
   // })
-})
+// })
 
 app.get('/dinner', (req,res)=> {
   let meals = [];
@@ -440,6 +458,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
 
 const port = 3000;
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`);
+  console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
 });

@@ -31,42 +31,52 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private httpClient: HttpClient) { }
 
-  getWeather() {
-    return this.weatherService.getWeather()
-      .subscribe(currWeather => {
-        console.log(currWeather, 'line 36')
-        this.currentWeather.push(currWeather)
-        console.log(this.currentWeather)
-      })
-  }
-
-  getCurrentTime() {
-    this.timeStamp = new Date();
-    this.timeStampString = this.timeStamp.toString();
-  }
-  
+    
+    getWeather2() {
+      this.weatherService.getWeather()
+    }
+    
+    getCurrentTime() {
+      this.timeStamp = new Date();
+      this.timeStampString = this.timeStamp.toString();
+    }
+    
+    // getLocation() {
+    //     if (navigator.geolocation) {
+    //       navigator.geolocation.getCurrentPosition(position => {
+    //         console.log(position);
+    //         this.latitude = position.coords.latitude.toString(),
+    //         this.longitude = position.coords.longitude.toString()
+    //       })
+    //     }
+    // }
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude.toString(),
-        this.longitude = position.coords.longitude.toString();
-        console.log(position, 'line 46')
-        console.log(this.latitude, this.longitude, 'line 48')
-      });
-    }
-  }
-
-  sendWeather() {
-    this.httpClient.post('/weather', {
-      params: {
-        latitude: this.latitude,
-        longitude: this.longitude
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.latitude = position.coords.latitude.toString(),
+            this.longitude = position.coords.longitude.toString();
+            console.log(this.latitude, this.longitude, 'line 48')
+          });
+        }
       }
-    }, { responseType: 'text' })
-      .subscribe(data => {
-        console.log(data, 'line 67')
+                
+    sendWeather() {
+      this.httpClient.get('/weather', {
+        params: {
+          latitude: this.latitude,
+          longitude: this.longitude
+        }
       })
-
+    }
+    
+    getWeather() {
+      return this.weatherService.getWeather()
+        .subscribe(currWeather => {
+          console.log(currWeather, 'line 99')
+          this.currentWeather.push(currWeather)
+          console.log(this.currentWeather)
+        })
+    }
 
     // return this.httpClient.post('/weather', {
     //   params: {
@@ -79,7 +89,7 @@ export class HomeComponent implements OnInit {
     //   error => {
     //     console.log('error', error);
     //   });
-  }
+  // }
 
   getBreakfast() {
     this.meals = [];
@@ -148,14 +158,21 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
   ngOnInit() {
-    // this.getWeather();
-    this.getCurrentTime();
     this.getLocation();
-    this.displayMeal();
     setTimeout(() => {
       this.sendWeather();
-    }, 2000);
-    // this.sendWeather();
+    }, 2000)
+    // setTimeout(() => {
+    //   this.getWeather();
+    // }, 3500)
+    // setTimeout(() => {
+
+    //   this.getWeather();
+    // }, 3000)
+    // this.getWeather();
+    this.getCurrentTime();
+    // this.getLocation();
+    this.displayMeal();
   }
 
   
