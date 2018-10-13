@@ -382,6 +382,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
               })
             }
             alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
+            console.log(alexaWorkout, " should be some exercises");
+            
             return alexaWorkout.splice(0, 1);
           }).then(currentExercise => {
             console.log('this need to be firing');
