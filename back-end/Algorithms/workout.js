@@ -221,9 +221,55 @@ module.exports = {
     .catch(err=>console.error(err));
   },
 
-  generateWorkoutSignUp: function(difficulty){
-    return Promise.all([this.generateWorkoutChest(difficulty), this.generateWorkoutCardio(difficulty), this.generateWorkoutLeg(difficulty), this.generateWorkoutCardio(difficulty), this.generateWorkoutBack(difficulty), this.generateWorkoutCardio(difficulty)])
-    .catch(err=>console.error(err));
+  generateWorkout: function(wo_num, difficulty){
+    return new Promise((resolve, reject)=>{
+      let solution;
+      if (wo_num === 0 || wo_num % 6 === 0) {
+        this.generateWorkoutChest(difficulty)
+        .then(wo => {
+          solution = wo
+          if (solution) {
+            resolve(solution)
+          } else {
+            reject('Error Fetching Workout')
+          }
+        })
+        .catch(err=>console.error(err))
+      } else if (wo_num % 2 === 1) {
+        this.generateWorkoutCardio(difficulty)
+        .then(wo => {
+          solution = wo
+          if (solution) {
+            resolve(solution)
+          } else {
+            reject('Error Fetching Workout')
+          }
+        })
+        .catch(err => console.error(err))
+      } else if (wo_num % 4 === 0) {
+        this.generateWorkoutLeg(difficulty)
+        .then(wo => {
+          solution = wo
+          if (solution) {
+            resolve(solution)
+          } else {
+            reject('Error Fetching Workout')
+          }
+        })
+        .catch(err => console.error(err))
+      } else if (wo_num % 2 === 0) {
+        this.generateWorkoutBack(difficulty)
+        .then(wo => {
+          solution = wo
+          if (solution) {
+            resolve(solution)
+          } else {
+            reject('Error Fetching Workout')
+          }
+        })
+        .catch(err => console.error(err))
+      }
+    })
   },
 
   generateNextWorkout: function(difficulty){}
