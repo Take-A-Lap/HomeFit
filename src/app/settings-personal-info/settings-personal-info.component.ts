@@ -14,18 +14,18 @@ export class SettingsPersonalInfoComponent implements OnInit {
 
   email: string;
   password: string;
-  age: string;
-  height: string;
-  weight: string;
-  goals: string;
-  push_ups: string;
-  squats: string;
-  miles: string;
+  age: number;
+  height: number;
+  weight: number;
+  goals: number;
+  push_ups: number;
+  squats: number;
+  miles: number;
   username: string;
   sex: string;
 
   updateSex(e) {
-    this.sex = e.options[e.selectedIndex].value;
+    this.sex = e.target.value;
   }
 
   updateEmail(e) {
