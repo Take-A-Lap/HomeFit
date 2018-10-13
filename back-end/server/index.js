@@ -34,23 +34,10 @@ app.get('/cornTest', (req, res) => {
 app.get('/generateWO', (req, res)=> {
   console.log(req.query.wo_num);
   wo_num = req.query.wo_num;
-  if(wo_num === 0 || wo_num % 6 === 0){
-    workout.generateWorkoutChest(req.query.diff)
-    .then((wo)=>res.send(wo))
-    .catch(err=>console.error(err))
-  } else if(wo_num % 2 === 1){
-    workout.generateWorkoutCardio(req.query.diff)
-    .then((wo) => res.send(wo))
-    .catch(err => console.error(err))
-  } else if (wo_num % 4 === 0) {
-    workout.generateWorkoutLeg(req.query.diff)
-    .then((wo) => res.send(wo))
-    .catch(err => console.error(err))
-  } else if (wo_num % 2 === 0) {
-    workout.generateWorkoutBack(req.query.diff)
-    .then((wo) => res.send(wo))
-    .catch(err => console.error(err))
-  }
+  diff = req.query.diff;
+  workout.generateWorkoutSignUp(wo_num, diff)
+  .then(workout=>res.send(workout))
+  .catch(err=>console.error(err));
 })
 
 app.get('/getUser', (req, res) => {
