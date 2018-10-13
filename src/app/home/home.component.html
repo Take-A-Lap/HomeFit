@@ -138,14 +138,17 @@
       </div>
     </div>
   </div> -->
+
     <div class="col-md-12">
-      <slideshow 
-        [imageUrls]=mealImages
-        [height]="height"
-        [minHeight]="'200px'"
-        [autoPlay]="true"
-        [showArrows]="false"
-      ></slideshow>
+      <div ng-click="goToRecipe()">
+        <slideshow 
+          [imageUrls]=imageUrls
+          [height]="height"
+          [minHeight]="'200px'"
+          [autoPlay]="true"
+          [showArrows]="false"
+        ></slideshow>
+      </div>  
     </div> 
   <br>
 </div>
