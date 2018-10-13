@@ -21,11 +21,11 @@ module.exports = {
     request(options, callback);
   },
 
-  // getWeatherDarkSky: function(latitude, longitude, callback) {
-  //   request(`https://api.darksky.net/forecast/${config.DARKSKY_API_KEY}/${latitude},${longitude}`, function(error, response, body) {
-  //     if (!error && response.statusCode === 200) {
-  //       callback(body);
-  //     }
-  //   })
-  // }
+  getCityNameForWeatherInfo: (latitude, longitude, callback) => {
+    let options = {
+      method: 'GET',
+      url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
+    }
+    request(options, callback);
+  }
 }
