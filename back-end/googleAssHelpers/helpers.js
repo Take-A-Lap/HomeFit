@@ -1,6 +1,7 @@
 const {
   dialogflow,
   Image,
+  SimpleResponse
 } = require('actions-on-google')
 const db = require('../database/dbHelpers');
 const workout = require('../Algorithms/workout.js');
@@ -8,6 +9,7 @@ const workout = require('../Algorithms/workout.js');
 
 const app = dialogflow();
 
+console.log(app, ' let\'s see whats inside of this on line 11 in google helpers');
 
 app.intent('start workout', conv => {
   console.log('please tell me this is at least called');
@@ -17,6 +19,10 @@ app.intent('start workout', conv => {
   conv.ask(new Image({
     url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
     alt: 'A cat',
+  }))
+  conv.ask(new SimpleResponse({
+    text: '<s> Let me know when you are ready to begin.</s>',
+    speech: '<s> Let me know when you are ready to begin.</s>'
   }))
 });
 
