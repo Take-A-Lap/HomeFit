@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-  let workouts = [];
+  let alexaWorkout = [];
   let sets = 0;
   let current;
 
@@ -333,6 +333,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       })
       .catch(err => {
         console.error(err);
+        res.json(alexaHelp.PLACEHOLDER());
       });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     res.json(alexaHelp.endSession());
@@ -348,65 +349,38 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do some stuff
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
-            return db.getExercisesFromExerciseWorkoutsByUserId(user.id)
+            // console.log(user, ' this needs to not be an empty array');
+            const squatComf = user.squat_comf;
+            const numWorkouts = user.workout_completes;
+            return workout.generateWorkout(numWorkouts, squatComf)
           })
-          .then(exerWork => {
-            workouts = workouts.length > 0 ? workouts : [].concat(exerWork.exercises.splice(0, 1));
-            if (workouts[0].length) {
-              workouts = workouts[0];
+          .then(genWorkout => {
+            if(alexaWorkout.length === 0 && sets !== 0){
+              db.getUserInfoByAlexUserId(req.body.session.user.userId)
+              .then(user =>{
+                return db.updateNoWO(user.id, user.workout_completes + 1);
+              })
             }
-            res.json(alexaHelp.initWorkout(workouts[0], 8 - workouts.length));
-            return exerWork;
-          })
-          .then(exercises => {
-            // this would be a good place to generate the workouts as they are being taken off
-            if (!exercises.exercises.length || exercises === undefined) {
-              workout.generateWorkoutSignUp(3, (workoutArr) => {
-                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
-              });
-            } else {
-              db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
-            }
+            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
+            return alexaWorkout.splice(0, 1);
+          }).then(currentExercise => {
+            current = currentExercise;
+            res.json(alexaHelp.initWorkout(current));
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER());
           });
         break;
       case 'coachExercise':
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
-            return db.getExercisesFromExerciseWorkoutsByUserId(user.id)
-          })
-          .then(exerWork => {
-            workouts = workouts.length > 0 ? workouts : [].concat(exerWork.exercises.splice(0, 1));
-            if (workouts[0].length) {
-              workouts = workouts[0];
-            }
-            if (current === undefined) {
-              current = workouts.splice(0, 1);
-              sets++;
-            }
-            if (sets <= 3) {
-              sets++;
-            } else {
-              current === undefined;
-              sets = 0;
-            }
             res.json(alexaHelp.coachExercise(current));
-            return exerWork;
-          })
-          .then(exercises => {
-            // this would be a good place to generate the workouts as they are being taken off
-            if (!exercises.exercises.length || exercises === undefined) {
-              workout.generateWorkoutSignUp(3, (workoutArr) => {
-                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
-              });
-            } else {
-              db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
-            }
+            sets++;
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER())
           });
         break;
       case 'readWorkoutStatus':
@@ -417,11 +391,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         link = link.split(' ').join('@');
         db.updateAlexaId(link, req.body.session.user.userId)
           .then(() => {
+            res.json(alexaHelp.linkAccount(link));
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER())
           })
-        res.json(alexaHelp.linkAccount(link));
         break;
       case 'changeView':
         let view = req.body.request.intent.slots.view.value;
@@ -429,7 +404,32 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.changeView(view));
         break;
       case 'skipExercise':
-        res.json(alexaHelp.PLACEHOLDER());
+        const former = current;
+        db.getUserInfoByAlexUserId(req.body.session.user.userId)
+          .then(user => {
+            // console.log(user, ' this needs to not be an empty array');
+            const squatComf = user.squat_comf;
+            const numWorkouts = user.workout_completes;
+            return workout.generateWorkout(numWorkouts, squatComf)
+          })
+          .then(genWorkout => {
+            if (alexaWorkout.length === 0 && sets !== 0) {
+              db.getUserInfoByAlexUserId(req.body.session.user.userId)
+                .then(user => {
+                  return db.updateNoWO(user.id, user.workout_completes + 1);
+                })
+            }
+            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
+            return alexaWorkout.splice(0, 1);
+          }).then(currentExercise => {
+            current = currentExercise;
+            res.json(alexaHelp.skip(former, current));
+          })
+          .catch(err => {
+            console.error(err);
+            res.json(alexaHelp.PLACEHOLDER());
+          });
+        // res.json(alexaHelp.PLACEHOLDER());
         break;
       case 'AMAZON.HelpIntent':
         res.json(alexaHelp.help());
