@@ -38,10 +38,10 @@ module.exports = {
     callback(text);
   },
 
-  createWeatherTypeLabel: (weatherInfo, number, callback) => {
+  createWeatherTypeLabel: (weatherInfo, callback) => {
     let label;
     label = weatherInfo.text;
-    return label;
+      callback(label);
   }
 
 }

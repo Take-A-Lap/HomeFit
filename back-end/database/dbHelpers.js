@@ -193,6 +193,7 @@ module.exports = {
   //create function to access weather_images in database
   getWeatherImages: (text, time) => db.any(`
     SELECT url FROM weather_images
-    WHERE weather = $1 AND time = $2 
+    WHERE weather = $1 AND time_of_day = $2 
   `, [text, time]).then(([weatherImages]) => weatherImages)
+      .then(({ url }) => url)
 };
