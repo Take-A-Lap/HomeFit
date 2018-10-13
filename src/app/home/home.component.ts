@@ -4,8 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { IImage } from 'ng-simple-slideshow';
 import { FoodService } from '../food/food.service';
 import { WeatherService } from '../weather.service';
 
@@ -15,13 +15,13 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   meals = [];
   meals2 = [];
   meals3 = [];
   currentWeather = [];
   time: number;
   timeStamp: Date;
+  dates = Array(7);
 
   constructor(
     private foodService: FoodService,
@@ -34,7 +34,8 @@ export class HomeComponent implements OnInit {
       .subscribe(currWeather => {
         this.currentWeather.push(currWeather, this.timeStamp.toString())
         console.log(this.currentWeather[1])
-      })  
+      })
+    console.log(this.timeStamp);  
   }
   
   getBreakfast() {
@@ -51,20 +52,35 @@ export class HomeComponent implements OnInit {
       .subscribe(lunchFood => {
         // console.log(Array.isArray(lunchFood), lunchFood);
         this.meals.push(lunchFood);
-        // console.log('we got lunchFood', this.meals);
+        console.log('we got lunchFood', this.meals);
       })
   }
   getDinner() {
+    console.log('Getting Dinner');
     this.meals = [];
     return this.foodService.getDinner()
       .subscribe(dinnerFood => {
         this.meals.push(dinnerFood);
-      })
+        console.log(this.meals);
+      });
   }
 
-  getTime(){
+  getTime() {
     let d = new Date();
     this.time = d.getHours();
+    // the current day of the week is
+    let day = d.getDay();
+    // the date for the current day of the week is
+    let date = d.getDate();
+    // Set today's date
+    this.dates[day] = date;
+    // Fill in other dates based on today's
+    for (let i = 0; i < day; i++) {
+      this.dates[i] = date - (day - i); 
+    }
+    for (let i = day + 1; i < this.dates.length; i++) {
+      this.dates[i] = date + (this.dates.length - i);
+    }
   }
 
   testClick(){
@@ -76,9 +92,9 @@ export class HomeComponent implements OnInit {
 
   displayMeal(){
     this.getTime();
-    if(this.time >= 21 || this.time < 10){
+    if (this.time >= 21 || this.time < 10) {
       this.getBreakfast();
-    } else if(this.time >= 10 && this.time < 14){
+    } else if (this.time >= 10 && this.time < 14) {
       this.getLunch();
     } else {
       this.getDinner();
