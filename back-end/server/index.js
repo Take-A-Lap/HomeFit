@@ -66,7 +66,7 @@ app.get('/getMyWorkOut', (req,res)=>{
       res.send(chorl)
     })
   })
-})
+
 app.post('/updateWorkouts', (req, res)=>{
   console.log(req);
   // db.updateWorkoutsByUserId()
