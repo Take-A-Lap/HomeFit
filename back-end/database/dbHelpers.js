@@ -14,11 +14,6 @@ const db = pgp(connection);
 
 module.exports = {
 
-  createReferenceRegimen: (user_id, day, exercise_id) => db.any(`
-    INSERT INTO gross_regimen (user_id, day_no, exercise_id)
-    VALUES ($1, $2, $3)
-  `, [user_id, day, exercise_id]),
-
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT * FROM users
   WHERE alexa_user_id = $1
