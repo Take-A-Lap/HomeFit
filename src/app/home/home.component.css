@@ -6,13 +6,21 @@
     }
 }
 
+.workout-button {
+  background-color: #42f483;
+  color: #1d163a;
+  display: block;
+  width: 100%;
+  height: 200%;
+}
+
 .container {
-  background-color: black;
+  background-color: #f6f98b;
 }
 
 .nav {
   border-radius: 0px;
-  background-color: #FAA24A;
+  background-color: #3549e8;
   /* background-color:#31cd32; */
   text-align: center
 }
@@ -26,19 +34,14 @@
 }
 
 .jumbotron {
-  background-image: url('../../assets/img/new_orleans_placeholder.jpg');
   border-radius: 0px;
+  color: lightgrey;
 }
 
 img {
   max-width: 100%;
   max-height: 100%;
 }
-
-/* tr {
-  max-width: 100%;
-  max-height: 100%;
-} */
 
 .fa {
   max-width: 100%;
@@ -60,6 +63,9 @@ h4 {
   width: 100%
 }
 
+.weatherText {
+  color: lightgrey;
+}
 p {
   color: navy;
 }
