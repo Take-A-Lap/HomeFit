@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
         console.log(position);
         this.latitude = position.coords.latitude.toString(),
         this.longitude = position.coords.longitude.toString();
+        // this.getCurrentTime();
         this.sendWeather1();
         });
       }
@@ -60,7 +61,8 @@ export class HomeComponent implements OnInit {
     return this.httpClient.post('/weather', {
       params: {
         latitude: this.latitude,
-        longitude: this.longitude
+        longitude: this.longitude,
+        timeStamp: this.time
       }
     }, { responseType: 'text' })
     .subscribe(data => {
@@ -160,6 +162,7 @@ export class HomeComponent implements OnInit {
     for (let i = day + 1; i < this.dates.length; i++) {
       this.dates[i] = date + (this.dates.length - i);
     }
+    console.log(this.dates);
   }
 
   testClick(){
