@@ -142,6 +142,12 @@ module.exports = {
     return response;
   },
 
+  skip: (former, current) => {
+    const speechOutput = "<s> I am not a fan of " + former + " either </s> <s> How about we try " + current + " </s> We can begin when you are ready or we can switch to another exercise if you would like.";
+    const response = buildResponse(speechOutput, false, "Skipping " + former);
+    return response;
+  },
+
   PLACEHOLDER: () => {
     const speechOutput = "<s>As this skill is currently in beta test mode,</s><s> some features are still being worked on.</s> Feel free to continue to use me for your workout needs while my developers continue to improve me.";
     const response = buildResponse(speechOutput, false, "This is a test");
