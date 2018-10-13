@@ -13,14 +13,15 @@ import { WorkoutService } from '../workout.service';
 export class WorkoutComponent implements OnInit {
 
   id;
+  diff;
   userID;
   name;
+  wo_num;
   exercise;
   masterIndex = 0;
-  workouts;
   index = 0;
-  workout = '';
-  completed = '';
+  workout;
+  completed;
   rep = 0;
   set = 1;
   email;
@@ -88,17 +89,8 @@ export class WorkoutComponent implements OnInit {
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
-        // this.completed = 'Workout Complete';
-        console.log(this.workouts.length);
-        this.workouts.shift();
-        console.log(this.workouts.length);
-        this.httpClient.post('/updateWorkouts', {
-          params: {
-            userID: this.id,
-            WOs: this.workouts
-          }
-        }).subscribe()
-        this.home();
+        this.increaseWONum()
+        this.home();        
       }
     }
     
@@ -116,24 +108,35 @@ export class WorkoutComponent implements OnInit {
       console.log(this.email);
     }
 
-    getWorkoutInfo(){
-      this.getUserInfo()
-      .then((value)=>{
-        this.id = value;
-        // console.log(value);
-        this.httpClient.get('/getMyWorkOut', {
-          params: { id: this.id }
-        }).subscribe((workouts) => {
-          console.log(workouts);
-          this.workouts = workouts;
-          this.workout = workouts[0];
-          this.exercise = this.workout[this.index];
-          this.youtube = this.exercise.youtube_link;
-          this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-          this.name = this.exercise.name;
-        });
+    // getWorkoutInfo(){
+    //   this.getUserInfo()
+    //   .then((value)=>{
+    //     this.id = value;
+    //     // console.log(value);
+    //     this.httpClient.get('/getMyWorkOut', {
+    //       params: { id: this.id }
+    //     }).subscribe((workouts) => {
+    //       console.log(workouts);
+    //       this.workout = workouts[0];
+    //       this.exercise = this.workout[this.index];
+    //       this.youtube = this.exercise.youtube_link;
+    //       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+    //       this.name = this.exercise.name;
+    //     });
+    //   })
+    //   .catch(err=>console.error(err));  
+    // }
+
+    increaseWONum(){
+      return new Promise((resolve, reject)=>{
+        let value = this.wo_num + 1;
+        let id = this.id;
+        this.httpClient.post('/updateWorkouts', {
+          params: {
+            value, id
+          }
+        }).subscribe(res=>console.log(res))
       })
-      .catch(err=>console.error(err));  
     }
 
     printIt(){
@@ -152,12 +155,12 @@ export class WorkoutComponent implements OnInit {
         this.httpClient.get('/getUser', {
           params: { email: this.email }
         }).subscribe(id => {
-          result =id;
-          this.id = id;
-          result = this.id.id
-          if (result === this.id.id) {
-            console.log('success');
-            resolve(result);
+          result = id;
+          this.id = result.id;
+          this.wo_num = result.workout_completes;
+          this.diff = result.squat_comf;
+          if (result === id) {
+            resolve(id);
           } else {
             reject('Get User Rejection')
           }
@@ -165,10 +168,37 @@ export class WorkoutComponent implements OnInit {
       })
     }
 
+    generateWO(){
+      return new Promise((resolve, reject)=>{
+        this.httpClient.get('/generateWO', {
+          params: {
+            diff: this.diff,
+            wo_num: this.wo_num
+          }
+        }).subscribe(wo=>{
+          // console.log(wo)
+          this.workout = wo;
+          this.exercise = this.workout[this.index];
+          this.youtube = this.exercise.youtube_link;
+          this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+          this.name = this.exercise.name;
+        })
+      })
+    }
+
+    searchAndGenerate() {
+      this.getUserInfo()
+      .then(()=>{
+        this.generateWO()
+      })
+    }
+
     ngOnInit() {
       this.getCookieInfo();
+      // this.getUserInfo();
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-      this.getWorkoutInfo();
+      // this.generateWO();
+      this.searchAndGenerate();
         
     }
 
