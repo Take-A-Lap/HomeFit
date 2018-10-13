@@ -348,9 +348,9 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
       .then((user) => {
-        console.log(req.body.session.user.userId);
+        console.log(user);
         
-        const passingName = (user ? user.name : "not linked yet");
+        const passingName = (user !== undefined ? user.name : "not linked yet");
         res.json(alexaHelp.invocationIntent(passingName));
       })
       .catch(err => {
