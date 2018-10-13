@@ -278,28 +278,8 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
             // console.log(user, ' this needs to not be an empty array');
-            return db.getExercisesFromExerciseWorkoutsByUserId(user.id)
-          })
-          .then(exerWork => {
-            // console.log(exerWork[0].exercises.slice(0, 1), " the array of json");
-            console.log(workouts, ' this should not be an empty array ----- workouts------');
-            workouts = workouts.length > 0 ? workouts : [].concat(exerWork.exercises.splice(0, 1));
-            if (workouts[0].length) {
-              workouts = workouts[0];
-            }
-            // console.log(workouts, ' this should be one days worth of workouts');
-            res.json(alexaHelp.initWorkout(workouts[0], 8 - workouts.length));
-            return exerWork;
-          })
-          .then(exercises => {
-            // this would be a good place to generate the workouts as they are being taken off
-            if (!exercises.exercises.length || exercises === undefined) {
-              workout.generateWorkoutSignUp(3, (workoutArr) => {
-                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
-              });
-            } else {
-              db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
-            }
+
+            return 
           })
           .catch(err => {
             console.error(err);
@@ -310,40 +290,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
             // console.log(userArr, ' this needs to not be an empty array');
-            return db.getExercisesFromExerciseWorkoutsByUserId(user.id)
-          })
-          .then(exerWork => {
-            // console.log(exerWork[0].exercises.slice(0, 1), " the array of json the second one");
-            console.log(workouts, ' this should equal workouts from above')
-            workouts = workouts.length > 0 ? workouts : [].concat(exerWork.exercises.splice(0, 1));
-            if (workouts[0].length) {
-              workouts = workouts[0];
-            }
-            if (current === undefined) {
-              current = workouts.splice(0, 1);
-              sets++;
-            }
-            if (sets <= 3) {
-              sets++;
-            } else {
-              console.log('this should mean that current and sets have been reset')
-              current === undefined;
-              sets = 0;
-            }
-            console.log(sets, " this should never be more than 3");
-            // console.log(workouts, ' this should be one days worth of workouts the second one');
-            res.json(alexaHelp.coachExercise(current));
-            return exerWork;
-          })
-          .then(exercises => {
-            // this would be a good place to generate the workouts as they are being taken off
-            if (!exercises.exercises.length || exercises === undefined) {
-              workout.generateWorkoutSignUp(3, (workoutArr) => {
-                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
-              });
-            } else {
-              db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
-            }
+            return 
           })
           .catch(err => {
             console.error(err);
