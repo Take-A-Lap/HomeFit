@@ -34,11 +34,11 @@ module.exports = {
   getWorkoutsByUserID: (id)=> db.any(`
     SELECT exercises FROM exercises_workouts
     WHERE id_user = $1
-  `, [id]),
+  `, [id]).then(([exercises])=> exercises),
 
   testHelperFunction: (id)=> db.any(`
   SELECT * FROM "exercises_workouts"
-  where id_user = 60
+  where id_user = 89
   `, [id]),
 
   getUserInfoByEmail: (email) => db.any(`

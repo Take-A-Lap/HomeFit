@@ -47,9 +47,12 @@ app.get('/getUserId', (req, res) => {
 })
 
 app.get('/homeFitAuth', (req, res) => {
-  console.log(req);
+  console.log(req.query.email);
   db.getPasswordByEmail(req.query.email)
-  .then(password=> res.send(password))
+  .then(password=> {
+    console.log(password);
+    res.send(password)
+  })
 })
 
 app.get('/getMyWorkOut', (req,res)=>{
@@ -57,9 +60,9 @@ app.get('/getMyWorkOut', (req,res)=>{
   const int = parseInt(req.query.id)
   db.getWorkoutsByUserID(int)
   .then((workouts) => {
-    console.log(workouts)
+    console.log(workouts.exercises)
     
-    res.send('hello')
+    res.send(workouts.exercises)
   })
   .catch((ugh)=>console.error(ugh));
 })
