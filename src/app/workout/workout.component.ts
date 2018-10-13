@@ -24,6 +24,7 @@ export class WorkoutComponent implements OnInit {
   rep = 0;
   set = 1;
   email;
+  options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   
   youtube = ''
   trustedUrl: SafeUrl;
@@ -75,7 +76,7 @@ export class WorkoutComponent implements OnInit {
       this.inc();
 
     }
-    
+
     switchExercise() {
       this.index++;
       this.exercise = this.workout[this.index];

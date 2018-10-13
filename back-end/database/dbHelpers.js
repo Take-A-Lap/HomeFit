@@ -36,6 +36,11 @@ module.exports = {
     WHERE id_user = $1
   `, [id]),
 
+  testHelperFunction: (id)=> db.any(`
+  SELECT * FROM "exercises_workouts"
+  where id_user = 60
+  `, [id]),
+
   getUserInfoByEmail: (email) => db.any(`
     SELECT * FROM users
     WHERE user_email = $1
