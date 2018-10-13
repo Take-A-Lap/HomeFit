@@ -7,6 +7,7 @@ const app = dialogflow();
 
 
 app.intent('start workout', conv => {
+  console.log('please tell me this is at least called');
   conv.ask('This is a test to see that you are connected to the server');
 });
 
