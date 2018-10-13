@@ -385,7 +385,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             console.log(alexaWorkout, " should be some exercises");
             
             return alexaWorkout.splice(0, 1);
-          }).then(currentExercise => {
+          }).then(([currentExercise]) => {
             console.log(currentExercise, 'this need to be defined as the current exercise');
             current = currentExercise;
             res.json(alexaHelp.initWorkout(current));
