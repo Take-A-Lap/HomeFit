@@ -149,8 +149,25 @@ app.post('/weather', (req, res) => {
         humidity: parsedBody.currently.humidity,
         icon: parsedBody.currently.icon
       }
-      console.log(weatherInfo)
-      res.send(weatherInfo);
+      weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude, (err, body) => {
+        if (err) {
+          console.error(err);
+        } else {
+          const parsedForCity = JSON.parse(body.body);
+            weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
+            weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
+            weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
+          weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
+            weatherInfo.time_of_day = body;
+          })
+          weather.runningRecommendations(weatherInfo, (data) => {
+            weatherInfo.recommendation = data;
+          })
+          db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day)
+            .then(result => { weatherInfo.url = result })
+              .then(() => {res.send(weatherInfo)})
+        }
+      })
     }
   })
   // res.sendStatus(201);
