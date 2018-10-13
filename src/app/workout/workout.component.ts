@@ -61,13 +61,6 @@ export class WorkoutComponent implements OnInit {
           clearInterval(setIncrement);
           this.set = 1;
           this.increment();
-          // this.masterIndex++;
-          //INSERT HTTP REQUEST TO POST THE 
-          //WORKOUT THAT WAS JUST COMPLETED
-          //AND THE DATE
-          // if (this.masterIndex > 6){
-          //   this.router.navigate(['/home']);
-          // }
         }
       }, (4500 + 10*this.exercise.rep_time));
     }
@@ -90,10 +83,32 @@ export class WorkoutComponent implements OnInit {
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
         this.increaseWONum()
+        this.storeCompleted();
         this.home();        
       }
     }
     
+    getDate(){
+      return new Promise((resolve, reject)=>{
+        var d = new Date();
+        var mo = d.getMonth() + 1;
+        var day = d.getDate();
+        var date = `${mo}/${day}`;
+        if(date){
+          resolve(date);
+        } else{
+          reject('Date Error');
+        }
+      })
+    }
+
+    storeCompleted(){
+      this.getDate().then(date=>{
+        this.httpClient.post('/completed', {
+          params: { date, id: this.id }
+        }).subscribe()
+      })
+    }
     testClick(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=')
