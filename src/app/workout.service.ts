@@ -13,6 +13,14 @@ export class WorkoutService {
       params: {
         userId: userID
       }
-    })  
+    }) 
+  }
+
+  getCompletedWorkouts(email) {
+    return this.httpClient.get('/getUser', {
+      params: {
+        email: email
+      }
+    });
   }
 }
