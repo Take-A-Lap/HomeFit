@@ -330,7 +330,7 @@ app.post('/signUp', (req, res) =>{
   let password = req.body.params.password;
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
   .then(()=>{
-    return Promise.all([db.getUserIdByEmail(email), workout.generateWorkoutSignUp(squatComf)])
+    return Promise.all([db.getUserIdByEmail(email)])
       .catch(err=>console.error(err));
   })
   .then(([user,regimen])=> {
