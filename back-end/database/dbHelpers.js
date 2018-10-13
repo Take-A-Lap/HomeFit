@@ -87,20 +87,6 @@ module.exports = {
     WHERE user_email = $1
   `, [email]).then(([id]) => id),
 
-  getExercisesFromExerciseWorkoutsByUserId: (userId) => db.any(`
-    SELECT exercises FROM exercises_workouts
-    WHERE id_user = $1
-  `, [userId]).then(([workouts]) => workouts),
-
-  insertIntoExerciseWorkoutsByUserIdAndArrayOfJson: (userId, arrayOfJson) => db.any(`
-    INSERT INTO exercises_workouts (id_user, exercises) VALUES ( $1, $2 ::json[])
-  `, [userId, arrayOfJson]),
-
-  addNewExercises: (name, rep_time, youtube_link, id_muscle_group, difficulty) => db.any(`
-    INSERT INTO exercises_workouts (name, rep_time, youtube_link, id_muscle_group, difficulty) 
-    VALUES ( $1, $2, $3, $4, $5)
-  `, [name, rep_time, youtube_link, id_muscle_group, difficulty]),
-
 
   addNewUser: (weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredUsername, password) => db.any(`
     INSERT INTO users 
