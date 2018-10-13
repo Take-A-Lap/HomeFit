@@ -12,7 +12,7 @@ import { WorkoutService } from '../workout.service';
 
 export class WorkoutComponent implements OnInit {
 
-  
+  id;
   userID;
   name;
   exercise;
@@ -24,6 +24,7 @@ export class WorkoutComponent implements OnInit {
   rep = 0;
   set = 1;
   email;
+  options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   
   youtube = ''
   trustedUrl: SafeUrl;
@@ -75,7 +76,7 @@ export class WorkoutComponent implements OnInit {
       this.inc();
 
     }
-    
+
     switchExercise() {
       this.index++;
       this.exercise = this.workout[this.index];
@@ -115,16 +116,23 @@ export class WorkoutComponent implements OnInit {
     }
 
     getWorkoutInfo(){
-      this.httpClient.get('/getMyWorkOut', {
-        params: {email: this.email}
-      }).subscribe((workouts)=>{
-        this.workouts = workouts;
-        this.workout = workouts[0];
-        this.exercise = this.workout[this.index];
-        this.youtube = this.exercise.youtube_link;
-        this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-        this.name = this.exercise.name;
-      });
+      this.getUserInfo()
+      .then((value)=>{
+        this.id = value;
+        // console.log(value);
+        this.httpClient.get('/getMyWorkOut', {
+          params: { id: this.id }
+        }).subscribe((workouts) => {
+          console.log(workouts);
+          this.workouts = workouts;
+          this.workout = workouts[0];
+          this.exercise = this.workout[this.index];
+          this.youtube = this.exercise.youtube_link;
+          this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+          this.name = this.exercise.name;
+        });
+      })
+      .catch(err=>console.error(err));  
     }
 
     printIt(){
@@ -138,14 +146,26 @@ export class WorkoutComponent implements OnInit {
     }
     
     getUserInfo(){
-      this.httpClient.get('/getUser', { 
-        params: { email: this.email }
-      }).subscribe();
+      let result;
+      return new Promise((resolve, reject)=>{
+        this.httpClient.get('/getUser', {
+          params: { email: this.email }
+        }).subscribe(id => {
+          result =id;
+          this.id = id;
+          result = this.id.id
+          if (result === this.id.id) {
+            console.log('success');
+            resolve(result);
+          } else {
+            reject('Get User Rejection')
+          }
+        });
+      })
     }
 
     ngOnInit() {
       this.getCookieInfo();
-      this.getUserInfo();
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       this.getWorkoutInfo();
         

@@ -25,43 +25,50 @@ app.use(bodyParser.urlencoded({
   let sets = 0;
   let current;
 
-app.use(express.static('dist/HomeFit'));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
 app.get('/cornTest', (req, res) => {
   // workout.generateWorkoutSignUp(3)
-  db.getExercisesFromExerciseWorkoutsByUserId(81)
+  db.testHelperFunction()
     .then(result => {
       res.send(result);
     })
     .catch((err) => console.error(err))
 })
 app.get('/getUser', (req, res) => {
-  console.log(req);
+  console.log(req.query.email)
+  db.getUserInfoByEmail(req.query.email)
+  .then((id)=>res.send(id))
+  .catch(err=>console.error(err));
 })
+
+app.get('/getUserId', (req, res) => {
+  db.getUserIdByEmail( req.query.email)
+    .then((id) => res.send(id))
+    .catch(err => console.error(err));
+})
+
 app.get('/homeFitAuth', (req, res) => {
   console.log(req);
   db.getPasswordByEmail(req.query.email)
   .then(password=> res.send(password))
 })
+
 app.get('/getMyWorkOut', (req,res)=>{
-  db.getUserIdByEmail(req.query.email)
-  .then((id)=>{
-    db.getWorkoutsByUserID(id.id)
-    .then((workouts) => {
-      chorl = workouts[0].exercises
-      res.send(chorl)
-    })
+  console.log("ID", req.query.id);
+  const int = parseInt(req.query.id)
+  db.getWorkoutsByUserID(int)
+  .then((workouts) => {
+    console.log(workouts)
+    
+    res.send('hello')
   })
+  .catch((ugh)=>console.error(ugh));
 })
+
 app.post('/updateWorkouts', (req, res)=>{
   console.log(req);
   // db.updateWorkoutsByUserId()
 })
+
 app.get('/weather', (req, res) => {
   weather.getWeather(body => {
     const parsedBody = JSON.parse(body);
