@@ -7,13 +7,11 @@ const weather = require('../weather/weatherHelpers');
 const app = express()
 const meal = require('../Algorithms/recipe.js');
 const workout = require('../Algorithms/workout.js');
-const alexaRouter = express.Router()
 const sse = require('../../sse');
 const fs = require('fs');
-const {
-  dialogflow,
-  Image,
-} = require('actions-on-google')
+const google = require('../googleAssHelpers/helpers');
+const alexaRouter = express.Router()
+
 
 app.use('/alexa', alexaRouter);
 app.use(express.static('dist/HomeFit'));
@@ -28,7 +26,6 @@ app.use(bodyParser.urlencoded({
   let alexaWorkout = [];
   let sets = 0;
   let current;
-const google = dialogflow();
 
 app.post('/fulfillment', google);
 app.get('/cornTest', (req, res) => {
