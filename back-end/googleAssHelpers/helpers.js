@@ -2,6 +2,7 @@ const {
   dialogflow,
   Image,
 } = require('actions-on-google')
+const db = require('../database/dbHelpers');
 
 const app = dialogflow();
 
