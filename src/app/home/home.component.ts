@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   dates = Array(7);
   latitude: string;
   longitude: string;
+  runningRecommendation: string;
 
   constructor(
     private foodService: FoodService,
@@ -70,7 +71,8 @@ export class HomeComponent implements OnInit {
       console.log('success', data);
       console.log(data, 'line 99')
       this.currentWeather.push(data)
-      console.log(this.currentWeather)
+      this.runningRecommendation = this.currentWeather[0].recommendation;
+      console.log(this.runningRecommendation, 'line 75')
     },
       error => {
         console.log('error', error);
