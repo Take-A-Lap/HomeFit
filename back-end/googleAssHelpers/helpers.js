@@ -8,6 +8,7 @@ const workout = require('../Algorithms/workout.js');
 
 const app = dialogflow();
 
+console.log(app, ' let\'s see whats inside of this on line 11 in google helpers');
 
 app.intent('start workout', conv => {
   console.log('please tell me this is at least called');
