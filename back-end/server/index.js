@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-  let workouts = [];
+  let alexaWorkout = [];
   let sets = 0;
   let current;
 
@@ -52,6 +52,38 @@ app.get('/getUserId', (req, res) => {
     .catch(err => console.error(err));
 })
 
+app.get('/getUser', (req, res) => {
+  console.log(req.query.email)
+  db.getUserInfoByEmail(req.query.email)
+    .then((id)=>res.send(id))
+    .catch(err=>console.error(err));
+})
+
+app.get('/getCompletedWO', (req, res) => {
+  console.log(req.query.email)
+  db.getUserInfoByEmail(req.query.email)
+    .then((userInfo)=> {
+      return userInfo;
+    })
+    .then(({ id }) => {
+      // use the id to query the completed str and cardio tables
+      let completedWorkouts = [];
+      db.getCompCardioByUserId(id)
+        .then(compCardio => {
+          completedWorkouts.push(compCardio);
+          db.getCompStrByUserId(id)
+            .then(compStr => {
+              completedWorkouts.push(compStr);
+              return completedWorkouts;
+            })
+        })
+    })
+    .then(completedWorkouts => {
+      res.send(completedWorkouts);
+    })
+    .catch(err=>console.error(err));
+});
+
 app.get('/homeFitAuth', (req, res) => {
   db.getPasswordByEmail(req.query.email)
   .then(password=> {
@@ -81,20 +113,47 @@ app.post('/updateWorkouts', (req, res)=>{
   .then(()=>res.send('workouts updated'))
 })
 
-app.get('/weather', (req, res) => {
-  weather.getWeather(body => {
-    const parsedBody = JSON.parse(body);
-    const weather = {
-      text: parsedBody[0].WeatherText,
-      city: 'New Orleans',
-      state: 'LA',
-      celsius: parsedBody[0].Temperature.Metric.Value,
-      fahrenheit: parsedBody[0].Temperature.Imperial.Value,
-      isDayTime: parsedBody[0].IsDayTime
+// app.get('/weather', (req, res) => {
+//   weather.getWeather((body) => {
+//     const parsedBody = JSON.parse(body);
+//     // console.log(parsedBody)
+//     const weatherInfo = {
+//       text: parsedBody[0].WeatherText,
+//       city: 'New Orleans',
+//       fahrenheit: parsedBody[0].Temperature.Imperial.Value,
+//       celsius: parsedBody[0].Temperature.Metric.Value,
+//       isDayTime: parsedBody[0].IsDayTime
+//     }
+//     res.send(weatherInfo)
+//   })
+//   // res.send(200);
+// })
+
+
+app.post('/weather', (req, res) => {
+  console.log(req.body.params.latitude, req.body.params.longitude, 'work pretty please');
+  weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, body) => {  
+    // console.log(body)
+    let weatherInfo = {};
+    if (err) {
+      console.error(err);
+    } else {
+      const parsedBody = JSON.parse(body.body);
+      weatherInfo = {
+        text: parsedBody.currently.summary,
+        temp: parsedBody.currently.temperature,
+        apparentTemp: parsedBody.currently.apparentTemperature,
+        humidity: parsedBody.currently.humidity,
+        icon: parsedBody.currently.icon
+      }
+      console.log(weatherInfo)
+      res.send(weatherInfo);
     }
-    res.send(weather);
   })
+  // res.sendStatus(201);
+  // res.end();
 })
+
 
 app.get('/dinner', (req,res)=> {
   let meals = [];
@@ -218,9 +277,11 @@ app.get('/breakfast', (req, res) => {
     res.send(breakfastResponse);
   })    
 })
+
 app.post('/saveWO', (req, res)=> {
   console.log(req);
 })
+
 app.get('/test', (req, res) => {  
   db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
   .then(userArr => {
@@ -230,9 +291,11 @@ app.get('/test', (req, res) => {
     console.error(err);
   })
 });
+
 app.get('/recallWOs', (req, res)=>{
 
 });
+
 app.post('/signUp', (req, res) =>{
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;
@@ -270,6 +333,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       })
       .catch(err => {
         console.error(err);
+        res.json(alexaHelp.PLACEHOLDER());
       });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     res.json(alexaHelp.endSession());
@@ -285,65 +349,38 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do some stuff
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
-            return db.getExercisesFromExerciseWorkoutsByUserId(user.id)
+            // console.log(user, ' this needs to not be an empty array');
+            const squatComf = user.squat_comf;
+            const numWorkouts = user.workout_completes;
+            return workout.generateWorkout(numWorkouts, squatComf)
           })
-          .then(exerWork => {
-            workouts = workouts.length > 0 ? workouts : [].concat(exerWork.exercises.splice(0, 1));
-            if (workouts[0].length) {
-              workouts = workouts[0];
+          .then(genWorkout => {
+            if(alexaWorkout.length === 0 && sets !== 0){
+              db.getUserInfoByAlexUserId(req.body.session.user.userId)
+              .then(user =>{
+                return db.updateNoWO(user.id, user.workout_completes + 1);
+              })
             }
-            res.json(alexaHelp.initWorkout(workouts[0], 8 - workouts.length));
-            return exerWork;
-          })
-          .then(exercises => {
-            // this would be a good place to generate the workouts as they are being taken off
-            if (!exercises.exercises.length || exercises === undefined) {
-              workout.generateWorkoutSignUp(3, (workoutArr) => {
-                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
-              });
-            } else {
-              db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
-            }
+            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
+            return alexaWorkout.splice(0, 1);
+          }).then(currentExercise => {
+            current = currentExercise;
+            res.json(alexaHelp.initWorkout(current));
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER());
           });
         break;
       case 'coachExercise':
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
-            return db.getExercisesFromExerciseWorkoutsByUserId(user.id)
-          })
-          .then(exerWork => {
-            workouts = workouts.length > 0 ? workouts : [].concat(exerWork.exercises.splice(0, 1));
-            if (workouts[0].length) {
-              workouts = workouts[0];
-            }
-            if (current === undefined) {
-              current = workouts.splice(0, 1);
-              sets++;
-            }
-            if (sets <= 3) {
-              sets++;
-            } else {
-              current === undefined;
-              sets = 0;
-            }
             res.json(alexaHelp.coachExercise(current));
-            return exerWork;
-          })
-          .then(exercises => {
-            // this would be a good place to generate the workouts as they are being taken off
-            if (!exercises.exercises.length || exercises === undefined) {
-              workout.generateWorkoutSignUp(3, (workoutArr) => {
-                db.updateWorkoutsByUserId(exercises.id_user, workoutArr);
-              });
-            } else {
-              db.updateWorkoutsByUserId(exercises.id_user, exercises.exercises);
-            }
+            sets++;
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER())
           });
         break;
       case 'readWorkoutStatus':
@@ -354,11 +391,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         link = link.split(' ').join('@');
         db.updateAlexaId(link, req.body.session.user.userId)
           .then(() => {
+            res.json(alexaHelp.linkAccount(link));
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER())
           })
-        res.json(alexaHelp.linkAccount(link));
         break;
       case 'changeView':
         let view = req.body.request.intent.slots.view.value;
@@ -366,7 +404,32 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         res.json(alexaHelp.changeView(view));
         break;
       case 'skipExercise':
-        res.json(alexaHelp.PLACEHOLDER());
+        const former = current;
+        db.getUserInfoByAlexUserId(req.body.session.user.userId)
+          .then(user => {
+            // console.log(user, ' this needs to not be an empty array');
+            const squatComf = user.squat_comf;
+            const numWorkouts = user.workout_completes;
+            return workout.generateWorkout(numWorkouts, squatComf)
+          })
+          .then(genWorkout => {
+            if (alexaWorkout.length === 0 && sets !== 0) {
+              db.getUserInfoByAlexUserId(req.body.session.user.userId)
+                .then(user => {
+                  return db.updateNoWO(user.id, user.workout_completes + 1);
+                })
+            }
+            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
+            return alexaWorkout.splice(0, 1);
+          }).then(currentExercise => {
+            current = currentExercise;
+            res.json(alexaHelp.skip(former, current));
+          })
+          .catch(err => {
+            console.error(err);
+            res.json(alexaHelp.PLACEHOLDER());
+          });
+        // res.json(alexaHelp.PLACEHOLDER());
         break;
       case 'AMAZON.HelpIntent':
         res.json(alexaHelp.help());
@@ -386,5 +449,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
 
 const port = 3000;
 app.listen(port, () => {
+  console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
 });
