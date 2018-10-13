@@ -16,10 +16,10 @@ app.intent('start workout', conv => {
   // conv.ask('This is a test to see that you are connected to the server');
   // conv.ask('Hi, how is it going?');
   // conv.ask(`Here's a picture of a cat`);
-  conv.ask(new Image({
-    url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
-    alt: 'A cat',
-  }));
+  // conv.ask(new Image({
+  //   url: 'https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/imgs/160204193356-01-cat-500.jpg',
+  //   alt: 'A cat',
+  // }));
   console.log('what happened after image was called?')
   conv.ask(new SimpleResponse({
     text: '<s> Let me know when you are ready to begin.</s>',
