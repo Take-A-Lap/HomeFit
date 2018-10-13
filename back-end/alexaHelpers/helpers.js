@@ -1,5 +1,9 @@
 const SKILL_NAME = "Fitness Trainer";
 
+const randomNumGen = (numOptions) =>{
+  return Math.floor(Math.random() * numOptions);
+}
+
 const buildResponse = (speechText, shouldSessionEnd, cardText) => {
 
   const speechOutput = "<speak>" + speechText + "</speak>";

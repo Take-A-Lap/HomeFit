@@ -14,11 +14,6 @@ const db = pgp(connection);
 
 module.exports = {
 
-  createReferenceRegimen: (user_id, day, exercise_id) => db.any(`
-    INSERT INTO gross_regimen (user_id, day_no, exercise_id)
-    VALUES ($1, $2, $3)
-  `, [user_id, day, exercise_id]),
-
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT * FROM users
   WHERE alexa_user_id = $1
@@ -35,11 +30,6 @@ module.exports = {
     SELECT password FROM users
     WHERE user_email = $1
   `, [email]).then(([password])=> password), 
-
-  getWorkoutsByUserID: (id)=> db.any(`
-    SELECT exercises FROM exercises_workouts
-    WHERE id_user = $1
-  `, [id]).then(([exercises])=> exercises),
 
   getUserInfoByEmail: (email) => db.any(`
     SELECT * FROM users
@@ -96,20 +86,6 @@ module.exports = {
     SELECT id FROM users
     WHERE user_email = $1
   `, [email]).then(([id]) => id),
-
-  getExercisesFromExerciseWorkoutsByUserId: (userId) => db.any(`
-    SELECT exercises FROM exercises_workouts
-    WHERE id_user = $1
-  `, [userId]).then(([workouts]) => workouts),
-
-  insertIntoExerciseWorkoutsByUserIdAndArrayOfJson: (userId, arrayOfJson) => db.any(`
-    INSERT INTO exercises_workouts (id_user, exercises) VALUES ( $1, $2 ::json[])
-  `, [userId, arrayOfJson]),
-
-  addNewExercises: (name, rep_time, youtube_link, id_muscle_group, difficulty) => db.any(`
-    INSERT INTO exercises_workouts (name, rep_time, youtube_link, id_muscle_group, difficulty) 
-    VALUES ( $1, $2, $3, $4, $5)
-  `, [name, rep_time, youtube_link, id_muscle_group, difficulty]),
 
 
   addNewUser: (weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredUsername, password) => db.any(`
@@ -177,28 +153,20 @@ module.exports = {
   user_email = $1
   `, [email, alexaId]),
 
-  updateWorkoutsByUserId: (userId, workouts) => db.any(`
-  UPDATE exercises_workouts
-  SET
-  exercises = $2 ::json[]
-  WHERE
-  id_user = $1 
-  `, [userId, workouts]),
-
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
     DELETE FROM user_dietary
     WHERE id_user = $1 AND id_dietary_restrictions = $2
   `, [userId, dietId]),
-
-
-  removeUserWorkout: (userId) => db.any(`
-    DELETE FROM exercises_workouts
-    WHERE id_user = $1
-  `, [userId]),
   
   removeUserByEmail: (userEmail) => db.any(`
     DELETE FROM users
     WHERE user_email = $1
   `, [userEmail]),
 
+  //create function to access weather_images in database
+  getWeatherImages: (text, time) => db.any(`
+    SELECT url FROM weather_images
+    WHERE weather = $1 AND time_of_day = $2 
+  `, [text, time]).then(([weatherImages]) => weatherImages)
+      .then(({ url }) => url)
 };

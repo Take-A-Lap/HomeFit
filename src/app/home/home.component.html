@@ -13,13 +13,12 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-xs-12 col-md-12">
-      <div class="jumbotron">
+    <div class="col-xs-12 col-md-12" *ngFor="let weather of currentWeather">
+      <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
         {{timeStampString.slice(0, 21)}}
-        <div>
-
+        <div class="weatherText">
           <!-- New Orleans, LA 64˚ Clear -->
-          New Orleans, LA {{currentWeather[0].temp}}˚ {{currentWeather[0].text}}
+          {{weather.city}}, {{weather.state}} {{weather.temp}}˚ {{weather.text}}
         </div>
       </div>
       <a class="nav-link" routerLink="/workout">
@@ -63,14 +62,14 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </div>  
   <div class="col-md-12">
     <slideshow 
-      [imageUrls]=imageUrls
-      [height]="height"
-      [minHeight]="'200px'"
-      [autoPlay]="true"
-      [showArrows]="false"
+    [imageUrls]=imageUrls
+    [height]="height"
+    [minHeight]="'200px'"
+    [autoPlay]="true"
+    [showArrows]="false"
     ></slideshow> 
   </div> 
   <br>
