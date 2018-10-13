@@ -247,10 +247,6 @@ app.post('/signUp', (req, res) =>{
   res.end();
 });
 
-<<<<<<< HEAD
-const port = 81;
-
-=======
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   console.log(req.body.request.type, " this us the type of request")
   if (req.body.request.type === 'LaunchRequest') {
@@ -401,8 +397,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-const port = 3000;
->>>>>>> b8d9b242019b1d1584e65d178c2ca91f853380bf
+const port = 81;
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
   app.keepAliveTimeout = 0;
