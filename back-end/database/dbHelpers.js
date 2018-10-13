@@ -14,6 +14,11 @@ const db = pgp(connection);
 
 module.exports = {
 
+  createReferenceRegimen: (user_id, day, exercise_id) => db.any(`
+    INSERT INTO gross_regimen (user_id, day_no, exercise_id)
+    VALUES ($1, $2, $3)
+  `, [user_id, day, exercise_id]),
+
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT * FROM users
   WHERE alexa_user_id = $1
@@ -35,11 +40,6 @@ module.exports = {
     SELECT exercises FROM exercises_workouts
     WHERE id_user = $1
   `, [id]).then(([exercises])=> exercises),
-
-  testHelperFunction: (id)=> db.any(`
-  SELECT * FROM "exercises_workouts"
-  where id_user = 89
-  `, [id]),
 
   getUserInfoByEmail: (email) => db.any(`
     SELECT * FROM users
@@ -141,6 +141,12 @@ module.exports = {
     VALUES
     ($1, $2, $3, $4, $5, $6, $7)
   `, [userId, exerciseId, date, lastTotalTime, bpm, distance, completed]),
+
+  updateNoWO: (user_id, newWONum)=> db.any(`
+      UPDATE users
+      SET workout_completes = $2
+      WHERE id = $1
+  `, [user_id, newWONum]),
 
   updateCompCardio: (completed, userId, date, lastTotalTime, bpm) => db.any(`
     UPDATE completed_cardio

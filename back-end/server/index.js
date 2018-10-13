@@ -26,13 +26,33 @@ app.use(bodyParser.urlencoded({
   let current;
 
 app.get('/cornTest', (req, res) => {
-  // workout.generateWorkoutSignUp(3)
-  db.testHelperFunction()
-    .then(result => {
-      res.send(result);
-    })
-    .catch((err) => console.error(err))
+  db.updateNoWO(17,2)
+  .then((results)=>res.send(results))
+  .catch((err) => console.error(err))
 })
+
+app.get('/generateWO', (req, res)=> {
+  console.log(req.query.wo_num);
+  wo_num = req.query.wo_num;
+  if(wo_num === 0 || wo_num % 6 === 0){
+    workout.generateWorkoutChest(req.query.diff)
+    .then((wo)=>res.send(wo))
+    .catch(err=>console.error(err))
+  } else if(wo_num % 2 === 1){
+    workout.generateWorkoutCardio(req.query.diff)
+    .then((wo) => res.send(wo))
+    .catch(err => console.error(err))
+  } else if (wo_num % 4 === 0) {
+    workout.generateWorkoutLeg(req.query.diff)
+    .then((wo) => res.send(wo))
+    .catch(err => console.error(err))
+  } else if (wo_num % 2 === 0) {
+    workout.generateWorkoutBack(req.query.diff)
+    .then((wo) => res.send(wo))
+    .catch(err => console.error(err))
+  }
+})
+
 app.get('/getUser', (req, res) => {
   db.getUserInfoByEmail(req.query.email)
   .then((id)=>res.send(id))
@@ -62,10 +82,9 @@ app.get('/getMyWorkOut', (req,res)=>{
 })
 
 app.post('/updateWorkouts', (req, res)=>{
-  console.log(req.body.params.WOs);
-  console.log(req.body.params.userID)
-  db.updateWorkoutsByUserId(req.body.params.userID, req.body.params.WOs)
-  .then()
+  console.log(req.body.params.id)
+  db.updateNoWO(req.body.params.id, req.body.params.value)
+  .then(()=>res.send('workouts updated'))
 })
 
 app.get('/weather', (req, res) => {
