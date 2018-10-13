@@ -81,7 +81,7 @@ app.post('/updateWorkouts', (req, res)=>{
 
 
 app.post('/weather', (req, res) => {
-  console.log(req.body.params.latitude, req.body.params.longitude, 'work pretty please');
+  console.log(typeof req.body.params.timeStamp, 'work pretty please');
   let weatherInfo = {};
 
   weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, body) => {  
@@ -106,7 +106,9 @@ app.post('/weather', (req, res) => {
             weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
             weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
             weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
-          res.send(weatherInfo);
+          weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
+            weatherInfo.time_of_day = body;
+          })
         }
       })
     }

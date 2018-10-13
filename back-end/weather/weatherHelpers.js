@@ -27,5 +27,18 @@ module.exports = {
       url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
     }
     request(options, callback);
+  },
+
+  createDayNightLabel: (number, callback) => {
+    let text;
+    if (number > 5 && number < 19) {
+      text = 'day';
+    }
+    text = 'night';
+    callback(text);
+  },
+
+  createWeatherTypeLabel: (number, callback) => {
+
   }
 }
