@@ -350,7 +350,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       .then((user) => {
         console.log(user);
         
-        const passingName = (user !== undefined ? user.name : "not linked yet");
+        const passingName = (user !== undefined ? user.preferred_username : "not linked yet");
         res.json(alexaHelp.invocationIntent(passingName));
       })
       .catch(err => {
