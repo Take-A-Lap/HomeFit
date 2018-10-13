@@ -77,6 +77,16 @@ h4 {
   width: 100%
 }
 
+/* Slideshow container */
+.slideshow-container {
+  min-height: 200px;
+  position: absolute;
+  margin: auto;
+}
+
+.slides {
+  object-fit: cover;
+}
 
 
 

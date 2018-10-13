@@ -138,18 +138,14 @@
       </div>
     </div>
   </div> -->
-
-  <div class="row">
     <div class="col-md-12">
-      <div>
-        {{meals[0][0].recipe.label}}
-      </div>
       <slideshow 
-        [imageUrls]=mappedMeals
+        [imageUrls]=mealImages
         [height]="height"
         [minHeight]="'200px'"
+        [autoPlay]="true"
+        [showArrows]="false"
       ></slideshow>
-    </div>
-  </div>  
-
+    </div> 
+  <br>
 </div>

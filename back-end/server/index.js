@@ -174,18 +174,10 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-// });
 ////////////////////////
 // Routes that handle alexa traffic are now attached here.
 // Since this is attached to a router mounted at /alexa,
 // endpoints with alexa/blah blah will be caught at blah blah
-
-app.use(express.static('dist/HomeFit'));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
 // app.get('/home', (req, res) => {
 //   res.redirect('localhost:3000/signup')
@@ -194,6 +186,38 @@ app.use(bodyParser.urlencoded({
 // app.get('/personalInfo', (req, res) => {
 //   res.redirect('localhost:3000/signup')
 // })
+
+app.get('/getUser', (req, res) => {
+  console.log(req.query.email)
+  db.getUserInfoByEmail(req.query.email)
+    .then((id)=>res.send(id))
+    .catch(err=>console.error(err));
+})
+
+app.get('/getCompletedWO', (req, res) => {
+  console.log(req.query.email)
+  db.getUserInfoByEmail(req.query.email)
+    .then((userInfo)=> {
+      return userInfo;
+    })
+    .then(({ id }) => {
+      // use the id to query the completed str and cardio tables
+      let completedWorkouts = [];
+      db.getCompCardioByUserId(id)
+        .then(compCardio => {
+          completedWorkouts.push(compCardio);
+          db.getCompStrByUserId(id)
+            .then(compStr => {
+              completedWorkouts.push(compStr);
+              return completedWorkouts;
+            })
+        })
+    })
+    .then(completedWorkouts => {
+      res.send(completedWorkouts);
+    })
+    .catch(err=>console.error(err));
+});
 
 app.get('/homeFitAuth', (req, res) => {
   // console.log(req.query.email);
@@ -302,6 +326,7 @@ app.get('/signupWO', (req,res)=>{
     console.error(err);
   });
 })
+
 app.get('/cornTest', (req,res)=>{
   workout.generateWorkoutBack(3)
   .then(result => {
@@ -309,6 +334,7 @@ app.get('/cornTest', (req,res)=>{
   })
   .catch((err)=>console.error(err))
 })
+
 app.get('/breakfast', (req, res) => {
   let meals = [];
   let breakfastResponse = [];
@@ -349,9 +375,11 @@ app.get('/breakfast', (req, res) => {
     // console.log(meals.length);
   })    
 })
+
 app.post('/saveWO', (req, res)=> {
   console.log(req);
 })
+
 app.get('/test', (req, res) => {
   // console.log(req);
   
@@ -363,9 +391,11 @@ app.get('/test', (req, res) => {
     console.error(err);
   })
 });
+
 app.get('/recallWOs', (req, res)=>{
 
 });
+
 app.post('/signUp', (req, res) =>{
   // console.log(req);
   let weight = req.body.params.weight;
@@ -397,7 +427,16 @@ app.post('/signUp', (req, res) =>{
   res.end();
 });
 
-
+app.get('/testWOS', (req, res) => {
+  db.getWorkoutsByUserID(81)
+    .then(() => {
+      res.send('got iy');
+    })
+    .catch((error) => {
+      console.log(error)
+      res.send('not working');
+    })
+});
 
 
 const port = 3000;
