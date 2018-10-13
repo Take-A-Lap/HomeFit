@@ -153,24 +153,10 @@ module.exports = {
   user_email = $1
   `, [email, alexaId]),
 
-  updateWorkoutsByUserId: (userId, workouts) => db.any(`
-  UPDATE exercises_workouts
-  SET
-  exercises = $2 ::json[]
-  WHERE
-  id_user = $1 
-  `, [userId, workouts]),
-
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
     DELETE FROM user_dietary
     WHERE id_user = $1 AND id_dietary_restrictions = $2
   `, [userId, dietId]),
-
-
-  removeUserWorkout: (userId) => db.any(`
-    DELETE FROM exercises_workouts
-    WHERE id_user = $1
-  `, [userId]),
   
   removeUserByEmail: (userEmail) => db.any(`
     DELETE FROM users
