@@ -114,27 +114,44 @@ app.post('/updateWorkouts', (req, res)=>{
 })
 
 app.post('/weather', (req, res) => {
-  console.log(req.body.params.latitude, req.body.params.longitude, 'work pretty please');
+  let weatherInfo = {};
   weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, body) => {  
-    // console.log(body)
-    let weatherInfo = {};
     if (err) {
       console.error(err);
     } else {
       const parsedBody = JSON.parse(body.body);
       weatherInfo = {
         text: parsedBody.currently.summary,
-        temp: parsedBody.currently.temperature,
-        apparentTemp: parsedBody.currently.apparentTemperature,
+        temp: Math.floor(parsedBody.currently.temperature),
+        apparentTemp: Math.floor(parsedBody.currently.apparentTemperature),
         humidity: parsedBody.currently.humidity,
         icon: parsedBody.currently.icon
       }
-      console.log(weatherInfo)
-      res.send(weatherInfo);
+      weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude, (err, body) => {
+        if (err) {
+          console.error(err);
+        } else {
+          const parsedForCity = JSON.parse(body.body);
+            weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
+            weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
+            weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
+          weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
+            weatherInfo.time_of_day = body;
+          })
+          db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day)
+            .then(result => { weatherInfo.url = result })
+              .then(() => {res.send(weatherInfo)})
+        }
+      })
     }
   })
-  // res.sendStatus(201);
-  // res.end();
+})
+
+app.post('/weather', (req, res) => {
+  console.log(req.body, 'line 109');
+  weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude, (err, body) => {
+    console.log(body, 'line 110');
+  })
 })
 
 
