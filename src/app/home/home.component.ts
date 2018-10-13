@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { IImage } from 'ng-simple-slideshow';
 import { FoodService } from '../food/food.service';
 import { WeatherService } from '../weather.service';
 
@@ -22,6 +21,8 @@ export class HomeComponent implements OnInit {
   time: number;
   timeStamp: Date;
   dates = Array(7);
+  latitude: number;
+  longitude: number;
 
   constructor(
     private foodService: FoodService,
@@ -35,9 +36,19 @@ export class HomeComponent implements OnInit {
         this.currentWeather.push(currWeather, this.timeStamp.toString())
         console.log(this.currentWeather[1])
       })
-    console.log(this.timeStamp);  
   }
   
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude,
+        this.longitude = position.coords.longitude
+        console.log(position, 'line 46')
+      });
+      console.log(this.latitude, this.longitude, 'line 48')
+    }
+  }
+
   getBreakfast() {
     this.meals = [];
     return this.foodService.getBreakfast()
@@ -106,6 +117,7 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     // this.getWeather();
+    this.getLocation();
     this.displayMeal();
   }
 

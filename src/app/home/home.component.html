@@ -1,17 +1,28 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <div class="btn-group" role="group">
-        <a routerLink="/workout"><button class="nav-buttons" type="button">Workout</button></a>
-        <button class="nav-buttons" type="button" (click)="onSubmit()">Settings</button>
-        <button class="nav-buttons" type="button">Logout</button>
+    <div class="col-xs-12 col-md-12">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/workout">Workout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/personalInfo">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Logout</a>
+        </li>
+      </ul>
+      <div class="jumbotron">
+          Current Weather: New Orleans, LA 64˚ Clear
+          <!-- Current Weather: {{currentWeather[0].city}}, LA {{currentWeather[0].fahrenheit}}˚ {{currentWeather[0].text}} -->
       </div>
-      <div class="media">
-        <div class="imageContainer">
-          Current Weather: {{currentWeather[0].city}}, LA {{currentWeather[0].fahrenheit}}˚ {{currentWeather[0].text}}
-          <img alt="Location pic" src="../../assets/img/new_orleans_placeholder.jpg" />
-        </div>
-      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
       <table class="table" cellpadding="15">
         <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <thead>
