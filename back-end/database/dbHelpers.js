@@ -134,6 +134,14 @@ module.exports = {
     WHERE
     id_user = $2
   `, [completed, userId, date, lastTotalTime, bpm]),
+  
+  updateGoogleSessionIdForUser: (username, sessionId) => db.any(`
+  UPDATE users
+  SET
+  google_session_id = $2
+  WHERE
+  preferred_username = $1
+  `,[username, sessionId])
 
   updateCompStr: (completed, userId, date, reps) => db.any(`
     UPDATE completed_str
