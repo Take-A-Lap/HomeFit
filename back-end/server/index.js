@@ -62,8 +62,10 @@ app.get('/getMyWorkOut', (req,res)=>{
 })
 
 app.post('/updateWorkouts', (req, res)=>{
-  console.log(req);
-  // db.updateWorkoutsByUserId()
+  console.log(req.body.params.WOs);
+  console.log(req.body.params.userID)
+  db.updateWorkoutsByUserId(req.body.params.userID, req.body.params.WOs)
+  .then()
 })
 
 app.get('/weather', (req, res) => {
@@ -154,12 +156,14 @@ app.get('/signupWO', (req,res)=>{
 
 app.get('/cornTest', (req,res)=>{
   // workout.generateWorkoutSignUp(3)
-  db.getExercisesFromExerciseWorkoutsByUserId(81)
+  workout.generateWorkoutSignUp(3)
+  // db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(89, )
 
   .then(result => {
+    console(result);
     res.send(result);
   })
-  .catch((err)=>console.error(err))
+  .catch((err)=>console.error('err'))
 })
 
 app.get('/breakfast', (req, res) => {
