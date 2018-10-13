@@ -8,11 +8,6 @@
       }
     </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <!-- remove line once pages are properly switching -->
-  <!-- <a routerLink="/home"><button class="btn btn-success"> Home </button></a> -->
-  <button class="btn btn-success" (click)="changePage()">Home</button>
-  <a routerLink="/settings"><button class="btn btn-success"> Settings </button></a>
-  <a routerLink="/workout"><button class="btn btn-success"> Workout </button></a>
   <br>
   <br>
   <br>
@@ -32,7 +27,9 @@
       <a routerLink="/login">
         <button class="sign-in_button">Sign In</button>
       </a>
-      <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+      <a routerLink="/settings">
+        <button class="sign-in_button"> Create Account </button>
+      </a>
     </div>
     <div class="col-xs-4 col-md-4"></div>
   </div>
