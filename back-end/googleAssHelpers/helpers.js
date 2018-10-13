@@ -23,7 +23,7 @@ app.intent('start workout', conv => {
   console.log('what happened after image was called?')
   conv.ask(new SimpleResponse({
     text: '<s> Let me know when you are ready to begin.</s>',
-    speech: '<s> Let me know when you are ready to begin.</s> Daisy, daisy'
+    speech: '<s> Let me know when you are ready to begin.</s> <s>Daisy, daisy</s>'
   }));
 });
 
