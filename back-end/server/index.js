@@ -330,7 +330,7 @@ app.post('/signUp', (req, res) =>{
   let password = req.body.params.password;
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
   .then(()=>{
-    return Promise.all([db.getUserIdByEmail(email), workout.generateWorkoutSignUp(squatComf)])
+    return Promise.all([db.getUserIdByEmail(email)])
       .catch(err=>console.error(err));
   })
   .then(([user,regimen])=> {
@@ -348,9 +348,9 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
       .then((user) => {
-        console.log(req.body.session.user.userId);
+        console.log(user);
         
-        const passingName = (user ? user.name : "not linked yet");
+        const passingName = (user !== undefined ? user.name : "not linked yet");
         res.json(alexaHelp.invocationIntent(passingName));
       })
       .catch(err => {
