@@ -138,6 +138,9 @@ app.post('/weather', (req, res) => {
           weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
             weatherInfo.time_of_day = body;
           })
+          weather.runningRecommendations(weatherInfo, (data) => {
+            weatherInfo.recommendation = data;
+          })
           db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day)
             .then(result => { weatherInfo.url = result })
               .then(() => {res.send(weatherInfo)})
