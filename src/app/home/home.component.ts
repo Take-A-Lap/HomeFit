@@ -52,18 +52,18 @@ export class HomeComponent implements OnInit {
   getCompletedWorkouts(email) {
     // should return a promise with an array in its callback
     // hardcode the email to be 	reptar@rugrats.com
-    this.workoutService.getCompletedWorkouts("reptar@rugrats.com")
-      .subscribe(compWorkOuts => {
-        // use the array of completed workouts to get dates that should be marked on the calender
-        console.log(compWorkOuts);
-        // if (compWorkOuts) {
-        //   // loop through the completed workouts array
-        //   compWorkOuts.forEach(completed => {
-        //     // for each completed push into the workout dates array the date property on the completed
-        //     this.workoutDates.push(completed.date);
-        //   });
-        // }
-      })
+    // this.workoutService.getCompletedWorkouts("reptar@rugrats.com")
+    //   .subscribe(compWorkOuts => {
+    //     // use the array of completed workouts to get dates that should be marked on the calender
+    //     console.log(compWorkOuts);
+    //     // if (compWorkOuts) {
+    //     //   // loop through the completed workouts array
+    //     //   compWorkOuts.forEach(completed => {
+    //     //     // for each completed push into the workout dates array the date property on the completed
+    //     //     this.workoutDates.push(completed.date);
+    //     //   });
+    //     // }
+    //   })
   }
 
   getBreakfast() {
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
       .subscribe(breakfastFood => {
         this.meals.push(breakfastFood)
         // console.log(this.meals);
-        this.mealImages = this.meals[0].map(meal => meal.image)
+        this.mealImages = this.meals[0].map(meal => meal.recipe.image)
       })
   }
 
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
         // console.log(Array.isArray(lunchFood), lunchFood);
         this.meals.push(lunchFood);
         console.log('we got lunchFood', this.meals);
-        this.mealImages = this.meals[0].map(meal => meal.image)
+        this.mealImages = this.meals[0].map(meal => meal.recipe.image)
       })
   }
   getDinner() {
@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
       .subscribe(dinnerFood => {
         this.meals.push(dinnerFood);
         // console.log(this.meals);
-        this.mealImages = this.meals[0].map(meal => meal.image)
+        this.mealImages = this.meals[0].map(meal => meal.recipe.image)
       });
   }
 
