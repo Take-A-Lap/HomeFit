@@ -20,9 +20,10 @@ export class HomeComponent implements OnInit {
   currentWeather = [];
   time: number;
   timeStamp: Date;
+  timeStampString: string;
   dates = Array(7);
-  latitude: number;
-  longitude: number;
+  latitude: string;
+  longitude: string;
 
   constructor(
     private foodService: FoodService,
@@ -30,22 +31,29 @@ export class HomeComponent implements OnInit {
     private router: Router) { }
 
   getWeather() {
-    this.timeStamp = new Date();
     return this.weatherService.getWeather()
       .subscribe(currWeather => {
         this.currentWeather.push(currWeather, this.timeStamp.toString())
         console.log(this.currentWeather[1])
       })
   }
+
+  getCurrentTime() {
+    this.timeStamp = new Date();
+    this.timeStampString = this.timeStamp.toString();
+  }
   
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude,
-        this.longitude = position.coords.longitude
+        this.latitude = position.coords.latitude.toString(),
+        this.longitude = position.coords.longitude.toString();
         console.log(position, 'line 46')
+        console.log(this.latitude, this.longitude, 'line 48')
       });
-      console.log(this.latitude, this.longitude, 'line 48')
+      setTimeout(() => {
+        console.log(this.latitude, this.longitude)
+      }, 3000)
     }
   }
 
@@ -117,6 +125,7 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     // this.getWeather();
+    this.getCurrentTime();
     this.getLocation();
     this.displayMeal();
   }

@@ -15,8 +15,17 @@
           <a class="nav-link">Logout</a>
         </li>
       </ul>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
       <div class="jumbotron">
-          Current Weather: New Orleans, LA 64˚ Clear
+        {{timeStampString.slice(0, 21)}}
+        <div>
+
+          New Orleans, LA 64˚ Clear
+        </div>
           <!-- Current Weather: {{currentWeather[0].city}}, LA {{currentWeather[0].fahrenheit}}˚ {{currentWeather[0].text}} -->
       </div>
     </div>
