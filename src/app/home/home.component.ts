@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { IImage } from 'ng-simple-slideshow';
 import { FoodService } from '../food/food.service';
 import { WeatherService } from '../weather.service';
 import { WorkoutService } from '../workout.service';
@@ -25,22 +24,54 @@ export class HomeComponent implements OnInit {
   workoutDates = [];
   time: number;
   timeStamp: Date;
+  timeStampString: string;
   email: string;
   dates = Array(7);
+  latitude: string;
+  longitude: string;
 
   constructor(
     private foodService: FoodService,
     private weatherService: WeatherService,
-    private router: Router) { }
-    private workoutService: WorkoutService
-  getWeather() {
-    this.timeStamp = new Date();
-    return this.weatherService.getWeather()
-      .subscribe(currWeather => {
-        this.currentWeather.push(currWeather, this.timeStamp.toString())
-        console.log(this.currentWeather[1])
-      })
-    console.log(this.timeStamp);  
+    private router: Router,
+    private httpClient: HttpClient,
+    private workoutService: WorkoutService) { }
+
+    getCurrentTime() {
+      this.timeStamp = new Date();
+      this.timeStampString = this.timeStamp.toString();
+    }
+
+    
+    
+  async getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+        this.latitude = position.coords.latitude.toString(),
+        this.longitude = position.coords.longitude.toString();
+        this.sendWeather1();
+        });
+      }
+  }
+
+  sendWeather1() {
+    return this.httpClient.post('/weather', {
+      params: {
+        latitude: this.latitude,
+        longitude: this.longitude
+      }
+    }, { responseType: 'text' })
+    .subscribe(data => {
+      data = JSON.parse(data);
+      console.log('success', data);
+      console.log(data, 'line 99')
+      this.currentWeather.push(data)
+      console.log(this.currentWeather)
+    },
+      error => {
+        console.log('error', error);
+      });
   }
   
   getCookieInfo() {
@@ -139,8 +170,17 @@ export class HomeComponent implements OnInit {
   onSubmit() {
     this.router.navigate(['/personalInfo']);
   }
+
   ngOnInit() {
+    this.getLocation();
     // this.getWeather();
+    // setTimeout(() => {
+    //   this.sendWeather1();
+    // }, 4000)
+    // setTimeout(() => {
+    //   this.getWeather();
+    // }, 4500)
+    this.getCurrentTime();
     this.displayMeal();
   }
 
