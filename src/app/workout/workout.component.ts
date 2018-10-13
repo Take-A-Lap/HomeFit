@@ -13,7 +13,7 @@ import { WorkoutService } from '../workout.service';
 export class WorkoutComponent implements OnInit {
 
   id;
-  user;
+  userID;
   name;
   exercise;
   masterIndex = 0;
@@ -88,23 +88,16 @@ export class WorkoutComponent implements OnInit {
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       } else {
         // this.completed = 'Workout Complete';
-        this.updateWorkout();
+        this.workouts.shift();
+        // this.httpClient.post('/updateWorkouts', {
+        //   params: {
+        //     userID: '???',
+        //     WOs: this.workouts
+        //   }
+        // }).subscribe()
         this.home()
 
       }
-    }
-
-    updateWorkout(){
-      console.log(this.workout.length);
-      this.workouts.shift();
-      this.workout = this.workout;
-      console.log(this.workout.length);
-      this.httpClient.post('/updateWorkouts', {
-        params: {
-          userId: this.id,
-          WOs: this.workouts
-        }
-      }).subscribe();
     }
     
     testClick(){
@@ -122,17 +115,23 @@ export class WorkoutComponent implements OnInit {
     }
 
     getWorkoutInfo(){
-      this.getCookieInfo();
-      this.httpClient.get('/getMyWorkOut', {
-        params: {email: this.email}
-      }).subscribe((workouts)=>{
-        this.workouts = workouts;
-        this.workout = workouts[0];
-        this.exercise = this.workout[this.index];
-        this.youtube = this.exercise.youtube_link;
-        this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-        this.name = this.exercise.name;
-      });
+      this.getUserInfo()
+      .then((value)=>{
+        this.id = value;
+        // console.log(value);
+        this.httpClient.get('/getMyWorkOut', {
+          params: { id: this.id }
+        }).subscribe((workouts) => {
+          console.log(workouts);
+          this.workouts = workouts;
+          this.workout = workouts[0];
+          this.exercise = this.workout[this.index];
+          this.youtube = this.exercise.youtube_link;
+          this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+          this.name = this.exercise.name;
+        });
+      })
+      .catch(err=>console.error(err));  
     }
 
     printIt(){
@@ -144,23 +143,30 @@ export class WorkoutComponent implements OnInit {
     home(){
       this.router.navigate(['/home']);
     }
-
+    
     getUserInfo(){
-      this.getCookieInfo();
-      this.httpClient.get('/getUser', { 
-        params: { email: this.email }
-      }).subscribe(profile=>{
-        // console.log(profile.id);
-        this.user = profile
-        this.id = this.user.id;
-        // console.log(this.userID);
-      });
+      let result;
+      return new Promise((resolve, reject)=>{
+        this.httpClient.get('/getUser', {
+          params: { email: this.email }
+        }).subscribe(id => {
+          result =id;
+          this.id = id;
+          result = this.id.id
+          if (result === this.id.id) {
+            console.log('success');
+            resolve(result);
+          } else {
+            reject('Get User Rejection')
+          }
+        });
+      })
     }
 
-    ngOnInit() {        
-      this.getWorkoutInfo();
-      this.getUserInfo();  
+    ngOnInit() {
+      this.getCookieInfo();
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+      this.getWorkoutInfo();
         
     }
 
