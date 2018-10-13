@@ -144,8 +144,8 @@ app.post('/weather', (req, res) => {
       const parsedBody = JSON.parse(body.body);
       weatherInfo = {
         text: parsedBody.currently.summary,
-        temp: parsedBody.currently.temperature,
-        apparentTemp: parsedBody.currently.apparentTemperature,
+        temp: Math.floor(parsedBody.currently.temperature),
+        apparentTemp: Math.floor(parsedBody.currently.apparentTemperature),
         humidity: parsedBody.currently.humidity,
         icon: parsedBody.currently.icon
       }
