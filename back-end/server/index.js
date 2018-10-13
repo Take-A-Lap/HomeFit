@@ -291,6 +291,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             return workout.generateWorkout(numWorkouts, squatComf)
           })
           .then(genWorkout => {
+            if(alexaWorkout.length === 0 && sets !== 0){
+              db.getUserInfoByAlexUserId(req.body.session.user.userId)
+              .then(user =>{
+                return db.updateNoWO(user.id, user.workout_completes + 1);
+              })
+            }
             alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
             return alexaWorkout.splice(0, 1);
           }).then(currentExercise => {
