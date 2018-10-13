@@ -333,6 +333,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       })
       .catch(err => {
         console.error(err);
+        res.json(alexaHelp.PLACEHOLDER());
       });
   } else if (req.body.request.type === 'SessionEndedRequest') {
     res.json(alexaHelp.endSession());
@@ -364,20 +365,22 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             return alexaWorkout.splice(0, 1);
           }).then(currentExercise => {
             current = currentExercise;
-            alexaHelp.initWorkout(current);
+            res.json(alexaHelp.initWorkout(current));
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER());
           });
         break;
       case 'coachExercise':
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
-            alexaHelp.coachExercise(current);
+            res.json(alexaHelp.coachExercise(current));
             sets++;
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER())
           });
         break;
       case 'readWorkoutStatus':
