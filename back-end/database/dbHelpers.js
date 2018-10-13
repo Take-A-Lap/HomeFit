@@ -14,6 +14,11 @@ const db = pgp(connection);
 
 module.exports = {
 
+  getUserInfoByGoogleSessionId: (sessionId) => db.any(`
+  SELECT * FROM users
+  WHERE google_session_id = $1
+  `, [sessionId]),
+
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT * FROM users
   WHERE alexa_user_id = $1
@@ -134,6 +139,14 @@ module.exports = {
     WHERE
     id_user = $2
   `, [completed, userId, date, lastTotalTime, bpm]),
+  
+  updateGoogleSessionIdForUser: (username, sessionId) => db.any(`
+  UPDATE users
+  SET
+  google_session_id = $2
+  WHERE
+  preferred_username = $1
+  `,[username, sessionId]),
 
   updateCompStr: (completed, userId, date, reps) => db.any(`
     UPDATE completed_str
