@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({
   let current;
 
 app.get('/cornTest', (req, res) => {
-  // workout.generateWorkoutSignUp(3)
-  db.testHelperFunction()
+  workout.generateWorkoutSignUp(3)
+  // db.testHelperFunction()
     .then(result => {
       res.send(result);
     })
