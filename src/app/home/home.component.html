@@ -3,13 +3,7 @@
     <div class="col-xs-12 col-md-12">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/workout">Workout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/personalInfo">Settings</a>
+          <a class="nav-link" routerLink="/personalInfo">Account Info</a>
         </li>
         <li class="nav-item">
           <a class="nav-link">Logout</a>
@@ -27,6 +21,11 @@
           {{weather.city}}, {{weather.state}} {{weather.temp}}˚ {{weather.text}}
         </div>
       </div>
+      <a class="nav-link" routerLink="/workout">
+        <button class="workout-button">
+          Workout
+        </button>
+      </a>
     </div>
   </div>
   <div class="row">
