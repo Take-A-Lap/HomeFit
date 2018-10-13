@@ -310,8 +310,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'coachExercise':
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
-            // console.log(userArr, ' this needs to not be an empty array');
-            return 
+            alexaHelp.coachExercise(current);
           })
           .catch(err => {
             console.error(err);
