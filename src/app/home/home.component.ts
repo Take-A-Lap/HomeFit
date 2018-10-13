@@ -31,55 +31,23 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private httpClient: HttpClient) { }
 
-    
-    // getWeather2() {
-    //   console.log('lijfie')
-    //   // this.weatherService.getWeatherData()
-    // }
-    
     getCurrentTime() {
       this.timeStamp = new Date();
       this.timeStampString = this.timeStamp.toString();
     }
+
     
-    // getLocation() {
-    //     if (navigator.geolocation) {
-    //       navigator.geolocation.getCurrentPosition(position => {
-    //         console.log(position);
-    //         this.latitude = position.coords.latitude.toString(),
-    //         this.longitude = position.coords.longitude.toString()
-    //       })
-    //     }
-    // }
-  getLocation() {
+    
+  async getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            this.latitude = position.coords.latitude.toString(),
-            this.longitude = position.coords.longitude.toString();
-            console.log(this.latitude, this.longitude, 'line 48')
-          });
-        }
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude.toString(),
+        this.longitude = position.coords.longitude.toString();
+        this.sendWeather1();
+        });
       }
-                
-    // sendWeather() {
-    //   this.httpClient.get('/weather', {
-    //     params: {
-    //       latitude: this.latitude,
-    //       longitude: this.longitude
-    //     }
-    //   })
-    //   .subscribe()
-    // }
-    
-    getWeather() {
-      console.log('test')
-       this.weatherService.getWeatherData()
-        .subscribe(currWeather => {
-          console.log(currWeather, 'line 99')
-          this.currentWeather.push(currWeather)
-          console.log(this.currentWeather)
-        })
-    }
+  }
+
   sendWeather1() {
     return this.httpClient.post('/weather', {
       params: {
@@ -88,12 +56,17 @@ export class HomeComponent implements OnInit {
       }
     }, { responseType: 'text' })
     .subscribe(data => {
+      data = JSON.parse(data);
       console.log('success', data);
+      console.log(data, 'line 99')
+      this.currentWeather.push(data)
+      console.log(this.currentWeather)
     },
       error => {
         console.log('error', error);
       });
   }
+    
 
   getBreakfast() {
     this.meals = [];
@@ -164,7 +137,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getLocation();
-    this.getWeather();
+    // this.getWeather();
     // setTimeout(() => {
     //   this.sendWeather1();
     // }, 4000)
