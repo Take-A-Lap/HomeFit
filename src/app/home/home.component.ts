@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FoodService } from '../food/food.service';
 import { WeatherService } from '../weather.service';
 import { WorkoutService } from '../workout.service';
+import { IImage } from './iImage';
 
 @Component({
   selector: 'app-home-component',
@@ -16,6 +17,7 @@ import { WorkoutService } from '../workout.service';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
+  imageUrls: (string | IImage)[] = [];
   mealImages = [];
   meals = [];
   meals2 = [];
@@ -83,9 +85,21 @@ export class HomeComponent implements OnInit {
         // console.log(Array.isArray(lunchFood), lunchFood);
         this.meals.push(lunchFood);
         console.log('we got lunchFood', this.meals);
-        this.mealImages = this.meals[0].map(meal => meal.recipe.image)
+        // this.mealImages = this.meals[0].map(meal => meal.recipe.image)
+        this.imageUrls = this.meals[0].map(meal => {
+          let proof = () => {
+            window.open(meal.recipe.url);
+          }
+          return {
+            url: meal.recipe.image,
+            href: meal.recipe.url,
+            clickAction: proof
+          }
+        })
       })
   }
+
+
   getDinner() {
     console.log('Getting Dinner');
     this.meals = [];
