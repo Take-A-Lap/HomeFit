@@ -63,30 +63,9 @@ app.post('/updateWorkouts', (req, res)=>{
   // db.updateWorkoutsByUserId()
 })
 
-// app.get('/weather', (req, res) => {
-//   weather.getWeather((body) => {
-//     const parsedBody = JSON.parse(body);
-//     // console.log(parsedBody)
-//     const weatherInfo = {
-//       text: parsedBody[0].WeatherText,
-//       city: 'New Orleans',
-//       fahrenheit: parsedBody[0].Temperature.Imperial.Value,
-//       celsius: parsedBody[0].Temperature.Metric.Value,
-//       isDayTime: parsedBody[0].IsDayTime
-//     }
-//     res.send(weatherInfo)
-//   })
-//   // res.send(200);
-// })
-
-
 app.post('/weather', (req, res) => {
-  console.log(typeof req.body.params.timeStamp, 'work pretty please');
   let weatherInfo = {};
-
   weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, body) => {  
-    // console.log(body)
-    // let weatherInfo = {};
     if (err) {
       console.error(err);
     } else {
@@ -116,8 +95,6 @@ app.post('/weather', (req, res) => {
       })
     }
   })
-  // res.sendStatus(201);
-  // res.end();
 })
 
 app.post('/weather', (req, res) => {
