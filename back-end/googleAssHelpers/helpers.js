@@ -12,6 +12,8 @@ const app = dialogflow();
 console.log(app, ' let\'s see whats inside of this on line 11 in google helpers');
 
 app.intent('start workout', conv => {
+  console.log(conv);
+  
   // console.log('please tell me this is at least called');
   // conv.ask('This is a test to see that you are connected to the server');
   // conv.ask('Hi, how is it going?');
@@ -22,8 +24,8 @@ app.intent('start workout', conv => {
   // }));
   console.log('what happened after image was called?')
   conv.ask(new SimpleResponse({
-    text: '<s> Let me know when you are ready to begin.</s>',
-    speech: '<speak> <s> Let me know when you are ready to begin. </s> <s> Daisy, daisy </s> </speak>'
+    text: 'Let me know when you are ready to begin.',
+    speech: '<speak> <s> Let me know when you are ready to begin. </s> </speak>'
   }));
 });
 
