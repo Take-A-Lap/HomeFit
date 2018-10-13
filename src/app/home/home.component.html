@@ -17,20 +17,19 @@
       <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
         {{timeStampString.slice(0, 21)}}
         <div class="weatherText">
-          <!-- New Orleans, LA 64˚ Clear -->
           {{weather.city}}, {{weather.state}} {{weather.temp}}˚ {{weather.text}}
         </div>
         Outdoor Running Conditions: {{weather.recommendation}}
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
       <a class="nav-link" routerLink="/workout">
         <button class="workout-button">
           Workout
         </button>
       </a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-md-12">
       <table class="table" cellpadding="15">
         <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <thead>
