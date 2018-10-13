@@ -412,6 +412,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'linkAccount':
         let link = req.body.request.intent.slots.accountName.value;
         link = link.split(' ').join('@');
+        console.log(link);
         db.updateAlexaId(link, req.body.session.user.userId)
           .then(() => {
             res.json(alexaHelp.linkAccount(link));
