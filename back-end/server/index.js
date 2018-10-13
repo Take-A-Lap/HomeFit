@@ -25,6 +25,8 @@ app.use(bodyParser.urlencoded({
   let sets = 0;
   let current;
 
+
+app.post('/fulfillment', google);
 app.get('/cornTest', (req, res) => {
   db.updateNoWO(17,2)
   .then((results)=>res.send(results))
