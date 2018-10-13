@@ -113,23 +113,6 @@ app.post('/updateWorkouts', (req, res)=>{
   .then(()=>res.send('workouts updated'))
 })
 
-// app.get('/weather', (req, res) => {
-//   weather.getWeather((body) => {
-//     const parsedBody = JSON.parse(body);
-//     // console.log(parsedBody)
-//     const weatherInfo = {
-//       text: parsedBody[0].WeatherText,
-//       city: 'New Orleans',
-//       fahrenheit: parsedBody[0].Temperature.Imperial.Value,
-//       celsius: parsedBody[0].Temperature.Metric.Value,
-//       isDayTime: parsedBody[0].IsDayTime
-//     }
-//     res.send(weatherInfo)
-//   })
-//   // res.send(200);
-// })
-
-
 app.post('/weather', (req, res) => {
   console.log(req.body.params.latitude, req.body.params.longitude, 'work pretty please');
   weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, body) => {  
