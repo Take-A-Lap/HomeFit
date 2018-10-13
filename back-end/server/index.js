@@ -311,6 +311,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
             alexaHelp.coachExercise(current);
+            sets++;
           })
           .catch(err => {
             console.error(err);
