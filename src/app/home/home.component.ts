@@ -28,13 +28,15 @@ export class HomeComponent implements OnInit {
   constructor(
     private foodService: FoodService,
     private weatherService: WeatherService,
-    private router: Router) { }
+    private router: Router,
+    private httpClient: HttpClient) { }
 
   getWeather() {
     return this.weatherService.getWeather()
       .subscribe(currWeather => {
-        this.currentWeather.push(currWeather, this.timeStamp.toString())
-        console.log(this.currentWeather[1])
+        console.log(currWeather, 'line 36')
+        this.currentWeather.push(currWeather)
+        console.log(this.currentWeather)
       })
   }
 
@@ -51,10 +53,32 @@ export class HomeComponent implements OnInit {
         console.log(position, 'line 46')
         console.log(this.latitude, this.longitude, 'line 48')
       });
-      setTimeout(() => {
-        console.log(this.latitude, this.longitude)
-      }, 3000)
     }
+  }
+
+  sendWeather() {
+    this.httpClient.post('/weather', {
+      params: {
+        latitude: this.latitude,
+        longitude: this.longitude
+      }
+    }, { responseType: 'text' })
+      .subscribe(data => {
+        console.log(data, 'line 67')
+      })
+
+
+    // return this.httpClient.post('/weather', {
+    //   params: {
+    //     info: this.
+    //   }
+    // }, { responseType: 'text' })
+    // .subscribe(data => {
+    //   console.log('success', data);
+    // },
+    //   error => {
+    //     console.log('error', error);
+    //   });
   }
 
   getBreakfast() {
@@ -128,6 +152,10 @@ export class HomeComponent implements OnInit {
     this.getCurrentTime();
     this.getLocation();
     this.displayMeal();
+    setTimeout(() => {
+      this.sendWeather();
+    }, 2000);
+    // this.sendWeather();
   }
 
   

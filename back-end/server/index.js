@@ -62,20 +62,61 @@ app.post('/updateWorkouts', (req, res)=>{
   console.log(req);
   // db.updateWorkoutsByUserId()
 })
-app.get('/weather', (req, res) => {
-  weather.getWeather(body => {
-    const parsedBody = JSON.parse(body);
-    console.log(parsedBody)
-    const weather = {
-      text: parsedBody[0].WeatherText,
-      city: 'New Orleans',
-      state: 'LA',
-      celsius: parsedBody[0].Temperature.Metric.Value,
-      fahrenheit: parsedBody[0].Temperature.Imperial.Value,
-      isDayTime: parsedBody[0].IsDayTime
+// app.get('/weather', (req, res) => {
+//   weather.getWeather(body => {
+//     const parsedBody = JSON.parse(body);
+//     console.log(parsedBody)
+//     const weather = {
+//       text: parsedBody[0].WeatherText,
+//       city: 'New Orleans',
+//       state: 'LA',
+//       celsius: parsedBody[0].Temperature.Metric.Value,
+//       fahrenheit: parsedBody[0].Temperature.Imperial.Value,
+//       isDayTime: parsedBody[0].IsDayTime
+//     }
+//     res.send(weather);
+//   })
+// })
+
+app.post('/weather', (req, res) => {
+  console.log(req.body, 'work pretty please');
+  weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, res, body) => {
+  //   // console.log(body);
+    const weatherInfo = {};
+    if (err) {
+      console.error(err);
+    } else {
+      const parsedBody = JSON.parse(body);
+      console.log(JSON.parse(parsedBody));
+      weatherInfo = {
+        text: parsedBody.currently.summary,
+        temp: parsedBody.currently.temperature,
+        apparentTemp: parsedBody.currently.apparentTemperature,
+        humidity: parsedBody.currently.humidity,
+        icon: parsedBody.currently.icon
+      }
+      // console.log(weatherInfo)
     }
-    res.send(weather);
+  // res.send(weatherInfo);
   })
+  res.sendStatus(201);
+  res.end();
+})
+
+app.get('/weather', (req, res) => {
+  console.log(req, 'work')
+  // weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitdue, (err, res, body) => {
+  //   const parsedBody = JSON.parse(body);
+  //   const weatherInfo = {
+  //     text: parsedBody.currently.summary,
+  //     temp: parsedBody.currently.temperature,
+  //     apparentTemp: parsedBody.currently.apparentTemperature,
+  //     humidity: parsedBody.currently.humidity,
+  //     icon: parsedBody.currently.icon
+  //   }
+    // console.log(weatherInfo)
+    // res.send(200);
+  // })
 })
 
 app.get('/dinner', (req,res)=> {
