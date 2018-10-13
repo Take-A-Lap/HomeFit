@@ -73,5 +73,5 @@ export function getAuthServiceConfigs() {
   ],
   bootstrap: [AppComponent]
 })
-//
+
 export class AppModule { }
