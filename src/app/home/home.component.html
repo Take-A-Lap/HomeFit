@@ -1,33 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" routerLink="/home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/workout">Workout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/personalInfo" (click)="onSubmit()">Settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">Logout</a>
-        </li>
-      </ul>
-      <div class="jumbotron">
-        <p>
-          Fri Oct 12 2018 00:53
-          <!-- {{currentWeather[1].slice(0, 24)}} -->
-          Current Weather: 
-          New Orleans, LA 72˚ Clear
-          <!-- New Orleans, LA {{currentWeather[0].fahrenheit}}˚ {{currentWeather[0].text}} -->
-        </p>
-    </div>
-  </div>
-</div>
-  <div class="row">
-    <div class="col-md-12">
+      <div class="btn-group" role="group">
+        <a routerLink="/workout"><button class="nav-buttons" type="button">Workout</button></a>
+        <button class="nav-buttons" type="button" (click)="onSubmit()">Settings</button>
+        <button class="nav-buttons" type="button">Logout</button>
+      </div>
+      <div class="media">
+        <div class="imageContainer">
+          Current Weather: {{currentWeather[0].city}}, LA {{currentWeather[0].fahrenheit}}˚ {{currentWeather[0].text}}
+          <img alt="Location pic" src="../../assets/img/new_orleans_placeholder.jpg" />
+        </div>
+      </div>
       <table class="table" cellpadding="15">
         <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <thead>
@@ -43,17 +27,17 @@
         </thead>
         <tbody>
           <tr>
-            <td class="day"><span class="number">31</span></td>
-            <td class="day"><span class="number">1</span>
+            <td class="day"><span class="number">{{dates[0]}}</span></td>
+            <td class="day"><span class="number">{{dates[1]}}</span>
               <div><span class="checkmark">&#10003;</span></div>
             </td>
-            <td class="day"><span class="number">2</span></td>
-            <td class="day"><span class="number">3</span></td>
-            <td class="day"><span class="number">4</span>
+            <td class="day"><span class="number">{{dates[2]}}</span></td>
+            <td class="day"><span class="number">{{dates[3]}}</span></td>
+            <td class="day"><span class="number">{{dates[4]}}</span>
               <div><span class="checkmark">&#10003;</span></div>
             </td>
-            <td class="day"><span class="number">5</span></td>
-            <td class="day"><span class="number">6</span>
+            <td class="day"><span class="number">{{dates[5]}}</span></td>
+            <td class="day"><span class="number">{{dates[6]}}</span>
               <div><span class="checkmark">&#10003;</span></div>
             </td>
           </tr>
@@ -83,6 +67,7 @@
       </div>
     </div>
   </div> -->
+
   <!-- <div class="row">
     <div class="col-md-12">
       <div id="home-page-slider" class="carousel slide" data-ride="carousel">

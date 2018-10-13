@@ -23,7 +23,7 @@
           <button class="btn btn-secondary" type="button">Home</button>
         </a>
         <button class="btn btn-secondary" type="button">Meal</button>
-        <a routerLink="/strengthWorkout"><button class="btn btn-secondary" type="button">Workout</button></a>
+        <a routerLink="/workout"><button class="btn btn-secondary" type="button">Workout</button></a>
         <a routerLink="/">
           <button class="btn btn-secondary" type="button">Logout</button>
         </a>
@@ -42,8 +42,7 @@
           <input  type="text" 
                   class="form-control" 
                   id="sex" 
-                  [value]="sex"
-                  (input)="updateMiles($event)"/>
+                  (input)="updateSex($event)"/>
         </div>
         <div class="form-group">
           <label for="emailInput">Email</label>

@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   time: number;
   timeStamp: Date;
   email: string;
+  dates = Array(7);
 
   constructor(
     private foodService: FoodService,
@@ -39,7 +40,8 @@ export class HomeComponent implements OnInit {
       .subscribe(currWeather => {
         this.currentWeather.push(currWeather, this.timeStamp.toString())
         console.log(this.currentWeather[1])
-      })  
+      })
+    console.log(this.timeStamp);  
   }
   
   getCookieInfo() {
@@ -114,6 +116,19 @@ export class HomeComponent implements OnInit {
   getTime() {
     let d = new Date();
     this.time = d.getHours();
+    // the current day of the week is
+    let day = d.getDay();
+    // the date for the current day of the week is
+    let date = d.getDate();
+    // Set today's date
+    this.dates[day] = date;
+    // Fill in other dates based on today's
+    for (let i = 0; i < day; i++) {
+      this.dates[i] = date - (day - i); 
+    }
+    for (let i = day + 1; i < this.dates.length; i++) {
+      this.dates[i] = date + (this.dates.length - i);
+    }
   }
 
   testClick(){
