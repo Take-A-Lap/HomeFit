@@ -44,6 +44,16 @@ module.exports = {
     let label;
     label = weatherInfo.text;
       callback(label);
-  }
+  },
 
+  runningRecommendations: (weatherInfo, callback) => {
+    let recommendation;
+    if (weatherInfo.temp > 90 || weatherInfo.temp < 25 || weatherInfo.humidity > 0.55) {
+      recommendation = 'Poor';
+    } else {
+      recommendation = 'Good';
+    }
+      callback(recommendation);
+  }
+  
 }
