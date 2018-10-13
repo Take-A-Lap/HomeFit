@@ -31,11 +31,6 @@ module.exports = {
     WHERE user_email = $1
   `, [email]).then(([password])=> password), 
 
-  getWorkoutsByUserID: (id)=> db.any(`
-    SELECT exercises FROM exercises_workouts
-    WHERE id_user = $1
-  `, [id]).then(([exercises])=> exercises),
-
   getUserInfoByEmail: (email) => db.any(`
     SELECT * FROM users
     WHERE user_email = $1
