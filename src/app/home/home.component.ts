@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
     for (let i = day + 1; i < this.dates.length; i++) {
       this.dates[i] = date + (this.dates.length - i);
     }
+    console.log(this.dates);
   }
 
   testClick(){
