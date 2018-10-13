@@ -388,11 +388,12 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         link = link.split(' ').join('@');
         db.updateAlexaId(link, req.body.session.user.userId)
           .then(() => {
+            res.json(alexaHelp.linkAccount(link));
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER())
           })
-        res.json(alexaHelp.linkAccount(link));
         break;
       case 'changeView':
         let view = req.body.request.intent.slots.view.value;
@@ -419,10 +420,11 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
             return alexaWorkout.splice(0, 1);
           }).then(currentExercise => {
             current = currentExercise;
-            alexaHelp.skip(former, current);
+            res.json(alexaHelp.skip(former, current));
           })
           .catch(err => {
             console.error(err);
+            res.json(alexaHelp.PLACEHOLDER());
           });
         // res.json(alexaHelp.PLACEHOLDER());
         break;
