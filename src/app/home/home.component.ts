@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   async getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
         this.latitude = position.coords.latitude.toString(),
         this.longitude = position.coords.longitude.toString();
         this.sendWeather1();
