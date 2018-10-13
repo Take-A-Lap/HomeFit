@@ -132,7 +132,7 @@ module.exports = {
     INSERT INTO completed_str
     (id_exercise, id_user, reps, completed, date)
     VALUES
-    ($!, $2, $3, $4, $5)
+    ($1, $2, $3, $4, $5)
   `, [exerciseId, userId, reps, completed, date]),
 
   insertIntoCompCardio: (userId, exerciseId, date, lastTotalTime, bpm, distance, completed) => db.any(`

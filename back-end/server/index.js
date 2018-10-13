@@ -72,6 +72,13 @@ app.get('/homeFitAuth', (req, res) => {
   })
 })
 
+app.post('/completed', (req, res)=>{
+  console.log(req.body.params.date);
+  var d = new Date();
+  db.insertIntoCompStr(1, req.body.params.id, 10, true, d)
+  .then(()=>res.send('tallied!'))
+})
+
 app.get('/getMyWorkOut', (req,res)=>{
   const int = parseInt(req.query.id)
   db.getWorkoutsByUserID(int)
