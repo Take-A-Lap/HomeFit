@@ -63,7 +63,10 @@ app.intent('start workout', conv => {
   })
   .then(currentWorkout => {
     if (currentWorkout !== undefined) {
-
+      conv.ask(new SimpleResponse({
+        text: 'Let me know when you are ready to begin.',
+        speech: '<speak> <s> Let me know when you are ready to begin. </s> </speak>'
+      }));
     }
   })
 });
