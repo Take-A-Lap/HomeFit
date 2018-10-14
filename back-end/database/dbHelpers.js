@@ -17,7 +17,7 @@ module.exports = {
   getUserInfoByGoogleSessionId: (sessionId) => db.any(`
   SELECT * FROM users
   WHERE google_session_id = $1
-  `, [sessionId]),
+  `, [sessionId]).then(([user]) => user),
 
   getUserInfoByAlexUserId: (alexaId) => db.any(`
   SELECT * FROM users
