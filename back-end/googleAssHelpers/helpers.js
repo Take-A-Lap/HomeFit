@@ -38,13 +38,22 @@ app.intent('link account', conv => {
 });
 
 app.intent('start workout', conv => {
-  console.log(conv.id);
+  console.log(conv.id, ' is this the same as the session id');
   // need to remember to grab the conversation id
-  
-  conv.ask(new SimpleResponse({
-    text: 'Let me know when you are ready to begin.',
-    speech: '<speak> <s> Let me know when you are ready to begin. </s> </speak>'
-  }));
+  db.getUserInfoByGoogleSessionId(conv.id)
+  .then(user => {
+    if(user !== undefined){
+      conv.ask(new SimpleResponse({
+        text: 'Let me know when you are ready to begin.',
+        speech: '<speak> <s> Let me know when you are ready to begin. </s> </speak>'
+      }));
+    } else {
+      conv.ask(new SimpleResponse({
+        test: 'Please link your session with your account.',
+        speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do to link your account is say ink my account followed by your account name </p> </speak>`
+      }));
+    }
+  })
 });
 
 app.intent('next exercise', conv => {
