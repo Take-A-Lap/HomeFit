@@ -23,7 +23,7 @@ app.intent('link account', conv => {
   console.log(conv.body.queryResult.parameters.accountName, ' looking for the value of the account some where?');
   conv.ask(new SimpleResponse({
     text: ``,
-    speech: '<speak> <s> Thank you </s> <s> ' + conv.body.queryResult.parameters.accountName + ' </s> <s> for linking your account to the our current session. </s> <s> Lets get started </s> <speak>'
+    speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to the our current session. </s> <s> Lets get started </s> </speak>`
   }))
 });
 
