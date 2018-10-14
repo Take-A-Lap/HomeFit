@@ -115,15 +115,16 @@ export class HomeComponent implements OnInit {
             clickAction: proof
           }
         })
+        console.log(this.imageUrls)
       })
   }
 
   getLunch() {
-    return this.foodService.getLunch()
+    return new Promise((resolve,reject)=>{
+      this.foodService.getLunch()
       .subscribe(lunchFood => {
-        // console.log(Array.isArray(lunchFood), lunchFood);
         this.meals = lunchFood;
-        this.imageUrls = this.meals.map(meal => {
+         let imageUrls = this.meals.map(meal => {
           let proof = () => {
             window.open(meal.url);
           }
@@ -133,7 +134,13 @@ export class HomeComponent implements OnInit {
             clickAction: proof
           }
         })
+        if(imageUrls.length){
+          resolve(imageUrls)
+        } else {
+          reject('Lunch Error')
+        }
       })
+    })
   }
 
 
@@ -192,7 +199,14 @@ export class HomeComponent implements OnInit {
     if (this.time >= 21 || this.time < 10) {
       this.getBreakfast();
     } else if (this.time >= 10 && this.time < 14) {
-      this.getLunch();
+      this.getLunch()
+      .then((result)=>{
+        console.log(Array.isArray(result))
+        result.forEach((item)=>{
+          console.log(item)
+        })
+        this.imageUrls = result;
+      })
     } else {
       this.getDinner();
     }
@@ -207,7 +221,7 @@ export class HomeComponent implements OnInit {
     this.getLocation();
     // this.getWeather();
     // this.getCurrentTime();
-    // this.displayMeal();
+    this.displayMeal();
   }
 
   

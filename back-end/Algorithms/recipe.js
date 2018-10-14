@@ -3,9 +3,18 @@ var request = require('request');
 const express = require('express');
 const config = require('../../config.js');
 const app = express();
+const axios = require('axios');
+
 
 module.exports = {
-  getBreakfast: function (calorieMin, calorieMax, dietaryRestrictions, callback) {
+
+  // promiseTest:()=>{
+  //   return new Promise(resolve, reject)=>{
+  //     axios.get()
+  //   }
+  // },
+
+  getBreakfast: function (calorieMin, calorieMax, dietaryRestrictions) {
     request(`https://api.edamam.com/search?q=breakfast&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&calories=${calorieMin}-${calorieMax}&health=${dietaryRestrictions}`, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         callback(body);
