@@ -96,8 +96,20 @@ app.intent('next exercise', conv => {
           speech: cadence
         }));
       }
-
+    } else {
+      conv.ask(new SimpleResponse({
+        test: 'Please link your session with your account.',
+        speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do to link your account is say ink my account followed by your account name </p> </speak>`
+      }));
     }
+  })
+  .catch(err => {
+    console.log(err);
+      conv.ask(new SimpleResponse({
+        text: 'Something went wrong',
+        speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
+      }));
+    })
   })
 
 });
