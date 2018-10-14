@@ -11,9 +11,16 @@ const app = dialogflow();
 
 console.log(app, ' let\'s see whats inside of this on line 11 in google helpers');
 
+// app.intent('Default Welcome Intent', (conv) => {
+//   conv.ask(new Permission({
+//     context: 'Hi there, to get your workout ready',
+//     permissions: 'NAME'
+//   }));
+// });
+
 app.intent('link account', conv => {
   conv.ask(`<speak> <s> Thank you for linking your account to the our current session. </s> <s> Lets get started </s> <speak>`)
-  console.log(conv, ' looking for the value of the account some where?');
+  console.log(conv.body.queryResult.parameters, ' looking for the value of the account some where?');
 });
 
 app.intent('start workout', conv => {
