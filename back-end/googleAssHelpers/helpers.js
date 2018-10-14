@@ -6,6 +6,8 @@ const {
 const db = require('../database/dbHelpers');
 const workout = require('../Algorithms/workout.js');
 
+let googleWorkout = [];
+let current;
 
 const app = dialogflow();
 
@@ -42,11 +44,10 @@ app.intent('start workout', conv => {
   // need to remember to grab the conversation id
   db.getUserInfoByGoogleSessionId(conv.id)
   .then(user => {
-    if(user !== undefined){
-      conv.ask(new SimpleResponse({
-        text: 'Let me know when you are ready to begin.',
-        speech: '<speak> <s> Let me know when you are ready to begin. </s> </speak>'
-      }));
+    if (user !== undefined) {
+      const squatComf = user.squat_comf;
+      const numWorkouts = user.workout_completes;
+      return workout.generateWorkout(numWorkouts, squatComf);
     } else {
       conv.ask(new SimpleResponse({
         test: 'Please link your session with your account.',
@@ -54,9 +55,21 @@ app.intent('start workout', conv => {
       }));
     }
   })
+  .then(genWorkout => {
+    if (genWorkout !== undefined) {
+      googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
+      return googleWorkout.splice(0, 1);
+    }
+  })
+  .then(currentWorkout => {
+    if (currentWorkout !== undefined) {
+
+    }
+  })
 });
 
 app.intent('next exercise', conv => {
+
 
 });
 
