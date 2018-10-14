@@ -83,6 +83,16 @@ app.intent('next exercise', conv => {
   console.log(conv.id, " conv.id inside of the next exercise intent");
   
   db.getUserInfoByGoogleSessionId(conv.id)
+  .then(user => {
+    if (user !== undefined) {
+      let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time * 1000} seconds. </s> <s> Let's begin on the count of 3. </s> 1 <break time="1s"> 2 <break time="1s"> <s> 3 </s>`;
+      for (let i = 1; i < 11; i++) {
+        cadence += ` give me a ${i} <break time="${rep_time}ms">`;
+      }
+      cadence += ` </speak>`;
+
+    }
+  })
 
 });
 
