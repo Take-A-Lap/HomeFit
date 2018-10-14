@@ -20,11 +20,21 @@ console.log(app, ' let\'s see whats inside of this on line 11 in google helpers'
 
 app.intent('link account', conv => {
   
-  console.log(conv.body.queryResult.parameters.accountName, ' looking for the value of the account some where?');
-  conv.ask(new SimpleResponse({
-    text: ``,
-    speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to the our current session. </s> <s> Lets get started </s> </speak>`
-  }))
+  console.log(conv.body.sessionId, ' looking for the value of the session id');
+  db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
+  .then(user => {
+    if(user !== undefined){
+      conv.ask(new SimpleResponse({
+        text: `Thank You!`,
+        speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to the our current session. </s> <s> Lets get started </s> </speak>`
+      }));
+      return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.body.sessionId);
+    }
+    conv.ask(new SimpleResponse({
+      text: `Please try again`,
+      speech: `<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> Could you try again? </s> </p> </speak>`
+    }));
+  });
 });
 
 app.intent('start workout', conv => {
