@@ -11,9 +11,15 @@ const app = dialogflow();
 
 console.log(app, ' let\'s see whats inside of this on line 11 in google helpers');
 
+app.intent('link account', conv => {
+  conv.ask(`<speak> <s> Thank you for linking your account to the our current session. </s> <s> Lets get started </s> <speak>`)
+  console.log(conv, ' looking for the value of the account some where?');
+});
+
 app.intent('start workout', conv => {
   console.log(conv.id);
   // need to remember to grab the conversation id
+  
   conv.ask(new SimpleResponse({
     text: 'Let me know when you are ready to begin.',
     speech: '<speak> <s> Let me know when you are ready to begin. </s> </speak>'
