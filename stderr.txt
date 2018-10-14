@@ -1,18 +1,18 @@
-events.js:183
-      throw er; // Unhandled 'error' event
-      ^
+undefined:1
+Forbidden
+^
 
-Error: listen EADDRINUSE :::81
-    at Object._errnoException (util.js:1022:11)
-    at _exceptionWithHostPort (util.js:1044:20)
-    at Server.setupListenHandle [as _listen2] (net.js:1367:14)
-    at listenInCluster (net.js:1408:12)
-    at Server.listen (net.js:1492:7)
-    at Function.listen (/root/Homefit/HomeFit/node_modules/express/lib/application.js:618:24)
-    at Object.<anonymous> (/root/Homefit/HomeFit/back-end/server/index.js:372:5)
-    at Module._compile (module.js:652:30)
-    at Object.Module._extensions..js (module.js:663:10)
-    at Module.load (module.js:565:32)
+SyntaxError: Unexpected token F in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at Request.weather.getWeatherDarkSky [as _callback] (/root/Homefit/HomeFit/back-end/server/index.js:144:31)
+    at Request.self.callback (/root/Homefit/HomeFit/node_modules/request/request.js:185:22)
+    at emitTwo (events.js:126:13)
+    at Request.emit (events.js:214:7)
+    at Request.<anonymous> (/root/Homefit/HomeFit/node_modules/request/request.js:1161:10)
+    at emitOne (events.js:116:13)
+    at Request.emit (events.js:211:7)
+    at IncomingMessage.<anonymous> (/root/Homefit/HomeFit/node_modules/request/request.js:1083:12)
+    at Object.onceWrapper (events.js:313:30)
 
 npm ERR! Linux 4.15.0-36-generic
 npm ERR! argv "/usr/bin/node" "/usr/bin/npm" "run" "start" "stdout.txt"
