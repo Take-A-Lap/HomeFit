@@ -141,7 +141,6 @@ app.post('/weather', (req, res) => {
     if (err) {
       console.error(err);
     } else {
-console.log(body);
       const parsedBody = JSON.parse(body.body);
       weatherInfo = {
         text: parsedBody.currently.summary,
