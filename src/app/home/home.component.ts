@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   meals2 = [];
   meals3 = [];
   currentWeather = [];
+  weather;
   workoutDates = [];
   time: number;
   timeStamp: Date;
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit {
 
     
     
-  async getLocation() {
+  getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position);
@@ -58,30 +59,26 @@ export class HomeComponent implements OnInit {
   }
 
   sendWeather1() {
-    return this.httpClient.post('/weather', {
-      params: {
-        latitude: this.latitude,
-        longitude: this.longitude,
-        timeStamp: this.time
-      }
-    }, { responseType: 'text' })
-    .subscribe(data => {
-      data = JSON.parse(data);
-      console.log('success', data);
-      console.log(data, 'line 99')
-      this.currentWeather.push(data)
-      console.log(this.currentWeather)
-    },
-      error => {
-        console.log('error', error);
-      });
-  }
+    this.getTime()
+    .then(()=>{
+      return this.httpClient.post('/weather', {
+        params: {
+          latitude: this.latitude,
+          longitude: this.longitude,
+          timeStamp: this.time
+        }
+      }, { responseType: 'text' })
+        .subscribe(data => {
+          this.currentWeather.push(data)
+          console.log(this.currentWeather[0]);
+    })
+  })
+}
   
   getCookieInfo() {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
-    console.log(this.email);
   }
 
   // make a function that takes a user email and sends post request to the backend endpoint that returns an array of information
@@ -159,22 +156,28 @@ export class HomeComponent implements OnInit {
   }
 
   getTime() {
-    let d = new Date();
-    this.time = d.getHours();
-    // the current day of the week is
-    let day = d.getDay();
-    // the date for the current day of the week is
-    let date = d.getDate();
-    // Set today's date
-    this.dates[day] = date;
-    // Fill in other dates based on today's
-    for (let i = 0; i < day; i++) {
-      this.dates[i] = date - (day - i); 
-    }
-    for (let i = day + 1; i < this.dates.length; i++) {
-      this.dates[i] = date + (this.dates.length - i);
-    }
-    console.log(this.dates);
+    return new Promise((resolve, reject)=>{
+      let d = new Date();
+      this.time = d.getHours();
+      // the current day of the week is
+      let day = d.getDay();
+      // the date for the current day of the week is
+      let date = d.getDate();
+      // Set today's date
+      this.dates[day] = date;
+      // Fill in other dates based on today's
+      for (let i = 0; i < day; i++) {
+        this.dates[i] = date - (day - i);
+      }
+      for (let i = day + 1; i < this.dates.length; i++) {
+        this.dates[i] = date + (this.dates.length - i);
+      }
+      if (d){
+        resolve(d)
+      } else {
+        reject('error getting time')
+      }
+    })
   }
 
   testClick(){
@@ -200,16 +203,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getLocation();
+    this.getCurrentTime()
+    this.getLocation();
     // this.getWeather();
-    // setTimeout(() => {
-    //   this.sendWeather1();
-    // }, 4000)
-    // setTimeout(() => {
-    //   this.getWeather();
-    // }, 4500)
     // this.getCurrentTime();
-    this.displayMeal();
+    // this.displayMeal();
   }
 
   
