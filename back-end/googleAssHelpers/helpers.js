@@ -72,6 +72,10 @@ app.intent('start workout', conv => {
   })
   .catch(err => {
     console.error(err);
+    conv.ask(new SimpleResponse({
+      text: 'Something went wrong',
+      speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
+    }));
   })
 });
 
