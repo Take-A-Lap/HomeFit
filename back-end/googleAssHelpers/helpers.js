@@ -61,13 +61,17 @@ app.intent('start workout', conv => {
       return googleWorkout.splice(0, 1);
     }
   })
-  .then(currentWorkout => {
-    if (currentWorkout !== undefined) {
+  .then(currentExercise => {
+    if (currentExercise !== undefined) {
+      current = currentExercise;
       conv.ask(new SimpleResponse({
         text: 'Let me know when you are ready to begin.',
         speech: '<speak> <s> Let me know when you are ready to begin. </s> </speak>'
       }));
     }
+  })
+  .catch(err => {
+    console.error(err);
   })
 });
 
