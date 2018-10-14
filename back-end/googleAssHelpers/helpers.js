@@ -40,7 +40,7 @@ app.intent('link account', conv => {
 });
 
 app.intent('start workout', conv => {
-  console.log(conv.id, ' is this the same as the session id');
+  console.log(conv.id, ' conv.id inside the start workout intent');
   // need to remember to grab the conversation id
   db.getUserInfoByGoogleSessionId(conv.id)
   .then(user => {
@@ -80,7 +80,9 @@ app.intent('start workout', conv => {
 });
 
 app.intent('next exercise', conv => {
-
+  console.log(conv.id, " conv.id inside of the next exercise intent");
+  
+  db.getUserInfoByGoogleSessionId(conv.id)
 
 });
 
