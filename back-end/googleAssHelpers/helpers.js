@@ -12,7 +12,7 @@ const app = dialogflow();
 console.log(app, ' let\'s see whats inside of this on line 11 in google helpers');
 
 app.intent('start workout', conv => {
-  console.log(conv);
+  console.log(conv.id);
   // need to remember to grab the conversation id
   conv.ask(new SimpleResponse({
     text: 'Let me know when you are ready to begin.',
