@@ -38,7 +38,7 @@ app.get('/generateWO', (req, res)=> {
   console.log(req.query.wo_num);
   wo_num = req.query.wo_num;
   diff = req.query.diff;
-  workout.generateWorkoutSignUp(wo_num, diff)
+  workout.generateWorkout(wo_num, diff)
   .then(workout=>res.send(workout))
   .catch(err=>console.error(err));
 })
