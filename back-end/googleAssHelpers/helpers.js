@@ -32,7 +32,7 @@ const nextExerObjResponses = [{
   part1: {
     before: '<speak> <s> The recommended pace for ',
     prep: 'is',
-    after: ' seconds. </s> <s> Let\'s begin </s> <break time="500ms" /> </s>'
+    after: ' seconds. </s> <s> Let\'s begin </s> <break time="500ms" />'
   },
   part2: {
     before: ' <s> Let\ss take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
@@ -119,7 +119,7 @@ app.intent('next exercise', conv => {
     if (user !== undefined) {
       if (current !== undefined){
         let index = randomNumGen(nextExerObjResponses.length);
-        // let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/> </s>`;
+        // let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/>`;
         let cadence = nextExerObjResponses[index].part1.before + current.name + nextExerObjResponses[index].part1.prep + (current.rep_time / 1000) + nextExerObjResponses[index].part1.after;
         for (let i = 1; i < 11; i++) {
           cadence += ` give me a ${i} <break time="${current.rep_time}ms"/>`;
