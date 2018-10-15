@@ -10,7 +10,7 @@ let googleWorkout = [];
 let current;
 
 const app = dialogflow();
-
+console.log('applesauce');
 
 app.intent('link account', conv => {
   

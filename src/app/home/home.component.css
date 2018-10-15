@@ -35,7 +35,8 @@
 
 .jumbotron {
   border-radius: 0px;
-  color: lightgrey;
+  color: black;
+font-weight: bold;
 }
 
 img {
@@ -64,7 +65,8 @@ h4 {
 }
 
 .weatherText {
-  color: lightgrey;
+  color: black;
+font-weight: bold;
 }
 p {
   color: navy;
