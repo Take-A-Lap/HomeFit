@@ -45,7 +45,9 @@ app.get('/generateWO', (req, res)=> {
 
 app.get('/getUser', (req, res) => {
   db.getUserInfoByEmail(req.query.email)
-  .then((id)=>res.send(id))
+  .then((id)=>{
+    console.log(id);
+    res.send(id)})
   .catch(err=>console.error(err));
 })
 

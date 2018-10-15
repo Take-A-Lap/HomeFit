@@ -227,6 +227,7 @@ module.exports = {
       if (wo_num === 0 || wo_num % 6 === 0) {
         this.generateWorkoutChest(difficulty)
         .then(wo => {
+          console.log(wo)
           solution = wo
           if (solution) {
             resolve(solution)
