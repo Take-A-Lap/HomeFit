@@ -13,13 +13,6 @@ const app = dialogflow();
 
 console.log(app, ' let\'s see whats inside of this on line 11 in google helpers');
 
-// app.intent('Default Welcome Intent', (conv) => {
-//   conv.ask(new Permission({
-//     context: 'Hi there, to get your workout ready',
-//     permissions: 'NAME'
-//   }));
-// });
-
 app.intent('link account', conv => {
   
   console.log(conv.body.sessionId, ' looking for the value of the session id');
