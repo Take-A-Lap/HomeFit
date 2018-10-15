@@ -60,7 +60,7 @@
       </table>
     </div>
   </div>  
-  <div class="col-md-12">
+  <div class="col-md-12" *ngIf="imageUrls">
     <slideshow 
     [imageUrls]=imageUrls
     [height]="height"

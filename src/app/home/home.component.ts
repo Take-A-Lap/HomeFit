@@ -111,6 +111,7 @@ export class HomeComponent implements OnInit {
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
         this.meals.push(breakfastFood)
+        console.log(breakfastFood, 'breakfastFood line 114')
         // console.log(this.meals);
         this.imageUrls = this.meals[0].map(meal => {
           let proof = () => {
