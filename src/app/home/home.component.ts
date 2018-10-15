@@ -212,8 +212,10 @@ export class HomeComponent implements OnInit {
     // setTimeout(() => {
     //   this.getWeather();
     // }, 4500)
+    this.getCookieInfo();
     this.getCurrentTime();
     this.displayMeal();
+    this.getCompletedWorkouts();
   }
 
   
