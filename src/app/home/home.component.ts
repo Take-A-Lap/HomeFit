@@ -93,7 +93,6 @@ export class HomeComponent implements OnInit {
     this.workoutService.getCompletedWorkouts(this.email)
       .subscribe(compWorkOuts => {
         // if the func returns dates
-        console.log(compWorkOuts);
         if (compWorkOuts) {
           // concat the dates to the workoutDates stored on the component
           this.workoutDates = this.workoutDates.concat(compWorkOuts);
@@ -105,7 +104,6 @@ export class HomeComponent implements OnInit {
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
         this.meals = breakfastFood
-        // console.log(this.meals);
         this.imageUrls = this.meals.map(meal => {
           let proof = () => {
             window.open(meal.url);
@@ -122,7 +120,6 @@ export class HomeComponent implements OnInit {
   getLunch() {
     return this.foodService.getLunch()
       .subscribe(lunchFood => {
-        // console.log(Array.isArray(lunchFood), lunchFood);
         this.meals = lunchFood;
         this.imageUrls = this.meals.map(meal => {
           let proof = () => {
@@ -139,7 +136,6 @@ export class HomeComponent implements OnInit {
 
 
   getDinner() {
-    console.log('Getting Dinner');
     return this.foodService.getDinner()
       .subscribe(dinnerFood => {
         this.meals = dinnerFood;
