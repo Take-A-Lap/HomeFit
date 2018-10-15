@@ -74,6 +74,7 @@ export class WorkoutComponent implements OnInit {
     switchExercise() {
       this.index++;
       this.exercise = this.workout[this.index];
+      this.name = this.exercise.name;
     }
     
     increment() {
