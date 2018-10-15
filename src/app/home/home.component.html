@@ -4,14 +4,19 @@
       <ul class="nav"><li class="nav-item">
         <a class="nav-link" routerLink="/workout">Workout</a>
       </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/personalInfo">Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">Logout</a>
-        </li>
-      </ul>
-    </div>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/personalInfo">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>
+  <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h1>Welcome Spider-Man</h1>
+      </div>
   </div>
   <br>
   <div class="row">
@@ -61,13 +66,13 @@
     </div>
   </div>  
   <div class="col-md-12" *ngIf="imageUrls">
-    <slideshow 
-    [imageUrls]=imageUrls
-    [height]="height"
-    [minHeight]="'200px'"
-    [autoPlay]="true"
-    [showArrows]="false"
-    ></slideshow> 
+      <slideshow 
+      [imageUrls]=imageUrls
+      [height]="height"
+      [minHeight]="'200px'"
+      [autoPlay]="true"
+      [showArrows]="false"
+      ></slideshow> 
   </div> 
   <br>
 </div>
