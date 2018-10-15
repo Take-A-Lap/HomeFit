@@ -15,7 +15,7 @@ console.log(app, ' let\'s see whats inside of this on line 11 in google helpers'
 
 app.intent('link account', conv => {
   
-  console.log(conv.id, ' looking for the value of the session id');
+  console.log(conv.body, ' looking for the value of the session id');
   db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
   .then(user => {
     if(user !== undefined){
