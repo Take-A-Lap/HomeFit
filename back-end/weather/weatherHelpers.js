@@ -33,7 +33,7 @@ module.exports = {
     let text;
     if (number > 5 && number < 19) {
       text = 'day';
-    } else if (number > 1 || number > 18) {
+    } else if (number > -1 || number > 18) {
 
       text = 'night';
     }

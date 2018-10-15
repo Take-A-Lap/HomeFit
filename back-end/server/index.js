@@ -160,8 +160,10 @@ app.post('/weather', (req, res) => {
             weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
             weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
             weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
-          weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
-            weatherInfo.time_of_day = body;
+            weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
+              console.log(body);
+              weatherInfo.time_of_day = body;
+              console.log(weatherInfo);
           })
           weather.runningRecommendations(weatherInfo, (data) => {
             weatherInfo.recommendation = data;
@@ -476,7 +478,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-const port = 81;
+const port = 3000;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
