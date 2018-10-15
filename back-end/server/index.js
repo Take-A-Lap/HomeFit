@@ -66,8 +66,8 @@ app.get('/getUser', (req, res) => {
 })
 
 app.get('/getCompletedWO', (req, res) => {
-  console.log(req.query.email)
-  db.getUserInfoByEmail(req.query.email)
+  let email = req.query.email;
+  db.getUserInfoByEmail(email)
     .then((userInfo)=> {
       return userInfo;
     })
@@ -76,16 +76,20 @@ app.get('/getCompletedWO', (req, res) => {
       let completedWorkouts = [];
       db.getCompCardioByUserId(id)
         .then(compCardio => {
-          completedWorkouts.push(compCardio);
+          if (compCardio) {
+            completedWorkouts = completedWorkouts.concat(compCardio);
+          }
           db.getCompStrByUserId(id)
             .then(compStr => {
-              completedWorkouts.push(compStr);
-              return completedWorkouts;
+              if (compStr) {
+                completedWorkouts = completedWorkouts
+                  .concat(compStr)
+                  .map(wo => wo.date.getDate())
+                  .filter((date, i, a) => a.indexOf(date) === i);
+                res.send(completedWorkouts);
+              }
             })
         })
-    })
-    .then(completedWorkouts => {
-      res.send(completedWorkouts);
     })
     .catch(err=>console.error(err));
 });
