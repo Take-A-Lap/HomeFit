@@ -84,7 +84,7 @@ app.intent('next exercise', conv => {
         for (let i = 1; i < 11; i++) {
           cadence += ` give me a ${i} <break time="${current.rep_time}ms"/>`;
         }
-        cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start the next exercise, we can do that as well</s> </speak>`;
+        cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
         conv.ask(new SimpleResponse({
           text: `Try and keep pace`,
           speech: cadence
