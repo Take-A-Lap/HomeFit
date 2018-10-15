@@ -44,7 +44,7 @@ app.get('/generateWO', (req, res)=> {
 })
 
 app.get('/getUser', (req, res) => {
-  console.log(req.query.email);
+  console.log(req.query.email); 
   db.getUserInfoByEmail(req.query.email)
   .then((id)=>{
     console.log(id);

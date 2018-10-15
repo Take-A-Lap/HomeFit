@@ -119,9 +119,8 @@ export class WorkoutComponent implements OnInit {
     getCookieInfo(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=');
-console.log(emailArr, 'emailArr')
-      this.email = emailArr[2];
-      console.log(this.email, 'cookie-info, workout component');
+      this.email = emailArr[emailArr.length -1];
+      console.log(this.email, 'workout.component this.email');
     }
 
     // getWorkoutInfo(){
