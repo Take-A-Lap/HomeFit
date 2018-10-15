@@ -38,7 +38,7 @@ app.get('/generateWO', (req, res)=> {
   console.log(req.query.wo_num);
   wo_num = req.query.wo_num;
   diff = req.query.diff;
-  workout.generateWorkoutSignUp(wo_num, diff)
+  workout.generateWorkout(wo_num, diff)
   .then(workout=>res.send(workout))
   .catch(err=>console.error(err));
 })
@@ -473,7 +473,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-const port = 81;
+const port = 3000;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
