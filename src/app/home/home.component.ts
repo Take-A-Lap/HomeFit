@@ -87,23 +87,18 @@ export class HomeComponent implements OnInit {
     console.log(this.email);
   }
 
-  // make a function that takes a user email and sends post request to the backend endpoint that returns an array of information
-  // from the completed strength table and cardio table
-  getCompletedWorkouts(email) {
-    // should return a promise with an array in its callback
-    // hardcode the email to be 	reptar@rugrats.com
-    // this.workoutService.getCompletedWorkouts("reptar@rugrats.com")
-    //   .subscribe(compWorkOuts => {
-    //     // use the array of completed workouts to get dates that should be marked on the calender
-    //     console.log(compWorkOuts);
-    //     // if (compWorkOuts) {
-    //     //   // loop through the completed workouts array
-    //     //   compWorkOuts.forEach(completed => {
-    //     //     // for each completed push into the workout dates array the date property on the completed
-    //     //     this.workoutDates.push(completed.date);
-    //     //   });
-    //     // }
-    //   })
+  // function that gets completed WO dates for calender
+  getCompletedWorkouts() {
+    // use the WO service completed WO function with user email stored on the component
+    this.workoutService.getCompletedWorkouts(this.email)
+      .subscribe(compWorkOuts => {
+        // if the func returns dates
+        console.log(compWorkOuts);
+        if (compWorkOuts) {
+          // concat the dates to the workoutDates stored on the component
+          this.workoutDates = this.workoutDates.concat(compWorkOuts);
+        }
+      });
   }
 
   getBreakfast() {
