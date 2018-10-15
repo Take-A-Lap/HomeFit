@@ -59,7 +59,7 @@ app.get('/getUserId', (req, res) => {
 })
 
 app.get('/getUser', (req, res) => {
-  console.log(req.query.email)
+  console.log(req.query)
   db.getUserInfoByEmail(req.query.email)
     .then((id)=>res.send(id))
     .catch(err=>console.error(err));
