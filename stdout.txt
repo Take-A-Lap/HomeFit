@@ -175,3 +175,10 @@ spider@man
   password: 'mj',
   google_session_id: null }
 7
+29.977430599999995 -90.0759281 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 82,
+  apparentTemp: 89,
+  humidity: 0.79,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
