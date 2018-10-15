@@ -60,7 +60,7 @@ app.intent('start workout', conv => {
       
       conv.ask(new SimpleResponse({
         text: 'Let me know when you are ready to begin.',
-        speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise. </s> <s> Let me know when you are in position </s> </speak>'
+        speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
       }));
     }
   })
