@@ -105,11 +105,13 @@ app.intent('next exercise', conv => {
   .then(user => {
     if (user !== undefined) {
       if (current !== undefined){
-        let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/> </s>`;
+        // let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/> </s>`;
+        let cadence = nextExerObjResponses[0].part1.before + current.name + nextExerObjResponses[0].part1.prep + (current.rep_time / 1000) + nextExerObjResponses[0].part1.after;
         for (let i = 1; i < 11; i++) {
           cadence += ` give me a ${i} <break time="${current.rep_time}ms"/>`;
         }
-        cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
+        // cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
+        cadence += nextExerObjResponses[0].part2.before + googleWorkout[0].name + nextExerObjResponses[0].part2.after;
         conv.ask(new SimpleResponse({
           text: `Try and keep pace`,
           speech: cadence
