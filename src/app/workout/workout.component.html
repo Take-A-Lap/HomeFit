@@ -18,6 +18,7 @@
         <div class="media">
           <iframe class="video" [src]="trustedUrl"></iframe>
         </div>
+        <button class="continue-button" (click)="answer()" *ngIf="clickMessage">clickMessage</button>
       </div>
     </div>
     <br>
