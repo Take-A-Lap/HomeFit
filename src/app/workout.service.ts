@@ -17,7 +17,6 @@ export class WorkoutService {
   }
 
   getCompletedWorkouts(email) {
-    console.log('checking for completed')
     return this.httpClient.get('/getCompletedWO', {
       params: {
         email: email

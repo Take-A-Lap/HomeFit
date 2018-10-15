@@ -67,7 +67,6 @@ app.get('/getUser', (req, res) => {
 
 app.get('/getCompletedWO', (req, res) => {
   let email = req.query.email;
-  console.log(email);
   db.getUserInfoByEmail(email)
     .then((userInfo)=> {
       return userInfo;
