@@ -179,12 +179,11 @@ export class HomeComponent implements OnInit {
     this.dates[day] = date;
     // Fill in other dates based on today's
     for (let i = 0; i < day; i++) {
-      this.dates[i] = date - (day - i); 
+      this.dates[i] = date - (day - i);
     }
     for (let i = day + 1; i < this.dates.length; i++) {
-      this.dates[i] = date + (this.dates.length - i);
+      this.dates[i] = date + i - 1;
     }
-    console.log(this.dates);
   }
 
   testClick(){
