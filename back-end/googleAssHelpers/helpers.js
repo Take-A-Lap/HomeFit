@@ -8,7 +8,9 @@ const workout = require('../Algorithms/workout.js');
 
 let googleWorkout = [];
 let current;
-
+const randomNumGen = (numOptions) => {
+  return Math.floor(Math.random() * numOptions);
+};
 const app = dialogflow();
 console.log('applesauce');
 
