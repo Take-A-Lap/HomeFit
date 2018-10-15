@@ -103,9 +103,7 @@ app.intent('next exercise', conv => {
         speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
       }));
     })
-  })
-
-});
+  });
 
 app.intent('Default Fallback Intent', conv => {
   conv.ask(`I didn't understand. Can you tell me something else?`)
