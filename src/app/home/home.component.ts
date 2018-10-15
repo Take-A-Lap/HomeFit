@@ -111,8 +111,18 @@ export class HomeComponent implements OnInit {
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
         this.meals.push(breakfastFood)
+        console.log(breakfastFood, 'breakfastFood line 114')
         // console.log(this.meals);
-        this.mealImages = this.meals[0].map(meal => meal.recipe.image)
+        this.imageUrls = this.meals[0].map(meal => {
+          let proof = () => {
+            window.open(meal.recipe.url);
+          }
+          return {
+            url: meal.recipe.image,
+            href: meal.recipe.url,
+            clickAction: proof
+          }
+        })
       })
   }
 
@@ -145,7 +155,16 @@ export class HomeComponent implements OnInit {
       .subscribe(dinnerFood => {
         this.meals.push(dinnerFood);
         // console.log(this.meals);
-        this.mealImages = this.meals[0].map(meal => meal.recipe.image)
+        this.imageUrls = this.meals[0].map(meal => {
+          let proof = () => {
+            window.open(meal.recipe.url);
+          }
+          return {
+            url: meal.recipe.image,
+            href: meal.recipe.url,
+            clickAction: proof
+          }
+        })
       });
   }
 
