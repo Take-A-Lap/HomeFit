@@ -93,7 +93,7 @@ app.intent('next exercise', conv => {
     } else {
       conv.ask(new SimpleResponse({
         test: 'Please link your session with your account.',
-        speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do to link your account is say ink my account followed by your account name </p> </speak>`
+        speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do is say link my account <break time"50ms"/> followed by your account name </p> </speak>`
       }));
     }
   })
