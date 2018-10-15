@@ -12,7 +12,28 @@ const randomNumGen = (numOptions) => {
   return Math.floor(Math.random() * numOptions);
 };
 const app = dialogflow();
-console.log('applesauce');
+
+const linkAccountObjResponses = [{
+  before: '<speak> <s> Thank you </s> <s> ',
+  after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
+}];
+
+const startWorkoutObjResponses = [{
+  before: '<speak> <s> Let me know when you are ready to begin your ',
+  after: ' exercise and are in position. </s> </speak>'
+}];
+
+const nextExerObjResponses = [{
+  part1: {
+    before: '',
+    prep: '',
+    after: ''
+  },
+  part2: {
+    before: '',
+    after: ''
+  }
+}];
 
 app.intent('link account', conv => {
   
