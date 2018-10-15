@@ -191,7 +191,7 @@ export class WorkoutComponent implements OnInit {
             wo_num: this.wo_num
           }
         }).subscribe(wo=>{
-          // console.log(wo)
+          console.log(wo)
           this.workout = wo;
           this.exercise = this.workout[this.index];
           this.youtube = this.exercise.youtube_link;
