@@ -173,12 +173,6 @@ console.log(body, 'body')
               .then(() => {res.send(weatherInfo)})
         }
       })
-    }
-  })
-  // res.sendStatus(201);
-  // res.end();
-})
-
 
 app.get('/dinner', (req,res)=> {
   let meals = [];
