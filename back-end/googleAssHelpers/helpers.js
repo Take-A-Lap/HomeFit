@@ -13,6 +13,11 @@ const randomNumGen = (numOptions) => {
 };
 const app = dialogflow();
 
+const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> Could you try again? </s> </p> </speak>`,
+  `<speak> <p> I am terribly sorry </p> <p> I am having trouble understanding you </p> <p> If it isn't too much to ask could you try again? </p> </speak>`,
+  `<speak> <s> This is embarrassing for me </s> <p> I sometimes have trouble with my hearing </p> <p> even at such a young age </p> <s> Would you kindly try the command again? </s> </speak>`
+];
+
 const linkAccountObjResponses = [{
   before: '<speak> <s> Thank you </s> <s> ',
   after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
@@ -49,9 +54,11 @@ app.intent('link account', conv => {
       }));
       return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.id);
     }
+    let index = randomNumGen(errorResponses.length);
     conv.ask(new SimpleResponse({
       text: `Please try again`,
-      speech: `<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> Could you try again? </s> </p> </speak>`
+      // speech: `<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> Could you try again? </s> </p> </speak>`
+      speech: errorResponses[index]
     }));
   });
 });
@@ -94,9 +101,12 @@ app.intent('start workout', conv => {
   })
   .catch(err => {
     console.error(err);
+    let index = randomNumGen(errorResponses.length);
     conv.ask(new SimpleResponse({
       text: 'Something went wrong',
-      speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
+      // speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
+      speech: errorResponses[index]
+
     }));
   })
 });
@@ -122,6 +132,7 @@ app.intent('next exercise', conv => {
         }));
       }
     } else {
+
       conv.ask(new SimpleResponse({
         test: 'Please link your session with your account.',
         speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do is say link my account <break time"50ms"/> followed by your account name </p> </speak>`
@@ -129,16 +140,19 @@ app.intent('next exercise', conv => {
     }
   })
   .catch(err => {
+    let index = randomNumGen(errorResponses);
     console.log(err);
-      conv.ask(new SimpleResponse({
-        text: 'Something went wrong',
-        speech: `<speak> <p> <s> I'm sorry something appears to have gone wrong. </s> Please try again </p> </speak>`
-      }));
+    conv.ask(new SimpleResponse({
+      text: 'Something went wrong',
+      // speech: `<speak> <p> <s> I'm sorry something appears to have gone wrong. </s> Please try again </p> </speak>`
+      speech: errorResponses[index]
+    }));
     })
   });
 
 app.intent('Default Fallback Intent', conv => {
-  conv.ask(`I didn't understand. Can you tell me something else?`)
+  let index = randomNumGen(errorResponses);
+  conv.ask(errorResponses[index]);
 });
 
 module.exports = app;
