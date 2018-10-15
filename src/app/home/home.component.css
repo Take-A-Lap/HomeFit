@@ -92,6 +92,8 @@ h4 {
 } */
 .forecastText {
   color: lightgrey;
+  margin-top: -40%;
+  padding-left: 10px;
 }
 
 table { width: 100%; box-sizing: border-box; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1); font-family: 'Ubuntu'; /*border-collapse: collapse;*/ border-spacing: 0; background-color: #333333; }

@@ -25,7 +25,10 @@
         <img class="weatherImage" [src]="weather.url">
         <div class="forecastText">
           <div class="weatherText">
-            {{weather.city}}, {{weather.state}} {{weather.temp}}˚ {{weather.text}}    
+            {{weather.city}}, {{weather.state}} {{weather.temp}}˚
+            <div>
+              {{weather.text}}    
+            </div>
           </div>
           Outdoor Running Conditions: {{weather.recommendation}}
         </div>
@@ -39,6 +42,9 @@
       </div> -->
     </div>
   </div>
+  <br>
+  <br>
+  <br>
   <div class="row">
     <div class="col-xs-12 col-md-12">
       <!-- <h3>Workout Log</h3> -->
