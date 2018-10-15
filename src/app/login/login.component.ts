@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
     }).subscribe(password=>{
       console.log(password);
       const value = Object.values(password)
+
       if(value[0] === this.password){
         document.cookie = `homeFit=${this.email}`;
         this.goHome();

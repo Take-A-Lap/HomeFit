@@ -38,14 +38,17 @@ app.get('/generateWO', (req, res)=> {
   console.log(req.query.wo_num);
   wo_num = req.query.wo_num;
   diff = req.query.diff;
-  workout.generateWorkoutSignUp(wo_num, diff)
+  workout.generateWorkout(wo_num, diff)
   .then(workout=>res.send(workout))
   .catch(err=>console.error(err));
 })
 
 app.get('/getUser', (req, res) => {
+  console.log(req.query.email);
   db.getUserInfoByEmail(req.query.email)
-  .then((id)=>res.send(id))
+  .then((id)=>{
+    console.log(id);
+    res.send(id)})
   .catch(err=>console.error(err));
 })
 
@@ -144,8 +147,8 @@ app.post('/weather', (req, res) => {
       const parsedBody = JSON.parse(body.body);
       weatherInfo = {
         text: parsedBody.currently.summary,
-        temp: parsedBody.currently.temperature,
-        apparentTemp: parsedBody.currently.apparentTemperature,
+        temp: Math.floor(parsedBody.currently.temperature),
+        apparentTemp: Math.floor(parsedBody.currently.apparentTemperature),
         humidity: parsedBody.currently.humidity,
         icon: parsedBody.currently.icon
       }
@@ -330,7 +333,7 @@ app.post('/signUp', (req, res) =>{
   let password = req.body.params.password;
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
   .then(()=>{
-    return Promise.all([db.getUserIdByEmail(email), workout.generateWorkoutSignUp(squatComf)])
+    return Promise.all([db.getUserIdByEmail(email)])
       .catch(err=>console.error(err));
   })
   .then(([user,regimen])=> {
@@ -348,7 +351,9 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
       .then((user) => {
-        const passingName = (user ? user.name : "not linked yet");
+        console.log(user);
+        
+        const passingName = (user !== undefined ? user.preferred_username : "not linked yet");
         res.json(alexaHelp.invocationIntent(passingName));
       })
       .catch(err => {
@@ -382,9 +387,11 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
               })
             }
             alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
+            console.log(alexaWorkout, " should be some exercises");
+            
             return alexaWorkout.splice(0, 1);
-          }).then(currentExercise => {
-            console.log('this need to be firing');
+          }).then(([currentExercise]) => {
+            console.log(currentExercise, 'this need to be defined as the current exercise');
             current = currentExercise;
             res.json(alexaHelp.initWorkout(current));
           })
@@ -410,6 +417,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'linkAccount':
         let link = req.body.request.intent.slots.accountName.value;
         link = link.split(' ').join('@');
+        console.log(link);
         db.updateAlexaId(link, req.body.session.user.userId)
           .then(() => {
             res.json(alexaHelp.linkAccount(link));
@@ -468,7 +476,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-const port = 3000;
+const port = 81;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;

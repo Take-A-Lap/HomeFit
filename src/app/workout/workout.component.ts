@@ -119,7 +119,7 @@ export class WorkoutComponent implements OnInit {
     getCookieInfo(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=');
-      this.email = emailArr[1];
+      this.email = emailArr[emailArr.length - 1];
       console.log(this.email);
     }
 
@@ -191,7 +191,7 @@ export class WorkoutComponent implements OnInit {
             wo_num: this.wo_num
           }
         }).subscribe(wo=>{
-          // console.log(wo)
+          console.log(wo)
           this.workout = wo;
           this.exercise = this.workout[this.index];
           this.youtube = this.exercise.youtube_link;
