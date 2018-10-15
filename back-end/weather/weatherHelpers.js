@@ -33,7 +33,7 @@ module.exports = {
     let text;
     if (number > 5 && number < 19) {
       text = 'day';
-    } else if (number > 1 || number > 18) {
+    } else if (number > -1 || number > 18) {
 
       text = 'night';
     }
@@ -42,9 +42,10 @@ module.exports = {
 
   createWeatherTypeLabel: (weatherInfo, callback) => {
     let label;
-    label = weatherInfo.text;
-      callback(label);
-  },
+  label = weatherInfo.text;
+callback(label);
+},
+ 
 
   runningRecommendations: (weatherInfo, callback) => {
     let recommendation;

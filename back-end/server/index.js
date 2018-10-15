@@ -157,10 +157,12 @@ app.post('/weather', (req, res) => {
           console.error(err);
         } else {
           const parsedForCity = JSON.parse(body.body);
+console.log(weatherInfo, 'weatherInfo')
             weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
             weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
             weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
           weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
+console.log(body, 'body')
             weatherInfo.time_of_day = body;
           })
           weather.runningRecommendations(weatherInfo, (data) => {

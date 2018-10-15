@@ -1,0 +1,177 @@
+
+> home-fit@0.0.0 start /root/Homefit/HomeFit
+> node back-end/server/index.js
+
+HomeFit is listening on port 81!
+spider@man
+{ id: 89,
+  weight: 165,
+  num_push_ups: 50,
+  jog_dist: 10,
+  age: 24,
+  sex: 'm',
+  height: 70,
+  squat_comf: 3,
+  workout_completes: 7,
+  goals: 3,
+  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
+  user_email: 'spider@man',
+  preferred_username: 'spider man',
+  password: 'mj',
+  google_session_id: null }
+7
+29.9797996 -90.07935789999999 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 80,
+  apparentTemp: 86,
+  humidity: 0.82,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+29.977417199999998 -90.0759118 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 80,
+  apparentTemp: 86,
+  humidity: 0.82,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+29.9797996 -90.07935789999999 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 80,
+  apparentTemp: 86,
+  humidity: 0.82,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+29.9797996 -90.07935789999999 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 81,
+  apparentTemp: 86,
+  humidity: 0.82,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+spider@man
+{ id: 89,
+  weight: 165,
+  num_push_ups: 50,
+  jog_dist: 10,
+  age: 24,
+  sex: 'm',
+  height: 70,
+  squat_comf: 3,
+  workout_completes: 7,
+  goals: 3,
+  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
+  user_email: 'spider@man',
+  preferred_username: 'spider man',
+  password: 'mj',
+  google_session_id: null }
+7
+29.9774346 -90.0759169 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 81,
+  apparentTemp: 87,
+  humidity: 0.81,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+spider@man
+{ id: 89,
+  weight: 165,
+  num_push_ups: 50,
+  jog_dist: 10,
+  age: 24,
+  sex: 'm',
+  height: 70,
+  squat_comf: 3,
+  workout_completes: 7,
+  goals: 3,
+  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
+  user_email: 'spider@man',
+  preferred_username: 'spider man',
+  password: 'mj',
+  google_session_id: null }
+7
+29.9797996 -90.07935789999999 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 81,
+  apparentTemp: 87,
+  humidity: 0.81,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+spider@man
+{ id: 89,
+  weight: 165,
+  num_push_ups: 50,
+  jog_dist: 10,
+  age: 24,
+  sex: 'm',
+  height: 70,
+  squat_comf: 3,
+  workout_completes: 7,
+  goals: 3,
+  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
+  user_email: 'spider@man',
+  preferred_username: 'spider man',
+  password: 'mj',
+  google_session_id: null }
+7
+29.9774171 -90.0759174 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 81,
+  apparentTemp: 87,
+  humidity: 0.81,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+spider@man
+{ id: 89,
+  weight: 165,
+  num_push_ups: 50,
+  jog_dist: 10,
+  age: 24,
+  sex: 'm',
+  height: 70,
+  squat_comf: 3,
+  workout_completes: 7,
+  goals: 3,
+  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
+  user_email: 'spider@man',
+  preferred_username: 'spider man',
+  password: 'mj',
+  google_session_id: null }
+7
+29.9774104 -90.0759233 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 81,
+  apparentTemp: 87,
+  humidity: 0.81,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+29.9797996 -90.07935789999999 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 81,
+  apparentTemp: 87,
+  humidity: 0.81,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+29.977440299999998 -90.0759428 work pretty please
+{ text: 'Humid and Partly Cloudy',
+  temp: 81,
+  apparentTemp: 88,
+  humidity: 0.81,
+  icon: 'partly-cloudy-day' } 'weatherInfo'
+day body
+spider@man
+{ id: 89,
+  weight: 165,
+  num_push_ups: 50,
+  jog_dist: 10,
+  age: 24,
+  sex: 'm',
+  height: 70,
+  squat_comf: 3,
+  workout_completes: 7,
+  goals: 3,
+  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
+  user_email: 'spider@man',
+  preferred_username: 'spider man',
+  password: 'mj',
+  google_session_id: null }
+7
