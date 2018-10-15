@@ -66,8 +66,8 @@ app.get('/getUser', (req, res) => {
 })
 
 app.get('/getCompletedWO', (req, res) => {
-  console.log(req.query.email)
-  db.getUserInfoByEmail(req.query.email)
+  let email = req.query.email;
+  db.getUserInfoByEmail(email)
     .then((userInfo)=> {
       return userInfo;
     })
@@ -76,16 +76,20 @@ app.get('/getCompletedWO', (req, res) => {
       let completedWorkouts = [];
       db.getCompCardioByUserId(id)
         .then(compCardio => {
-          completedWorkouts.push(compCardio);
+          if (compCardio) {
+            completedWorkouts = completedWorkouts.concat(compCardio);
+          }
           db.getCompStrByUserId(id)
             .then(compStr => {
-              completedWorkouts.push(compStr);
-              return completedWorkouts;
+              if (compStr) {
+                completedWorkouts = completedWorkouts
+                  .concat(compStr)
+                  .map(wo => wo.date.getDate())
+                  .filter((date, i, a) => a.indexOf(date) === i);
+                res.send(completedWorkouts);
+              }
             })
         })
-    })
-    .then(completedWorkouts => {
-      res.send(completedWorkouts);
     })
     .catch(err=>console.error(err));
 });
@@ -173,6 +177,9 @@ console.log(body, 'body')
               .then(() => {res.send(weatherInfo)})
         }
       })
+    }
+  })
+})
 
 app.get('/dinner', (req,res)=> {
   let meals = [];
@@ -328,18 +335,18 @@ app.post('/signUp', (req, res) =>{
   let username = req.body.params.userName;
   let password = req.body.params.password;
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
-  .then(()=>{
-    return Promise.all([db.getUserIdByEmail(email)])
-      .catch(err=>console.error(err));
-  })
-  .then(([user,regimen])=> {
-    const ins = [];
-    regimen.forEach(exer=>{
-      ins.push(JSON.stringify(exer))
+    .then(()=>{
+      return Promise.all([db.getUserIdByEmail(email)])
+        .catch(err=>console.error(err));
     })
-    db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
-  })
-  .catch(err=>console.error(err));
+    .then(([user,regimen])=> {
+      const ins = [];
+      regimen.forEach(exer=>{
+        ins.push(JSON.stringify(exer))
+      })
+      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
+    })
+    .catch(err=>console.error(err));
   res.end();
 });
 
