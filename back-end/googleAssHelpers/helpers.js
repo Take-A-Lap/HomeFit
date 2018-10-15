@@ -43,7 +43,8 @@ app.intent('link account', conv => {
     if(user !== undefined){
       conv.ask(new SimpleResponse({
         text: `Thank You!`,
-        speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
+        // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
+        speech: linkAccountObjResponses[0].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[0].after;
       }));
       return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.id);
     }
@@ -83,7 +84,8 @@ app.intent('start workout', conv => {
       
       conv.ask(new SimpleResponse({
         text: 'Let me know when you are ready to begin.',
-        speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
+        // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
+        speech: startWorkoutObjResponses[0].before + current.name + startWorkoutObjResponses[0].after;
       }));
     }
   })
