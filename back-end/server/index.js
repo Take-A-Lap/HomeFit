@@ -38,14 +38,17 @@ app.get('/generateWO', (req, res)=> {
   console.log(req.query.wo_num);
   wo_num = req.query.wo_num;
   diff = req.query.diff;
-  workout.generateWorkoutSignUp(wo_num, diff)
+  workout.generateWorkout(wo_num, diff)
   .then(workout=>res.send(workout))
   .catch(err=>console.error(err));
 })
 
 app.get('/getUser', (req, res) => {
+  console.log(req.query.email); 
   db.getUserInfoByEmail(req.query.email)
-  .then((id)=>res.send(id))
+  .then((id)=>{
+    console.log(id);
+    res.send(id)})
   .catch(err=>console.error(err));
 })
 
@@ -56,7 +59,7 @@ app.get('/getUserId', (req, res) => {
 })
 
 app.get('/getUser', (req, res) => {
-  console.log(req.query.email)
+  console.log(req.query)
   db.getUserInfoByEmail(req.query.email)
     .then((id)=>res.send(id))
     .catch(err=>console.error(err));
@@ -135,39 +138,41 @@ app.post('/updateWorkouts', (req, res)=>{
 
 app.post('/weather', (req, res) => {
   console.log(req.body.params.latitude, req.body.params.longitude, 'work pretty please');
-  weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude)
-  .then(body=>{
-    const parsedBody = JSON.parse(body.body);
-    weatherInfo = {
-      text: parsedBody.currently.summary,
-      temp: parsedBody.currently.temperature,
-      apparentTemp: parsedBody.currently.apparentTemperature,
-      humidity: parsedBody.currently.humidity,
-      icon: parsedBody.currently.icon
-    }
-  })
-  .then(()=> weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude))
-  .then(body => {
-      let weatherInfo = {};
-      console.log(body.body);
-      const parsedForCity = body.body;
-      weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
-      weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
-      weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
-      weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
-        weatherInfo.time_of_day = body;
+  weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, body) => {  
+    // console.log(body)
+    let weatherInfo = {};
+    if (err) {
+      console.error(err);
+    } else {
+      const parsedBody = JSON.parse(body.body);
+      weatherInfo = {
+        text: parsedBody.currently.summary,
+        temp: Math.floor(parsedBody.currently.temperature),
+        apparentTemp: Math.floor(parsedBody.currently.apparentTemperature),
+        humidity: parsedBody.currently.humidity,
+        icon: parsedBody.currently.icon
+      }
+      weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude, (err, body) => {
+        if (err) {
+          console.error(err);
+        } else {
+          const parsedForCity = JSON.parse(body.body);
+console.log(weatherInfo, 'weatherInfo')
+            weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
+            weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
+            weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
+          weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
+console.log(body, 'body')
+            weatherInfo.time_of_day = body;
+          })
+          weather.runningRecommendations(weatherInfo, (data) => {
+            weatherInfo.recommendation = data;
+          })
+          db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day)
+            .then(result => { weatherInfo.url = result })
+              .then(() => {res.send(weatherInfo)})
+        }
       })
-    })
-  .then(()=> weather.createDayNightLabel(req.body.params.timeStamp))
-  .then(body => weatherInfo.time_of_day = body)
-  .then(() => weather.runningRecommendations(weatherInfo))
-  .then(data=> weatherInfo.recommendation = data)
-  .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
-  .then(result => { weatherInfo.url = result })
-  .then(() => {res.send(weatherInfo)})
-})
-
-
 
 app.get('/dinner', (req,res)=> {
   let meals = [];
@@ -467,7 +472,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-const port = 3000;
+const port = 81;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;

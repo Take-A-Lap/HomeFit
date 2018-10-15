@@ -10,6 +10,7 @@ import { WeatherService } from '../weather.service';
 import { WorkoutService } from '../workout.service';
 import { IImage } from './iImage';
 
+
 @Component({
   selector: 'app-home-component',
   templateUrl: 'home.component.html',

@@ -48,32 +48,21 @@ module.exports = {
 
   createDayNightLabel: (number) => {
     let text;
-    return new Promise((resolve, reject)=>{
-      if (number > 5 && number < 19) {
-        text = 'day';
-      } else if (number > 1 || number > 18) {
-        text = 'night';
-      }
-      if(text === 'day' || text === 'night'){
-        resolve(text)
-      } else {
-        reject('time of day label rejection')
-      }
-    })
+
+    if (number > 5 && number < 19) {
+      text = 'day';
+    } else if (number > -1 || number > 18) {
+
+      text = 'night';
+    }
+    callback(text);
   },
 
   createWeatherTypeLabel: (weatherInfo) => {
     let label;
-    return new Promise((resolve, reject)=>{
-      label = weatherInfo.text;
-      if (label = weatherInfo.text){
-        resolve(label)
-      } else {
-        reject(label)
-      }
-    })
-  },
-
+  label = weatherInfo.text;
+callback(label);
+},
   runningRecommendations: (weatherInfo) => {
     let recommendation;
     return new Promise((resolve, reject)=>{

@@ -62,7 +62,7 @@ export class WorkoutComponent implements OnInit {
           this.set = 1;
           this.increment();
         }
-      }, (4500 + 10*this.exercise.rep_time));
+      }, (12000 + 10*this.exercise.rep_time));
     }
 
     workinDatBody(){
@@ -74,6 +74,7 @@ export class WorkoutComponent implements OnInit {
     switchExercise() {
       this.index++;
       this.exercise = this.workout[this.index];
+this.name = this.exercise.name;
     }
     
     increment() {
@@ -112,15 +113,15 @@ export class WorkoutComponent implements OnInit {
     testClick(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=')
-      let email = emailArr[1]
+      let email = emailArr[2]
       console.log(email);
     }
 
     getCookieInfo(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=');
-      this.email = emailArr[1];
-      console.log(this.email);
+      this.email = emailArr[emailArr.length -1];
+      console.log(this.email, 'workout.component this.email');
     }
 
     // getWorkoutInfo(){
@@ -191,7 +192,7 @@ export class WorkoutComponent implements OnInit {
             wo_num: this.wo_num
           }
         }).subscribe(wo=>{
-          // console.log(wo)
+          console.log(wo)
           this.workout = wo;
           this.exercise = this.workout[this.index];
           this.youtube = this.exercise.youtube_link;
