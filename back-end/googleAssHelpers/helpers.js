@@ -54,9 +54,11 @@ app.intent('start workout', conv => {
       return googleWorkout.splice(0, 1);
     }
   })
-  .then(currentExercise => {
+  .then(([currentExercise]) => {
     if (currentExercise !== undefined) {
       current = currentExercise;
+      console.log(current, ' this should the current workout object');
+      
       conv.ask(new SimpleResponse({
         text: 'Let me know when you are ready to begin.',
         speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise. </s> <s> Let me know when you are in position </s> </speak>'
