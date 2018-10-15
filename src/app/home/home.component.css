@@ -15,12 +15,12 @@
 }
 
 .container {
-  background-color: #f6f98b;
+  background-color: black;
 }
 
 .nav {
   border-radius: 0px;
-  background-color: #3549e8;
+  background-color: #FAA24A;
   /* background-color:#31cd32; */
   text-align: center
 }
