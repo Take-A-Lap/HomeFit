@@ -20,7 +20,7 @@ app.intent('link account', conv => {
     if(user !== undefined){
       conv.ask(new SimpleResponse({
         text: `Thank You!`,
-        speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to the our current session. </s> <s> Lets get started </s> </speak>`
+        speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
       }));
       return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.id);
     }
