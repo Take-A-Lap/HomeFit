@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
   getCookieInfo() {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
-    this.email = emailArr[1];
+    this.email = emailArr[emailArr.length -1];
     console.log(this.email);
   }
 
