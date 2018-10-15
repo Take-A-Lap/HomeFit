@@ -59,7 +59,7 @@ app.get('/getUserId', (req, res) => {
 })
 
 app.get('/getUser', (req, res) => {
-  console.log(req.query.email)
+  console.log(req.query)
   db.getUserInfoByEmail(req.query.email)
     .then((id)=>res.send(id))
     .catch(err=>console.error(err));
@@ -157,10 +157,12 @@ app.post('/weather', (req, res) => {
           console.error(err);
         } else {
           const parsedForCity = JSON.parse(body.body);
+console.log(weatherInfo, 'weatherInfo')
             weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
             weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
             weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
           weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
+console.log(body, 'body')
             weatherInfo.time_of_day = body;
           })
           weather.runningRecommendations(weatherInfo, (data) => {
@@ -171,12 +173,6 @@ app.post('/weather', (req, res) => {
               .then(() => {res.send(weatherInfo)})
         }
       })
-    }
-  })
-  // res.sendStatus(201);
-  // res.end();
-})
-
 
 app.get('/dinner', (req,res)=> {
   let meals = [];

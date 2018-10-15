@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-12" *ngFor="let weather of currentWeather">
       <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
-        {{timeStampString.slice(0, 15)}}
+        {{timeStampString.slice(0, 21)}}
         <div class="weatherText">
           {{weather.city}}, {{weather.state}} {{weather.temp}}˚ {{weather.text}}
         </div>

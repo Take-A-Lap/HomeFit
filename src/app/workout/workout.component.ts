@@ -62,7 +62,7 @@ export class WorkoutComponent implements OnInit {
           this.set = 1;
           this.increment();
         }
-      }, (4500 + 10*this.exercise.rep_time));
+      }, (12000 + 10*this.exercise.rep_time));
     }
 
     workinDatBody(){
@@ -74,6 +74,7 @@ export class WorkoutComponent implements OnInit {
     switchExercise() {
       this.index++;
       this.exercise = this.workout[this.index];
+this.name = this.exercise.name;
     }
     
     increment() {
@@ -112,7 +113,7 @@ export class WorkoutComponent implements OnInit {
     testClick(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=')
-      let email = emailArr[1]
+      let email = emailArr[2]
       console.log(email);
     }
 

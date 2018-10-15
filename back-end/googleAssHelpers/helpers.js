@@ -10,7 +10,7 @@ let googleWorkout = [];
 let current;
 
 const app = dialogflow();
-
+console.log('applesauce');
 
 app.intent('link account', conv => {
   
@@ -20,7 +20,7 @@ app.intent('link account', conv => {
     if(user !== undefined){
       conv.ask(new SimpleResponse({
         text: `Thank You!`,
-        speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to the our current session. </s> <s> Lets get started </s> </speak>`
+        speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
       }));
       return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.id);
     }
@@ -80,11 +80,11 @@ app.intent('next exercise', conv => {
   .then(user => {
     if (user !== undefined) {
       if (current !== undefined){
-        let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin on the count of 3. </s> 1 <break time="500ms"/> 2 <break time="500ms"/> <s> 3 <break time="500ms"/> Let's begin </s>`;
+        let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/> </s>`;
         for (let i = 1; i < 11; i++) {
           cadence += ` give me a ${i} <break time="${current.rep_time}ms"/>`;
         }
-        cadence += ` </speak>`;
+        cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
         conv.ask(new SimpleResponse({
           text: `Try and keep pace`,
           speech: cadence
@@ -93,7 +93,7 @@ app.intent('next exercise', conv => {
     } else {
       conv.ask(new SimpleResponse({
         test: 'Please link your session with your account.',
-        speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do to link your account is say ink my account followed by your account name </p> </speak>`
+        speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do is say link my account <break time"50ms"/> followed by your account name </p> </speak>`
       }));
     }
   })
@@ -101,7 +101,7 @@ app.intent('next exercise', conv => {
     console.log(err);
       conv.ask(new SimpleResponse({
         text: 'Something went wrong',
-        speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
+        speech: `<speak> <p> <s> I'm sorry something appears to have gone wrong. </s> Please try again </p> </speak>`
       }));
     })
   });

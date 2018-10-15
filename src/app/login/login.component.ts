@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(){
-    console.log('firing');
+    console.log('firing', this.email);
     this.httpClient.get('/homeFitAuth', {
       params: { email: this.email }
     }).subscribe(password=>{
