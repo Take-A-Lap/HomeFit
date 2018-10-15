@@ -15,8 +15,8 @@ console.log(app, ' let\'s see whats inside of this on line 11 in google helpers'
 
 app.intent('link account', conv => {
   
-  console.log(conv.id, ' looking for the value of the session id');
-  db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
+  console.log(conv.body, ' looking for the value of the session id');
+  return db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
   .then(user => {
     if(user !== undefined){
       conv.ask(new SimpleResponse({
@@ -35,7 +35,7 @@ app.intent('link account', conv => {
 app.intent('start workout', conv => {
   console.log(conv.id, ' conv.id inside the start workout intent');
   // need to remember to grab the conversation id
-  db.getUserInfoByGoogleSessionId(conv.id)
+  return db.getUserInfoByGoogleSessionId(conv.id)
   .then(user => {
     if (user !== undefined) {
       const squatComf = user.squat_comf;
@@ -75,7 +75,7 @@ app.intent('start workout', conv => {
 app.intent('next exercise', conv => {
   console.log(conv.id, " conv.id inside of the next exercise intent");
   
-  db.getUserInfoByGoogleSessionId(conv.id)
+  return db.getUserInfoByGoogleSessionId(conv.id)
   .then(user => {
     if (user !== undefined) {
       if (current !== undefined){
