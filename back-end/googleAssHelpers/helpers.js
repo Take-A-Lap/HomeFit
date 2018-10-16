@@ -64,7 +64,8 @@ app.intent('link account', conv => {
 });
 
 app.intent('describe exercise', conv => {
-
+  return db.getExerciseDescription(1)
+  .then()
 });
 
 app.intent('start workout', conv => {
