@@ -70,6 +70,15 @@ const nextExerObjResponses = [
   }
 ];
 
+const greetings = [
+  `<speak> <p> <s> Welcome to Home fit trainer </s> <s> The fitness trainer designed for your personal needs. </s> </p> <p> <s> Before we begin </s> <s> I will need you to connect our session to your home fit account </s> <s> To do that all you have to do is say link my account and say your account name </s> <s> after you link up we can begin today's workout </s> </p> </speak>`,
+];
+
+app.intent('Default Welcome Intent', conv =>{
+  let index = randomNumGen(greetings.length);
+  conv.ask(greetings[index]);
+});
+
 app.intent('link account', conv => {
   
   console.log(conv.id, ' looking for the value of the session id');
