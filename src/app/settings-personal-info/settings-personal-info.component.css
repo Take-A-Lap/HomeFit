@@ -11,12 +11,12 @@
 }
 
 label {
-  color: #FAA24A;
+  color: #CCCCFF;
 }
 
 .nav {
   border-radius: 0px;
-  background-color:#FAA24A;
+  background-color:#CCCCFF;
   text-align: center;
 }
 
@@ -26,7 +26,7 @@ label {
 
 .next_button {
   width: 100%;
-  background-color: #FAA24A;
+  background-color: #CCCCFF;
   text-align: center;
   color: white;
 }

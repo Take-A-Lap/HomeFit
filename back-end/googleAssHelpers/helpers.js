@@ -18,27 +18,45 @@ const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. <
   `<speak> <s> This is embarrassing for me </s> <p> I sometimes have trouble with my hearing </p> <p> even at such a young age </p> <s> Would you kindly try the command again? </s> </speak>`
 ];
 
-const linkAccountObjResponses = [{
-  before: '<speak> <s> Thank you </s> <s> ',
-  after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
-}];
+const linkAccountObjResponses = [
+  {
+    before: '<speak> <s> Thank you </s> <s> ',
+    after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
+  },
+  {
+    before: '<speak> <s> We apologize for the inconvenience </s> <p> <s>',
+    after: '</s> </p> <break time ="750ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s>  </speak>'
+  },
+  {
+    before: '<speak> <s> Well </s> <p> <s>',
+    after: '</s> </p> <s> Looks like we are all set </s> <s> lets get started with those exercises </s> </speak>'
+  },
+  {
+    before: '<speak>  <s> Glad to have you back ',
+    after: '</s> <s> Now that we got all the technical stuff out of the way </s> <s> Lets egt ready to start that workout </s> </speak>'
+  }
+];
 
-const startWorkoutObjResponses = [{
+const startWorkoutObjResponses = [
+  {
   before: '<speak> <s> Let me know when you are ready to begin your ',
   after: ' exercise and are in position. </s> </speak>'
-}];
-
-const nextExerObjResponses = [{
-  part1: {
-    before: '<speak> <s> The recommended pace for ',
-    prep: 'is',
-    after: ' seconds. </s> <s> Let\'s begin </s> <break time="500ms" />'
-  },
-  part2: {
-    before: ' <s> Let\ss take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
-    after: ', we can do that as well</s> </speak>'
   }
-}];
+];
+
+const nextExerObjResponses = [
+  {
+    part1: {
+      before: '<speak> <s> The recommended pace for ',
+      prep: 'is',
+      after: ' seconds. </s> <s> Let\'s begin </s> <break time="500ms" />'
+    },
+    part2: {
+      before: ' <s> Let\ss take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
+      after: ', we can do that as well</s> </speak>'
+    }
+  }
+];
 
 app.intent('link account', conv => {
   
@@ -62,6 +80,7 @@ app.intent('link account', conv => {
     }));
   });
 });
+
 
 app.intent('start workout', conv => {
   console.log(conv.id, ' conv.id inside the start workout intent');
@@ -91,12 +110,13 @@ app.intent('start workout', conv => {
       console.log(current, ' this should the current workout object');
       
       let index = randomNumGen(startWorkoutObjResponses.length);
-
+      
       conv.ask(new SimpleResponse({
         text: 'Let me know when you are ready to begin.',
         // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
         speech: startWorkoutObjResponses[index].before + current.name + startWorkoutObjResponses[index].after
       }));
+      
     }
   })
   .catch(err => {
@@ -106,10 +126,23 @@ app.intent('start workout', conv => {
       text: 'Something went wrong',
       // speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
       speech: errorResponses[index]
-
+      
     }));
   })
 });
+
+app.intent('describe exercise', conv => {
+  return db.getExerciseDescription(1)
+    .then(({ description }) =>{
+      conv.ask("<speak>" + description + "</speak>");
+    })
+  // conv.ask("<speak> This is the description for" + current.name +" </speak>");
+  // conv.ask("<speak>" + current.description + "</speak>");
+});
+
+app.intent('take a break', conv => {
+  conv.close(`Okay, we will pick this up again later`);
+})
 
 app.intent('next exercise', conv => {
   console.log(conv.id, " conv.id inside of the next exercise intent");
@@ -149,7 +182,9 @@ app.intent('next exercise', conv => {
     }));
     })
   });
+app.intent('take a break', conv => {
 
+});
 app.intent('Default Fallback Intent', conv => {
   let index = randomNumGen(errorResponses);
   conv.ask(errorResponses[index]);

@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit {
         });
       }
   }
-
   sendWeather() {
     return this.httpClient.post('/weather', {
       params: {
@@ -75,7 +74,6 @@ export class HomeComponent implements OnInit {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
-  }
 
   // function that gets completed WO dates for calender
   getCompletedWorkouts() {
@@ -200,7 +198,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getCurrentTime();  
     this.getLocation();
-    this.displayMeal();
+    // this.displayMeal();
     this.getCookieInfo();
     this.getCompletedWorkouts();
   }

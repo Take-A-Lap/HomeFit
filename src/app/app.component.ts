@@ -12,24 +12,7 @@ export class AppComponent {
     this.router.navigate([page]);
   }
   ngOnInit() {
-    var source = new EventSource('/events');
-      // listens for an event from the server (an sseRes.sseSEnd())
-      source.onmessage = function(e) {
-        console.log('i\'m connecting');
-      };
-      /** add an event listener for a workoutEvent use event.data or just destructure
-       * and then JSON.parse it to get the object sent from the backend
-      */ 
-      source.addEventListener('workOutEvent', (event) => {
-       // console.log(event.data);
-        // uncomment for to fire off changePage function
-        // this.changePage("/home");
-      }, false);
-
-      source.addEventListener('newEvent', (event) => {
-      //  console.log(event.data);
-      }, false);
-
+    
   }
   title = 'HomeFit';
 
