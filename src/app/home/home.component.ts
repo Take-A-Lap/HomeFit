@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   meals2 = [];
   meals3 = [];
   currentWeather = [];
+  weather;
   workoutDates = [];
   time: number;
   timeStamp: Date;
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit {
 
     
     
-  async getLocation() {
+  getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position);
@@ -84,8 +85,7 @@ export class HomeComponent implements OnInit {
   getCookieInfo() {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
-    this.email = emailArr[emailArr.length -1];
-    console.log(this.email);
+    this.email = emailArr[1];
   }
 
   // function that gets completed WO dates for calender
@@ -115,14 +115,16 @@ export class HomeComponent implements OnInit {
             clickAction: proof
           }
         })
+        console.log(this.imageUrls)
       })
   }
 
   getLunch() {
-    return this.foodService.getLunch()
+    return new Promise((resolve,reject)=>{
+      this.foodService.getLunch()
       .subscribe(lunchFood => {
         this.meals = lunchFood;
-        this.imageUrls = this.meals.map(meal => {
+         let imageUrls = this.meals.map(meal => {
           let proof = () => {
             window.open(meal.url);
           }
@@ -132,7 +134,13 @@ export class HomeComponent implements OnInit {
             clickAction: proof
           }
         })
+        if(imageUrls.length){
+          resolve(imageUrls)
+        } else {
+          reject('Lunch Error')
+        }
       })
+    })
   }
 
 
@@ -154,21 +162,28 @@ export class HomeComponent implements OnInit {
   }
 
   getTime() {
-    let d = new Date();
-    this.time = d.getHours();
-    // the current day of the week is
-    let day = d.getDay();
-    // the date for the current day of the week is
-    let date = d.getDate();
-    // Set today's date
-    this.dates[day] = date;
-    // Fill in other dates based on today's
-    for (let i = 0; i < day; i++) {
-      this.dates[i] = date - (day - i);
-    }
-    for (let i = day + 1; i < this.dates.length; i++) {
-      this.dates[i] = date + i - 1;
-    }
+    return new Promise((resolve, reject)=>{
+      let d = new Date();
+      this.time = d.getHours();
+      // the current day of the week is
+      let day = d.getDay();
+      // the date for the current day of the week is
+      let date = d.getDate();
+      // Set today's date
+      this.dates[day] = date;
+      // Fill in other dates based on today's
+      for (let i = 0; i < day; i++) {
+        this.dates[i] = date - (day - i);
+      }
+      for (let i = day + 1; i < this.dates.length; i++) {
+        this.dates[i] = date + (this.dates.length - i);
+      }
+      if (d){
+        resolve(d)
+      } else {
+        reject('error getting time')
+      }
+    })
   }
 
   testClick(){
@@ -183,7 +198,14 @@ export class HomeComponent implements OnInit {
     if (this.time >= 21 || this.time < 10) {
       this.getBreakfast();
     } else if (this.time >= 10 && this.time < 14) {
-      this.getLunch();
+      this.getLunch()
+      .then((result)=>{
+        console.log(Array.isArray(result))
+        result.forEach((item)=>{
+          console.log(item)
+        })
+        this.imageUrls = result;
+      })
     } else {
       this.getDinner();
     }
@@ -194,12 +216,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.getCurrentTime()
     this.getLocation();
-
-    this.getCookieInfo();
-    this.getCurrentTime();
     this.displayMeal();
+    this.getCookieInfo();
     this.getCompletedWorkouts();
   }
 

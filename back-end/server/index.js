@@ -35,7 +35,6 @@ app.get('/cornTest', (req, res) => {
 })
 
 app.get('/generateWO', (req, res)=> {
-  console.log(req.query.wo_num);
   wo_num = req.query.wo_num;
   diff = req.query.diff;
   workout.generateWorkout(wo_num, diff)
@@ -59,15 +58,13 @@ app.get('/getUserId', (req, res) => {
 })
 
 app.get('/getUser', (req, res) => {
-  console.log(req.query)
   db.getUserInfoByEmail(req.query.email)
     .then((id)=>res.send(id))
     .catch(err=>console.error(err));
 })
 
 app.get('/getCompletedWO', (req, res) => {
-  let email = req.query.email;
-  db.getUserInfoByEmail(email)
+  db.getUserInfoByEmail(req.query.email)
     .then((userInfo)=> {
       return userInfo;
     })
@@ -102,7 +99,6 @@ app.get('/homeFitAuth', (req, res) => {
 })
 
 app.post('/completed', (req, res)=>{
-  console.log(req.body.params.date);
   var d = new Date();
   db.insertIntoCompStr(1, req.body.params.id, 10, true, d)
   .then(()=>res.send('tallied!'))
@@ -118,69 +114,36 @@ app.get('/getMyWorkOut', (req,res)=>{
 })
 
 app.post('/updateWorkouts', (req, res)=>{
-  console.log(req.body.params.id)
   db.updateNoWO(req.body.params.id, req.body.params.value)
   .then(()=>res.send('workouts updated'))
 })
 
-// app.get('/weather', (req, res) => {
-//   weather.getWeather((body) => {
-//     const parsedBody = JSON.parse(body);
-//     // console.log(parsedBody)
-//     const weatherInfo = {
-//       text: parsedBody[0].WeatherText,
-//       city: 'New Orleans',
-//       fahrenheit: parsedBody[0].Temperature.Imperial.Value,
-//       celsius: parsedBody[0].Temperature.Metric.Value,
-//       isDayTime: parsedBody[0].IsDayTime
-//     }
-//     res.send(weatherInfo)
-//   })
-//   // res.send(200);
-// })
-
-
-
 app.post('/weather', (req, res) => {
-  weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, body) => {  
-    let weatherInfo = {};
-    if (err) {
-      console.error(err);
-    } else {
-      const parsedBody = JSON.parse(body.body);
-      weatherInfo = {
-        text: parsedBody.currently.summary,
-        temp: Math.floor(parsedBody.currently.temperature),
-        apparentTemp: Math.floor(parsedBody.currently.apparentTemperature),
-        humidity: parsedBody.currently.humidity,
-        icon: parsedBody.currently.icon
-      }
-      weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude, (err, body) => {
-        if (err) {
-          console.error(err);
-        } else {
-          const parsedForCity = JSON.parse(body.body);
-            console.log(weatherInfo, 'weatherInfo')
-            console.log(req.body.params.timeStamp)
-            weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
-            weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
-            weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
-            weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
-              weatherInfo.time_of_day = body;
-              console.log(weatherInfo);
-          })
-          weather.runningRecommendations(weatherInfo, (data) => {
-            weatherInfo.recommendation = data;
-          })
-          db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day)
-            .then(result => { 
-              console.log(result);
-              weatherInfo.url = result })
-              .then(() => {res.send(weatherInfo)})
-        }
-      })
-    }
+  let weatherInfo = {};
+  Promise.all([
+    weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
+    weather.createDayNightLabel(req.body.params.timeStamp), 
+    weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude)
+  ])
+  .then((response)=> {
+    weatherInfo.text = response[0].summary;
+    weatherInfo.temp = response[0].temperature;
+    weatherInfo.apparentTemp = response[0].apparentTemperature;
+    weatherInfo.humidity = response[0].humidity,
+    weatherInfo.icon = response[0].icon
+    weatherInfo.time_of_day = response[1];
+    weatherInfo.city = response[2].City;
+    weatherInfo.state = response[2].State;
+    weatherInfo.country = response[2].Country;
   })
+  .then(() => {
+    weather.runningRecommendations(weatherInfo)
+  })
+  .then(data => weatherInfo.recommendation = data)
+  .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
+  .then(result => { weatherInfo.url = result })
+  .then(() => {res.send(weatherInfo)})
+  .catch((err)=>console.error(err))
 })
 
 app.get('/dinner', (req,res)=> {
@@ -306,10 +269,6 @@ app.get('/breakfast', (req, res) => {
   })    
 })
 
-app.post('/saveWO', (req, res)=> {
-  console.log(req);
-})
-
 app.get('/test', (req, res) => {  
   db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
   .then(userArr => {
@@ -379,7 +338,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         //do some stuff
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
-            // console.log(user, ' this needs to not be an empty array');
             const squatComf = user.squat_comf;
             const numWorkouts = user.workout_completes;
             return workout.generateWorkout(numWorkouts, squatComf)
@@ -391,12 +349,9 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
                 return db.updateNoWO(user.id, user.workout_completes + 1);
               })
             }
-            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
-            console.log(alexaWorkout, " should be some exercises");
-            
+            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;            
             return alexaWorkout.splice(0, 1);
           }).then(([currentExercise]) => {
-            console.log(currentExercise, 'this need to be defined as the current exercise');
             current = currentExercise;
             res.json(alexaHelp.initWorkout(current));
           })
@@ -441,7 +396,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
         const former = current;
         db.getUserInfoByAlexUserId(req.body.session.user.userId)
           .then(user => {
-            // console.log(user, ' this needs to not be an empty array');
             const squatComf = user.squat_comf;
             const numWorkouts = user.workout_completes;
             return workout.generateWorkout(numWorkouts, squatComf)

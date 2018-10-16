@@ -13,20 +13,57 @@ module.exports = {
   },
 
   //Dark Sky API call
-  getWeatherDarkSky: (latitude, longitude, callback) => {
-    let options = {
-      method: 'GET',
-      url: `https://api.darksky.net/forecast/${config.DARKSKY_API_KEY}/${latitude},${longitude}`
-    }
-    request(options, callback);
+  getWeatherDarkSky: (latitude, longitude) => {
+    return new Promise((resolve, reject)=>{
+      let solution;
+      let options = {
+        method: 'GET',
+        url: `https://api.darksky.net/forecast/${config.DARKSKY_API_KEY}/${latitude},${longitude}`
+      }
+      request(options, (error, response) => {
+        let solution = JSON.parse(response.body);
+        if (response) {
+          resolve(solution.currently)
+        } else {
+          reject('darkSky Rejection')
+        }
+      })
+    })    
   },
 
-  getCityNameForWeatherInfo: (latitude, longitude, callback) => {
-    let options = {
-      method: 'GET',
-      url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
-    }
-    request(options, callback);
+  getCityNameForWeatherInfo: (latitude, longitude) => {
+    return new Promise((resolve, reject)=>{
+      let options = {
+        method: 'GET',
+        url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
+      }
+      request(options, (error, result)=> {
+        let solution = JSON.parse(result.body)
+        if (result) {
+          resolve(solution.Response.View[0].Result[0].Location.Address)
+        } else {
+          reject('getCity Rejection')
+        }
+      })
+    })
+  },
+
+  issueAdvisory: (lat, long, time)=> {
+    return new Promise((resolve, reject)=>{
+      let options = {
+        method: 'GET',
+        url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
+      }
+      request(options, (error, result) => {
+        if (result) {
+          resolve(result)
+        } else {
+          reject('getCity Rejection')
+        }
+      })
+    })
+      getCityNameForWeatherInfo(lat, long),
+      createDayNightLabel(time)
   },
 
   createDayNightLabel: (number, callback) => {
