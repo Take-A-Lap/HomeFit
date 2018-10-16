@@ -63,6 +63,10 @@ app.intent('link account', conv => {
   });
 });
 
+app.intent('describe exercise', conv => {
+
+});
+
 app.intent('start workout', conv => {
   console.log(conv.id, ' conv.id inside the start workout intent');
   // need to remember to grab the conversation id
