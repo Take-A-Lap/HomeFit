@@ -18,27 +18,33 @@ const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. <
   `<speak> <s> This is embarrassing for me </s> <p> I sometimes have trouble with my hearing </p> <p> even at such a young age </p> <s> Would you kindly try the command again? </s> </speak>`
 ];
 
-const linkAccountObjResponses = [{
+const linkAccountObjResponses = [
+  {
   before: '<speak> <s> Thank you </s> <s> ',
   after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
-}];
+  }
+];
 
-const startWorkoutObjResponses = [{
+const startWorkoutObjResponses = [
+  {
   before: '<speak> <s> Let me know when you are ready to begin your ',
   after: ' exercise and are in position. </s> </speak>'
-}];
-
-const nextExerObjResponses = [{
-  part1: {
-    before: '<speak> <s> The recommended pace for ',
-    prep: 'is',
-    after: ' seconds. </s> <s> Let\'s begin </s> <break time="500ms" />'
-  },
-  part2: {
-    before: ' <s> Let\ss take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
-    after: ', we can do that as well</s> </speak>'
   }
-}];
+];
+
+const nextExerObjResponses = [
+  {
+    part1: {
+      before: '<speak> <s> The recommended pace for ',
+      prep: 'is',
+      after: ' seconds. </s> <s> Let\'s begin </s> <break time="500ms" />'
+    },
+    part2: {
+      before: ' <s> Let\ss take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
+      after: ', we can do that as well</s> </speak>'
+    }
+  }
+];
 
 app.intent('link account', conv => {
   
