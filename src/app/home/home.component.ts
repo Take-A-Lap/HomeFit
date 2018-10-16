@@ -57,9 +57,8 @@ export class HomeComponent implements OnInit {
         this.sendWeather();
         });
       }
-  },
-  
-  sendWeather1() {
+  }
+  sendWeather() {
     this.getTime()
     .then(()=>{
       return this.httpClient.post('/weather', {

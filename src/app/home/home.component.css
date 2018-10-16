@@ -89,9 +89,9 @@ table { width: 100%; box-sizing: border-box; box-shadow: inset 0px 0px 0px 1px r
 
 th, td { border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
 
-th { text-transform: uppercase; font-size:10px; font-weight:700; padding: 10px 0; color: rgba(255,255,255,0.5); background-color: #292929; letter-spacing: 1px; }
+th { text-transform: uppercase; font-size:10px; font-weight:700; padding: 10px 0; color: rgba(27, 1, 70, 0.5); background-color: #ffffff; letter-spacing: 1px; }
 
-td { width: 14.285%; transition: all 0.3s; font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 400; font-size: 14px; padding: 1.5% 1.5% 5%; vertical-align: initial; padding: 1.5% 0 ; height: 75px; }
+td { width: 14.285%; transition: all 0.3s; font-size: 14px; color: rgba(27, 1, 70, 0.5); font-weight: 400; font-size: 14px; background-color: #ffffff; padding: 1.5% 1.5% 5%; vertical-align: initial; padding: 1.5% 0 ; height: 75px; }
 
 .day:hover { background-color: rgba(0,0,0,0.1); cursor:pointer; }
 
