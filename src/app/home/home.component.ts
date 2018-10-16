@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
     getCurrentTime() {
       this.timeStamp = new Date();
       this.timeStampString = this.timeStamp.toString();
+      console.log(this.timeStampString);
     }
 
     
@@ -54,12 +55,12 @@ export class HomeComponent implements OnInit {
         this.latitude = position.coords.latitude.toString(),
         this.longitude = position.coords.longitude.toString();
         // this.getCurrentTime();
-        this.sendWeather1();
+        this.sendWeather();
         });
       }
   }
 
-  sendWeather1() {
+  sendWeather() {
     return this.httpClient.post('/weather', {
       params: {
         latitude: this.latitude,
@@ -203,15 +204,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getLocation();
-    // this.getWeather();
-    // setTimeout(() => {
-    //   this.sendWeather1();
-    // }, 4000)
-    // setTimeout(() => {
-    //   this.getWeather();
-    // }, 4500)
-    // this.getCurrentTime();
+    this.getLocation();
+    this.getCurrentTime();
     this.displayMeal();
   }
 

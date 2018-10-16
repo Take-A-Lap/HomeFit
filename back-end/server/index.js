@@ -136,10 +136,9 @@ app.post('/updateWorkouts', (req, res)=>{
 // })
 
 
+
 app.post('/weather', (req, res) => {
-  console.log(req.body.params.latitude, req.body.params.longitude, 'work pretty please');
   weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude, (err, body) => {  
-    // console.log(body)
     let weatherInfo = {};
     if (err) {
       console.error(err);
@@ -158,11 +157,11 @@ app.post('/weather', (req, res) => {
         } else {
           const parsedForCity = JSON.parse(body.body);
             console.log(weatherInfo, 'weatherInfo')
+            console.log(req.body.params.timeStamp)
             weatherInfo.city = parsedForCity.Response.View[0].Result[0].Location.Address.City;
             weatherInfo.state = parsedForCity.Response.View[0].Result[0].Location.Address.State;
             weatherInfo.country = parsedForCity.Response.View[0].Result[0].Location.Address.Country;
             weather.createDayNightLabel(req.body.params.timeStamp, (body) => {
-              console.log(body);
               weatherInfo.time_of_day = body;
               console.log(weatherInfo);
           })
@@ -170,7 +169,9 @@ app.post('/weather', (req, res) => {
             weatherInfo.recommendation = data;
           })
           db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day)
-            .then(result => { weatherInfo.url = result })
+            .then(result => { 
+              console.log(result);
+              weatherInfo.url = result })
               .then(() => {res.send(weatherInfo)})
         }
       })

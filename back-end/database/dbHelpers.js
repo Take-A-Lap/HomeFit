@@ -181,5 +181,5 @@ module.exports = {
     SELECT url FROM weather_images
     WHERE weather = $1 AND time_of_day = $2 
   `, [text, time]).then(([weatherImages]) => weatherImages)
-      .then(({ url }) => url)
+    .then(({ url }) => url)
 };
