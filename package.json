@@ -31,6 +31,7 @@
     "ask-sdk": "^2.0.10",
     "axios": "^0.18.0",
     "babel-preset-env": "^1.7.0",
+    "bluebird": "^3.5.2",
     "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
     "express": "^4.16.3",
