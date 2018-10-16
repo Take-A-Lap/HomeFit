@@ -23,7 +23,7 @@
     <div class="col-12" *ngFor="let weather of currentWeather">
       <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
         <div class="forecastText">
-          {{timeStampString.slice(0, 21)}}
+          <div class="clock">{{Clock | date: 'HH:mm:ss'}}</div>
           <div class="weatherText">
             {{weather.city}}, {{weather.state}} {{weather.temp}}˚
             <div>

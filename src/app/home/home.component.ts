@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   latitude: string;
   longitude: string;
   runningRecommendation: string;
+  clock: string;
 
   constructor(
     private foodService: FoodService,
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit {
       console.log(this.timeStampString);
     }
 
-    
+    Clock = Date.now();
     
   getLocation() {
     if (navigator.geolocation) {
@@ -195,12 +196,28 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
 
+  // clockDisplay() {
+  //   let date = new Date();
+  //   let hour = date.getHours();
+  //   let min = date.getMinutes();
+  //   let sec = date.getSeconds();
+
+  //   let time = `${hour}: ${min}.${sec}`;
+  //   this.clock = time;
+  //   setTimeout(this.clock, 1000);
+  // }
+
   ngOnInit() {
-    this.getCurrentTime();  
+    // this.getCurrentTime();
+    this.getTime();  
     this.getLocation();
     this.displayMeal();
-    this.getCookieInfo();
+    this.getCookieInfo(); 
     this.getCompletedWorkouts();
+    setInterval(() => {
+      this.Clock = Date.now();
+    }, 1000);
+    // this.clockDisplay();
   }
 
   
