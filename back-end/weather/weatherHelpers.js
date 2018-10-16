@@ -67,7 +67,7 @@ module.exports = {
 
   },
 
-  createDayNightLabel: (number) => {
+  createDayNightLabel: (number, callback) => {
     let text;
     return new Promise((resolve, reject) => {
       if (number > 5 && number < 19) {
@@ -83,7 +83,7 @@ module.exports = {
     })
   },
 
-  createWeatherTypeLabel: (weatherInfo) => {
+  createWeatherTypeLabel: (weatherInfo, callback) => {
     let label;
     return new Promise((resolve, reject) => {
       label = weatherInfo.text;

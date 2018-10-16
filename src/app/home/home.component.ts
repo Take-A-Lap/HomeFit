@@ -17,12 +17,13 @@ import { IImage } from './iImage';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-  imageUrls: (string | IImage)[] = [];
+  imageUrls;;
   mealImages = [];
   meals;
   meals2 = [];
   meals3 = [];
   currentWeather = [];
+  weather;
   workoutDates = [];
   time: number;
   timeStamp: Date;
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
     getCurrentTime() {
       this.timeStamp = new Date();
       this.timeStampString = this.timeStamp.toString();
+      console.log(this.timeStampString);
     }
 
     
@@ -52,12 +54,12 @@ export class HomeComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude.toString(),
         this.longitude = position.coords.longitude.toString();
-        this.sendWeather1();
+        this.sendWeather();
         });
       }
   }
 
-  sendWeather1() {
+  sendWeather() {
     return this.httpClient.post('/weather', {
       params: {
         latitude: this.latitude,
@@ -81,6 +83,19 @@ export class HomeComponent implements OnInit {
     this.email = emailArr[1];
   }
 
+  // function that gets completed WO dates for calender
+  getCompletedWorkouts() {
+    // use the WO service completed WO function with user email stored on the component
+    this.workoutService.getCompletedWorkouts(this.email)
+      .subscribe(compWorkOuts => {
+        // if the func returns dates
+        if (compWorkOuts) {
+          // concat the dates to the workoutDates stored on the component
+          this.workoutDates = this.workoutDates.concat(compWorkOuts);
+        }
+      });
+  }
+
   getBreakfast() {
     return this.foodService.getBreakfast()
       .subscribe(breakfastFood => {
@@ -96,21 +111,29 @@ export class HomeComponent implements OnInit {
             clickAction: proof
           }
         })
+        console.log(this.imageUrls)
       })
   }
 
   getLunch() {
-    return this.foodService.getLunch()
+    return new Promise((resolve,reject)=>{
+      this.foodService.getLunch()
       .subscribe(lunchFood => {
         this.meals = lunchFood;
-        this.imageUrls = this.meals.map(meal => {
+        let imageUrls = this.meals.map(meal => {
           return {
             url: meal.image,
             href: meal.url,
             clickAction: ()=>window.open(meal.url)
           }
         })
+        if(imageUrls.length){
+          resolve(imageUrls)
+        } else {
+          reject('Lunch Error')
+        }
       })
+    })
   }
 
 
@@ -160,7 +183,10 @@ export class HomeComponent implements OnInit {
     if (this.time >= 21 || this.time < 10) {
       this.getBreakfast();
     } else if (this.time >= 10 && this.time < 14) {
-      this.getLunch();
+      this.getLunch()
+      .then((result)=>{
+        this.imageUrls = result;
+      })
     } else {
       this.getDinner();
     }
@@ -174,6 +200,8 @@ export class HomeComponent implements OnInit {
     this.getCurrentTime();  
     this.getLocation();
     this.displayMeal();
+    this.getCookieInfo();
+    this.getCompletedWorkouts();
   }
 
   

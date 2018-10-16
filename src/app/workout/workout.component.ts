@@ -14,10 +14,12 @@ export class WorkoutComponent implements OnInit {
 
   id;
   diff;
+  clickMessage;
   userID;
   name;
   wo_num;
   exercise;
+  ready = true;
   masterIndex = 0;
   index = 0;
   workout;
@@ -38,15 +40,25 @@ export class WorkoutComponent implements OnInit {
     ) { }
     
     plus(){
-      let repIncrement = setInterval(() => {
-        if (this.rep < 10) {
-          this.rep++;
-        } else {
-          clearInterval(repIncrement);
-          this.rep = 0;
-          this.set++;
-        }
-      }, this.exercise.rep_time)
+      if(this.set <= 3 && this.ready === true ){
+        return new Promise((resolve,reject)=>{
+          let repIncrement = setInterval(() => {
+            if (this.rep < 10) {
+              this.rep++;
+            } else {
+              clearInterval(repIncrement);
+              if (this.rep === 10) {
+                resolve('Great set!')
+              } else {
+                reject('Worse set')
+              }
+            }
+          }, this.exercise.rep_time)
+        })
+      } else {
+        this.set = 1;
+        this.increment();
+      }
     }
     
     switchRep() {
@@ -65,18 +77,36 @@ export class WorkoutComponent implements OnInit {
       }, (12000 + 10*this.exercise.rep_time));
     }
 
-    workinDatBody(){
-      this.plus();
-      this.inc();
-
+    question(){
+      return new Promise((resolve, reject)=>{
+        this.ready = false;
+        this.clickMessage = 'Continue?'
+        this.set++;
+      })
     }
+
+    workinDatBody(){
+      this.plus()
+      .then(()=>{
+        this.question();
+      })
+    }
+
+
+  answer() {
+    this.ready = true;
+    this.clickMessage = '';
+    this.rep = 0;
+    this.plus()
+  }
 
     switchExercise() {
       this.index++;
       this.exercise = this.workout[this.index];
-this.name = this.exercise.name;
+      this.name = this.exercise.name;
     }
-    
+
+
     increment() {
       if (this.index < 7) {
         this.switchExercise();
