@@ -66,16 +66,20 @@ app.get('/getCompletedWO', (req, res) => {
       let completedWorkouts = [];
       db.getCompCardioByUserId(id)
         .then(compCardio => {
-          completedWorkouts.push(compCardio);
+          if (compCardio) {
+            completedWorkouts = completedWorkouts.concat(compCardio);
+          }
           db.getCompStrByUserId(id)
             .then(compStr => {
-              completedWorkouts.push(compStr);
-              return completedWorkouts;
+              if (compStr) {
+                completedWorkouts = completedWorkouts
+                  .concat(compStr)
+                  .map(wo => wo.date.getDate())
+                  .filter((date, i, a) => a.indexOf(date) === i);
+                res.send(completedWorkouts);
+              }
             })
         })
-    })
-    .then(completedWorkouts => {
-      res.send(completedWorkouts);
     })
     .catch(err=>console.error(err));
 });
@@ -137,7 +141,30 @@ app.post('/weather', (req, res) => {
       res.send(weatherInfo)
     })
     .catch((err) => console.error(err /*'Good luck finding that error, bitch'*/ ))
+    weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
+    weather.createDayNightLabel(req.body.params.timeStamp), 
+    weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude)
+  ])
+  .then((response)=> {
+    weatherInfo.text = response[0].summary;
+    weatherInfo.temp = response[0].temperature;
+    weatherInfo.apparentTemp = response[0].apparentTemperature;
+    weatherInfo.humidity = response[0].humidity,
+    weatherInfo.icon = response[0].icon
+    weatherInfo.time_of_day = response[1];
+    weatherInfo.city = response[2].City;
+    weatherInfo.state = response[2].State;
+    weatherInfo.country = response[2].Country;
   })
+  .then(() => {
+    weather.runningRecommendations(weatherInfo)
+  })
+  .then(data => weatherInfo.recommendation = data)
+  .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
+  .then(result => { weatherInfo.url = result })
+  .then(() => {res.send(weatherInfo)})
+  .catch((err)=>console.error(err))
+})
 
 app.get('/dinner', (req,res)=> {
   let meals;
@@ -193,22 +220,6 @@ app.get('/breakfast', (req, res) => {
   }).catch(err=>console.error(err))
 })
 
-app.get('/cornTest', (req, res) => {
-  meal.getLunch(0, 1000, "alcohol-free")
-    .then(recipes => res.send(recipes))
-    .catch(err => console(err))
-})
-
-app.get('/test', (req, res) => {  
-  db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
-  .then(userArr => {
-    res.send(userArr);
-  })
-  .catch(err => {
-    console.error(err);
-  })
-});
-
 app.get('/signupWO', (req, res) => {
   return Promise.all([
       db.getUs,
@@ -235,18 +246,18 @@ app.post('/signUp', (req, res) =>{
   let username = req.body.params.userName;
   let password = req.body.params.password;
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
-  .then(()=>{
-    return Promise.all([db.getUserIdByEmail(email)])
-      .catch(err=>console.error(err));
-  })
-  .then(([user,regimen])=> {
-    const ins = [];
-    regimen.forEach(exer=>{
-      ins.push(JSON.stringify(exer))
+    .then(()=>{
+      return Promise.all([db.getUserIdByEmail(email)])
+        .catch(err=>console.error(err));
     })
-    db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
-  })
-  .catch(err=>console.error(err));
+    .then(([user,regimen])=> {
+      const ins = [];
+      regimen.forEach(exer=>{
+        ins.push(JSON.stringify(exer))
+      })
+      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
+    })
+    .catch(err=>console.error(err));
   res.end();
 });
 
