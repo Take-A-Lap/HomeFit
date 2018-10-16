@@ -17,7 +17,7 @@ import { IImage } from './iImage';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-  imageUrls: (string | IImage)[] = [];
+  imageUrls;;
   mealImages = [];
   meals;
   meals2 = [];
@@ -52,10 +52,8 @@ export class HomeComponent implements OnInit {
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
         this.latitude = position.coords.latitude.toString(),
         this.longitude = position.coords.longitude.toString();
-        // this.getCurrentTime();
         this.sendWeather();
         });
       }
@@ -71,14 +69,11 @@ export class HomeComponent implements OnInit {
     }, { responseType: 'text' })
     .subscribe(data => {
       data = JSON.parse(data);
-      console.log('success', data);
-      console.log(data, 'line 99')
       this.currentWeather.push(data)
       this.runningRecommendation = this.currentWeather[0].recommendation;
-      console.log(this.runningRecommendation, 'line 75')
     },
       error => {
-        console.log('error', error);
+        console.error('error', error);
       });
   }
   
@@ -109,6 +104,7 @@ export class HomeComponent implements OnInit {
           let proof = () => {
             window.open(meal.url);
           }
+          
           return {
             url: meal.image,
             href: meal.url,
@@ -124,14 +120,11 @@ export class HomeComponent implements OnInit {
       this.foodService.getLunch()
       .subscribe(lunchFood => {
         this.meals = lunchFood;
-         let imageUrls = this.meals.map(meal => {
-          let proof = () => {
-            window.open(meal.url);
-          }
+        let imageUrls = this.meals.map(meal => {
           return {
             url: meal.image,
             href: meal.url,
-            clickAction: proof
+            clickAction: ()=>window.open(meal.url)
           }
         })
         if(imageUrls.length){
@@ -162,35 +155,27 @@ export class HomeComponent implements OnInit {
   }
 
   getTime() {
-    return new Promise((resolve, reject)=>{
-      let d = new Date();
-      this.time = d.getHours();
-      // the current day of the week is
-      let day = d.getDay();
-      // the date for the current day of the week is
-      let date = d.getDate();
-      // Set today's date
-      this.dates[day] = date;
-      // Fill in other dates based on today's
-      for (let i = 0; i < day; i++) {
-        this.dates[i] = date - (day - i);
-      }
-      for (let i = day + 1; i < this.dates.length; i++) {
-        this.dates[i] = date + (this.dates.length - i);
-      }
-      if (d){
-        resolve(d)
-      } else {
-        reject('error getting time')
-      }
-    })
+    let d = new Date();
+    this.time = d.getHours();
+    // the current day of the week is
+    let day = d.getDay();
+    // the date for the current day of the week is
+    let date = d.getDate();
+    // Set today's date
+    this.dates[day] = date;
+    // Fill in other dates based on today's
+    for (let i = 0; i < day; i++) {
+      this.dates[i] = date - (day - i); 
+    }
+    for (let i = day + 1; i < this.dates.length; i++) {
+      this.dates[i] = date + (this.dates.length - i);
+    }
   }
 
   testClick(){
     let cookie = document.cookie;
     let emailArr = cookie.split('=')
     let email = emailArr[1]
-    console.log(email);
   }
 
   displayMeal(){
@@ -199,13 +184,9 @@ export class HomeComponent implements OnInit {
       this.getBreakfast();
     } else if (this.time >= 10 && this.time < 14) {
       this.getLunch()
-      // .then((result)=>{
-        // console.log(Array.isArray(result))
-      //   result.forEach((item)=>{
-      //     console.log(item)
-      //   })
-      //   this.imageUrls = result;
-      // })
+      .then((result)=>{
+        this.imageUrls = result;
+      })
     } else {
       this.getDinner();
     }
@@ -216,7 +197,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCurrentTime()
+    this.getCurrentTime();  
     this.getLocation();
     // this.displayMeal();
     this.getCookieInfo();
