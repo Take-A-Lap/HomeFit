@@ -21,6 +21,7 @@ export class WorkoutComponent implements OnInit {
   wo_index;
   exercise;
   ready = true;
+  start = true;
   masterIndex = 0;
   index = 0;
   workout;
@@ -87,6 +88,7 @@ export class WorkoutComponent implements OnInit {
     }
 
     workinDatBody(){
+      this.start = false;
       this.plus()
       .then(()=>{
         this.question();
@@ -113,6 +115,7 @@ export class WorkoutComponent implements OnInit {
         this.switchExercise();
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+        this.start = true;
       } else {
         this.increaseWONum()
         this.storeCompleted();

@@ -21,6 +21,7 @@
         <div class="media">
           <iframe class="video" [src]="trustedUrl"></iframe>
         </div>
+        <button class="rep_button" (click)="workinDatBody()" *ngIf="start">Start Rep Count</button>
         <button class="continue-button" (click)="answer()" *ngIf="clickMessage">{{clickMessage}}</button>
       </div>
     </div>
@@ -36,7 +37,6 @@
       <!-- <h2>Reps</h2> -->
       <div class="jumbotron">
         <h3>Rep: {{rep}}</h3>
-        <button class="rep_button" (click)="workinDatBody()">Start Rep Count</button>
         </div>
     </div>
   </div>
