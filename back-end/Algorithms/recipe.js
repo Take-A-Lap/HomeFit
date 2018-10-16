@@ -8,7 +8,6 @@ const axios = require('axios');
 
 
 module.exports = {
-  
   getBreakfast: function (calorieMin, calorieMax, dietaryRestrictions) {
     const adjustment = dietaryRestrictions ? `&health=${dietaryRestrictions}` : '';
     return new Promise((resolve, reject) => {
