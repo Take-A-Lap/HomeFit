@@ -199,13 +199,13 @@ export class HomeComponent implements OnInit {
       this.getBreakfast();
     } else if (this.time >= 10 && this.time < 14) {
       this.getLunch()
-      .then((result)=>{
-        console.log(Array.isArray(result))
-        result.forEach((item)=>{
-          console.log(item)
-        })
-        this.imageUrls = result;
-      })
+      // .then((result)=>{
+        // console.log(Array.isArray(result))
+      //   result.forEach((item)=>{
+      //     console.log(item)
+      //   })
+      //   this.imageUrls = result;
+      // })
     } else {
       this.getDinner();
     }
@@ -218,7 +218,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getCurrentTime()
     this.getLocation();
-    this.displayMeal();
+    // this.displayMeal();
     this.getCookieInfo();
     this.getCompletedWorkouts();
   }

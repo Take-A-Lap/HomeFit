@@ -36,6 +36,12 @@
   background-size: cover;
 }
 
+.forecastText {
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+  text-shadow: 2px 2px #000000;
+}
 
 .weatherImage {
   max-width: 100%;
@@ -77,12 +83,7 @@ h4 {
   color: #FFFFFF;
 }
 
-.forecastText {
-  color: white;
-  font-weight: bold;
-  padding-left: 10px;
-  text-shadow: 2px 2px #000000;
-}
+
 
 table { width: 100%; box-sizing: border-box; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1); font-family: 'Ubuntu'; /*border-collapse: collapse;*/ border-spacing: 0; background-color: #333333; }
 

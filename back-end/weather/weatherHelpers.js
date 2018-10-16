@@ -74,7 +74,8 @@ module.exports = {
 
       text = 'night';
     }
-    callback(text);
+    return text;
+    // callback(text);
   },
 
   createWeatherTypeLabel: (weatherInfo, callback) => {
