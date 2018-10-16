@@ -20,9 +20,10 @@ export class WorkoutComponent implements OnInit {
   wo_num;
   wo_index;
   exercise;
+  previous;
   ready = true;
   start = true;
-  masterIndex = 0;
+  masterIndex;
   index = 0;
   workout;
   completed;
@@ -189,6 +190,8 @@ export class WorkoutComponent implements OnInit {
           result = id;
           this.id = result.id;
           this.wo_num = result.workout_completes;
+          this.masterIndex = result.current_workout_index;
+          this.previous = result.last_exercise_id;
           this.diff = result.squat_comf;
           if (result === id) {
             resolve(id);
@@ -205,7 +208,8 @@ export class WorkoutComponent implements OnInit {
           params: {
             diff: this.diff,
             wo_num: this.wo_num,
-            wo_index: this.wo_index
+            wo_index: this.masterIndex,
+            previous: this.previous
           }
         }).subscribe(wo=>{
           console.log(wo)
@@ -227,7 +231,6 @@ export class WorkoutComponent implements OnInit {
 
     ngOnInit() {
       this.getCookieInfo();
-      // this.getUserInfo();
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       // this.generateWO();
       this.searchAndGenerate();

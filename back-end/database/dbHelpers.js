@@ -14,6 +14,11 @@ const db = pgp(connection);
 
 module.exports = {
 
+  getExerciseIndex: (email) => db.any(`
+  SELECT current_workout_index FROM users
+  WHERE user_email = $1
+  `, [email]),
+
   getExerciseDescription: (exerciseId) => db.any(`
   SELECT description FROM exercises
   WHERE id = $1

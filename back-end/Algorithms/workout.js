@@ -95,27 +95,28 @@ const generateQuadExercises = function(difficulty){
       })
     })
   }
-  const generateChestExercises = function(difficulty){
-    return new Promise ((resolve, reject)=>{
-      const workout = [];
-      db.getExerciseByMuscleAndDiff(6, difficulty)
-      .then((exercises) => {
-        //Generate four random numbers between 0 and array.length
-        const firstIndex = Math.floor(Math.random() * exercises.length);
-        const secondIndex = Math.floor(Math.random() * exercises.length);
-        const thirdIndex = Math.floor(Math.random() * exercises.length);
-        const fourthIndex = Math.floor(Math.random() * exercises.length);
-        //Push object at indexes of random numbers into the workout array
-        workout.push(exercises[firstIndex], exercises[secondIndex], exercises[thirdIndex], exercises[fourthIndex]);
+  const generateChestExercises = function(difficulty, prev, index){
+    let startIndex = 4 - index;
+    db.get
+    if(startIndex > 0){
+      return new Promise ((resolve, reject)=>{
+        const workout = [];
+        db.getExerciseByMuscleAndDiff(6, difficulty)
+        .then((exercises) => {
+          workout.push()
+          for(let i = 0; i < startIndex - 1; i++){
+            workout.push(exercises[Math.floor(Math.random() * exercises.length)])
+          }
+        })
+        .then(() => {
+          if (workout.length === 4) {
+            resolve(workout)
+          } else {
+            reject('Chest Rejection')
+          }
+        })
       })
-      .then(() => {
-        if (workout.length === 4) {
-          resolve(workout)
-        } else {
-          reject('Chest Rejection')
-        }
-      })
-    })
+    }
   }
   const generateTricepExercises = function(difficulty){
     return new Promise((resolve, reject)=>{
@@ -221,7 +222,7 @@ module.exports = {
     .catch(err=>console.error(err));
   },
 
-  generateWorkout: function(wo_num, difficulty){
+  generateWorkout: function(wo_num, difficulty, prev, index){
     return new Promise((resolve, reject)=>{
       let solution;
       if (wo_num === 0 || wo_num % 6 === 0) {
