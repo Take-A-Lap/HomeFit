@@ -18,6 +18,7 @@ module.exports = {
   SELECT description FROM exercises
   WHERE id = $1
   `, [exerciseId]).then(([exercise]) => exercise),
+  
   getUserInfoByGoogleSessionId: (sessionId) => db.any(`
   SELECT * FROM users
   WHERE google_session_id = $1
@@ -52,6 +53,11 @@ module.exports = {
     AND user_dietary.id_user = $1)
     `, [userId]).then(([userDiet]) => userDiet),
 
+  getWeatherImages: (text, time) => db.any(`
+    SELECT url FROM weather_images
+    WHERE weather = $1 AND time_of_day = $2 
+  `, [text, time]).then(([weatherImages]) => weatherImages)
+    .then(({ url }) => url),
   // need to get the exercises
   getExerciseByMuscleAndDiff: (muscleId, difficulty) => db.any(`
     SELECT * FROM exercises
@@ -181,9 +187,4 @@ module.exports = {
   `, [userEmail]),
 
   //create function to access weather_images in database
-  getWeatherImages: (text, time) => db.any(`
-    SELECT url FROM weather_images
-    WHERE weather = $1 AND time_of_day = $2 
-  `, [text, time]).then(([weatherImages]) => weatherImages)
-    .then(({ url }) => url)
 };
