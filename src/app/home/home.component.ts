@@ -54,10 +54,10 @@ export class HomeComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude.toString(),
         this.longitude = position.coords.longitude.toString();
-        this.sendWeather();
+        this.sendWeather1();
         });
       }
-  },
+  }
   
   sendWeather1() {
     this.getTime()
@@ -80,6 +80,7 @@ export class HomeComponent implements OnInit {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
+  }
 
   // function that gets completed WO dates for calender
   getCompletedWorkouts() {
@@ -209,5 +210,5 @@ export class HomeComponent implements OnInit {
     this.getCompletedWorkouts();
   }
 
-  
+
 }
