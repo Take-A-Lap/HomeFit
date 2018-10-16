@@ -14,6 +14,10 @@ const db = pgp(connection);
 
 module.exports = {
 
+  getExerciseDescription: (exerciseId) => db.any(`
+  SELECT description FROM exercises
+  WHERE id = $1
+  `, [exerciseId]),
   getUserInfoByGoogleSessionId: (sessionId) => db.any(`
   SELECT * FROM users
   WHERE google_session_id = $1
