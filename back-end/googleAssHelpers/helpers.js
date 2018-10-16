@@ -81,14 +81,6 @@ app.intent('link account', conv => {
   });
 });
 
-app.intent('describe exercise', conv => {
-  return db.getExerciseDescription(1)
-    .then(({ description }) =>{
-      conv.ask("<speak>" + description + "</speak>");
-    })
-  // conv.ask("<speak> This is the description for" + current.name +" </speak>");
-  // conv.ask("<speak>" + current.description + "</speak>");
-});
 
 app.intent('start workout', conv => {
   console.log(conv.id, ' conv.id inside the start workout intent');
@@ -118,7 +110,7 @@ app.intent('start workout', conv => {
       console.log(current, ' this should the current workout object');
       
       let index = randomNumGen(startWorkoutObjResponses.length);
-
+      
       conv.ask(new SimpleResponse({
         text: 'Let me know when you are ready to begin.',
         // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
@@ -134,10 +126,23 @@ app.intent('start workout', conv => {
       text: 'Something went wrong',
       // speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
       speech: errorResponses[index]
-
+      
     }));
   })
 });
+
+app.intent('describe exercise', conv => {
+  return db.getExerciseDescription(1)
+    .then(({ description }) =>{
+      conv.ask("<speak>" + description + "</speak>");
+    })
+  // conv.ask("<speak> This is the description for" + current.name +" </speak>");
+  // conv.ask("<speak>" + current.description + "</speak>");
+});
+
+app.intent('take a break', conv => {
+  conv.close(`Okay, we will pick this up again later`);
+})
 
 app.intent('next exercise', conv => {
   console.log(conv.id, " conv.id inside of the next exercise intent");
@@ -177,7 +182,9 @@ app.intent('next exercise', conv => {
     }));
     })
   });
+app.intent('take a break', conv => {
 
+});
 app.intent('Default Fallback Intent', conv => {
   let index = randomNumGen(errorResponses);
   conv.ask(errorResponses[index]);
