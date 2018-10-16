@@ -40,7 +40,19 @@ const linkAccountObjResponses = [
 const startWorkoutObjResponses = [
   {
   before: '<speak> <s> Let me know when you are ready to begin your ',
-  after: ' exercise and are in position. </s> </speak>'
+  after: ' and are in position. </s> </speak>'
+  },
+  {
+    before: '<speak> <s> Lets do some',
+    after: '</s> <s> Let me know when you are ready</s></speak>'
+  },
+  {
+    before: '<speak> <s> <prosody pitch="+20%" ><emphasis level="reduced"> cowabunga  </emphasis></prosody> </s><s>lets do some',
+    after: '</s> </speak>'
+  },
+  {
+    before: '<speak> ',
+    after: '</speak>'
   }
 ];
 
