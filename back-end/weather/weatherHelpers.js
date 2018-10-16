@@ -14,7 +14,7 @@ module.exports = {
 
   //Dark Sky API call
   getWeatherDarkSky: (latitude, longitude) => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
       let solution;
       let options = {
         method: 'GET',
@@ -28,16 +28,16 @@ module.exports = {
           reject('darkSky Rejection')
         }
       })
-    })    
+    })
   },
 
   getCityNameForWeatherInfo: (latitude, longitude) => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
       let options = {
         method: 'GET',
         url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
       }
-      request(options, (error, result)=> {
+      request(options, (error, result) => {
         let solution = JSON.parse(result.body)
         if (result) {
           resolve(solution.Response.View[0].Result[0].Location.Address)
@@ -48,8 +48,8 @@ module.exports = {
     })
   },
 
-  issueAdvisory: (lat, long, time)=> {
-    return new Promise((resolve, reject)=>{
+  issueAdvisory: (lat, long, time) => {
+    return new Promise((resolve, reject) => {
       let options = {
         method: 'GET',
         url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
@@ -62,35 +62,55 @@ module.exports = {
         }
       })
     })
-      getCityNameForWeatherInfo(lat, long),
+    getCityNameForWeatherInfo(lat, long),
       createDayNightLabel(time)
+
   },
 
   createDayNightLabel: (number, callback) => {
     let text;
-    if (number > 5 && number < 18) {
-      text = 'day';
-    } else if (number > -1 && number < 6 || number > 17 && number < 24) {
-
-      text = 'night';
-    }
-    callback(text);
+    return new Promise((resolve, reject) => {
+      if (number > 5 && number < 19) {
+        text = 'day';
+      } else if (number > 1 || number > 18) {
+        text = 'night';
+      }
+      if (text === 'day' || text === 'night') {
+        resolve(text)
+      } else {
+        reject('time of day label rejection')
+      }
+    })
   },
 
   createWeatherTypeLabel: (weatherInfo, callback) => {
     let label;
-    label = weatherInfo.text;
-    callback(label);
+    return new Promise((resolve, reject) => {
+      label = weatherInfo.text;
+      if (label = weatherInfo.text) {
+        resolve(label)
+      } else {
+        reject(label)
+      }
+    })
   },
 
-  runningRecommendations: (weatherInfo, callback) => {
+  runningRecommendations: (weatherInfo) => {
     let recommendation;
-    if (weatherInfo.temp > 90 || weatherInfo.temp < 25 || weatherInfo.humidity > 0.55) {
-      recommendation = 'Poor';
-    } else {
-      recommendation = 'Good';
-    }
-    callback(recommendation);
+    return new Promise((resolve, reject) => {
+        if (weatherInfo.temp > 90 || weatherInfo.temp < 25 || weatherInfo.humidity > 0.55) {
+          recommendation = 'Poor';
+        } else {
+          recommendation = 'Good';
+        }
+      })
+      .then(recommendation => {
+        if (recommendation === 'Poor' || recommendation === 'Good') {
+          resolve(recommendation)
+        } else {
+          reject('advisory rejection')
+        }
+      })
+      .catch(() => console.error('yuck'))
   }
-
 }

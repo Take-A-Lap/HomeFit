@@ -28,11 +28,6 @@ app.use(bodyParser.urlencoded({
   let current;
 
 app.post('/fulfillment', google);
-app.get('/cornTest', (req, res) => {
-  db.updateNoWO(17,2)
-  .then((results)=>res.send(results))
-  .catch((err) => console.error(err))
-})
 
 app.get('/generateWO', (req, res)=> {
   wo_num = req.query.wo_num;
@@ -43,10 +38,8 @@ app.get('/generateWO', (req, res)=> {
 })
 
 app.get('/getUser', (req, res) => {
-  console.log(req.query.email); 
   db.getUserInfoByEmail(req.query.email)
   .then((id)=>{
-    console.log(id);
     res.send(id)})
   .catch(err=>console.error(err));
 })
@@ -121,152 +114,93 @@ app.post('/updateWorkouts', (req, res)=>{
 app.post('/weather', (req, res) => {
   let weatherInfo = {};
   Promise.all([
-    weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
-    weather.createDayNightLabel(req.body.params.timeStamp), 
-    weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude)
-  ])
-  .then((response)=> {
-    weatherInfo.text = response[0].summary;
-    weatherInfo.temp = response[0].temperature;
-    weatherInfo.apparentTemp = response[0].apparentTemperature;
-    weatherInfo.humidity = response[0].humidity,
-    weatherInfo.icon = response[0].icon
-    weatherInfo.time_of_day = response[1];
-    weatherInfo.city = response[2].City;
-    weatherInfo.state = response[2].State;
-    weatherInfo.country = response[2].Country;
+      weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
+      weather.createDayNightLabel(req.body.params.timeStamp),
+      weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude)
+    ])
+    .then((response) => {
+      weatherInfo.text = response[0].summary;
+      weatherInfo.temp = response[0].temperature;
+      weatherInfo.apparentTemp = response[0].apparentTemperature;
+      weatherInfo.humidity = response[0].humidity,
+        weatherInfo.icon = response[0].icon
+      weatherInfo.time_of_day = response[1];
+      weatherInfo.city = response[2].City;
+      weatherInfo.state = response[2].State;
+      weatherInfo.country = response[2].Country;
+    })
+    .then(() => {
+      weather.runningRecommendations(weatherInfo)
+    })
+    .then(data => weatherInfo.recommendation = data)
+    .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
+    .then(result => {
+      weatherInfo.url = result
+    })
+    .then(() => {
+      res.send(weatherInfo)
+    })
+    .catch((err) => console.error(err /*'Good luck finding that error, bitch'*/ ))
   })
-  .then(() => {
-    weather.runningRecommendations(weatherInfo)
-  })
-  .then(data => weatherInfo.recommendation = data)
-  .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
-  .then(result => { weatherInfo.url = result })
-  .then(() => {res.send(weatherInfo)})
-  .catch((err)=>console.error(err))
-})
 
 app.get('/dinner', (req,res)=> {
-  let meals = [];
-  let dinnerResponse = [];
-  meal.getChicken(300, 700, "alcohol-free", (meal) => {
-    let result = JSON.parse(meal);
-    let recipes = result.hits;
-    recipes.forEach(recipe => {
-      meals.push(recipe);
-    });
-  })
-  meal.getBeef(300, 700, "alcohol-free", (meal) => {
-    let result = JSON.parse(meal);
-    let recipes = result.hits;
-    recipes.forEach(recipe => {
-      meals.push(recipe);
-    });
-  })
-  meal.getFish(300, 700, "alcohol-free", (meal) => {
-    let result = JSON.parse(meal);
-    let recipes = result.hits;
-    recipes.forEach(recipe => {
-      meals.push(recipe);
-    });
-  })
-  
-  function generateSeven(array) {
-    let randScreen = [];
-    let randomNumbers = {};
-    for (let i = 1; i <= 7; i++) {
-      let gen = Math.floor(Math.random() * array.length);
-      randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * array.length) : gen;
-    }
-    let randomNumberArray = Object.values(randomNumbers);
-    randomNumberArray.forEach(randomNumber => {
-      dinnerResponse.push(array[randomNumber]);
-    });
-  }
-
-  meal.getSteak(300, 700, "alcohol-free", (meal) => {
-    let result = JSON.parse(meal);
-    let recipes = result.hits;
-    recipes.forEach(recipe => {
-      meals.push(recipe);
-    });
-    generateSeven(meals);
-    dinnerResponse = dinnerResponse.map(dinner => dinner.recipe)
-    res.send(dinnerResponse);
-  });
+  let meals;
+  let dinner = [];
+  Promise.all([
+    meal.getChicken(300, 700, "alcohol-free"), 
+    meal.getBeef(300, 700, "alcohol-free"), 
+    meal.getFish(300, 700, "alcohol-free"),
+    meal.getSteak(300, 700, "alcohol-free")
+  ])
+  .then(recipes => {
+    meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
+    return meals;
+  }).then(meals => {
+    return meal.narrowDown(meals)
+  }).then(randomArray => {
+    randomArray.forEach(index => dinner.push(meals[index].recipe))
+  }).then(() => {
+    res.send(dinner)
+  }).catch(err => console.error(err))
 });
 
 app.get('/lunch', (req,res) => {
-  let lunchRecipes = [];
-  meal.getLunch(0,500,"alcohol-free", (meals) => {
-    let result = JSON.parse(meals);
-    meal.generateSeven(result.hits, lunchRecipes);
-    res.send(lunchRecipes);
-  })
-})
-app.get('/signupWO', (req,res)=>{
-  return Promise.all([
-    db.getUs, 
-    workout.generateWorkoutSignUp(3)
-  ])
-  .then(([user, regimen])=>{
-      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, regimen);
-  })
-  .catch((err)=>{
-    console.error(err);
-  });
-})
-
-app.get('/cornTest', (req,res)=>{
-  // workout.generateWorkoutSignUp(3)
-  workout.generateWorkoutSignUp(3)
-  // db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(89, )
-
-  .then(result => {
-    console(result);
-    res.send(result);
-  })
-  .catch((err)=>console.error('err'))
+  let meals;
+  let lunch = [];
+  meal.getLunch(0, 500, "alcohol-free")
+  .then(recipes => {
+    meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
+    return meals;
+  }).then(meals => {
+    return meal.narrowDown(meals);
+  }).then(randomArray => {
+    randomArray.forEach(index => lunch.push(meals[index].recipe))
+  }).then(() => {
+    res.send(lunch)
+  }).catch(err => console.error(err))
+  .catch(err=>console.error(err))
 })
 
 app.get('/breakfast', (req, res) => {
-  let meals = [];
-  let breakfastResponse = [];
-  meal.getBreakfast(300, 700, "alcohol-free", (meal) => {
-    let result = JSON.parse(meal);
-    let recipes = result.hits;
-    recipes.forEach(recipe => {
-      meals.push(recipe);
-    });
-  })     
-  meal.getYogurt(300, 700, "alcohol-free", (meal) => {
-    let result = JSON.parse(meal);
-    let recipes = result.hits;
-    recipes.forEach(recipe => {
-      meals.push(recipe);
-    });
-  })      
-  function generateSeven(array){
-    let randScreen = [];
-    let randomNumbers = {};
-    for(let i = 1; i <= 7; i++){
-      let gen = Math.floor(Math.random() * array.length);
-      randomNumbers[i] = randScreen.includes(gen) ? Math.floor(Math.random() * array.length) : gen;
-    }
-    let randomNumberArray = Object.values(randomNumbers);
-    randomNumberArray.forEach(randomNumber => {
-      breakfastResponse.push(array[randomNumber]);
-    });
-  }
-  meal.getEggs(300, 700, "alcohol-free", (meal) => {
-    let result = JSON.parse(meal);
-    let recipes = result.hits;
-    recipes.forEach(recipe => {
-      meals.push(recipe);
-    });
-    generateSeven(meals);
-    res.send(breakfastResponse);
-  })    
+  let meals;
+  let breakfast = [];
+  Promise.all([meal.getBreakfast(300, 700, "alcohol-free"), meal.getYogurt(300, 700, "alcohol-free"), meal.getEggs(300, 700, "alcohol-free")])
+  .then(recipes=>{
+    meals = recipes.reduce((acc,curr)=>acc.concat(curr),[])
+    return meals;
+  }).then(meals=>{
+    return meal.narrowDown(meals)
+  }).then(randomArray=>{
+    randomArray.forEach(index=>breakfast.push(meals[index].recipe))
+  }).then(()=>{
+    res.send(breakfast)
+  }).catch(err=>console.error(err))
+})
+
+app.get('/cornTest', (req, res) => {
+  meal.getLunch(0, 1000, "alcohol-free")
+    .then(recipes => res.send(recipes))
+    .catch(err => console(err))
 })
 
 app.get('/test', (req, res) => {  
@@ -279,9 +213,18 @@ app.get('/test', (req, res) => {
   })
 });
 
-app.get('/recallWOs', (req, res)=>{
-
-});
+app.get('/signupWO', (req, res) => {
+  return Promise.all([
+      db.getUs,
+      workout.generateWorkoutSignUp(3)
+    ])
+    .then(([user, regimen]) => {
+      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, regimen);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+})
 
 app.post('/signUp', (req, res) =>{
   let weight = req.body.params.weight;
@@ -315,8 +258,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
       .then((user) => {
-        console.log(user);
-        
         const passingName = (user !== undefined ? user.preferred_username : "not linked yet");
         res.json(alexaHelp.invocationIntent(passingName));
       })
@@ -349,7 +290,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
                 return db.updateNoWO(user.id, user.workout_completes + 1);
               })
             }
-            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;            
+            alexaWorkout = alexaWorkout.length > 0 ? alexaWorkout : genWorkout;
             return alexaWorkout.splice(0, 1);
           }).then(([currentExercise]) => {
             current = currentExercise;
@@ -377,7 +318,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
       case 'linkAccount':
         let link = req.body.request.intent.slots.accountName.value;
         link = link.split(' ').join('@');
-        console.log(link);
         db.updateAlexaId(link, req.body.session.user.userId)
           .then(() => {
             res.json(alexaHelp.linkAccount(link));
