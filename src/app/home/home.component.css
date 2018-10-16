@@ -36,6 +36,9 @@
   background-size: cover;
 }
 
+.clock {
+  font-size: 20px;
+}
 .forecastText {
   color: white;
   font-weight: bold;
