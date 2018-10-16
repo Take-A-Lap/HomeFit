@@ -57,31 +57,29 @@ export class HomeComponent implements OnInit {
         this.sendWeather();
         });
       }
-  }
-
-  sendWeather() {
-    return this.httpClient.post('/weather', {
-      params: {
-        latitude: this.latitude,
-        longitude: this.longitude,
-        timeStamp: this.time
-      }
-    }, { responseType: 'text' })
-    .subscribe(data => {
-      data = JSON.parse(data);
-      this.currentWeather.push(data)
-      this.runningRecommendation = this.currentWeather[0].recommendation;
-    },
-      error => {
-        console.error('error', error);
-      });
-  }
+  },
+  
+  sendWeather1() {
+    this.getTime()
+    .then(()=>{
+      return this.httpClient.post('/weather', {
+        params: {
+          latitude: this.latitude,
+          longitude: this.longitude,
+          timeStamp: this.time
+        }
+      }, { responseType: 'text' })
+        .subscribe(data => {
+          this.currentWeather.push(data)
+          console.log(this.currentWeather[0]);
+    })
+  })
+}
   
   getCookieInfo() {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
-  }
 
   // function that gets completed WO dates for calender
   getCompletedWorkouts() {
@@ -155,21 +153,28 @@ export class HomeComponent implements OnInit {
   }
 
   getTime() {
-    let d = new Date();
-    this.time = d.getHours();
-    // the current day of the week is
-    let day = d.getDay();
-    // the date for the current day of the week is
-    let date = d.getDate();
-    // Set today's date
-    this.dates[day] = date;
-    // Fill in other dates based on today's
-    for (let i = 0; i < day; i++) {
-      this.dates[i] = date - (day - i); 
-    }
-    for (let i = day + 1; i < this.dates.length; i++) {
-      this.dates[i] = date + (this.dates.length - i);
-    }
+    return new Promise((resolve, reject)=>{
+      let d = new Date();
+      this.time = d.getHours();
+      // the current day of the week is
+      let day = d.getDay();
+      // the date for the current day of the week is
+      let date = d.getDate();
+      // Set today's date
+      this.dates[day] = date;
+      // Fill in other dates based on today's
+      for (let i = 0; i < day; i++) {
+        this.dates[i] = date - (day - i);
+      }
+      for (let i = day + 1; i < this.dates.length; i++) {
+        this.dates[i] = date + (this.dates.length - i);
+      }
+      if (d){
+        resolve(d)
+      } else {
+        reject('error getting time')
+      }
+    })
   }
 
   testClick(){

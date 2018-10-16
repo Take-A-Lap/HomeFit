@@ -54,6 +54,22 @@ module.exports = {
         method: 'GET',
         url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
       }
+      request(options, (error, result)=> {
+        let solution = JSON.parse(result.body)
+        if (result) {
+          resolve(solution.Response.View[0].Result[0].Location.Address)
+        } else {
+          reject('getCity Rejection')
+        }
+      })
+    })
+  },
+  issueAdvisory: (lat, long, time)=> {
+    return new Promise((resolve, reject)=>{
+      let options = {
+        method: 'GET',
+        url: `https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?prox=${latitude}%2C${longitude}%2C250&mode=retrieveAddresses&maxresults=1&gen=9&app_id=${config.HERE_AP_ID}&app_code=${config.HERE_AP_CODE}`
+      }
       request(options, (error, result) => {
         if (result) {
           resolve(result)
@@ -62,9 +78,8 @@ module.exports = {
         }
       })
     })
-    getCityNameForWeatherInfo(lat, long),
+      getCityNameForWeatherInfo(lat, long),
       createDayNightLabel(time)
-
   },
 
   createDayNightLabel: (number, callback) => {
