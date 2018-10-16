@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     getCurrentTime() {
       this.timeStamp = new Date();
       this.timeStampString = this.timeStamp.toString();
-      console.log(this.timeStampString);
+      // console.log(this.timeStampString);
     }
 
     Clock = Date.now();
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
         longitude: this.longitude,
         timeStamp: this.time
       }
-    }, { responseType: 'text' })
+    })
       .subscribe(data => {
         this.currentWeather.push(data);
   })
@@ -133,6 +133,7 @@ export class HomeComponent implements OnInit {
   getDinner() {
     return this.foodService.getDinner()
       .subscribe(dinnerFood => {
+        console.log(dinnerFood);
         this.meals = dinnerFood;
         this.imageUrls = this.meals.map(meal => {
           let proof = () => {
