@@ -3,6 +3,7 @@
     .container {
       padding-left: 200px;
       padding-right: 200px;
+      border: 5px;
     }
 }
 
@@ -10,23 +11,12 @@
   background-color: black;
 }
 
-label {
-  color: #CCCCFF;
-}
-
-.nav {
-  border-radius: 0px;
-  background-color:#CCCCFF;
-  text-align: center;
-}
-
-.nav a {
+.button {
+  background-color: #FAA24A;
   color: white;
+  width: 100%;
 }
 
-.next_button {
-  width: 100%;
-  background-color: #CCCCFF;
-  text-align: center;
+label {
   color: white;
 }

@@ -17,7 +17,7 @@ import { IImage } from './iImage';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-  imageUrls: (string | IImage)[] = [];
+  imageUrls;;
   mealImages = [];
   meals;
   meals2 = [];
@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
     getCurrentTime() {
       this.timeStamp = new Date();
       this.timeStampString = this.timeStamp.toString();
+      console.log(this.timeStampString);
     }
 
     
@@ -53,11 +54,11 @@ export class HomeComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude.toString(),
         this.longitude = position.coords.longitude.toString();
-        this.sendWeather1();
+        this.sendWeather();
         });
       }
-  }
-
+  },
+  
   sendWeather1() {
     this.getTime()
     .then(()=>{
@@ -79,6 +80,19 @@ export class HomeComponent implements OnInit {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
+
+  // function that gets completed WO dates for calender
+  getCompletedWorkouts() {
+    // use the WO service completed WO function with user email stored on the component
+    this.workoutService.getCompletedWorkouts(this.email)
+      .subscribe(compWorkOuts => {
+        // if the func returns dates
+        if (compWorkOuts) {
+          // concat the dates to the workoutDates stored on the component
+          this.workoutDates = this.workoutDates.concat(compWorkOuts);
+        }
+      });
+  }
 
   getBreakfast() {
     return this.foodService.getBreakfast()
@@ -104,7 +118,7 @@ export class HomeComponent implements OnInit {
       this.foodService.getLunch()
       .subscribe(lunchFood => {
         this.meals = lunchFood;
-        this.imageUrls = this.meals.map(meal => {
+        let imageUrls = this.meals.map(meal => {
           return {
             url: meal.image,
             href: meal.url,
@@ -176,10 +190,6 @@ export class HomeComponent implements OnInit {
     } else if (this.time >= 10 && this.time < 14) {
       this.getLunch()
       .then((result)=>{
-        console.log(Array.isArray(result))
-        result.forEach((item)=>{
-          console.log(item)
-        })
         this.imageUrls = result;
       })
     } else {
@@ -194,7 +204,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getCurrentTime();  
     this.getLocation();
-    this.displayMeal();
+    // this.displayMeal();
+    this.getCookieInfo();
+    this.getCompletedWorkouts();
   }
 
   
