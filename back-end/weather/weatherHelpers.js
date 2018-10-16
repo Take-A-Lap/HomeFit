@@ -98,17 +98,10 @@ module.exports = {
   runningRecommendations: (weatherInfo) => {
     let recommendation;
     return new Promise((resolve, reject) => {
-        if (weatherInfo.temp > 90 || weatherInfo.temp < 25 || weatherInfo.humidity > 0.55) {
-          recommendation = 'Poor';
+        if (weatherInfo.temp > 90 || weatherInfo.temp < 25 || weatherInfo.humidity > 0.75) {
+          resolve('Poor');
         } else {
-          recommendation = 'Good';
-        }
-      })
-      .then(recommendation => {
-        if (recommendation === 'Poor' || recommendation === 'Good') {
-          resolve(recommendation)
-        } else {
-          reject('advisory rejection')
+          resolve('Good');
         }
       })
       .catch(() => console.error('yuck'))

@@ -130,9 +130,11 @@ app.post('/weather', (req, res) => {
       weatherInfo.country = response[2].Country;
     })
     .then(() => {
-      weather.runningRecommendations(weatherInfo)
+      return weather.runningRecommendations(weatherInfo)
     })
-    .then(data => weatherInfo.recommendation = data)
+    .then(data => {
+      weatherInfo.recommendation = data
+    })
     .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
     .then(result => {
       weatherInfo.url = result
