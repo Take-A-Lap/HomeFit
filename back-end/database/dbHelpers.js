@@ -18,6 +18,7 @@ module.exports = {
   SELECT description FROM exercises
   WHERE id = $1
   `, [exerciseId]).then(([exercise]) => exercise),
+  
   getUserInfoByGoogleSessionId: (sessionId) => db.any(`
   SELECT * FROM users
   WHERE google_session_id = $1

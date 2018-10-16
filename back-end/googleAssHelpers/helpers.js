@@ -64,10 +64,12 @@ app.intent('link account', conv => {
 });
 
 app.intent('describe exercise', conv => {
-  return db.getExerciseDescription(1)
-    .then(({ description }) =>{
-      conv.ask("<speak>" + description + "</speak>");
-    })
+  // return db.getExerciseDescription(1)
+  //   .then(({ description }) =>{
+  //     conv.ask("<speak>" + description + "</speak>");
+  //   })
+  conv.ask("<speak> This is the description for" + current.name +" </speak>");
+  conv.ask("<speak>" + current.description + "</speak>");
 });
 
 app.intent('start workout', conv => {
