@@ -193,22 +193,6 @@ app.get('/breakfast', (req, res) => {
   }).catch(err=>console.error(err))
 })
 
-app.get('/cornTest', (req, res) => {
-  meal.getLunch(0, 1000, "alcohol-free")
-    .then(recipes => res.send(recipes))
-    .catch(err => console(err))
-})
-
-app.get('/test', (req, res) => {  
-  db.getUserInfoByAlexUserId('amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY')
-  .then(userArr => {
-    res.send(userArr);
-  })
-  .catch(err => {
-    console.error(err);
-  })
-});
-
 app.get('/signupWO', (req, res) => {
   return Promise.all([
       db.getUs,

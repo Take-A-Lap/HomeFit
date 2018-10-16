@@ -4,9 +4,10 @@ var request = /*Promise.promisify(*/require('request');
 const express = require('express');
 const config = require('../../config.js');
 const app = express();
+const axios = require('axios');
+
 
 module.exports = {
-  
   getBreakfast: function (calorieMin, calorieMax, dietaryRestrictions) {
     const adjustment = dietaryRestrictions ? `&health=${dietaryRestrictions}` : '';
     return new Promise((resolve, reject) => {
