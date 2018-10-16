@@ -199,7 +199,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getCurrentTime();  
     this.getLocation();
-    this.displayMeal();
+    // this.displayMeal();
     this.getCookieInfo();
     this.getCompletedWorkouts();
   }
