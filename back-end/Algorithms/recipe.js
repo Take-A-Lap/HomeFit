@@ -68,6 +68,8 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=steak&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body) {
+          console.log(typeof body);
+          body = JSON.parse(body);
           resolve(body.hits)
         } else {
           reject('Steak rejection')
