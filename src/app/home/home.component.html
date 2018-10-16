@@ -21,18 +21,6 @@
   <br>
   <div class="row">
     <div class="col-12" *ngFor="let weather of currentWeather">
-      <!-- <div class="jumbotron"> 
-         <img class="weatherImage" [src]="weather.url">
-         <div class="forecastText"> 
-           <div class="weatherText"> 
-             {{weather.city}}, {{weather.state}} {{weather.temp}}˚ 
-             <div>
-              {{weather.text}}    
-            </div> 
-           </div> 
-           Outdoor Running Conditions: {{weather.recommendation}} 
-         </div> 
-       </div>  -->
       <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
         <div class="forecastText">
           {{timeStampString.slice(0, 21)}}
@@ -53,7 +41,6 @@
     <div class="col-xs-12 col-md-12">
       <!-- <h3>Workout Log</h3> -->
       <a routerLink="/workout"><button class="workoutButton">Workout</button></a>
-
       <table class="table" cellpadding="15">
         <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <thead>
