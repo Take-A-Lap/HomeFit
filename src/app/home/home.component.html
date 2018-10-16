@@ -4,60 +4,98 @@
       <ul class="nav"><li class="nav-item">
         <a class="nav-link" routerLink="/workout">Workout</a>
       </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/personalInfo">Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">Logout</a>
-        </li>
-      </ul>
-    </div>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/personalInfo">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>
+  <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <h2>Welcome Spider-Man</h2>
+      </div>
   </div>
   <br>
   <div class="row">
-    <div class="col-xs-12 col-md-12" *ngFor="let weather of currentWeather">
+    <div class="col-12" *ngFor="let weather of currentWeather">
+      <!-- <div class="jumbotron"> 
+         <img class="weatherImage" [src]="weather.url">
+         <div class="forecastText"> 
+           <div class="weatherText"> 
+             {{weather.city}}, {{weather.state}} {{weather.temp}}˚ 
+             <div>
+              {{weather.text}}    
+            </div> 
+           </div> 
+           Outdoor Running Conditions: {{weather.recommendation}} 
+         </div> 
+       </div>  -->
       <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
-        {{timeStampString.slice(0, 21)}}
-        <div class="weatherText">
-          {{weather.city}}, {{weather.state}} {{weather.temp}}˚ {{weather.text}}
+        <div class="forecastText">
+          {{timeStampString.slice(0, 21)}}
+          <div class="weatherText">
+            {{weather.city}}, {{weather.state}} {{weather.temp}}˚
+            <div>
+              {{weather.text}}
+            </div> 
+          </div>
+          Outdoor Running Conditions: {{weather.recommendation}}
         </div>
-        Outdoor Running Conditions: {{weather.recommendation}}
       </div>
     </div>
   </div>
+  <br>
+
   <div class="row">
-      <div class="col-xs-12 col-md-12">
-        <table class="table" cellpadding="15">
-          <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
-          <thead>
-            <tr>
-              <th class="day-name">Sun</th>
-              <th class="day-name">Mon</th>
-              <th class="day-name">Tue</th>
-              <th class="day-name">Wed</th>
-              <th class="day-name">Thu</th>
-              <th class="day-name">Fri</th>
-              <th class="day-name">Sat</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td *ngFor="let date of dates" class="day"><span class="number">{{date}}</span>
-                <div *ngIf="workoutDates.includes(date)"><span class="checkmark">&#10003;</span></div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
+    <div class="col-xs-12 col-md-12">
+      <!-- <h3>Workout Log</h3> -->
+      <a routerLink="/workout"><button class="workoutButton">Workout</button></a>
+      <table class="table" cellpadding="15">
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
+        <thead>
+          <tr>
+            <th class="day-name">Sun</th>
+            <th class="day-name">Mon</th>
+            <th class="day-name">Tue</th>
+            <th class="day-name">Wed</th>
+            <th class="day-name">Thu</th>
+            <th class="day-name">Fri</th>
+            <th class="day-name">Sat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="day"><span class="number">{{dates[0]}}</span></td>
+            <td class="day"><span class="number">{{dates[1]}}</span>
+              <div><span class="checkmark">&#10003;</span></div>
+            </td>
+            <td class="day"><span class="number">{{dates[2]}}</span></td>
+            <td class="day"><span class="number">{{dates[3]}}</span></td>
+            <td class="day"><span class="number">{{dates[4]}}</span>
+              <div><span class="checkmark">&#10003;</span></div>
+            </td>
+            <td class="day"><span class="number">{{dates[5]}}</span></td>
+            <td class="day"><span class="number">{{dates[6]}}</span>
+              <div><span class="checkmark">&#10003;</span></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>  
   <div class="col-md-12" *ngIf="imageUrls">
-    <slideshow 
-    [imageUrls]=imageUrls
-    [height]="height"
-    [minHeight]="'200px'"
-    [autoPlay]="true"
-    [showArrows]="false"
-    ></slideshow> 
+      <slideshow 
+      [imageUrls]=imageUrls
+      [height]="height"
+      [minHeight]="'200px'"
+      [autoPlay]="true"
+      [showArrows]="false"
+      ></slideshow> 
   </div> 
   <br>
 </div>
