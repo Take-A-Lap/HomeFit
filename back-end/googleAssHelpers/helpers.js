@@ -20,8 +20,12 @@ const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. <
 
 const linkAccountObjResponses = [
   {
-  before: '<speak> <s> Thank you </s> <s> ',
-  after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
+    before: '<speak> <s> Thank you </s> <s> ',
+    after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
+  },
+  {
+    before: '<speak> <s> We apologize for the inconvenience </s> <p> <s>',
+    after: '</s> </p> <break time ="750ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s>  </speak>'
   }
 ];
 
