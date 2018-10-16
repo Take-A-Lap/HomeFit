@@ -14,7 +14,7 @@
     <br>
     <div class="row">
       <div class="col-xs-12 col-md-12">
-        <h2>Current Exercise: {{exercise.name}}</h2>
+        <h2>Current Exercise: {{name}}</h2>
         <div class="media">
           <iframe class="video" [src]="trustedUrl"></iframe>
         </div>
@@ -25,7 +25,6 @@
     <div class="col-xs-6 col-md-6">
       <div class="jumbotron">
         <h3>Set: {{set}}</h3>
-        <button class="test-button" (click)="increment()">Switch</button>
       </div>
     </div>
     <div class="col-xs-6 col-md-6">

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/meals">Meals</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/personalInfo">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Logout</a>
+        </li>
+      </ul>
+      </div>
+    </div>     
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="media"> </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div>
+            <p>
+              I'm Alexa, I'll be your personal trainer today.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div>
+            <h3>{{name}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <div class="media">
+        <img class="mr-6" alt="Alexa_photo" src="../../assets/img/alexa.jpeg" />
+        <p class="mr-6">I'm Alexa, I'll be your personal trainer today.</p>
+      </div>
+    </div>
+    
+  </div> -->
+  <br>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="jumbotron">
+        <h2>
+          Sets
+        </h2>
+        <p>
+          {{set}}
+        </p>
+        
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="jumbotron">
+        <h2>
+          Reps
+        </h2>
+        <p>
+          {{rep}}
+        </p>
+        <button (click)="workinDatBody()">Start Rep Count</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="media">
+        <iframe class="video" [src]="trustedUrl"></iframe>
+      </div>
+      <h3>{{exercise.name}}</h3>
+      <!-- <button (click)="increment()">Next Exercise</button> -->
+    </div>
+  </div>
+</div>

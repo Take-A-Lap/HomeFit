@@ -76,7 +76,7 @@ module.exports = {
     return response;
   },
   // start workout and first exercise
-  initWorkout: (exercise, count) => {
+  initWorkout: (exercise) => {
     if(typeof exercise !== "object"){
       return buildResponse("<p> That's all for today </p> <s> We can pick up again tomorrow </s> You can also check out your suggested recipes at e dot home fit do dot com");
     }
