@@ -63,6 +63,13 @@ app.intent('link account', conv => {
   });
 });
 
+app.intent('describe exercise', conv => {
+  return db.getExerciseDescription(1)
+    .then(({ description }) =>{
+      conv.ask("<speak>" + description + "</speak>");
+    })
+});
+
 app.intent('start workout', conv => {
   console.log(conv.id, ' conv.id inside the start workout intent');
   // need to remember to grab the conversation id
@@ -97,7 +104,7 @@ app.intent('start workout', conv => {
         // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
         speech: startWorkoutObjResponses[index].before + current.name + startWorkoutObjResponses[index].after
       }));
-      conv.ask("<speak>" + current.description + "</speak>");
+      
     }
   })
   .catch(err => {
