@@ -163,14 +163,11 @@ app.get('/dinner', (req,res)=> {
 app.get('/lunch', (req,res) => {
   let meals;
   let lunch = [];
-  console.log('In the server')
   meal.getLunch(0, 500, "alcohol-free")
   .then(recipes => {
-    console.log('api has returned')
     meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
     return meals;
   }).then(meals => {
-    console.log('the meals have been merged')
     return meal.narrowDown(meals);
   }).then(randomArray => {
     randomArray.forEach(index => lunch.push(meals[index].recipe))

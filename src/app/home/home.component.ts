@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
       this.runningRecommendation = this.currentWeather[0].recommendation;
     },
       error => {
-        console.log('error', error);
+        console.error('error', error);
       });
   }
   
@@ -102,9 +102,7 @@ export class HomeComponent implements OnInit {
   getLunch() {
     return this.foodService.getLunch()
       .subscribe(lunchFood => {
-        console.log('we have meals in the front')
         this.meals = lunchFood;
-        console.log(this.meals)
         this.imageUrls = this.meals.map(meal => {
           return {
             url: meal.image,
@@ -112,7 +110,6 @@ export class HomeComponent implements OnInit {
             clickAction: ()=>window.open(meal.url)
           }
         })
-        console.log(this.imageUrls)
       })
   }
 
