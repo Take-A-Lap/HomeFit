@@ -20,10 +20,8 @@ export class HomeComponent implements OnInit {
   imageUrls;;
   mealImages = [];
   meals;
-  meals2 = [];
-  meals3 = [];
   currentWeather = [];
-  weather;
+  recommendation;
   workoutDates = [];
   time: number;
   timeStamp: Date;
@@ -60,21 +58,18 @@ export class HomeComponent implements OnInit {
   }
 
   sendWeather() {
-    this.getTime()
-    .then(()=>{
-      return this.httpClient.post('/weather', {
-        params: {
-          latitude: this.latitude,
-          longitude: this.longitude,
-          timeStamp: this.time
-        }
-      }, { responseType: 'text' })
-        .subscribe(data => {
-          this.currentWeather.push(data)
-          console.log(this.currentWeather[0]);
-    })
+    return this.httpClient.post('/weather', {
+      params: {
+        latitude: this.latitude,
+        longitude: this.longitude,
+        timeStamp: this.time
+      }
+    }, { responseType: 'text' })
+      .subscribe(data => {
+        this.currentWeather.push(data);
   })
 }
+
   
   getCookieInfo() {
     let cookie = document.cookie;
