@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
-
+  }
   // function that gets completed WO dates for calender
   getCompletedWorkouts() {
     // use the WO service completed WO function with user email stored on the component
@@ -198,7 +198,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getCurrentTime();  
     this.getLocation();
-    // this.displayMeal();
+    this.displayMeal();
     this.getCookieInfo();
     this.getCompletedWorkouts();
   }
