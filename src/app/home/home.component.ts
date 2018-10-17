@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   longitude: string;
   runningRecommendation: string;
   clock: string;
+  username: object;
 
   constructor(
     private foodService: FoodService,
@@ -43,11 +44,11 @@ export class HomeComponent implements OnInit {
     getCurrentTime() {
       this.timeStamp = new Date();
       this.timeStampString = this.timeStamp.toString();
-      console.log(this.timeStampString);
+      // console.log(this.timeStampString);
     }
 
     Clock = Date.now();
-    
+
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -64,17 +65,37 @@ export class HomeComponent implements OnInit {
         longitude: this.longitude,
         timeStamp: this.time
       }
-    }, { responseType: 'text' })
-      .subscribe(data => {
-        this.currentWeather.push(data);
-  })
-}
-
+    })
+    .subscribe(data => {
+      this.currentWeather.push(data)
+      this.runningRecommendation = this.currentWeather[0].recommendation;
+    },
+      error => {
+        console.error('error', error);
+      });
+  }
   
   getCookieInfo() {
+    //function to get username added to getCookieInfo
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
+    console.log(this.email)
+    return this.httpClient.get('/username', {
+      params: {
+        user: this.email
+      }
+    })
+    .subscribe(user => {
+      let filteredKey = Object.keys(user).filter(key => {
+        return key === 'preferred_username'
+      })
+      let usernameKey = filteredKey[0];
+      this.username = user[usernameKey];
+    }, 
+    error => {
+      console.error(error, 'error');
+    })
   }
   // function that gets completed WO dates for calender
   getCompletedWorkouts() {
@@ -133,6 +154,7 @@ export class HomeComponent implements OnInit {
   getDinner() {
     return this.foodService.getDinner()
       .subscribe(dinnerFood => {
+        console.log(dinnerFood);
         this.meals = dinnerFood;
         this.imageUrls = this.meals.map(meal => {
           let proof = () => {
@@ -196,16 +218,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
 
-  // clockDisplay() {
-  //   let date = new Date();
-  //   let hour = date.getHours();
-  //   let min = date.getMinutes();
-  //   let sec = date.getSeconds();
-
-  //   let time = `${hour}: ${min}.${sec}`;
-  //   this.clock = time;
-  //   setTimeout(this.clock, 1000);
-  // }
+  
 
   ngOnInit() {
     // this.getCurrentTime();
