@@ -17,7 +17,7 @@ const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. <
   `<speak> <p> I am terribly sorry </p> <p> I am having trouble understanding you </p> <p> If it isn't too much to ask could you try again? </p> </speak>`,
   `<speak> <s> This is embarrassing for me </s> <p> I sometimes have trouble with my hearing </p> <p> even at such a young age </p> <s> Would you kindly try the command again? </s> </speak>`
 ];
-
+const spanishErrorResponse = [];
 const linkAccountObjResponses = [
   {
     before: '<speak> <s> Thank you </s> <s> ',
