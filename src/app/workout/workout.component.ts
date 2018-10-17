@@ -20,10 +20,11 @@ export class WorkoutComponent implements OnInit {
   wo_num;
   wo_index;
   exercise;
+  previous;
   ready = true;
   start = true;
-  masterIndex = 0;
   index = 0;
+  masterIndex = this.index;
   workout;
   completed;
   rep = 0;
@@ -105,6 +106,7 @@ export class WorkoutComponent implements OnInit {
 
     switchExercise() {
       this.index++;
+      this.storeInProgress(this.id, this.previous, this.index);
       this.exercise = this.workout[this.index];
       this.name = this.exercise.name;
     }
@@ -113,13 +115,17 @@ export class WorkoutComponent implements OnInit {
     increment() {
       if (this.index < 7) {
         this.switchExercise();
+        this.previous = this.exercise.id;
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
         this.start = true;
       } else {
         this.increaseWONum()
-        this.storeCompleted();
-        this.home();        
+          .then(() => this.storeCompleted())
+          .then(() => this.storeInProgress(this.id, this.previous, 0))
+          .then(() => this.home())
+          .catch(err => console.error(err))
+        ;        
       }
     }
     
@@ -144,6 +150,14 @@ export class WorkoutComponent implements OnInit {
         }).subscribe()
       })
     }
+
+    storeInProgress(id, ex_id, index){
+      console.log('heading to server')
+      this.httpClient.post('/inProgress', {
+        params: {id, ex_id, index}
+      }).subscribe(()=>console.log('back from server'))
+    }
+
     testClick(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=')
@@ -151,11 +165,63 @@ export class WorkoutComponent implements OnInit {
       console.log(email);
     }
 
+    printIt(){
+      console.log(this.exercise);
+      console.log(this.workout[0]);
+      console.log(this.workout[1]);
+    }
+    
+    generateWO(){
+      return new Promise((resolve, reject)=>{
+        this.httpClient.get('/generateWO', {
+          params: {
+            diff: this.diff,
+            wo_num: this.wo_num,
+            wo_index: this.index.toString(),
+            previous: this.previous
+          }
+        }).subscribe(wo=>{
+          console.log(wo)
+          this.workout = wo;
+          this.exercise = this.workout[this.index];
+          this.previous = this.exercise.id;
+          this.youtube = this.exercise.youtube_link;
+          this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+          this.name = this.exercise.name;
+        })
+      })
+    }
+
     getCookieInfo(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=');
       this.email = emailArr[emailArr.length -1];
       console.log(this.email, 'workout.component this.email');
+    }
+
+    getUserInfo(){
+      let result;
+      return new Promise((resolve, reject)=>{
+        this.httpClient.get('/getUser', {
+          params: { email: this.email }
+        }).subscribe(id => {
+          result = id;
+          this.id = result.id;
+          this.wo_num = result.workout_completes;
+          this.index = result.current_workout_index || 0;
+          this.previous = result.last_exercise_id || 7;
+          this.diff = result.squat_comf;
+          if (result === id) {
+            resolve(id);
+          } else {
+            reject('Get User Rejection')
+          }
+        });
+      })
+    }
+
+    home(){
+      this.router.navigate(['/home']);
     }
 
     increaseWONum(){
@@ -170,54 +236,6 @@ export class WorkoutComponent implements OnInit {
       })
     }
 
-    printIt(){
-      console.log(this.exercise);
-      console.log(this.workout[0]);
-      console.log(this.workout[1]);
-    }
-
-    home(){
-      this.router.navigate(['/home']);
-    }
-    
-    getUserInfo(){
-      let result;
-      return new Promise((resolve, reject)=>{
-        this.httpClient.get('/getUser', {
-          params: { email: this.email }
-        }).subscribe(id => {
-          result = id;
-          this.id = result.id;
-          this.wo_num = result.workout_completes;
-          this.diff = result.squat_comf;
-          if (result === id) {
-            resolve(id);
-          } else {
-            reject('Get User Rejection')
-          }
-        });
-      })
-    }
-
-    generateWO(){
-      return new Promise((resolve, reject)=>{
-        this.httpClient.get('/generateWO', {
-          params: {
-            diff: this.diff,
-            wo_num: this.wo_num,
-            wo_index: this.wo_index
-          }
-        }).subscribe(wo=>{
-          console.log(wo)
-          this.workout = wo;
-          this.exercise = this.workout[this.index];
-          this.youtube = this.exercise.youtube_link;
-          this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-          this.name = this.exercise.name;
-        })
-      })
-    }
-
     searchAndGenerate() {
       this.getUserInfo()
       .then(()=>{
@@ -227,7 +245,6 @@ export class WorkoutComponent implements OnInit {
 
     ngOnInit() {
       this.getCookieInfo();
-      // this.getUserInfo();
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       // this.generateWO();
       this.searchAndGenerate();
