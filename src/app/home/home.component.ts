@@ -184,7 +184,7 @@ export class HomeComponent implements OnInit {
         this.dates[i] = date - (day - i);
       }
       for (let i = day + 1; i < this.dates.length; i++) {
-        this.dates[i] = date + (this.dates.length - i);
+        this.dates[i] = date + i - 1;
       }
       if (d){
         resolve(d)
