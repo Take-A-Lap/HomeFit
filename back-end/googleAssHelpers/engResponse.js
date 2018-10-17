@@ -6,11 +6,11 @@ const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. <
 
 const linkAccountObjResponses = [
   {
-    before: '<speak> <s> <prosody pitch="+15st"> Thank </prosody> <prosody pitch="-10st"> you </prosody> </s> <s> ',
+    before: '<speak> <s> <prosody pitch="+10st"> Thank </prosody> <prosody pitch="-10st"> you </prosody> </s> <s> ',
     after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
   },
   {
-    before: '<speak> <s> We apologize for the inconvenience </s> <p> <s>',
+    before: '<speak> <s> <prosody pitch="+10st"> We apologize </prosody> for the <prosody pitch="-10st"> inconvenience </prosody> </s> <p> <s>',
     after: '</s> </p> <break time ="50ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s>  </speak>'
   },
   {
@@ -37,8 +37,8 @@ const startWorkoutObjResponses = [
     after: '</s> <break time="500ms" /> <prosody pitch="30%" volume="loud"> Come on <break time="5ms" /> Are you ready? </prosody> </speak>'
   },
   {
-    before: '<speak> ',
-    after: '</speak>'
+    before: '<speak> <s> Alright it is ',
+    after: ' time </s> <s> Let\'s get going! </s> <s> You ready? </s> </speak>'
   }
 ];
 
