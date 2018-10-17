@@ -83,13 +83,9 @@ app.get('/getCompletedWO', (req, res) => {
     .then(({ id }) => {
       // use the id to query the completed str and cardio tables
       let completedWorkouts = [];
-      db.getCompCardioByUserId(id)
-        .then(compCardio => {
-          if (compCardio) {
-            completedWorkouts = completedWorkouts.concat(compCardio);
-          }
           db.getCompStrByUserId(id)
             .then(compStr => {
+              console.log('str', compStr);
               if (compStr) {
                 completedWorkouts = completedWorkouts
                   .concat(compStr)
@@ -97,8 +93,7 @@ app.get('/getCompletedWO', (req, res) => {
                   .filter((date, i, a) => a.indexOf(date) === i);
                 res.send(completedWorkouts);
               }
-            })
-        })
+      })
     })
     .catch(err=>console.error(err));
 });
