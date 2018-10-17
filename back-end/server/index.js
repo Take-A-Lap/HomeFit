@@ -196,7 +196,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/home', (req, res) => {
-  res.redirect('localhost:3000/signup')
+  res.send('hello');
 })
 
 app.get('/personalInfo', (req, res) => {
