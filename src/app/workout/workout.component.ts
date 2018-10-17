@@ -18,8 +18,10 @@ export class WorkoutComponent implements OnInit {
   userID;
   name;
   wo_num;
+  wo_index;
   exercise;
   ready = true;
+  start = true;
   masterIndex = 0;
   index = 0;
   workout;
@@ -86,6 +88,7 @@ export class WorkoutComponent implements OnInit {
     }
 
     workinDatBody(){
+      this.start = false;
       this.plus()
       .then(()=>{
         this.question();
@@ -97,7 +100,7 @@ export class WorkoutComponent implements OnInit {
     this.ready = true;
     this.clickMessage = '';
     this.rep = 0;
-    this.plus()
+    this.workinDatBody();
   }
 
     switchExercise() {
@@ -112,6 +115,7 @@ export class WorkoutComponent implements OnInit {
         this.switchExercise();
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+        this.start = true;
       } else {
         this.increaseWONum()
         this.storeCompleted();
@@ -153,25 +157,6 @@ export class WorkoutComponent implements OnInit {
       this.email = emailArr[emailArr.length -1];
       console.log(this.email, 'workout.component this.email');
     }
-
-    // getWorkoutInfo(){
-    //   this.getUserInfo()
-    //   .then((value)=>{
-    //     this.id = value;
-    //     // console.log(value);
-    //     this.httpClient.get('/getMyWorkOut', {
-    //       params: { id: this.id }
-    //     }).subscribe((workouts) => {
-    //       console.log(workouts);
-    //       this.workout = workouts[0];
-    //       this.exercise = this.workout[this.index];
-    //       this.youtube = this.exercise.youtube_link;
-    //       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-    //       this.name = this.exercise.name;
-    //     });
-    //   })
-    //   .catch(err=>console.error(err));  
-    // }
 
     increaseWONum(){
       return new Promise((resolve, reject)=>{
@@ -219,7 +204,8 @@ export class WorkoutComponent implements OnInit {
         this.httpClient.get('/generateWO', {
           params: {
             diff: this.diff,
-            wo_num: this.wo_num
+            wo_num: this.wo_num,
+            wo_index: this.wo_index
           }
         }).subscribe(wo=>{
           console.log(wo)

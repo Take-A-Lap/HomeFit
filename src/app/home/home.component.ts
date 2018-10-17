@@ -20,10 +20,8 @@ export class HomeComponent implements OnInit {
   imageUrls;;
   mealImages = [];
   meals;
-  meals2 = [];
-  meals3 = [];
   currentWeather = [];
-  weather;
+  recommendation;
   workoutDates = [];
   time: number;
   timeStamp: Date;
@@ -33,6 +31,8 @@ export class HomeComponent implements OnInit {
   latitude: string;
   longitude: string;
   runningRecommendation: string;
+  clock: string;
+  username: object;
 
   constructor(
     private foodService: FoodService,
@@ -44,44 +44,59 @@ export class HomeComponent implements OnInit {
     getCurrentTime() {
       this.timeStamp = new Date();
       this.timeStampString = this.timeStamp.toString();
-      console.log(this.timeStampString);
+      // console.log(this.timeStampString);
     }
 
-    
-    
+    Clock = Date.now();
+
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude.toString(),
         this.longitude = position.coords.longitude.toString();
-        this.sendWeather1();
+        this.sendWeather();
         });
       }
   }
-  
-  sendWeather1() {
-    this.getTime()
-    .then(()=>{
-      return this.httpClient.post('/weather', {
-        params: {
-          latitude: this.latitude,
-          longitude: this.longitude,
-          timeStamp: this.time
-        }
-      }, { responseType: 'text' })
-        .subscribe(data => {
-          this.currentWeather.push(data)
-          console.log(this.currentWeather[0]);
+  sendWeather() {
+    return this.httpClient.post('/weather', {
+      params: {
+        latitude: this.latitude,
+        longitude: this.longitude,
+        timeStamp: this.time
+      }
     })
-  })
-}
+    .subscribe(data => {
+      this.currentWeather.push(data)
+      this.runningRecommendation = this.currentWeather[0].recommendation;
+    },
+      error => {
+        console.error('error', error);
+      });
+  }
   
   getCookieInfo() {
+    //function to get username added to getCookieInfo
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
+    console.log(this.email)
+    return this.httpClient.get('/username', {
+      params: {
+        user: this.email
+      }
+    })
+    .subscribe(user => {
+      let filteredKey = Object.keys(user).filter(key => {
+        return key === 'preferred_username'
+      })
+      let usernameKey = filteredKey[0];
+      this.username = user[usernameKey];
+    }, 
+    error => {
+      console.error(error, 'error');
+    })
   }
-
   // function that gets completed WO dates for calender
   getCompletedWorkouts() {
     // use the WO service completed WO function with user email stored on the component
@@ -139,6 +154,7 @@ export class HomeComponent implements OnInit {
   getDinner() {
     return this.foodService.getDinner()
       .subscribe(dinnerFood => {
+        console.log(dinnerFood);
         this.meals = dinnerFood;
         this.imageUrls = this.meals.map(meal => {
           let proof = () => {
@@ -202,12 +218,19 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
 
+  
+
   ngOnInit() {
-    this.getCurrentTime();  
+    // this.getCurrentTime();
+    this.getTime();  
     this.getLocation();
-    // this.displayMeal();
-    this.getCookieInfo();
+    this.displayMeal();
+    this.getCookieInfo(); 
     this.getCompletedWorkouts();
+    setInterval(() => {
+      this.Clock = Date.now();
+    }, 1000);
+    // this.clockDisplay();
   }
 
 
