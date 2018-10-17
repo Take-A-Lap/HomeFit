@@ -141,7 +141,7 @@ const greetings = [
 
 app.intent('Default Welcome Intent', conv =>{
   let index = randomNumGen(greetings.length);
-  console.log(conv.user.User.raw.locale, ' this is should be a lcoale code')
+  console.log(conv.user, ' this is should be a this is the user property')
   conv.ask(greetings[index]);
 });
 
