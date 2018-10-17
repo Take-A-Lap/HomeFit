@@ -19,7 +19,7 @@ const linkAccountObjResponses = [
   },
   {
     before: '<speak>  <s> Glad to have you back ',
-    after: '</s> <s> Now that we got all the technical stuff out of the way </s> <s> Lets egt ready to start that workout </s> </speak>'
+    after: '</s> <s> Now that we got all the technical stuff out of the way </s> <s> Lets get ready to start that workout </s> </speak>'
   }
 ];
 
