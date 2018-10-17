@@ -140,9 +140,14 @@ const greetings = [
 ];
 
 app.intent('Default Welcome Intent', conv =>{
-  let index = randomNumGen(greetings.length);
-  console.log(conv.user.User.raw.locale, ' this is should be a lcoale code')
-  conv.ask(greetings[index]);
+  if (conv.user.raw.locale === 'es-419') {
+    conv.ask(`Hola, mi llamo alexa`);
+  } else {
+    let index = randomNumGen(greetings.length);
+    console.log(conv.user.raw.locale, ' this is should be a this is the user property')
+    conv.ask(greetings[index]);
+
+  }
 });
 
 app.intent('link account', conv => {
