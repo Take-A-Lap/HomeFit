@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   longitude: string;
   runningRecommendation: string;
   clock: string;
+  username: object;
 
   constructor(
     private foodService: FoodService,
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit {
     }
 
     Clock = Date.now();
-    
+
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -67,9 +68,8 @@ export class HomeComponent implements OnInit {
         longitude: this.longitude,
         timeStamp: this.time
       }
-    }, { responseType: 'text' })
+    })
     .subscribe(data => {
-      data = JSON.parse(data);
       this.currentWeather.push(data)
       this.runningRecommendation = this.currentWeather[0].recommendation;
     },
@@ -79,9 +79,26 @@ export class HomeComponent implements OnInit {
   }
   
   getCookieInfo() {
+    //function to get username added to getCookieInfo
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[1];
+    console.log(this.email)
+    return this.httpClient.get('/username', {
+      params: {
+        user: this.email
+      }
+    })
+    .subscribe(user => {
+      let filteredKey = Object.keys(user).filter(key => {
+        return key === 'preferred_username'
+      })
+      let usernameKey = filteredKey[0];
+      this.username = user[usernameKey];
+    }, 
+    error => {
+      console.error(error, 'error');
+    })
   }
 
   // function that gets completed WO dates for calender
@@ -197,16 +214,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
 
-  // clockDisplay() {
-  //   let date = new Date();
-  //   let hour = date.getHours();
-  //   let min = date.getMinutes();
-  //   let sec = date.getSeconds();
-
-  //   let time = `${hour}: ${min}.${sec}`;
-  //   this.clock = time;
-  //   setTimeout(this.clock, 1000);
-  // }
+  
 
   ngOnInit() {
     // this.getCurrentTime();
