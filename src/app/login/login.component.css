@@ -3,6 +3,7 @@
     .container {
       padding-left: 200px;
       padding-right: 200px;
+      border: 5px;
     }
 }
 
@@ -10,30 +11,12 @@
   background-color: #899991;
 }
 
-.nav {
-  border-radius: 0px;
+.button {
   background-color:#CCCCFF;
-  text-align: center;
-}
-
-.nav a {
   color: white;
-}
-
-h1 {
-  color: #CCCCFF;
-}
-
-p {
-  color: #CCCCFF;
-}
-td {
-  color: #CCCCFF;
-}
-
-.submit_button {
   width: 100%;
-  background-color: #CCCCFF;
-  text-align: center;
+}
+
+label {
   color: white;
 }

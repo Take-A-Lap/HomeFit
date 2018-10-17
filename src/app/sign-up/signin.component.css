@@ -1,0 +1,25 @@
+@media (min-width: 769px) {
+    /* CSS in here for desktop only */
+    .container {
+      padding-left: 200px;
+      padding-right: 200px;
+    }
+}
+
+.HomeFit_logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.sign-in_button {
+  /* background-color: #FAA24A; */
+  background-color: #31cd32;
+  color: white;
+}
+
+
+
+.op_spark_logo {
+  float: right;
+  position: relative;
+}

@@ -6,12 +6,27 @@
     }
 }
 
+.container {
+  background-color: #899991;
+}
+
+label {
+  color: #CCCCFF;
+}
+
 .nav {
   border-radius: 0px;
-  background-color:#31cd32;
+  background-color:#CCCCFF;
   text-align: center;
 }
 
 .nav a {
+  color: white;
+}
+
+.next_button {
+  width: 100%;
+  background-color: #CCCCFF;
+  text-align: center;
   color: white;
 }

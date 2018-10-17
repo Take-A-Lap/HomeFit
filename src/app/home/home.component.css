@@ -4,38 +4,119 @@
       padding-left: 200px;
       padding-right: 200px;
     }
+  
+}
+
+.container {
+  background-color: #899991;
+  background-size: contain;
+  min-height: 100%;
+  min-width: 100%;
+  height: 100%;
 }
 
 .nav {
   border-radius: 0px;
-  background-color:#31cd32;
+  background-color: #CCCCFF;
+  text-align: center
+}
+
+.nav a {
+  color: white
+}
+
+.nav a:hover {
+  color: grey;
+}
+
+.jumbotron {
+  border-radius: 0px;
+  color: white;
+  margin: 0 auto;
+  background-size: cover;
+}
+
+.clock {
+  font-size: 20px;
+}
+.forecastText {
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+  text-shadow: 2px 2px #000000;
+}
+
+.weatherImage {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+ }
+
+.fa {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.mealDescription {
+  color: #FAA24A;
+}
+
+h2 {
+  color: white;
+}
+
+h3 {
+  color: white;
+}
+
+h4 {
+  color: #FAA24A;
 }
 
 .btn {
-  color: red
+  border-radius: 0px;
+  background-color:#FAA24A;
+  color: white;
+  width: 100%
 }
 
-.cal_sun {
-  background-color:#31cd32
+.workoutButton {
+  width: 100%;
+  background-color: #CCCCFF;
+  color: #FFFFFF;
 }
 
-.imageContainer {
+
+
+table { width: 100%; box-sizing: border-box; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1); font-family: 'Ubuntu'; /*border-collapse: collapse;*/ border-spacing: 0; background-color: #333333; }
+
+th, td { border: 1px solid rgba(255,255,255,0.1); box-sizing: border-box; }
+
+th { text-transform: uppercase; font-size:10px; font-weight:700; padding: 10px 0; color: rgba(27, 1, 70, 0.5); background-color: #ffffff; letter-spacing: 1px; }
+
+td { width: 14.285%; transition: all 0.3s; font-size: 14px; color: rgba(27, 1, 70, 0.5); font-weight: 400; font-size: 14px; background-color: #ffffff; padding: 1.5% 1.5% 5%; vertical-align: initial; padding: 1.5% 0 ; height: 75px; }
+
+.day:hover { background-color: rgba(0,0,0,0.1); cursor:pointer; }
+
+.today { color: #FFF; background-color: rgba(0,0,0,.25) !important; }
+
+span.number { margin-left: 10% }
+
+span.event { height: 4px; background-color: rgba(0,0,0,.3); display: block; margin: 5px 10%; border-radius: 2px; background-color: #91c33b; }
+
+span.event-multiday { margin: 5px -2px; border-radius: 0; }
+span.event-multiday-start { margin-right: -4px;  }
+span.event-multiday-finish { margin-left: -4px;  }
+.day-name {
+  text-align: center;
+}
+span.event-ghost { background-color:transparent; }
+
+.checkmark {
   position: relative;
-  width:200px; 
-  height:200px; 
-  background-image: url('../../assets/img/new_orleans_placeholder.jpg')
+  margin-left: 25px;
+  margin-bottom: 35px;
+  color: #31cd32
 }
 
-/* h5 {
-  position: absolute; 
-   top: 200px; 
-   left: 0; 
-   width: 100%; 
-}
 
-h6 {
-  position: absolute; 
-   top: 220px; 
-   left: 0; 
-   width: 100%; 
-} */

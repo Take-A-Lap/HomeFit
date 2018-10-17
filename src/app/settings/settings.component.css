@@ -3,6 +3,7 @@
     .container {
       padding-left: 200px;
       padding-right: 200px;
+      border: 5px;
     }
 }
 
@@ -10,30 +11,22 @@
   background-color: #899991;
 }
 
-.nav {
-  border-radius: 0px;
-  background-color:#CCCCFF;
-  text-align: center;
-}
-
-.nav a {
-  color: white;
-}
-
-h1 {
+h2 {
   color: #CCCCFF;
 }
 
 p {
   color: #CCCCFF;
 }
-td {
-  color: #CCCCFF;
+
+
+.button {
+  background-color: #CCCCFF;
+  color: #FFFFFF;
 }
 
-.submit_button {
-  width: 100%;
+.next_button {
   background-color: #CCCCFF;
-  text-align: center;
-  color: white;
+  color: #FFFFFF;
+  width: 100%;
 }
