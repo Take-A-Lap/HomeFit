@@ -71,8 +71,70 @@ const nextExerObjResponses = [
 ];
 
 const greetings = [
-  `<speak> <p> <s> Welcome to Home fit trainer </s> <s> The fitness trainer designed for your personal needs. </s> </p> <p> <s> Before we begin </s> <s> I will need you to connect our session to your home fit account </s> <s> To do that all you have to do is say link my account and say your account name </s> <s> after you link up we can begin today's workout </s> </p> </speak>`,
-  `<speak> <p> <prosody rate"fast" volume="+3db" pitch="+25st" > Hi </prosody> </p> <p> <prosody rate="fast" pitch="+15st"> I am excited for our workout today </prosody> </p> <p> <prosody rate="slow" pitch="-10st"> <s> But </s> </prosody> <s> Don't forget you will need to connect our current session with your home fit username </s>  <s> all you have to do is say link my account and say your account name </s> </p> </speak>`,
+  `<speak>
+    <p>
+      <s>
+        Welcome to Home fit trainer
+      </s>
+      <s> 
+        The fitness trainer designed for your personal needs.
+      </s> 
+    </p>
+    <p>
+      <s>
+        Before we begin
+      </s>
+      <s>
+        I will need you to connect our session to your home fit account
+      </s>
+      <s>
+        To do that all you have to do is say link my account and say your account name
+      </s>
+      <s>
+        after you link up we can begin today's workout
+      </s>
+    </p>
+  </speak>`,
+  `<speak> 
+    <p>
+      <prosody rate"fast" volume="+3db" pitch="+25st" >
+        Hi
+      </prosody>
+    </p>
+    <p>
+      <prosody rate="fast" pitch="+15st">
+        I am excited for our workout today
+      </prosody>
+    </p> 
+    <p>
+      <prosody rate="slow" pitch="-10st">
+        <s>
+          But
+        </s>
+      </prosody>
+      <s>
+        Don't forget you will need to connect our current session with your home fit username
+      </s>
+      <s>
+        all you have to do is say link my account and say your account name 
+      </s>
+    </p>
+  </speak>`,
+  `<speak>
+    <p>
+      How should i greet our users roger?
+    </p>
+  </speak>`,
+  `<speak>
+    <p>
+      How should i greet our users josh?
+    </p>
+  </speak>`,
+  `<speak>
+    <p>
+      How should i greet our users cornelius?
+    </p>
+  </speak>`
 ];
 
 app.intent('Default Welcome Intent', conv =>{
