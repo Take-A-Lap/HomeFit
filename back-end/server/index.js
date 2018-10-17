@@ -120,7 +120,6 @@ app.post('/weather', (req, res) => {
       weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude)
     ])
     .then((response) => {
-      // console.log(response)
       weatherInfo.text = response[0].summary;
       weatherInfo.temp = response[0].temperature;
       weatherInfo.apparentTemp = response[0].apparentTemperature;
