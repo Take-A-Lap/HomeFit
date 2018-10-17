@@ -114,6 +114,7 @@ app.post('/updateWorkouts', (req, res)=>{
 })
 
 app.post('/weather', (req, res) => {
+  console.log(req.body.params.timeStamp);
   let weatherInfo = {};
   Promise.all([
       weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
@@ -121,11 +122,12 @@ app.post('/weather', (req, res) => {
       weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude)
     ])
     .then((response) => {
+      // console.log(response)
       weatherInfo.text = response[0].summary;
       weatherInfo.temp = response[0].temperature;
       weatherInfo.apparentTemp = response[0].apparentTemperature;
       weatherInfo.humidity = response[0].humidity,
-        weatherInfo.icon = response[0].icon
+      weatherInfo.icon = response[0].icon
       weatherInfo.time_of_day = response[1];
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
