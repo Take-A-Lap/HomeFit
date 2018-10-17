@@ -43,7 +43,11 @@ app.get('/generateWO', (req, res)=> {
 })
 
 app.get('/test', (req, res)=>{
-  workout.generateWorkoutChest(3, 3, 39).then(wo=>res.send(wo)).catch(err=>console.error(err))
+  Promise.all([
+    meal.getChicken(0, 1000), 
+    meal.getBeef(0, 1000), 
+    meal.getSteak(0, 1000)
+  ]).then(ex=>res.send(ex)).catch(err=>console.log(err))
 })
 
 app.get('/getUser', (req, res) => {
