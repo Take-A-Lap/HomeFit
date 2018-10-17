@@ -73,12 +73,12 @@ module.exports = {
   getCompCardioByUserId: (userId) => db.any(`
     SELECT * FROM completed_cardio
     WHERE id_user = $1
-  `, [userId]).then(([compCardio]) => compCardio),
+  `, [userId]),
 
   getCompStrByUserId: (userId) => db.any(`
     SELECT * FROM completed_str
     WHERE id_user = $1
-  `, [userId]).then(([compStr]) => compStr),
+  `, [userId]),
 
   // realized we may need to grab the exercises by their id as well
   getExerciseById: (exerciseId) => db.any(`
