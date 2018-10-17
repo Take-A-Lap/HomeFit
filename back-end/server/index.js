@@ -42,6 +42,10 @@ app.get('/generateWO', (req, res)=> {
     .catch(err=>console.error(err));
 })
 
+app.get('/test', (req, res)=>{
+  workout.generateWorkoutChest(3, 3, 39).then(wo=>res.send(wo)).catch(err=>console.error(err))
+})
+
 app.get('/getUser', (req, res) => {
   db.getUserInfoByEmail(req.query.email)
   .then((id)=>{

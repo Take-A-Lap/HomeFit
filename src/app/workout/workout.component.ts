@@ -106,7 +106,7 @@ export class WorkoutComponent implements OnInit {
 
     switchExercise() {
       this.index++;
-      this.storeInProgress();
+      this.storeInProgress(this.id, this.previous, this.index);
       this.exercise = this.workout[this.index];
       this.name = this.exercise.name;
     }
@@ -120,9 +120,12 @@ export class WorkoutComponent implements OnInit {
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
         this.start = true;
       } else {
-        this.increaseWONum();
-        this.storeCompleted();
-        this.home();        
+        this.increaseWONum()
+          .then(() => this.storeCompleted())
+          .then(() => this.storeInProgress(this.id, this.previous, 0))
+          .then(() => this.home())
+          .catch(err => console.error(err))
+        ;        
       }
     }
     
@@ -148,14 +151,10 @@ export class WorkoutComponent implements OnInit {
       })
     }
 
-    storeInProgress(){
+    storeInProgress(id, ex_id, index){
       console.log('heading to server')
       this.httpClient.post('/inProgress', {
-        params: {
-          id: this.id,
-          ex_id: this.previous,
-          index: this.index
-        }
+        params: {id, ex_id, index}
       }).subscribe(()=>console.log('back from server'))
     }
 
@@ -166,6 +165,33 @@ export class WorkoutComponent implements OnInit {
       console.log(email);
     }
 
+    printIt(){
+      console.log(this.exercise);
+      console.log(this.workout[0]);
+      console.log(this.workout[1]);
+    }
+    
+    generateWO(){
+      return new Promise((resolve, reject)=>{
+        this.httpClient.get('/generateWO', {
+          params: {
+            diff: this.diff,
+            wo_num: this.wo_num,
+            wo_index: this.index.toString(),
+            previous: this.previous
+          }
+        }).subscribe(wo=>{
+          console.log(wo)
+          this.workout = wo;
+          this.exercise = this.workout[this.index];
+          this.previous = this.exercise.id;
+          this.youtube = this.exercise.youtube_link;
+          this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
+          this.name = this.exercise.name;
+        })
+      })
+    }
+
     getCookieInfo(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=');
@@ -173,28 +199,6 @@ export class WorkoutComponent implements OnInit {
       console.log(this.email, 'workout.component this.email');
     }
 
-    increaseWONum(){
-      return new Promise((resolve, reject)=>{
-        let value = this.wo_num + 1;
-        let id = this.id;
-        this.httpClient.post('/updateWorkouts', {
-          params: {
-            value, id
-          }
-        }).subscribe(res=>console.log(res))
-      })
-    }
-
-    printIt(){
-      console.log(this.exercise);
-      console.log(this.workout[0]);
-      console.log(this.workout[1]);
-    }
-
-    home(){
-      this.router.navigate(['/home']);
-    }
-    
     getUserInfo(){
       let result;
       return new Promise((resolve, reject)=>{
@@ -216,24 +220,19 @@ export class WorkoutComponent implements OnInit {
       })
     }
 
-    generateWO(){
+    home(){
+      this.router.navigate(['/home']);
+    }
+
+    increaseWONum(){
       return new Promise((resolve, reject)=>{
-        this.httpClient.get('/generateWO', {
+        let value = this.wo_num + 1;
+        let id = this.id;
+        this.httpClient.post('/updateWorkouts', {
           params: {
-            diff: this.diff,
-            wo_num: this.wo_num,
-            wo_index: this.index.toString(),
-            previous: this.previous
+            value, id
           }
-        }).subscribe(wo=>{
-          console.log(wo)
-          this.workout = wo;
-          this.exercise = this.workout[this.index];
-          this.previous = this.exercise.id;
-          this.youtube = this.exercise.youtube_link;
-          this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
-          this.name = this.exercise.name;
-        })
+        }).subscribe(res=>console.log(res))
       })
     }
 

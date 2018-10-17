@@ -105,31 +105,11 @@ module.exports = {
     .catch(err=>console.error(err));
   },
 
-  generateWorkoutLeg: function(difficulty){
-    let x; 
+  generateWorkoutLeg: function(difficulty, index, prev){
     if(index === 1){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        x = ex;
-        return Promise.all([
-          generateQuadExercise(difficulty),
-          generateQuadExercise(difficulty),
-          generateQuadExercise(difficulty),
-          generateLegExercise(difficulty),
-          generateLegExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [x]))
-        .catch((err) => {
-          console.error(err)
-        })
-      })
-    } else if(index === 2){
-      db.getExerciseById(prev)
-      .then(ex => {
-        x = ex;
-        return Promise.all([
+      return Promise.all([
+        generateQuadExercise(difficulty),
+        db.getExerciseById(prev),
         generateQuadExercise(difficulty),
         generateQuadExercise(difficulty),
         generateLegExercise(difficulty),
@@ -137,77 +117,100 @@ module.exports = {
         generateAbExercise(difficulty),
         generateAbExercise(difficulty)
       ])
-      .then(results => results.reduce((final, curr) => final.concat(curr), [x]))
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
       .catch((err) => {
         console.error(err)
       })
-  })
+    } else if(index === 2){
+      return Promise.all([
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        db.getExerciseById(prev),
+        generateQuadExercise(difficulty),
+        generateLegExercise(difficulty),
+        generateLegExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
+      })
     }else if(index === 3){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        x = ex;
-        return Promise.all([
-          generateQuadExercise(difficulty),
-          generateLegExercise(difficulty),
-          generateLegExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [x]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        db.getExerciseById(prev),
+        generateLegExercise(difficulty),
+        generateLegExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     }else if(index === 4){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateLegExercise(difficulty),
-          generateLegExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateLegExercise(difficulty),
+        db.getExerciseById(prev),
+        generateLegExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     }else if(index === 5){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateLegExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateLegExercise(difficulty),
+        generateLegExercise(difficulty),
+        db.getExerciseById(prev),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     }else if(index === 6){
       db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateLegExercise(difficulty),
+        generateLegExercise(difficulty),
+        generateAbExercise(difficulty),
+        db.getExerciseById(prev),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
-
     }else if(index === 7){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateQuadExercise(difficulty),
+        generateLegExercise(difficulty),
+        generateLegExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty),
+        db.getExerciseById(prev),
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     } else {
       return Promise.all([
@@ -227,7 +230,7 @@ module.exports = {
     }
   },
 
-  generateWorkoutBack: function(difficulty){
+  generateWorkoutBack: function(difficulty, index, prev){
     if(!index){
       return Promise.all([
         generateBackExercise(difficulty),
@@ -244,103 +247,110 @@ module.exports = {
           console.error(err)
         })
     } else if(index === 1){
-      ds.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateBackExercise(difficulty),
-          generateBackExercise(difficulty),
-          generateBackExercise(difficulty),
-          generateBackArmExercise(difficulty),
-          generateBackArmExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
+      return Promise.all([
+        generateBackExercise(difficulty),
+        db.getExerciseById(prev),
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+        .then(results => results.reduce((final, curr) => final.concat(curr), []))
         .catch((err) => {
           console.error(err)
         })
-      })
     } else if(index ===2){
-      ds.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateBackExercise(difficulty),
-          generateBackExercise(difficulty),
-          generateBackArmExercise(difficulty),
-          generateBackArmExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
+      return Promise.all([
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        db.getExerciseById(prev),
+        generateBackExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+        .then(results => results.reduce((final, curr) => final.concat(curr), []))
         .catch((err) => {
           console.error(err)
         })
-      })
     } else if (index === 3){
-      ds.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateBackExercise(difficulty),
-          generateBackArmExercise(difficulty),
-          generateBackArmExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
+      return Promise.all([
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        db.getExerciseById(prev),
+        generateBackArmExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+        .then(results => results.reduce((final, curr) => final.concat(curr), []))
         .catch((err) => {
           console.error(err)
         })
-      })
     } else if (index === 4){
-      ds.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateBackArmExercise(difficulty),
-          generateBackArmExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
+      return Promise.all([
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        db.getExerciseById(prev),
+        generateBackArmExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+        .then(results => results.reduce((final, curr) => final.concat(curr), []))
         .catch((err) => {
           console.error(err)
         })
-      })
     } else if (index === 5){
-      ds.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateBackArmExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
+      return Promise.all([
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        db.getExerciseById(prev),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+        .then(results => results.reduce((final, curr) => final.concat(curr), []))
         .catch((err) => {
           console.error(err)
         })
-      })
     } else if (index === 6){
-      ds.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
+      return Promise.all([
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateAbExercise(difficulty),
+        db.getExerciseById(prev),
+        generateAbExercise(difficulty)
+      ])
+        .then(results => results.reduce((final, curr) => final.concat(curr), []))
         .catch((err) => {
           console.error(err)
         })
-      })
     } else if (index === 7){
-      ds.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
+      return Promise.all([
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateBackArmExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty),
+        db.getExerciseById(prev)
+      ])
+        .then(results => results.reduce((final, curr) => final.concat(curr), []))
         .catch((err) => {
           console.error(err)
         })
-      })
     }
     
   },
@@ -362,192 +372,207 @@ module.exports = {
         console.error(err)
       })
     } else if (index === 1) {
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateChestExercise(difficulty),
-          generateChestExercise(difficulty),
-          generateChestExercise(difficulty),
-          generateTricepExercise(difficulty),
-          generateTricepExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateChestExercise(difficulty),
+        db.getExerciseById(prev),
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     } else if (index === 2) {
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateChestExercise(difficulty),
-          generateChestExercise(difficulty),
-          generateTricepExercise(difficulty),
-          generateTricepExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        db.getExerciseById(prev),
+        generateChestExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     } else if (index === 3) {
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateChestExercise(difficulty),
-          generateTricepExercise(difficulty),
-          generateTricepExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        db.getExerciseById(prev),
+        generateTricepExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     } else if (index === 4) {
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateTricepExercise(difficulty),
-          generateTricepExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateTricepExercise(difficulty),
+        db.getExerciseById(prev),
+        generateTricepExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     } else if (index === 5) {
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateTricepExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateTricepExercise(difficulty),
+        db.getExerciseById(prev),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
     } else if (index === 6) {
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateAbExercise(difficulty),
+        db.getExerciseById(prev),
+        generateAbExercise(difficulty)
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
-
     } else if (index === 7){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-        .catch((err) => {
-          console.error(err)
-        })
+      return Promise.all([
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateChestExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateTricepExercise(difficulty),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty),
+        db.getExerciseById(prev),
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch((err) => {
+        console.error(err)
       })
-    }  
+    }
   },
 
   generateWorkoutCardio: function(difficulty, index, prev){
    console.log('hhh')
   if (index === 1){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        console.log(ex)
-        return Promise.all([
-          generateCardioExercise(difficulty),
-          generateCardioExercise(difficulty),
-          generateCardioExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-        ])
-          .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-          .catch(err => console.error(err));
-      }) 
-    } else if( index === 2){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateCardioExercise(difficulty),
-          generateCardioExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-        ])
-          .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-          .catch(err => console.error(err));
-      }) 
+    return Promise.all([
+      generateCardioExercise(difficulty),
+      db.getExerciseById(prev),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+    ])
+    .then(results => results.reduce((final, curr) => final.concat(curr), []))
+    .catch(err => console.error(err)); 
+  } else if( index === 2){
+    return Promise.all([
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      db.getExerciseById(prev),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+    ])
+    .then(results => results.reduce((final, curr) => final.concat(curr), []))
+    .catch(err => console.error(err));
     } else if(index === 3){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateCardioExercise(difficulty),
-          generateCardioExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-        ])
-          .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-          .catch(err => console.error(err));
-      }) 
+    return Promise.all([
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      db.getExerciseById(prev),
+      generateCardioExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+    ])
+    .then(results => results.reduce((final, curr) => final.concat(curr), []))
+    .catch(err => console.error(err));
     } else if (index === 4){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateCardioExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-        ])
-          .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-          .catch(err => console.error(err));
-      }) 
+    return Promise.all([
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      db.getExerciseById(prev),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+    ])
+    .then(results => results.reduce((final, curr) => final.concat(curr), []))
+    .catch(err => console.error(err));
     } else if (index === 5){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-        ])
-          .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-          .catch(err => console.error(err));
-      }) 
+    return Promise.all([
+        generateCardioExercise(difficulty),
+        generateCardioExercise(difficulty),
+        generateCardioExercise(difficulty),
+        generateCardioExercise(difficulty),
+        generateAbExercise(difficulty),
+        db.getExerciseById(prev),
+        generateAbExercise(difficulty),
+        generateAbExercise(difficulty),
+      ])
+      .then(results => results.reduce((final, curr) => final.concat(curr), []))
+      .catch(err => console.error(err));
     } else if (index === 6){
       db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-        ])
-          .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-          .catch(err => console.error(err));
-      }) 
+    return Promise.all([
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+      db.getExerciseById(prev),
+      generateAbExercise(difficulty),
+    ])
+    .then(results => results.reduce((final, curr) => final.concat(curr), []))
+    .catch(err => console.error(err));
     } else if ( index === 7){
-      db.getExerciseById(prev)
-      .then(ex=>{
-        return Promise.all([
-          generateAbExercise(difficulty),
-        ])
-          .then(results => results.reduce((final, curr) => final.concat(curr), [ex]))
-          .catch(err => console.error(err));
-      }) 
+    return Promise.all([
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+      db.getExerciseById(prev),
+    ])
+    .then(results => results.reduce((final, curr) => final.concat(curr), []))
+    .catch(err => console.error(err));
     } else {
       return Promise.all([
           generateCardioExercise(difficulty),
@@ -615,4 +640,37 @@ module.exports = {
   },
 
   generateNextWorkout: function(difficulty){}
+}
+ 
+function otherCardio(difficulty, index, prev){
+  return new Promise((resolve, reject) => {
+    console.log('hhh')
+    let solution = [];
+    let i = 0;
+    while (i < 8) {
+      if (i !== index && i > 4) {
+        generateAbExercise(difficulty).then(ex => {
+          solution.push(ex)
+          if (solution.length === 8) {
+            resolve(solution)
+          }
+        })
+      } else if (i !== index) {
+        generateCardioExercise(difficulty).then(ex => {
+          solution.push(ex)
+          if (solution.length === 8) {
+            resolve(solution)
+          }
+        })
+      } else {
+        db.getExerciseById(prev).then(ex => {
+          solution.push(ex)
+          if (solution.length === 8) {
+            resolve(solution)
+          }
+        })
+      }
+      i++;
+    }
+  })
 }

@@ -61,9 +61,9 @@ module.exports = {
   getWeatherImages: (text, time) => db.any(`
     SELECT url FROM weather_images
     WHERE weather = $1 AND time_of_day = $2 
-  `, [text, time]).then(([weatherImages]) => weatherImages)
-    .then(({ url }) => url),
+  `, [text, time]).then(([weatherImages]) => weatherImages),
   // need to get the exercises
+  
   getExerciseByMuscleAndDiff: (muscleId, difficulty) => db.any(`
     SELECT * FROM exercises
     WHERE id_muscle_group = $1 AND difficulty < $2
