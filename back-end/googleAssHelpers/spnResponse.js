@@ -17,8 +17,8 @@ const linkAccountObjResponsesMasculine = [
     after: '</s> </p> <s> Todo bien, </s> <s> Empezamos con los ejercisios. </s> </speak>'
   },
   {
-    before: '<speak> <s> Me alegra de verte ',
-    after: '</s> <s> si estés list`o, podemos empezar con los ejercisios de hoy. </s> </speak>'
+    before: '<speak> <s> Me alegra de oírle ',
+    after: '</s> <s> si esté listo, podemos empezar con los ejercisios de hoy. </s> </speak>'
   }
 ];
 
@@ -36,13 +36,53 @@ const linkAccountObjResponsesFeminine = [
     after: '</s> </p> <s> Todo bien, </s> <s> Empezamos con los ejercisios. </s> </speak>'
   },
   {
-    before: '<speak> <s> Me alegra de verle ',
-    after: '</s> <s> si estés lista, podemos empezar con los ejercisios de hoy. </s> </speak>'
+    before: '<speak> <s> Me alegra de oírle ',
+    after: '</s> <s> si esté lista, podemos empezar con los ejercisios de hoy. </s> </speak>'
+  }
+];
+
+const startWorkoutObjResponsesMasculine = [
+  {
+    before: '<speak> <s> Avísame cuando esté listo de empezar su ',
+    after: ' e en posición. </s> </speak>'
+  },
+  {
+    before: '<speak> <s> Hacemos ',
+    after: '</s> <s> Dígame cuando esté listo. </s></speak>'
+  },
+  {
+    before: '<speak> <s> <prosody pitch="+20%" ><empasis level="reduced"> Vale </emphasis></prosody> </s><s> Seguimos con ',
+    after: '</s> </speak>'
+  },
+  {
+    before: '<speak> <s> Es la hora de seguir, </s> <s> Comenzamos el siguiente ejercisio',
+    after: '</s> </speak>'
+  }
+];
+
+const startWorkoutObjResponsesFeminine = [
+  {
+    before: '<speak> <s> Avísame cuando esté listo de empezar su ',
+    after: ' e en posición. </s> </speak>'
+  },
+  {
+    before: '<speak> <s> Hacemos ',
+    after: '</s> <s> Dígame cuando esté listo. </s></speak>'
+  },
+  {
+    before: '<speak> <s> <prosody pitch="+20%" ><empasis level="reduced"> Vale </emphasis></prosody> </s><s> Seguimos con ',
+    after: '</s> </speak>'
+  },
+  {
+    before: '<speak> <s> Es la hora de seguir, </s> <s> Comenzamos el siguiente ejercisio',
+    after: '</s> </speak>'
   }
 ];
 
 module.exports = {
   spanishErrorResponse,
   linkAccountObjResponsesMasculine,
-  linkAccountObjResponsesFeminine
+  linkAccountObjResponsesFeminine,
+  startWorkoutObjResponsesMasculine,
+  startWorkoutObjResponsesFeminine
 }
