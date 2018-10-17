@@ -120,7 +120,6 @@ app.post('/weather', (req, res) => {
       weather.getCityNameForWeatherInfo(req.body.params.latitude, req.body.params.longitude)
     ])
     .then((response) => {
-      // console.log(response)
       weatherInfo.text = response[0].summary;
       weatherInfo.temp = response[0].temperature;
       weatherInfo.apparentTemp = response[0].apparentTemperature;
@@ -130,6 +129,7 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
+      console.log(weatherInfo);
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)
@@ -145,6 +145,14 @@ app.post('/weather', (req, res) => {
       res.send(weatherInfo)
     })
     .catch((err) => console.error(err /*'Good luck finding that error, bitch'*/ ))
+  })
+
+
+  //get request to db to retrieve username
+  app.get('/username', (req, res) => {
+    console.log(req.query);
+    db.getUserInfoByEmail(req.query.user)
+      .then((user) => res.send(user))
   })
 
 app.get('/dinner', (req,res)=> {
