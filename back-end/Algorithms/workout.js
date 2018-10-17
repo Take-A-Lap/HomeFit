@@ -464,10 +464,11 @@ module.exports = {
   },
 
   generateWorkoutCardio: function(difficulty, index, prev){
-   
+   console.log('hhh')
   if (index === 1){
       db.getExerciseById(prev)
       .then(ex=>{
+        console.log(ex)
         return Promise.all([
           generateCardioExercise(difficulty),
           generateCardioExercise(difficulty),

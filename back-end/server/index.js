@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({
 app.post('/fulfillment', google);
 
 app.get('/generateWO', (req, res)=> {
+  console.log(req.query.wo_index)
   wo_num = req.query.wo_num;
   diff = req.query.diff;
   prev = req.query.previous;

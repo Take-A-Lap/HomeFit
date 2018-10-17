@@ -85,7 +85,6 @@ export class WorkoutComponent implements OnInit {
         this.ready = false;
         this.clickMessage = 'Continue?'
         this.set++;
-        this.storeInProgress();
       })
     }
 
@@ -107,6 +106,7 @@ export class WorkoutComponent implements OnInit {
 
     switchExercise() {
       this.index++;
+      this.storeInProgress();
       this.exercise = this.workout[this.index];
       this.name = this.exercise.name;
     }
@@ -147,9 +147,7 @@ export class WorkoutComponent implements OnInit {
         }).subscribe()
       })
     }
-test(){
-  this.storeInProgress()
-}
+
     storeInProgress(){
       console.log('heading to server')
       this.httpClient.post('/inProgress', {
