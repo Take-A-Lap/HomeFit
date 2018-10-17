@@ -14,7 +14,7 @@ const linkAccountObjResponses = [
     after: '</s> </p> <break time ="50ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s>  </speak>'
   },
   {
-    before: '<speak> <s> Well </s> <p> <s>',
+    before: '<speak> <s> <prosody pitch="-5st"> Well </prosody> </s> <p> <s>',
     after: '</s> </p> <s> Looks like we are all set </s> <s> lets get started with those exercises </s> </speak>'
   },
   {
