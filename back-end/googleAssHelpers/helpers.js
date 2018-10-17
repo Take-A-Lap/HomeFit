@@ -13,7 +13,7 @@ const randomNumGen = (numOptions) => {
 };
 const app = dialogflow();
 
-const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> Could you try again? </s> </p> </speak>`,
+const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> <prosody pitch="+10%" >Could you </prosody> <prosody pitch="+20%" > try again? </prosody></s> </p> </speak>`,
   `<speak> <p> I am terribly sorry </p> <p> I am having trouble understanding you </p> <p> If it isn't too much to ask could you try again? </p> </speak>`,
   `<speak> <s> This is embarrassing for me </s> <p> I sometimes have trouble with my hearing </p> <p> even at such a young age </p> <s> Would you kindly try the command again? </s> </speak>`
 ];
@@ -145,7 +145,7 @@ app.intent('Default Welcome Intent', conv =>{
 
 app.intent('link account', conv => {
   
-  console.log(conv.id, ' looking for the value of the session id');
+  // console.log(conv.id, ' looking for the value of the session id');
   return db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
   .then(user => {
     if(user !== undefined){
@@ -168,7 +168,7 @@ app.intent('link account', conv => {
 
 
 app.intent('start workout', conv => {
-  console.log(conv.id, ' conv.id inside the start workout intent');
+  // console.log(conv.id, ' conv.id inside the start workout intent');
   // need to remember to grab the conversation id
   return db.getUserInfoByGoogleSessionId(conv.id)
   .then(user => {
@@ -192,7 +192,7 @@ app.intent('start workout', conv => {
   .then(([currentExercise]) => {
     if (currentExercise !== undefined) {
       current = currentExercise;
-      console.log(current, ' this should the current workout object');
+      // console.log(current, ' this should the current workout object');
       
       let index = randomNumGen(startWorkoutObjResponses.length);
       
@@ -219,6 +219,8 @@ app.intent('start workout', conv => {
 app.intent('describe exercise', conv => {
   return db.getExerciseDescription(1)
     .then(({ description }) =>{
+      console.log('describe was invoked');
+      
       conv.ask("<speak>" + description + "</speak>");
     })
   // conv.ask("<speak> This is the description for" + current.name +" </speak>");
@@ -230,7 +232,7 @@ app.intent('take a break', conv => {
 })
 
 app.intent('next exercise', conv => {
-  console.log(conv.id, " conv.id inside of the next exercise intent");
+  // console.log(conv.id, " conv.id inside of the next exercise intent");
   
   return db.getUserInfoByGoogleSessionId(conv.id)
   .then(user => {
