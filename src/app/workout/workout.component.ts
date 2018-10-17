@@ -23,8 +23,8 @@ export class WorkoutComponent implements OnInit {
   previous;
   ready = true;
   start = true;
-  masterIndex;
   index = 0;
+  masterIndex = this.index;
   workout;
   completed;
   rep = 0;
@@ -85,6 +85,7 @@ export class WorkoutComponent implements OnInit {
         this.ready = false;
         this.clickMessage = 'Continue?'
         this.set++;
+        this.storeInProgress();
       })
     }
 
@@ -114,11 +115,12 @@ export class WorkoutComponent implements OnInit {
     increment() {
       if (this.index < 7) {
         this.switchExercise();
+        this.previous = this.exercise.id;
         this.youtube = this.exercise.youtube_link;
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
         this.start = true;
       } else {
-        this.increaseWONum()
+        this.increaseWONum();
         this.storeCompleted();
         this.home();        
       }
@@ -145,6 +147,20 @@ export class WorkoutComponent implements OnInit {
         }).subscribe()
       })
     }
+test(){
+  this.storeInProgress()
+}
+    storeInProgress(){
+      console.log('heading to server')
+      this.httpClient.post('/inProgress', {
+        params: {
+          id: this.id,
+          ex_id: this.previous,
+          index: this.index
+        }
+      }).subscribe(()=>console.log('back from server'))
+    }
+
     testClick(){
       let cookie = document.cookie;
       let emailArr = cookie.split('=')
@@ -190,8 +206,8 @@ export class WorkoutComponent implements OnInit {
           result = id;
           this.id = result.id;
           this.wo_num = result.workout_completes;
-          this.masterIndex = result.current_workout_index;
-          this.previous = result.last_exercise_id;
+          this.index = result.current_workout_index || 0;
+          this.previous = result.last_exercise_id || 7;
           this.diff = result.squat_comf;
           if (result === id) {
             resolve(id);
@@ -208,13 +224,14 @@ export class WorkoutComponent implements OnInit {
           params: {
             diff: this.diff,
             wo_num: this.wo_num,
-            wo_index: this.masterIndex,
+            wo_index: this.index.toString(),
             previous: this.previous
           }
         }).subscribe(wo=>{
           console.log(wo)
           this.workout = wo;
           this.exercise = this.workout[this.index];
+          this.previous = this.exercise.id;
           this.youtube = this.exercise.youtube_link;
           this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
           this.name = this.exercise.name;

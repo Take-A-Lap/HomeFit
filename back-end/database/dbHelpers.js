@@ -144,6 +144,21 @@ module.exports = {
       WHERE id = $1
   `, [user_id, newWONum]),
 
+  updateWOIndex: (userID, index) => db.any(`
+    UPDATE users
+    SET 
+    current_workout_index = $2
+    WHERE id = $1
+  `, [userID, index]),
+
+
+  updateLastWO: (userID, last)=> db.any(`
+      UPDATE users
+      SET
+      last_exercise_id = $2
+      WHERE id = $1
+  `, [userID, last]),
+
   updateCompCardio: (completed, userId, date, lastTotalTime, bpm) => db.any(`
     UPDATE completed_cardio
     SET

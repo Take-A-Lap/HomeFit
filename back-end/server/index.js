@@ -35,7 +35,9 @@ app.get('/generateWO', (req, res)=> {
   prev = req.query.previous;
   index = req.query.wo_index;
     workout.generateWorkout(wo_num, diff, prev, index)
-    .then(workout=>res.send(workout))
+    .then(workout=>{
+      res.send(workout)
+    })
     .catch(err=>console.error(err));
 })
 
@@ -44,6 +46,12 @@ app.get('/getUser', (req, res) => {
   .then((id)=>{
     res.send(id)})
   .catch(err=>console.error(err));
+})
+
+app.post('/inProgress', (req, res)=>{
+  console.log(req.body);
+  db.updateWOIndex(req.body.params.id, req.body.params.index)
+  db.updateLastWO(req.body.params.id, req.body.params.ex_id)
 })
 
 app.get('/getUserId', (req, res) => {
@@ -153,7 +161,7 @@ app.get('/dinner', (req,res)=> {
   }).then(meals => {
     return meal.narrowDown(meals)
   }).then(randomArray => {
-    randomArray.forEach(index => dinner.push(meals[index].recipe))
+    randomArray.forEach(index => dinner.push(meals[index]))
   }).then(() => {
     res.send(dinner)
   }).catch(err => console.error(err))

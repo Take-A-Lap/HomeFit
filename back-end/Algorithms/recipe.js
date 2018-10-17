@@ -13,7 +13,6 @@ module.exports = {
     return new Promise((resolve, reject) => {
       request(`https://api.edamam.com/search?q=breakfast&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body) {
-          body = JSON.parse(body)
           resolve(body.hits)
         } else {
           reject('Breakfast Error')
@@ -27,7 +26,6 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=eggs&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=12&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
        if (body) {
-         body = JSON.parse(body)
          resolve(body.hits)
        } else {
           reject('Egg rejection')
@@ -40,7 +38,6 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=yogurt&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body) {
-          body = JSON.parse(body)
           resolve(body.hits)
         } else {
           reject('Yogurt rejection')
@@ -54,7 +51,6 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=lunch&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=30&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if(body){
-          body = JSON.parse(body)
           resolve(body.hits)
         } else {
           reject('lunch rejection')
@@ -68,7 +64,6 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=steak&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body) {
-          body = JSON.parse(body)
           resolve(body.hits)
         } else {
           reject('Steak rejection')
@@ -95,7 +90,6 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=chicken&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body) {
-          body = JSON.parse(body)
           resolve(body.hits)
         } else {
           reject('Chicken rejection')
