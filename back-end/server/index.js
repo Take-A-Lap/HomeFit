@@ -30,11 +30,20 @@ app.use(bodyParser.urlencoded({
 app.post('/fulfillment', google);
 
 app.get('/generateWO', (req, res)=> {
+  console.log(req.query.wo_index)
   wo_num = req.query.wo_num;
   diff = req.query.diff;
-  workout.generateWorkout(wo_num, diff)
-  .then(workout=>res.send(workout))
-  .catch(err=>console.error(err));
+  prev = req.query.previous;
+  index = req.query.wo_index;
+    workout.generateWorkout(wo_num, diff, prev, index)
+    .then(workout=>{
+      res.send(workout)
+    })
+    .catch(err=>console.error(err));
+})
+
+app.get('/test', (req, res)=>{
+  workout.generateWorkoutChest(3, 3, 39).then(wo=>res.send(wo)).catch(err=>console.error(err))
 })
 
 app.get('/getUser', (req, res) => {
@@ -42,6 +51,12 @@ app.get('/getUser', (req, res) => {
   .then((id)=>{
     res.send(id)})
   .catch(err=>console.error(err));
+})
+
+app.post('/inProgress', (req, res)=>{
+  console.log(req.body);
+  db.updateWOIndex(req.body.params.id, req.body.params.index)
+  db.updateLastWO(req.body.params.id, req.body.params.ex_id)
 })
 
 app.get('/getUserId', (req, res) => {
@@ -64,13 +79,9 @@ app.get('/getCompletedWO', (req, res) => {
     .then(({ id }) => {
       // use the id to query the completed str and cardio tables
       let completedWorkouts = [];
-      db.getCompCardioByUserId(id)
-        .then(compCardio => {
-          if (compCardio) {
-            completedWorkouts = completedWorkouts.concat(compCardio);
-          }
           db.getCompStrByUserId(id)
             .then(compStr => {
+              console.log('str', compStr);
               if (compStr) {
                 completedWorkouts = completedWorkouts
                   .concat(compStr)
@@ -78,8 +89,7 @@ app.get('/getCompletedWO', (req, res) => {
                   .filter((date, i, a) => a.indexOf(date) === i);
                 res.send(completedWorkouts);
               }
-            })
-        })
+      })
     })
     .catch(err=>console.error(err));
 });
@@ -95,15 +105,6 @@ app.post('/completed', (req, res)=>{
   var d = new Date();
   db.insertIntoCompStr(1, req.body.params.id, 10, true, d)
   .then(()=>res.send('tallied!'))
-})
-
-app.get('/getMyWorkOut', (req,res)=>{
-  const int = parseInt(req.query.id)
-  db.getWorkoutsByUserID(int)
-  .then((workouts) => {
-    res.send(workouts.exercises)
-  })
-  .catch((ugh)=>console.error(ugh));
 })
 
 app.post('/updateWorkouts', (req, res)=>{
@@ -170,7 +171,7 @@ app.get('/dinner', (req,res)=> {
   }).then(meals => {
     return meal.narrowDown(meals)
   }).then(randomArray => {
-    randomArray.forEach(index => dinner.push(meals[index].recipe))
+    randomArray.forEach(index => dinner.push(meals[index]))
   }).then(() => {
     res.send(dinner)
   }).catch(err => console.error(err))
@@ -207,19 +208,6 @@ app.get('/breakfast', (req, res) => {
   }).then(()=>{
     res.send(breakfast)
   }).catch(err=>console.error(err))
-})
-
-app.get('/signupWO', (req, res) => {
-  return Promise.all([
-      db.getUs,
-      workout.generateWorkoutSignUp(3)
-    ])
-    .then(([user, regimen]) => {
-      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, regimen);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 })
 
 app.post('/signUp', (req, res) =>{

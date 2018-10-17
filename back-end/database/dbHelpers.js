@@ -14,6 +14,11 @@ const db = pgp(connection);
 
 module.exports = {
 
+  getExerciseIndex: (email) => db.any(`
+  SELECT current_workout_index FROM users
+  WHERE user_email = $1
+  `, [email]),
+
   getExerciseDescription: (exerciseId) => db.any(`
   SELECT description FROM exercises
   WHERE id = $1
@@ -56,9 +61,9 @@ module.exports = {
   getWeatherImages: (text, time) => db.any(`
     SELECT url FROM weather_images
     WHERE weather = $1 AND time_of_day = $2 
-  `, [text, time]).then(([weatherImages]) => weatherImages)
-    .then(({ url }) => url),
+  `, [text, time]).then(([weatherImages]) => weatherImages),
   // need to get the exercises
+  
   getExerciseByMuscleAndDiff: (muscleId, difficulty) => db.any(`
     SELECT * FROM exercises
     WHERE id_muscle_group = $1 AND difficulty < $2
@@ -68,12 +73,12 @@ module.exports = {
   getCompCardioByUserId: (userId) => db.any(`
     SELECT * FROM completed_cardio
     WHERE id_user = $1
-  `, [userId]).then(([compCardio]) => compCardio),
+  `, [userId]),
 
   getCompStrByUserId: (userId) => db.any(`
     SELECT * FROM completed_str
     WHERE id_user = $1
-  `, [userId]).then(([compStr]) => compStr),
+  `, [userId]),
 
   // realized we may need to grab the exercises by their id as well
   getExerciseById: (exerciseId) => db.any(`
@@ -138,6 +143,21 @@ module.exports = {
       SET workout_completes = $2
       WHERE id = $1
   `, [user_id, newWONum]),
+
+  updateWOIndex: (userID, index) => db.any(`
+    UPDATE users
+    SET 
+    current_workout_index = $2
+    WHERE id = $1
+  `, [userID, index]),
+
+
+  updateLastWO: (userID, last)=> db.any(`
+      UPDATE users
+      SET
+      last_exercise_id = $2
+      WHERE id = $1
+  `, [userID, last]),
 
   updateCompCardio: (completed, userId, date, lastTotalTime, bpm) => db.any(`
     UPDATE completed_cardio
