@@ -1,5 +1,5 @@
-const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> <prosody pitch="+5%" >Could you </prosody> <prosody pitch="+25%" > try again? </prosody></s> </p> </speak>`,
-  `<speak> <p> I am terribly sorry </p> <p> I am having trouble understanding you </p> <p> <prosody pitch="+5%"> If it isn't </prosody><prosody pitch="+15%"> too much to ask </prosody> <break time="5ms" /> <prosody  pitch="+30%">could you try again? </prosody> </p> </speak>`,
+const errorResponses = [`<speak> <p> <s> <prosody rate="slow" volume="-2db"> I'm sorry, </prosody> <break time="5ms"/> I may have miss heard you. </s> <s> <prosody pitch="+5%" >Could you </prosody> <prosody pitch="+25%" > try again? </prosody></s> </p> </speak>`,
+  `<speak> <prosody rate="fast" volume="-1db" > <p> I am terribly sorry </p> <break time="5ms" /> <p> I am having trouble understanding you </p> <p> <prosody pitch="+5%"> If it isn't </prosody><prosody pitch="+15%"> too much to ask </prosody> <break time="5ms" /> <prosody  pitch="+30%">could you try again? </prosody> </p> </prosody> </speak>`,
   `<speak> <s> This is embarrassing for me </s> <p> I sometimes have trouble with my hearing </p> <p> even at such a young age </p> <s> Would you kindly try the command again? </s> </speak>`
 ];
 
@@ -15,7 +15,7 @@ const linkAccountObjResponses = [
   },
   {
     before: '<speak> <s> <prosody pitch="-5st" rate="slow"> Well </prosody> </s> <p> <s>',
-    after: '</s> </p> <prosody rate="fast"><s> Looks like we are all set </s> <s> lets get started with those exercises </s> </prosody> </speak>'
+    after: '</s> </p> <break time="5ms" /> <prosody rate="fast"><s> Looks like we are all set </s> <s> lets get started with those exercises </s> </prosody> </speak>'
   },
   {
     before: '<speak> <prosody rate="fast"> <s> <prosody pitch="+20st">>Glad to have you back ',
