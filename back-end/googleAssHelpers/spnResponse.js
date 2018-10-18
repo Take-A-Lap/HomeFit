@@ -134,17 +134,17 @@ const spanishGreetings = [
   </speak>`,
   `<speak> 
     <p>
-      <prosody rate="fast" volume="+3db" pitch="+25st" >
+      <prosody >
         Hola
       </prosody>
     </p>
     <p>
-      <prosody rate="fast" pitch="+15st">
+      <prosody >
         Tengo muchas ganas de hacer a nuestro entrenamiento hoy.
       </prosody>
     </p> 
     <p>
-      <prosody rate="slow" pitch="-10st">
+      <prosody >
         <s>
           Sin embargo
         </s>
