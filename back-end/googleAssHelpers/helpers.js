@@ -1,6 +1,5 @@
 const {
   dialogflow,
-  Image,
   SimpleResponse
 } = require('actions-on-google')
 const db = require('../database/dbHelpers');
