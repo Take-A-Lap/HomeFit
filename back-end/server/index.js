@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bluebird = require ('bluebird')
 const verifier = require('alexa-verifier-middleware');
 const db = require('../database/dbHelpers');
 const alexaHelp = require('../alexaHelpers/helpers');
 const weather = require('../weather/weatherHelpers');
 const app = express()
-const meal = require('../Algorithms/recipe.js');
+const meal = bluebird.promisifyAll(require('../Algorithms/recipe.js'));
 const workout = require('../Algorithms/workout.js');
 const sse = require('../../sse');
 const fs = require('fs');
@@ -160,26 +161,63 @@ app.post('/weather', (req, res) => {
       .then((user) => res.send(user))
   })
 
-app.get('/dinner', (req,res)=> {
-  let meals;
-  let dinner = [];
-  Promise.all([
-    meal.getChicken(300, 700, "alcohol-free"), 
-    meal.getBeef(300, 700, "alcohol-free"), 
-    meal.getFish(300, 700, "alcohol-free"),
-    meal.getSteak(300, 700, "alcohol-free")
-  ])
-  .then(recipes => {
-    meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
-    return meals;
-  }).then(meals => {
-    return meal.narrowDown(meals)
-  }).then(randomArray => {
-    randomArray.forEach(index => dinner.push(meals[index]))
-  }).then(() => {
-    res.send(dinner)
-  }).catch(err => console.error(err))
-});
+  app.get('/dinner', (req,res)=>{
+    bluebird.all(Promise.all([
+      meal.getChicken(0, 700), 
+      meal.getBeef(0, 700),
+      meal.getSteak(0, 700),
+      meal.getFish(0, 700)
+    ]))
+    .then(input=>res.send(input))
+  })
+  // app.get('/dinner', (req, res) => {
+  //   let meals;
+  //   let dinner = [];
+  //   meal.getChicken(300, 700, "alcohol-free")
+  //   .then(chickens=>{
+  //     return meal.getBeef(300, 700, "alcohol-free")
+  //     .then(beefs=>[beefs,chickens]);
+  //   })
+  //   .then(beefAndChickens=>{
+  //     return meal.getFish(300, 700, "alcohol-free")
+  //     .then(fishes=>beefAndChickens.concat(fishes))
+  //   })
+  //   .then(beefAndChickenAndFishes=>{
+  //     return meal.getSteak(300, 700, "alcohol-free")
+  //     .then(steaks=>beefAndChickenAndFishes.concat(steaks))
+  //   })
+  //   .then(recipes => {
+  //     console.log(recipes.length)
+  //     meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
+  //     return meals;
+  //   }).then(meals => {
+  //     return meal.narrowDown(meals)
+  //   }).then(randomArray => {
+  //     randomArray.forEach(index => dinner.push(meals[index]))
+  //   }).then(() => {
+  //     res.send(dinner)
+  //   }).catch(err => console.error(err))
+  // });
+// app.get('/dinner', (req,res)=> {
+//   let meals;
+//   let dinner = [];
+//   Promise.all([
+//     meal.getChicken(300, 700, "alcohol-free"), 
+//     meal.getBeef(300, 700, "alcohol-free"), 
+//     meal.getFish(300, 700, "alcohol-free"),
+//     meal.getSteak(300, 700, "alcohol-free")
+//   ])
+//   .then(recipes => {
+//     meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
+//     return meals;
+//   }).then(meals => {
+//     return meal.narrowDown(meals)
+//   }).then(randomArray => {
+//     randomArray.forEach(index => dinner.push(meals[index]))
+//   }).then(() => {
+//     res.send(dinner)
+//   }).catch(err => console.error(err))
+// });
 
 app.get('/lunch', (req,res) => {
   let meals;

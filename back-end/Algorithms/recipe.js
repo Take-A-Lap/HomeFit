@@ -1,6 +1,7 @@
 // const axios = require('axios');
 // var Promise = require('bluebird');
-var request = /*Promise.promisify(*/require('request');
+const bluebird = require('bluebird');
+var request = bluebird.promisify(require('request'));
 const express = require('express');
 const config = require('../../config.js');
 const app = express();
@@ -68,6 +69,7 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=steak&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body) {
+          console.log('steak')
           body = JSON.parse(body)
           resolve(body.hits)
         } else {
@@ -82,6 +84,7 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=beef&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body) {
+          console.log('beef')
           body = JSON.parse(body)
           resolve(body.hits)
         } else {
@@ -96,6 +99,7 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=chicken&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body) {
+          console.log('chicken')
           body = JSON.parse(body)
           resolve(body.hits)
         } else {
@@ -109,6 +113,7 @@ module.exports = {
     return new Promise((resolve, reject)=>{
       request(`https://api.edamam.com/search?q=fish&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`, function (error, response, body) {
         if (body){
+          console.log('fish')
           body = JSON.parse(body)
           resolve(body.hits)
         } else {
