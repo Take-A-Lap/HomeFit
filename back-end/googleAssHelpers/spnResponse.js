@@ -171,10 +171,10 @@ const spanishGreetings = [
   `<speak> 
     <p> 
       <s> 
-        To begin, you must link your account to our current session. 
+        Para empezar, debe conectar a su cuenta a nuestra sesión actual.
       </s>
       <s> 
-        To achieve this, simply say link my account and your username.
+        Para lograrlo, diga conecta a mi cuenta y su nombre de usuario.
       </s>
     </p>
   </speak>`
