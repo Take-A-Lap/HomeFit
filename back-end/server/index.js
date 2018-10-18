@@ -78,18 +78,15 @@ app.get('/getCompletedWO', (req, res) => {
     })
     .then(({ id }) => {
       // use the id to query the completed str and cardio tables
-      let completedWorkouts = [];
-          db.getCompStrByUserId(id)
-            .then(compStr => {
-              console.log('str', compStr);
-              if (compStr) {
-                completedWorkouts = completedWorkouts
-                  .concat(compStr)
-                  .map(wo => wo.date.getDate())
-                  .filter((date, i, a) => a.indexOf(date) === i);
-                res.send(completedWorkouts);
-              }
-      })
+      return db.getCompStrByUserId(id)
+    })
+    .then(compStr => {
+      if (compStr) {
+        const result = compStr
+          .map(wo => wo.date.getDate())
+          .filter((date, i, a) => a.indexOf(date) === i);
+        res.send(result);
+      }
     })
     .catch(err=>console.error(err));
 });
