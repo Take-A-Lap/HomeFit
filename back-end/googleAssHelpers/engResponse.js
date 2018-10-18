@@ -91,17 +91,17 @@ const greetings = [
 
   `<speak> 
     <p>
-      <prosody rate="fast" volume="+3db" pitch="+25st" >
+      <prosody rate="fast" volume="+3db" pitch="+15st" >
         Hi
       </prosody>
     </p>
     <p>
-      <prosody rate="fast" pitch="+15st">
+      <prosody rate="fast" pitch="+10st">
         I am excited for our workout today
       </prosody>
     </p> 
     <p>
-      <prosody rate="slow" pitch="-10st">
+      <prosody rate="slow" pitch="-5st">
         <s>
           But
         </s>
