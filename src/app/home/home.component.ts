@@ -103,8 +103,6 @@ export class HomeComponent implements OnInit {
     this.workoutService.getCompletedWorkouts(this.email)
       .subscribe(compWorkOuts => {
         // if the func returns dates
-        console.log(this.email, 106)
-        console.log(compWorkOuts);
         if (compWorkOuts) {
           // concat the dates to the workoutDates stored on the component
           this.workoutDates = this.workoutDates.concat(compWorkOuts);
