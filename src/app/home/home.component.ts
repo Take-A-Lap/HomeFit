@@ -183,8 +183,10 @@ export class HomeComponent implements OnInit {
       for (let i = 0; i < day; i++) {
         this.dates[i] = date - (day - i);
       }
+      let count = 1;
       for (let i = day + 1; i < this.dates.length; i++) {
-        this.dates[i] = date + (this.dates.length - i);
+        this.dates[i] = date + count;
+        count++;
       }
       if (d){
         resolve(d)
@@ -233,5 +235,5 @@ export class HomeComponent implements OnInit {
     // this.clockDisplay();
   }
 
-  
+
 }
