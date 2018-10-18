@@ -154,9 +154,8 @@ export class HomeComponent implements OnInit {
 
   getDinner() {
     return new Promise((resolve, reject)=>{
-      this.httpClient.get('/dinner')
+      this.foodService.getDinner()
         .subscribe(dinnerFood => {
-          console.log(dinnerFood)
           this.meals = dinnerFood;
            let imageUrls = this.meals.map(meal => {
             return {
@@ -165,6 +164,7 @@ export class HomeComponent implements OnInit {
               clickAction: ()=>window.open(meal.url)
             }
           })
+          console.log(imageUrls);
           if(imageUrls.length){
             resolve(imageUrls)
           } else {
