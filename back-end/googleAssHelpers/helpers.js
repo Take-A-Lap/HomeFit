@@ -86,7 +86,51 @@ app.intent('link account', conv => {
 
 app.intent('start workout', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    conv.ask(`Hola, mi llamo alexa`);
+    return db.getUserInfoByGoogleSessionId(conv.id)
+      .then(user => {
+        if (user !== undefined) {
+          const squatComf = user.squat_comf;
+          const numWorkouts = user.workout_completes;
+          return workout.generateWorkout(numWorkouts, squatComf);
+        } else {
+          conv.ask(new SimpleResponse({
+            test: 'Por favor, conecta a su cuenta a la sesión.',
+            speech: `<speak> <p> Lo siento, pero tenemos que conectar usted a su cuenta.</p> <p> Para conectar a su cuenta, solamente necesita decir conecta a mi cuenta seguido por el nombre de la cuenta. </p> </speak>`
+          }));
+        }
+      })
+      .then(genWorkout => {
+        if (genWorkout !== undefined) {
+          googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
+          return googleWorkout.splice(0, 1);
+        }
+      })
+      .then(([currentExercise]) => {
+        if (currentExercise !== undefined) {
+          current = currentExercise;
+          // console.log(current, ' this should the current workout object');
+
+          let index = randomNumGen(spanishStartWorkoutObjResponsesMasculine.length);
+
+          conv.ask(new SimpleResponse({
+            text: 'Avísame cuando esté listo de empezar.',
+            // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
+            speech: spanishStartWorkoutObjResponsesMasculine[index].before + current.name + spanishStartWorkoutObjResponsesMasculine[index].after
+          }));
+
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        let index = randomNumGen(spanishErrorResponse.length);
+        conv.ask(new SimpleResponse({
+          text: 'Fue un problema',
+          // speech: `<speak> <p> I'm sorry something appears to have gone wrong. Please try again </p> </speak>`
+          speech: spanishErrorResponse[index]
+
+        }));
+      })
+    // conv.ask(`Hola, mi llamo alexa`);
   } else {
 
     // console.log(conv.id, ' conv.id inside the start workout intent');
@@ -100,7 +144,7 @@ app.intent('start workout', conv => {
       } else {
         conv.ask(new SimpleResponse({
           test: 'Please link your session with your account.',
-          speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do to link your account is say ink my account followed by your account name </p> </speak>`
+          speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do to link your account is say link my account followed by your account name </p> </speak>`
         }));
       }
     })
