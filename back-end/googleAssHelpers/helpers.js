@@ -205,7 +205,7 @@ app.intent('describe exercise', conv => {
 
 app.intent('take a break', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    conv.ask(`Hola, mi llamo alexa`);
+    conv.close(`De acuerdo, seguimos mas tarde.`);
   } else {
     conv.close(`Okay, we will pick this up again later`);
   }
