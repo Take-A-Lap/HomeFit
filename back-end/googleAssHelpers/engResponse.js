@@ -25,11 +25,11 @@ const linkAccountObjResponses = [
 
 const startWorkoutObjResponses = [
   {
-    before: '<speak> <prosody rate="fast" volume="loud" pitch="+30%"> <s> Let me know when you are ready to begin your ',
+    before: '<speak> <prosody volume="loud" pitch="+30%"> <s> Let me know when you are ready to begin your ',
     after: ' and are in position. </s> </prosody> </speak>'
   },
   {
-    before: '<speak> <prosody rate="fast" volume="loud" pitch="+30%"> <s> Lets do some',
+    before: '<speak> <prosody volume="loud" pitch="+30%"> <s> Lets do some',
     after: '</s> <s> Let me know when you are ready</s> </prosody> </speak>'
   },
   {
@@ -62,7 +62,7 @@ const greetings = [
     <p>
       <s>
         <prosody volume="+3db" pitch="+25%" >
-          Welcome to Home fit trainer
+          Welcome to Home Fit trainer
         </prosody>
       </s>
       <s>
@@ -82,7 +82,7 @@ const greetings = [
         I will need you to connect our session to your home fit account
       </s>
       <s>
-        To do that all you have to do is say link my account and say your account name
+        To do that all you have to do is say link my account and say your home fit account name
       </s>
       <s>
         after you link up we can begin today's workout
@@ -114,7 +114,7 @@ const greetings = [
           Don't forget you will need to connect our current session with your home fit username
         </s>
         <s>
-          all you have to do is say link my account and say your account name 
+          all you have to do is say link my account and say your home fit account name 
         </s>
         </prosody>
       </p>
@@ -129,13 +129,32 @@ const greetings = [
   //   </prosody>
   // </speak>`,
 
-  // `<speak>
-  // <prosody rate="fast">
-  //   <p>
-  //     How should i greet our users josh?
-  //   </p>
-  //   </prosody>
-  // </speak>`,
+  `<speak>
+    <p>
+      <s> 
+        Welcome to Home Fit trainer.
+      </s>
+    </p>
+    <p> 
+      <s> 
+        The only trainer you will ever need.
+      </s>
+    </p>
+    <p>
+      Link your session and we can begin
+    </p>
+  </speak>`,
+
+  `<speak> 
+    <p> 
+      <s> 
+        To begin, you must link your account to our current session. 
+      </s>
+      <s> 
+        To achieve this, simply say link my account and your username.
+      </s>
+    </p>
+  </speak>`
 
   // `<speak>
   // <prosody rate="fast">
