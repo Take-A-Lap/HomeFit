@@ -81,19 +81,20 @@ const greetings = [
       </s>
     </p>
   </speak>`,
+
   `<speak> 
     <p>
-      <prosody rate"fast" volume="+3db" pitch="+25st" >
+      <prosody rate="fast" volume="+3db" pitch="+25%" >
         Hi
       </prosody>
     </p>
     <p>
-      <prosody rate="fast" pitch="+15st">
+      <prosody rate="fast" pitch="+15%">
         I am excited for our workout today
       </prosody>
     </p> 
     <p>
-      <prosody rate="slow" pitch="-10st">
+      <prosody rate="slow" pitch="-10%">
         <s>
           But
         </s>
@@ -106,16 +107,19 @@ const greetings = [
       </s>
     </p>
   </speak>`,
+
   `<speak>
     <p>
       How should i greet our users roger?
     </p>
   </speak>`,
+
   `<speak>
     <p>
       How should i greet our users josh?
     </p>
   </speak>`,
+
   `<speak>
     <p>
       How should i greet our users cornelius?
