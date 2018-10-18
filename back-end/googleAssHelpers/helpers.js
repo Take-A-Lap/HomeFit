@@ -31,7 +31,7 @@ app.intent('Default Welcome Intent', conv =>{
 });
 
 app.intent('link account', conv => {
-  if (conv.user.raw.locale === 'es-419') {
+  if (conv.user.raw.locale.slice(0, 2) === 'es') {
     return db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
       .then(user => {
         if (user !== undefined) {
@@ -84,7 +84,7 @@ app.intent('link account', conv => {
 
 
 app.intent('start workout', conv => {
-  if (conv.user.raw.locale === 'es-419') {
+  if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
 
@@ -138,7 +138,7 @@ app.intent('start workout', conv => {
 });
 
 app.intent('describe exercise', conv => {
-  if (conv.user.raw.locale === 'es-419') {
+  if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
 
@@ -154,7 +154,7 @@ app.intent('describe exercise', conv => {
 });
 
 app.intent('take a break', conv => {
-  if (conv.user.raw.locale === 'es-419') {
+  if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
     conv.close(`Okay, we will pick this up again later`);
@@ -163,7 +163,7 @@ app.intent('take a break', conv => {
 
 app.intent('next exercise', conv => {
   // console.log(conv.id, " conv.id inside of the next exercise intent");
-  if (conv.user.raw.locale === 'es-419') {
+  if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
 
@@ -205,7 +205,7 @@ app.intent('next exercise', conv => {
 });
 
 app.intent('Default Fallback Intent', conv => {
-  if (conv.user.raw.locale === 'es-419') {
+  if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
     let index = randomNumGen(errorResponses);
