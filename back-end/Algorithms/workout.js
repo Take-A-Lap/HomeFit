@@ -480,7 +480,6 @@ module.exports = {
   },
 
   generateWorkoutCardio: function(difficulty, index, prev){
-   console.log('hhh')
   if (index === 1){
     return Promise.all([
       generateCardioExercise(difficulty),
@@ -644,7 +643,6 @@ module.exports = {
  
 function otherCardio(difficulty, index, prev){
   return new Promise((resolve, reject) => {
-    console.log('hhh')
     let solution = [];
     let i = 0;
     while (i < 8) {
