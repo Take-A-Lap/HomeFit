@@ -6,20 +6,20 @@ const errorResponses = [`<speak> <p> <s> I'm sorry, I may have miss heard you. <
 
 const linkAccountObjResponses = [
   {
-    before: '<speak> <s> <prosody pitch="+10st" rate="fast"> Thank </prosody> <prosody pitch="-10st" rate="fast"> you </prosody> </s> <s> ',
-    after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>'
+    before: '<speak> <s> <prosody pitch="+10st" rate="fast"> Thank </prosody> <prosody pitch="-10st" rate="fast"> you </prosody> <prosody rate="fast"></s> <s> ',
+    after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </prosody></speak>'
   },
   {
-    before: '<speak> <s> <prosody pitch="+10st"> We apologize </prosody> for the <prosody pitch="-10st"> inconvenience </prosody> </s> <p> <s>',
-    after: '</s> </p> <break time ="50ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s>  </speak>'
+    before: '<speak><prosody rate="fast"> <s> <prosody pitch="+10st"> We apologize </prosody> for the <prosody pitch="-10st"> inconvenience </prosody> </s> <p> <s>',
+    after: '</s> </p> <break time ="50ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s> </prosody> </speak>'
   },
   {
     before: '<speak> <s> <prosody pitch="-5st" rate="slow"> Well </prosody> </s> <p> <s>',
-    after: '</s> </p> <s> Looks like we are all set </s> <s> lets get started with those exercises </s> </speak>'
+    after: '</s> </p> <prosody rate="fast"><s> Looks like we are all set </s> <s> lets get started with those exercises </s> </prosody> </speak>'
   },
   {
-    before: '<speak>  <s> <prosody pitch="+20st">>Glad to have you back ',
-    after: ' </prosody> </s> <s> Now that we got all the technical stuff out of the way </s> <s> Lets get ready to start that workout </s> </speak>'
+    before: '<speak> <prosody rate="fast"> <s> <prosody pitch="+20st">>Glad to have you back ',
+    after: ' </prosody> </s> <s> Now that we got all the technical stuff out of the way </s> <s> Lets get ready to start that workout </s> </prosody> </speak>'
   }
 ];
 
@@ -58,14 +58,15 @@ const nextExerObjResponses = [
 
 const greetings = [
   `<speak>
+    <prosody rate="fast">
     <p>
       <s>
-        <prosody rate="fast" volume="+3db" pitch="+25st" >
+        <prosody volume="+3db" pitch="+25st" >
           Welcome to Home fit trainer
         </prosody>
       </s>
       <s>
-        <prosody rate="fast" volume="+3db" pitch="+30st" >
+        <prosody volume="+3db" pitch="+30st" >
           The <break time="10ms" /> fitness trainer <break time="5ms" /> 
         </prosody> 
         <prosody rate="slow" volume="+1db" pitch="+15st" > 
@@ -87,16 +88,18 @@ const greetings = [
         after you link up we can begin today's workout
       </s>
     </p>
+    </prosody>
   </speak>`,
 
   `<speak> 
+  <prosody rate="fast">
     <p>
-      <prosody rate="fast" volume="+3db" pitch="+15st" >
+      <prosody volume="+3db" pitch="+15st" >
         Hi
       </prosody>
     </p>
     <p>
-      <prosody rate="fast" volume="+2db" pitch="+10st">
+      <prosody volume="+2db" pitch="+10st">
         I am excited for our workout today
       </prosody>
     </p> 
@@ -115,30 +118,32 @@ const greetings = [
       </s>
       </prosody>
     </p>
+    </prosody>
   </speak>`,
 
-  `<speak>
-    <p>
-      How should i greet our users roger?
-    </p>
-  </speak>`,
+  // `<speak>
+  // <prosody rate="fast">
+  //   <p>
+  //     How should i greet our users roger?
+  //   </p>
+  //   </prosody>
+  // </speak>`,
 
-  `<speak>
-    <p>
-      How should i greet our users josh?
-    </p>
-  </speak>`,
+  // `<speak>
+  // <prosody rate="fast">
+  //   <p>
+  //     How should i greet our users josh?
+  //   </p>
+  //   </prosody>
+  // </speak>`,
 
-  `<speak>g
-    <p>
-      How should i greet our users cornelius?
-    </p>
-  </speak>`,
-  `<speak>
-    <p>
-      How should i greet our users alex?
-    </p>
-  </speak>`
+  // `<speak>
+  // <prosody rate="fast">
+  //   <p>
+  //     How should i greet our users cornelius?
+  //   </p>
+  //   </prosody>
+  // </speak>`
 ];
 
 module.exports = {
