@@ -1,5 +1,5 @@
-const spanishErrorResponse = [`<speak> <p> <s> Lo siento mucho, no le puedo entender. </s> <s> <prosody pitch="+10%"> ¿Podría preguntarme otra vez? </prosody> </s> </p> </speak>`,
-`<speak> <p> <s> Perdóname, no le entiendo. </s> <s> <prosody pitch="+10%"> ¿Puede repetirlo, por favor?</prosody> </s> </p> </speak>`,
+const spanishErrorResponse = [`<speak> <p> <s> Lo siento mucho, no le puedo entender. </s> <s> <prosody pitch="+10%"> Podría preguntarme otra vez? </prosody> </s> </p> </speak>`,
+`<speak> <p> <s> Perdóname, no le entiendo. </s> <s> <prosody pitch="+10%"> Puede repetirlo, por favor?</prosody> </s> </p> </speak>`,
 `<speak> <p> <s> Me avergüenza decir, </s>  <s> pero le he entendí mal. </s> <s> Repitalo, por favor. </s> </p> </speak>`,
 `<speak> <p> <s> Perdón, </s> <s> dígame otra vez. </s> </p> </speak>`];
 
@@ -159,22 +159,22 @@ const spanishGreetings = [
   </speak>`,
   `<speak>
     <p>
-      ¿Como debo saludar a nuestros usarios Roger?
+      Como debo saludar a nuestros usarios Roger?
     </p>
   </speak>`,
   `<speak>
     <p>
-      ¿Como debo saludar a nuestros usarios Josh?
+      Como debo saludar a nuestros usarios Josh?
     </p>
   </speak>`,
   `<speak>
     <p>
-      ¿Como debo saludar a nuestros usarios Cornelius?
+      Como debo saludar a nuestros usarios Cornelius?
     </p>
   </speak>`,
   `<speak>
     <p>
-      ¿Como debo saludar a nuestros usarios Alex?
+      Como debo saludar a nuestros usarios Alex?
     </p>
   </speak>`
 ];
