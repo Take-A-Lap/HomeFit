@@ -44,11 +44,9 @@ app.get('/generateWO', (req, res)=> {
 })
 
 app.get('/test', (req, res)=>{
-  Promise.all([
-    meal.getChicken(0, 1000), 
-    meal.getBeef(0, 1000), 
-    meal.getSteak(0, 1000)
-  ]).then(ex=>res.send(ex)).catch(err=>console.log(err))
+  meal.getDinnerMeal('steak',0,1000)
+  .then(recipes=>res.send(recipes))
+  .catch(err=>console.error(err))
 })
 
 app.get('/getUser', (req, res) => {
@@ -153,101 +151,28 @@ app.post('/weather', (req, res) => {
 
 
   //get request to db to retrieve username
-  app.get('/username', (req, res) => {
+app.get('/username', (req, res) => {
     console.log(req.query);
     db.getUserInfoByEmail(req.query.user)
       .then((user) => res.send(user))
   })
 
-  app.get('/dinner', (req,res)=>{
-    bluebird.all(Promise.all([
-      meal.getChicken(0, 700), 
-      meal.getBeef(0, 700),
-      meal.getSteak(0, 700),
-      meal.getFish(0, 700)
-    ]))
-    .then(input=>res.send(input))
-  })
-  // app.get('/dinner', (req, res) => {
-  //   let meals;
-  //   let dinner = [];
-  //   meal.getChicken(300, 700, "alcohol-free")
-  //   .then(chickens=>{
-  //     return meal.getBeef(300, 700, "alcohol-free")
-  //     .then(beefs=>[beefs,chickens]);
-  //   })
-  //   .then(beefAndChickens=>{
-  //     return meal.getFish(300, 700, "alcohol-free")
-  //     .then(fishes=>beefAndChickens.concat(fishes))
-  //   })
-  //   .then(beefAndChickenAndFishes=>{
-  //     return meal.getSteak(300, 700, "alcohol-free")
-  //     .then(steaks=>beefAndChickenAndFishes.concat(steaks))
-  //   })
-  //   .then(recipes => {
-  //     console.log(recipes.length)
-  //     meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
-  //     return meals;
-  //   }).then(meals => {
-  //     return meal.narrowDown(meals)
-  //   }).then(randomArray => {
-  //     randomArray.forEach(index => dinner.push(meals[index]))
-  //   }).then(() => {
-  //     res.send(dinner)
-  //   }).catch(err => console.error(err))
-  // });
-// app.get('/dinner', (req,res)=> {
-//   let meals;
-//   let dinner = [];
-//   Promise.all([
-//     meal.getChicken(300, 700, "alcohol-free"), 
-//     meal.getBeef(300, 700, "alcohol-free"), 
-//     meal.getFish(300, 700, "alcohol-free"),
-//     meal.getSteak(300, 700, "alcohol-free")
-//   ])
-//   .then(recipes => {
-//     meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
-//     return meals;
-//   }).then(meals => {
-//     return meal.narrowDown(meals)
-//   }).then(randomArray => {
-//     randomArray.forEach(index => dinner.push(meals[index]))
-//   }).then(() => {
-//     res.send(dinner)
-//   }).catch(err => console.error(err))
-// });
+app.get('/dinner', (req,res)=>{
+  meal.getDinner()
+    .then(dinner=>res.send(dinner))
+    .catch(err=>console.log(err));
+})
 
 app.get('/lunch', (req,res) => {
-  let meals;
-  let lunch = [];
-  meal.getLunch(0, 500, "alcohol-free")
-  .then(recipes => {
-    meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
-    return meals;
-  }).then(meals => {
-    return meal.narrowDown(meals);
-  }).then(randomArray => {
-    randomArray.forEach(index => lunch.push(meals[index].recipe))
-  }).then(() => {
-    res.send(lunch)
-  }).catch(err => console.error(err))
-  .catch(err=>console.error(err))
+  meal.getLunch()
+    .then(lunch=>res.send(lunch))
+    .catch(err => console.error(err))
 })
 
 app.get('/breakfast', (req, res) => {
-  let meals;
-  let breakfast = [];
-  Promise.all([meal.getBreakfast(300, 700, "alcohol-free"), meal.getYogurt(300, 700, "alcohol-free"), meal.getEggs(300, 700, "alcohol-free")])
-  .then(recipes=>{
-    meals = recipes.reduce((acc,curr)=>acc.concat(curr),[])
-    return meals;
-  }).then(meals=>{
-    return meal.narrowDown(meals)
-  }).then(randomArray=>{
-    randomArray.forEach(index=>breakfast.push(meals[index].recipe))
-  }).then(()=>{
-    res.send(breakfast)
-  }).catch(err=>console.error(err))
+  meal.getBreakfast()
+    .then(dinner => res.send(dinner))
+    .catch(err => console.log(err));
 })
 
 app.post('/signUp', (req, res) =>{
@@ -409,7 +334,7 @@ app.post('/savePartial', (req, res) => {
   res.send('got it')
 })
 
-const port = 81;
+const port = 3000;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
