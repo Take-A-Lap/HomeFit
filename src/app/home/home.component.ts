@@ -68,7 +68,6 @@ export class HomeComponent implements OnInit {
     })
     .subscribe(data => {
       this.currentWeather.push(data)
-      console.log(this.currentWeather)
       this.runningRecommendation = this.currentWeather[0].recommendation;
     },
       error => {
@@ -81,7 +80,6 @@ export class HomeComponent implements OnInit {
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
     this.email = emailArr[emailArr.length - 1];
-    console.log(this.email)
     return this.httpClient.get('/username', {
       params: {
         user: this.email
@@ -126,7 +124,6 @@ export class HomeComponent implements OnInit {
             clickAction: proof
           }
         })
-        console.log(this.imageUrls)
       })
   }
 
@@ -156,6 +153,7 @@ export class HomeComponent implements OnInit {
     return new Promise((resolve, reject)=>{
       this.foodService.getDinner()
         .subscribe(dinnerFood => {
+          console.log(dinnerFood)
           this.meals = dinnerFood;
            let imageUrls = this.meals.map(meal => {
             return {
@@ -164,7 +162,6 @@ export class HomeComponent implements OnInit {
               clickAction: ()=>window.open(meal.url)
             }
           })
-          console.log(imageUrls);
           if(imageUrls.length){
             resolve(imageUrls)
           } else {
@@ -219,6 +216,7 @@ export class HomeComponent implements OnInit {
     } else {
       this.getDinner()
       .then((result)=>{
+        console.log(result)
         this.imageUrls = result;
       })
     }

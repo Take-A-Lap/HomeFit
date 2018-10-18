@@ -31,7 +31,6 @@ app.use(bodyParser.urlencoded({
 app.post('/fulfillment', google);
 
 app.get('/generateWO', (req, res)=> {
-  console.log(req.query.wo_index)
   wo_num = req.query.wo_num;
   diff = req.query.diff;
   prev = req.query.previous;
@@ -57,7 +56,6 @@ app.get('/getUser', (req, res) => {
 })
 
 app.post('/inProgress', (req, res)=>{
-  console.log(req.body);
   db.updateWOIndex(req.body.params.id, req.body.params.index)
   db.updateLastWO(req.body.params.id, req.body.params.ex_id)
 })
@@ -113,7 +111,6 @@ app.post('/updateWorkouts', (req, res)=>{
 })
 
 app.post('/weather', (req, res) => {
-  console.log(req.body.params.timeStamp);
   let weatherInfo = {};
   Promise.all([
       weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
@@ -130,7 +127,6 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
-      console.log(weatherInfo);
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)
@@ -141,7 +137,6 @@ app.post('/weather', (req, res) => {
     .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
     .then(result => {
       weatherInfo.url = result.url
-      console.log(weatherInfo.url)
     })
     .then(() => {
       res.send(weatherInfo)
@@ -152,25 +147,27 @@ app.post('/weather', (req, res) => {
 
   //get request to db to retrieve username
 app.get('/username', (req, res) => {
-    console.log(req.query);
     db.getUserInfoByEmail(req.query.user)
       .then((user) => res.send(user))
   })
 
 app.get('/dinner', (req,res)=>{
   meal.getDinner()
+  .then(recipes=> recipes.map(recipe=>recipe.recipe))
     .then(dinner=>res.send(dinner))
     .catch(err=>console.log(err));
 })
 
 app.get('/lunch', (req,res) => {
   meal.getLunch()
+    .then(recipes => recipes.map(recipe => recipe.recipe))
     .then(lunch=>res.send(lunch))
     .catch(err => console.error(err))
 })
 
 app.get('/breakfast', (req, res) => {
   meal.getBreakfast()
+    .then(recipes => recipes.map(recipe => recipe.recipe))
     .then(dinner => res.send(dinner))
     .catch(err => console.log(err));
 })
@@ -327,7 +324,6 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
 app.post('/savePartial', (req, res) => {
   let { id, exerciseId } = req.body;
   const d = new Date();
-  console.log(id, exerciseId, d);
   db.insertPartialWorkout(id, exerciseId, d)
     .then(res => console.log(res))
     .catch(error => console.error());
