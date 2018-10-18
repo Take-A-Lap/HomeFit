@@ -23,8 +23,11 @@ app.intent('Default Welcome Intent', conv =>{
     conv.ask(spanishGreetings[index]);
   } else {
     let index = randomNumGen(greetings.length);
+    console.log(index, ' greetings response index');
+
     // console.log(conv.user.raw.locale, ' this is should be a this is the user property')
-    conv.ask(greetings[index]);
+    
+    conv.ask(greetings[1]);
 
   }
 });
@@ -66,6 +69,7 @@ app.intent('link account', conv => {
     .then(user => {
       if(user !== undefined){
         let index = randomNumGen(linkAccountObjResponses.length);
+        console.log(index, ' link account response index');
         conv.ask(new SimpleResponse({
           text: `Thank You!`,
           // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
@@ -74,6 +78,7 @@ app.intent('link account', conv => {
         return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.id);
       }
       let index = randomNumGen(errorResponses.length);
+      console.log(index, ' error response index');
       conv.ask(new SimpleResponse({
         text: `Please try again`,
         // speech: `<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> Could you try again? </s> </p> </speak>`
@@ -160,6 +165,7 @@ app.intent('start workout', conv => {
         // console.log(current, ' this should the current workout object');
         
         let index = randomNumGen(startWorkoutObjResponses.length);
+        console.log(index, ' startWorkoutObjResponses response index');
         
         conv.ask(new SimpleResponse({
           text: 'Let me know when you are ready to begin.',
@@ -224,6 +230,8 @@ app.intent('next exercise', conv => {
           }
           // cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
           cadence += nextExerObjResponses[index].part2.before + googleWorkout[0].name + nextExerObjResponses[index].part2.after;
+          console.log(index, ' nextExerObjResponses response index');
+
           conv.ask(new SimpleResponse({
             text: `Try and keep pace`,
             speech: cadence
