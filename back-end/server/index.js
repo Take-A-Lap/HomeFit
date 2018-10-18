@@ -137,7 +137,8 @@ app.post('/weather', (req, res) => {
     })
     .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
     .then(result => {
-      weatherInfo.url = result
+      weatherInfo.url = result.url
+      console.log(weatherInfo.url)
     })
     .then(() => {
       res.send(weatherInfo)
