@@ -18,6 +18,7 @@ const app = dialogflow();
 
 
 app.intent('Default Welcome Intent', conv =>{
+  console.log(conv.user)
   if (conv.user.raw.locale === 'es-419') {
     // conv.ask(`Hola, mi llamo alexa`);
     let index = randomNumGen(spanishGreetings.length);
