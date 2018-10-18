@@ -109,7 +109,7 @@ const greetings = [
             But
           </s>
         </prosody>
-        <prosody volume="+1db+ pitch="+5%">
+        <prosody volume="+1db" pitch="+5%">
         <s>
           Don't forget you will need to connect our current session with your home fit username
         </s>
