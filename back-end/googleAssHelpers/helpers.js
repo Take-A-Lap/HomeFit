@@ -32,9 +32,9 @@ app.intent('Default Welcome Intent', conv =>{
 
 app.intent('link account', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    console.log(conv.body.queryResult.parameters.accountName.toLowerCase());
+    console.log(conv.body.queryResult.parameters.accountName);
     
-    return db.getUserInfoByName(conv.body.queryResult.parameters.accountName.toLowerCase())
+    return db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
       .then(user => {
         if (user !== undefined) {
           if (user.sex === 'm') {
