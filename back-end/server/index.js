@@ -83,18 +83,15 @@ app.get('/getCompletedWO', (req, res) => {
     })
     .then(({ id }) => {
       // use the id to query the completed str and cardio tables
-      let completedWorkouts = [];
-          db.getCompStrByUserId(id)
-            .then(compStr => {
-              console.log('str', compStr);
-              if (compStr) {
-                completedWorkouts = completedWorkouts
-                  .concat(compStr)
-                  .map(wo => wo.date.getDate())
-                  .filter((date, i, a) => a.indexOf(date) === i);
-                res.send(completedWorkouts);
-              }
-      })
+      return db.getCompletedWorkoutDates(id)
+    })
+    .then(compStr => {
+      if (compStr) {
+        const result = compStr
+          .map(wo => wo.date.getDate())
+          .filter((date, i, a) => a.indexOf(date) === i);
+        res.send(result);
+      }
     })
     .catch(err=>console.error(err));
 });
@@ -106,9 +103,9 @@ app.get('/homeFitAuth', (req, res) => {
   })
 })
 
-app.post('/completed', (req, res)=>{
+app.post('/completed', (req, res)=> {
   var d = new Date();
-  db.insertIntoCompStr(1, req.body.params.id, 10, true, d)
+  db.insertIntoWorkouts(req.body.params.id, d, true)
   .then(()=>res.send('tallied!'))
 })
 
@@ -145,7 +142,8 @@ app.post('/weather', (req, res) => {
     })
     .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
     .then(result => {
-      weatherInfo.url = result
+      weatherInfo.url = result.url
+      console.log(weatherInfo.url)
     })
     .then(() => {
       res.send(weatherInfo)
@@ -401,7 +399,17 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-const port = 3000;
+app.post('/savePartial', (req, res) => {
+  let { id, exerciseId } = req.body;
+  const d = new Date();
+  console.log(id, exerciseId, d);
+  db.insertPartialWorkout(id, exerciseId, d)
+    .then(res => console.log(res))
+    .catch(error => console.error());
+  res.send('got it')
+})
+
+const port = 81;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;

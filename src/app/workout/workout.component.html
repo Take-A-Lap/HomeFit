@@ -6,9 +6,6 @@
           <a class="nav-link active" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink='/personalInfo'>Account Info</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" routerLink="/logout">Logout</a>
         </li>
       </ul>
@@ -21,23 +18,20 @@
         <div class="media">
           <iframe class="video" [src]="trustedUrl"></iframe>
         </div>
-        <button class="rep_button" (click)="workinDatBody()" *ngIf="start">Start Rep Count</button>
-        <button class="rep_button" (click)="answer()" *ngIf="clickMessage">{{clickMessage}}</button>
+        <br>
+<button class="rep_button" (click)="workinDatBody()" *ngIf="start">Start Rep Count</button>
+<button class="rep_button" (click)="answer()" *ngIf="clickMessage">{{clickMessage}}</button>
       </div>
     </div>
     <br>
+    <br>
+    <br>
   <div class="row">
-    <div class="col-xs-6 col-md-6">
-      <div class="jumbotron">
+      <div class="jumbotron text-center col-mid-6">
         <h3>Set: {{set}}</h3>
       </div>
-    </div>
-    
-    <div class="col-xs-6 col-md-6">
-      <!-- <h2>Reps</h2> -->
-      <div class="jumbotron">
+      <div class="jumbotron text-center col-mid-6">
         <h3>Rep: {{rep}}</h3>
-        </div>
-    </div>
+      </div>
   </div>
 </div>

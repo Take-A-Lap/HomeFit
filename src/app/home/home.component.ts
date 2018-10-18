@@ -68,6 +68,7 @@ export class HomeComponent implements OnInit {
     })
     .subscribe(data => {
       this.currentWeather.push(data)
+      console.log(this.currentWeather)
       this.runningRecommendation = this.currentWeather[0].recommendation;
     },
       error => {
@@ -79,7 +80,7 @@ export class HomeComponent implements OnInit {
     //function to get username added to getCookieInfo
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
-    this.email = emailArr[1];
+    this.email = emailArr[emailArr.length - 1];
     console.log(this.email)
     return this.httpClient.get('/username', {
       params: {
@@ -103,8 +104,6 @@ export class HomeComponent implements OnInit {
     this.workoutService.getCompletedWorkouts(this.email)
       .subscribe(compWorkOuts => {
         // if the func returns dates
-        console.log(this.email, 106)
-        console.log(compWorkOuts);
         if (compWorkOuts) {
           // concat the dates to the workoutDates stored on the component
           this.workoutDates = this.workoutDates.concat(compWorkOuts);
