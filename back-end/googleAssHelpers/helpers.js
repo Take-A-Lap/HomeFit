@@ -99,7 +99,7 @@ app.intent('start workout', conv => {
           return workout.generateWorkout(numWorkouts, squatComf);
         } else {
           conv.ask(new SimpleResponse({
-            test: 'Por favor, conecta a su cuenta a la sesión.',
+            text: 'Por favor, conecta a su cuenta a la sesión.',
             speech: `<speak> <p> Lo siento, pero tenemos que conectar usted a su cuenta.</p> <p> Para conectar a su cuenta, solamente necesita decir conecta a mi cuenta seguido por el nombre de la cuenta. </p> </speak>`
           }));
         }
@@ -148,7 +148,7 @@ app.intent('start workout', conv => {
         return workout.generateWorkout(numWorkouts, squatComf);
       } else {
         conv.ask(new SimpleResponse({
-          test: 'Please link your session with your account.',
+          text: 'Please link your session with your account.',
           speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do to link your account is say link my account followed by your account name </p> </speak>`
         }));
       }
