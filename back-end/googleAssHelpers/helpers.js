@@ -5,6 +5,7 @@ const {
 } = require('actions-on-google')
 const db = require('../database/dbHelpers');
 const workout = require('../Algorithms/workout.js');
+const { spanishErrorResponse, spanishLinkAccountObjResponsesFeminine, spanishLinkAccountObjResponsesMasculine, spanishNextExerObjResponsesFeminine, spanishNextExerObjResponsesMasculine, spanishGreetings, spanishStartWorkoutObjResponsesFeminine, spanishStartWorkoutObjResponsesMasculine } = require('./spnResponse');
 const { greetings, nextExerObjResponses, startWorkoutObjResponses, linkAccountObjResponses, errorResponses} = require('./engResponse');
 // const {} = require('./spnResponse');
 let googleWorkout = [];
@@ -18,7 +19,9 @@ const app = dialogflow();
 
 app.intent('Default Welcome Intent', conv =>{
   if (conv.user.raw.locale === 'es-419') {
-    conv.ask(`Hola, mi llamo alexa`);
+    // conv.ask(`Hola, mi llamo alexa`);
+    let index = randomNumGen(spanishGreetings.length);
+    conv.ask(spanishGreetings[index]);
   } else {
     let index = randomNumGen(greetings.length);
     // console.log(conv.user.raw.locale, ' this is should be a this is the user property')
@@ -29,7 +32,34 @@ app.intent('Default Welcome Intent', conv =>{
 
 app.intent('link account', conv => {
   if (conv.user.raw.locale === 'es-419') {
-    conv.ask(`Hola, mi llamo alexa`);
+    return db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
+      .then(user => {
+        if (user !== undefined) {
+          if (user.sex === 'm') {
+            let index = randomNumGen(spanishLinkAccountObjResponsesFeminine.length);
+            conv.ask(new SimpleResponse({
+              text: `Thank You!`,
+              // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
+              speech: spanishLinkAccountObjResponsesFeminine[index].before + conv.body.queryResult.parameters.accountName + spanishLinkAccountObjResponsesFeminine[index].after
+            }));
+            return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.id);
+          } else if (user.sex === 'f') {
+            let index = randomNumGen(spanishLinkAccountObjResponsesFeminine.length);
+            conv.ask(new SimpleResponse({
+              text: `Thank You!`,
+              // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
+              speech: spanishLinkAccountObjResponsesFeminine[index].before + conv.body.queryResult.parameters.accountName + spanishLinkAccountObjResponsesFeminine[index].after
+            }));
+            return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.id);
+          }
+        }
+        let index = randomNumGen(spanishErrorResponse.length);
+        conv.ask(new SimpleResponse({
+          text: `Please try again`,
+          // speech: `<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> Could you try again? </s> </p> </speak>`
+          speech: spanishErrorResponse[index]
+        }));
+      });
   } else {
     return db.getUserInfoByName(conv.body.queryResult.parameters.accountName)
     .then(user => {

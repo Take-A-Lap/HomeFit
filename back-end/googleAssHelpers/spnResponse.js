@@ -3,7 +3,7 @@ const spanishErrorResponse = [`<speak> <p> <s> Lo siento mucho, no le puedo ente
 `<speak> <p> <s> Me avergüenza decir, </s>  <s> pero le he entendí mal. </s> <s> Repitalo, por favor. </s> </p> </speak>`,
 `<speak> <p> <s> Perdón, </s> <s> dígame otra vez. </s> </p> </speak>`];
 
-const linkAccountObjResponsesMasculine = [
+const spanishLinkAccountObjResponsesMasculine = [
   {
     before: '<speak> <s> Gracias </s> <s>',
     after: '</s>, <s> por conectar a su cuenta a la sesión actual. </s> <s> Empezamos. </s> </speak>'
@@ -22,7 +22,7 @@ const linkAccountObjResponsesMasculine = [
   }
 ];
 
-const linkAccountObjResponsesFeminine = [
+const spanishLinkAccountObjResponsesFeminine = [
   {
     before: '<speak> <s> Gracias </s> <s>',
     after: '</s>, <s> por conectar a su cuenta a la sesión actual. </s> <s> Empezamos. </s> </speak>'
@@ -41,7 +41,7 @@ const linkAccountObjResponsesFeminine = [
   }
 ];
 
-const startWorkoutObjResponsesMasculine = [
+const spanishStartWorkoutObjResponsesMasculine = [
   {
     before: '<speak> <s> Avísame cuando esté listo de empezar su ',
     after: ' e en posición. </s> </speak>'
@@ -60,7 +60,7 @@ const startWorkoutObjResponsesMasculine = [
   }
 ];
 
-const startWorkoutObjResponsesFeminine = [
+const spanishStartWorkoutObjResponsesFeminine = [
   {
     before: '<speak> <s> Avísame cuando esté lista de empezar su ',
     after: ' e en posición. </s> </speak>'
@@ -79,7 +79,7 @@ const startWorkoutObjResponsesFeminine = [
   }
 ];
 
-const nextExerObjResponsesMasculine = [
+const spanishNextExerObjResponsesMasculine = [
   {
     part1: {
       before: '<speak> <s> El rato recomendado por ',
@@ -93,7 +93,7 @@ const nextExerObjResponsesMasculine = [
   }
 ];
 
-const nextExerObjResponsesFeminine = [
+const spanishNextExerObjResponsesFeminine = [
   {
     part1: {
       before: '<speak> <s> El rato recomendado por ',
@@ -107,7 +107,7 @@ const nextExerObjResponsesFeminine = [
   }
 ]
 
-const greetingsSpanish = [
+const spanishGreetings = [
   `<speak>
     <p>
       <s>
@@ -181,11 +181,11 @@ const greetingsSpanish = [
 
 module.exports = {
   spanishErrorResponse,
-  linkAccountObjResponsesMasculine,
-  linkAccountObjResponsesFeminine,
-  startWorkoutObjResponsesMasculine,
-  startWorkoutObjResponsesFeminine,
-  nextExerObjResponsesMasculine,
-  nextExerObjResponsesFeminine,
-  greetingsSpanish
+  spanishLinkAccountObjResponsesMasculine,
+  spanishLinkAccountObjResponsesFeminine,
+  spanishStartWorkoutObjResponsesMasculine,
+  spanishStartWorkoutObjResponsesFeminine,
+  spanishNextExerObjResponsesMasculine,
+  spanishNextExerObjResponsesFeminine,
+  spanishGreetings
 }
