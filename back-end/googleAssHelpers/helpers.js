@@ -20,9 +20,8 @@ const app = dialogflow();
 app.intent('Default Welcome Intent', conv =>{
   console.log(conv.user)
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    conv.ask(`Hola, me llamo alexa`);
-    // let index = randomNumGen(spanishGreetings.length);
-    // conv.ask(spanishGreetings[index]);
+    let index = randomNumGen(spanishGreetings.length);
+    conv.ask(spanishGreetings[index]);
   } else {
     let index = randomNumGen(greetings.length);
     // console.log(conv.user.raw.locale, ' this is should be a this is the user property')
