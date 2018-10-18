@@ -58,14 +58,15 @@ const nextExerObjResponses = [
 
 const greetings = [
   `<speak>
+    <prosody rate="fast">
     <p>
       <s>
-        <prosody rate="fast" volume="+3db" pitch="+25st" >
+        <prosody volume="+3db" pitch="+25st" >
           Welcome to Home fit trainer
         </prosody>
       </s>
       <s>
-        <prosody rate="fast" volume="+3db" pitch="+30st" >
+        <prosody volume="+3db" pitch="+30st" >
           The <break time="10ms" /> fitness trainer <break time="5ms" /> 
         </prosody> 
         <prosody rate="slow" volume="+1db" pitch="+15st" > 
@@ -87,16 +88,18 @@ const greetings = [
         after you link up we can begin today's workout
       </s>
     </p>
+    </prosody>
   </speak>`,
 
   `<speak> 
+  <prosody rate="fast">
     <p>
-      <prosody rate="fast" volume="+3db" pitch="+15st" >
+      <prosody volume="+3db" pitch="+15st" >
         Hi
       </prosody>
     </p>
     <p>
-      <prosody rate="fast" volume="+2db" pitch="+10st">
+      <prosody volume="+2db" pitch="+10st">
         I am excited for our workout today
       </prosody>
     </p> 
@@ -115,29 +118,31 @@ const greetings = [
       </s>
       </prosody>
     </p>
+    </prosody>
   </speak>`,
 
   `<speak>
+  <prosody rate="fast">
     <p>
       How should i greet our users roger?
     </p>
+    </prosody>
   </speak>`,
 
   `<speak>
+  <prosody rate="fast">
     <p>
       How should i greet our users josh?
     </p>
+    </prosody>
   </speak>`,
 
-  `<speak>g
+  `<speak>
+  <prosody rate="fast">
     <p>
       How should i greet our users cornelius?
     </p>
-  </speak>`,
-  `<speak>
-    <p>
-      How should i greet our users alex?
-    </p>
+    </prosody>
   </speak>`
 ];
 
