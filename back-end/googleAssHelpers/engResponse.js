@@ -6,7 +6,7 @@ const errorResponses = [`<speak> <p> <s> <prosody rate="slow" volume="-2db"> I'm
 
 const linkAccountObjResponses = [
   {
-    before: '<speak> <s> <prosody pitch="+10st" rate="fast"> Thank </prosody> <prosody pitch="-10st" rate="fast"> you </prosody> <prosody rate="fast"></s> <s> ',
+    before: '<speak> <s> <prosody pitch="+10st" rate="fast"> Thank </prosody> <prosody pitch="-3st" rate="fast"> you </prosody> <prosody rate="fast"></s> <s> ',
     after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </prosody></speak>'
   },
   {
