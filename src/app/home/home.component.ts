@@ -68,6 +68,7 @@ export class HomeComponent implements OnInit {
     })
     .subscribe(data => {
       this.currentWeather.push(data)
+      console.log(this.currentWeather)
       this.runningRecommendation = this.currentWeather[0].recommendation;
     },
       error => {
