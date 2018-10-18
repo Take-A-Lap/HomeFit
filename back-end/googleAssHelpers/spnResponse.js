@@ -165,11 +165,6 @@ const spanishGreetings = [
       <s> 
         El único entrenador necesitará.
       </s>
-    </p>
-  </speak>`,
-
-  `<speak> 
-    <p> 
       <s> 
         Para empezar, debe conectar a su cuenta a nuestra sesión actual.
       </s>
