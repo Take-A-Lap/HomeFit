@@ -140,6 +140,9 @@ const greetings = [
         The only trainer you will ever need.
       </s>
     </p>
+    <p>
+      Link your session and we can begin
+    </p>
   </speak>`,
 
   `<speak> 
