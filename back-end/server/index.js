@@ -137,7 +137,8 @@ app.post('/weather', (req, res) => {
     })
     .then(() => db.getWeatherImages(weatherInfo.text, weatherInfo.time_of_day))
     .then(result => {
-      weatherInfo.url = result
+      weatherInfo.url = result.url
+      console.log(weatherInfo.url)
     })
     .then(() => {
       res.send(weatherInfo)
@@ -356,7 +357,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-const port = 81;
+const port = 3000;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
