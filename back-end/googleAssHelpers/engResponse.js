@@ -62,7 +62,7 @@ const greetings = [
     <p>
       <s>
         <prosody volume="+3db" pitch="+25%" >
-          Welcome to Home fit trainer
+          Welcome to Home Fit trainer
         </prosody>
       </s>
       <s>
@@ -126,13 +126,29 @@ const greetings = [
   //   </prosody>
   // </speak>`,
 
-  // `<speak>
-  // <prosody rate="fast">
-  //   <p>
-  //     How should i greet our users josh?
-  //   </p>
-  //   </prosody>
-  // </speak>`,
+  `<speak>
+    <p>
+      <s> 
+        Welcome to Home Fit trainer.
+      </s>
+    </p>
+    <p> 
+      <s> 
+        The only trainer you will ever need.
+      </s>
+    </p>
+  </speak>`,
+
+  `<speak> 
+    <p> 
+      <s> 
+        To begin, you must link your account to our current session. 
+      </s>
+      <s> 
+        To achieve this, simply say link my account and your username.
+      </s>
+    </p>
+  </speak>`
 
   // `<speak>
   // <prosody rate="fast">
