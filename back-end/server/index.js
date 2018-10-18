@@ -78,23 +78,15 @@ app.get('/getCompletedWO', (req, res) => {
     })
     .then(({ id }) => {
       // use the id to query the completed str and cardio tables
-      let completedWorkouts = [];
-      db.getCompCardioByUserId(id)
-        .then(compCardio => {
-          if (compCardio) {
-            completedWorkouts = completedWorkouts.concat(compCardio);
-          }
-          db.getCompStrByUserId(id)
-            .then(compStr => {
-              if (compStr) {
-                completedWorkouts = completedWorkouts
-                  .concat(compStr)
-                  .map(wo => wo.date.getDate())
-                  .filter((date, i, a) => a.indexOf(date) === i);
-                res.send(completedWorkouts);
-              }
-            })
-        })
+      return db.getCompStrByUserId(id)
+    })
+    .then(compStr => {
+      if (compStr) {
+        const result = compStr
+          .map(wo => wo.date.getDate())
+          .filter((date, i, a) => a.indexOf(date) === i);
+        res.send(result);
+      }
     })
     .catch(err=>console.error(err));
 });
@@ -364,7 +356,7 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
   }
 });
 
-const port = 3000;
+const port = 81;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;

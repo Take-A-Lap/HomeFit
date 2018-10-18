@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
     //function to get username added to getCookieInfo
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
-    this.email = emailArr[1];
+    this.email = emailArr[emailArr.length - 1];
     console.log(this.email)
     return this.httpClient.get('/username', {
       params: {
@@ -183,8 +183,10 @@ export class HomeComponent implements OnInit {
       for (let i = 0; i < day; i++) {
         this.dates[i] = date - (day - i);
       }
+      let count = 1;
       for (let i = day + 1; i < this.dates.length; i++) {
-        this.dates[i] = date + (this.dates.length - i);
+        this.dates[i] = date + count;
+        count++;
       }
       if (d){
         resolve(d)
@@ -233,5 +235,5 @@ export class HomeComponent implements OnInit {
     // this.clockDisplay();
   }
 
-  
+
 }
