@@ -192,11 +192,10 @@ app.intent('describe exercise', conv => {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    return db.getExerciseDescription(1)
+    return db.getExerciseDescription(11)
       .then(({ description }) =>{
-        console.log('describe was invoked');
         
-        conv.ask('<speak> <prosody rate="fast"> ' + description + " </prosody> </speak>");
+        conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
       })
     // conv.ask("<speak> This is the description for" + current.name +" </speak>");
     // conv.ask("<speak>" + current.description + "</speak>");
@@ -205,7 +204,11 @@ app.intent('describe exercise', conv => {
 
 app.intent('take a break', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
+<<<<<<< HEAD
     conv.close(`De, acuerdo, seguimos más tarde.`);
+=======
+    conv.close(`De acuerdo, seguimos mas tarde.`);
+>>>>>>> a25a3f6384b42fbde72d76b64d763a481fbc8646
   } else {
     conv.close(`Okay, we will pick this up again later`);
   }
