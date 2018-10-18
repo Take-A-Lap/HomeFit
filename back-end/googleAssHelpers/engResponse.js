@@ -131,6 +131,11 @@ const greetings = [
     <p>
       How should i greet our users cornelius?
     </p>
+  </speak>`,
+  `<speak>
+    <p>
+      How should i greet our users alex?
+    </p>
   </speak>`
 ];
 
