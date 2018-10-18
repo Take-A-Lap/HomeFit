@@ -134,7 +134,7 @@ const spanishGreetings = [
   </speak>`,
   `<speak> 
     <p>
-      <prosody rate"fast" volume="+3db" pitch="+25st" >
+      <prosody rate="fast" volume="+3db" pitch="+25st" >
         Hola
       </prosody>
     </p>
