@@ -51,7 +51,7 @@ const spanishStartWorkoutObjResponsesMasculine = [
     after: '</s> <s> Dígame cuando esté listo. </s></speak>'
   },
   {
-    before: '<speak> <s> <prosody pitch="+20%" ><empasis level="reduced"> Vale </emphasis></prosody> </s><s> Seguimos con ',
+    before: '<speak> <s> Vale </s><s> Seguimos con ',
     after: '</s> </speak>'
   },
   {
@@ -70,7 +70,7 @@ const spanishStartWorkoutObjResponsesFeminine = [
     after: '</s> <s> Dígame cuando esté lista. </s></speak>'
   },
   {
-    before: '<speak> <s> <prosody pitch="+20%" ><emphasis level="reduced"> Vale </emphasis></prosody> </s><s> Seguimos con ',
+    before: '<speak> <s> Vale </s><s> Seguimos con ',
     after: '</s> </speak>'
   },
   {
