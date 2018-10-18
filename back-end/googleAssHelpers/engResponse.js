@@ -127,7 +127,7 @@ const greetings = [
     </p>
   </speak>`,
 
-  `<speak>
+  `<speak>g
     <p>
       How should i greet our users cornelius?
     </p>
