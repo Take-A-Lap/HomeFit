@@ -121,29 +121,29 @@ const greetings = [
     </prosody>
   </speak>`,
 
-  `<speak>
-  <prosody rate="fast">
-    <p>
-      How should i greet our users roger?
-    </p>
-    </prosody>
-  </speak>`,
+  // `<speak>
+  // <prosody rate="fast">
+  //   <p>
+  //     How should i greet our users roger?
+  //   </p>
+  //   </prosody>
+  // </speak>`,
 
-  `<speak>
-  <prosody rate="fast">
-    <p>
-      How should i greet our users josh?
-    </p>
-    </prosody>
-  </speak>`,
+  // `<speak>
+  // <prosody rate="fast">
+  //   <p>
+  //     How should i greet our users josh?
+  //   </p>
+  //   </prosody>
+  // </speak>`,
 
-  `<speak>
-  <prosody rate="fast">
-    <p>
-      How should i greet our users cornelius?
-    </p>
-    </prosody>
-  </speak>`
+  // `<speak>
+  // <prosody rate="fast">
+  //   <p>
+  //     How should i greet our users cornelius?
+  //   </p>
+  //   </prosody>
+  // </speak>`
 ];
 
 module.exports = {
