@@ -6,7 +6,6 @@ const db = require('../database/dbHelpers');
 const workout = require('../Algorithms/workout.js');
 const { spanishErrorResponse, spanishLinkAccountObjResponsesFeminine, spanishLinkAccountObjResponsesMasculine, spanishNextExerObjResponsesFeminine, spanishNextExerObjResponsesMasculine, spanishGreetings, spanishStartWorkoutObjResponsesFeminine, spanishStartWorkoutObjResponsesMasculine } = require('./spnResponse');
 const { greetings, nextExerObjResponses, startWorkoutObjResponses, linkAccountObjResponses, errorResponses} = require('./engResponse');
-// const {} = require('./spnResponse');
 let googleWorkout = [];
 let current;
 const randomNumGen = (numOptions) => {
@@ -42,7 +41,7 @@ app.intent('link account', conv => {
           if (user.sex === 'm') {
             let index = randomNumGen(spanishLinkAccountObjResponsesFeminine.length);
             conv.ask(new SimpleResponse({
-              text: `Thank You!`,
+              text: `Gracias!`,
               // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
               speech: spanishLinkAccountObjResponsesFeminine[index].before + conv.body.queryResult.parameters.accountName + spanishLinkAccountObjResponsesFeminine[index].after
             }));
@@ -50,7 +49,7 @@ app.intent('link account', conv => {
           } else if (user.sex === 'f') {
             let index = randomNumGen(spanishLinkAccountObjResponsesFeminine.length);
             conv.ask(new SimpleResponse({
-              text: `Thank You!`,
+              text: `Gracias!`,
               // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
               speech: spanishLinkAccountObjResponsesFeminine[index].before + conv.body.queryResult.parameters.accountName + spanishLinkAccountObjResponsesFeminine[index].after
             }));
@@ -59,7 +58,7 @@ app.intent('link account', conv => {
         }
         let index = randomNumGen(spanishErrorResponse.length);
         conv.ask(new SimpleResponse({
-          text: `Please try again`,
+          text: `Por favor, intenta de nuevo`,
           // speech: `<speak> <p> <s> I'm sorry, I may have miss heard you. </s> <s> Could you try again? </s> </p> </speak>`
           speech: spanishErrorResponse[index]
         }));
