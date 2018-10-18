@@ -51,7 +51,8 @@ iframe {
   border-radius: 10px;
   margin-top: 20x;
   margin-bottom: 10px;
-  margin-left: 15px;
+  margin-left: 12px;
+  margin-right: 2px
 }
 .jumbotronSet {
   background-color: #333366;
@@ -80,5 +81,6 @@ h3 {
   background-color: #CCCCFF;
   color: white;
   position: absolute;
-  width: 93%
+  width: 93%;
+  height: 20%;
 }
