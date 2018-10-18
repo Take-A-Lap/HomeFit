@@ -96,22 +96,24 @@ const greetings = [
       </prosody>
     </p>
     <p>
-      <prosody rate="fast" pitch="+10st">
+      <prosody rate="fast" volume="+2db" pitch="+10st">
         I am excited for our workout today
       </prosody>
     </p> 
     <p>
-      <prosody rate="slow" pitch="-5st">
+      <prosody rate="slow" volume="-1db" pitch="-5st">
         <s>
           But
         </s>
       </prosody>
+      <prosody rate="fast" volume="+1db+ pitch="+5st">
       <s>
         Don't forget you will need to connect our current session with your home fit username
       </s>
       <s>
         all you have to do is say link my account and say your account name 
       </s>
+      </prosody>
     </p>
   </speak>`,
 
