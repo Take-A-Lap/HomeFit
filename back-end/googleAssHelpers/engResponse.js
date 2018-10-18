@@ -61,15 +61,15 @@ const greetings = [
     <prosody rate="fast">
     <p>
       <s>
-        <prosody  pitch="+25st" >
+        <prosody volume="+3db" pitch="+25%" >
           Welcome to Home fit trainer
         </prosody>
       </s>
       <s>
-        <prosody pitch="+30st" >
+        <prosody volume="+3db" pitch="+30%" >
           The <break time="10ms" /> fitness trainer <break time="5ms" /> 
         </prosody> 
-        <prosody rate="slow" pitch="+15st" > 
+        <prosody rate="slow" volume="+1db" pitch="+15%" > 
           designed for your personal needs.
         </prosody>
       </s> 
