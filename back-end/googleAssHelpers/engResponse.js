@@ -147,6 +147,11 @@ const greetings = [
 
   `<speak> 
     <p> 
+      <s>
+        <prosody volume="+3db" pitch="+25%" >
+          Welcome to Home Fit trainer
+        </prosody>
+      </s>
       <s> 
         To begin, you must link your account to our current session. 
       </s>
