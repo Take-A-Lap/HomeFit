@@ -23,7 +23,10 @@ app.intent('Default Welcome Intent', conv =>{
     conv.ask(spanishGreetings[index]);
   } else {
     let index = randomNumGen(greetings.length);
+    console.log(index, ' greetings response index');
+
     // console.log(conv.user.raw.locale, ' this is should be a this is the user property')
+    
     conv.ask(greetings[index]);
 
   }
