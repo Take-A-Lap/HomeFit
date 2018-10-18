@@ -134,17 +134,17 @@ const spanishGreetings = [
   </speak>`,
   `<speak> 
     <p>
-      <prosody rate="fast" volume="+3db" pitch="+25st" >
+      <prosody >
         Hola
       </prosody>
     </p>
     <p>
-      <prosody rate="fast" pitch="+15st">
+      <prosody >
         Tengo muchas ganas de hacer a nuestro entrenamiento hoy.
       </prosody>
     </p> 
     <p>
-      <prosody rate="slow" pitch="-10st">
+      <prosody >
         <s>
           Sin embargo
         </s>
@@ -156,27 +156,27 @@ const spanishGreetings = [
       Dígame conecta a mi cuenta e el nombre de la cuenta.
       </s>
     </p>
-  </speak>`,
-  `<speak>
-    <p>
-      Como debo saludar a nuestros usarios Roger?
-    </p>
-  </speak>`,
-  `<speak>
-    <p>
-      Como debo saludar a nuestros usarios Josh?
-    </p>
-  </speak>`,
-  `<speak>
-    <p>
-      Como debo saludar a nuestros usarios Cornelius?
-    </p>
-  </speak>`,
-  `<speak>
-    <p>
-      Como debo saludar a nuestros usarios Alex?
-    </p>
   </speak>`
+  // `<speak>
+  //   <p>
+  //     Como debo saludar a nuestros usarios Roger?
+  //   </p>
+  // </speak>`,
+  // `<speak>
+  //   <p>
+  //     Como debo saludar a nuestros usarios Josh?
+  //   </p>
+  // </speak>`,
+  // `<speak>
+  //   <p>
+  //     Como debo saludar a nuestros usarios Cornelius?
+  //   </p>
+  // </speak>`,
+  // `<speak>
+  //   <p>
+  //     Como debo saludar a nuestros usarios Alex?
+  //   </p>
+  // </speak>`
 ];
 
 module.exports = {
