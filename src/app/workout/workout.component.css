@@ -36,15 +36,32 @@ iframe {
   width: 100%;
   height: 100%;
 }
+.row {
+  display: flex
+}
 
 .jumbotron {
   background-color: #333366;
   /* background-color: #638493; */
+  max-width: 45%;
+  max-height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 20x;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+.jumbotronSet {
+  background-color: #333366;
+  /* background-color: #638493; */
   max-width: 100%;
+  display: flex;
   max-height: 100%;
   text-align: center;
   align-items: center;
-  border-radius: 0px;
+  border-radius: 10px;
 }
 h2 {
   color: #CCCCFF;
@@ -63,5 +80,5 @@ h3 {
   background-color: #CCCCFF;
   color: white;
   position: absolute;
-  width: 100%
+  width: 93%
 }
