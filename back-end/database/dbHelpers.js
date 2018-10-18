@@ -69,17 +69,6 @@ module.exports = {
     WHERE id_muscle_group = $1 AND difficulty < $2
     `, [muscleId, difficulty + 1]),
 
-  // need to get the completed exercises first cardio then i will do str will be basically the same
-  getCompCardioByUserId: (userId) => db.any(`
-    SELECT * FROM completed_cardio
-    WHERE id_user = $1
-  `, [userId]),
-
-  getCompStrByUserId: (userId) => db.any(`
-    SELECT * FROM completed_str
-    WHERE id_user = $1
-  `, [userId]),
-
   // realized we may need to grab the exercises by their id as well
   getExerciseById: (exerciseId) => db.any(`
     SELECT * FROM exercises
@@ -97,6 +86,16 @@ module.exports = {
     WHERE name = $1
   `, [name]).then(([link]) => link),
 
+  getCompletedWorkoutDates: (userId) => db.any(`
+    SELECT * FROM workout_date
+    WHERE id_user = $1 AND completed = true
+  `, [userId]),
+
+  getPartialWorkoutDates: (userId) => db.any(`
+    SELECT * FROM workout_date
+    WHERE id_user = $1 AND completed = false
+  `, [userId]),
+
   getUserById: (userId) => db.any(`
     SELECT * FROM users
     WHERE id = $1
@@ -107,7 +106,7 @@ module.exports = {
     WHERE user_email = $1
   `, [email]).then(([id]) => id),
 
-
+  
   addNewUser: (weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredUsername, password) => db.any(`
     INSERT INTO users 
     (weight, num_push_ups, jog_dist, age, sex, height, squat_comf, workout_completes, goals, user_email, preferred_username, password)
@@ -124,19 +123,12 @@ module.exports = {
     ($1, $2)
   `, [userId, dietId]),
 
-  insertIntoCompStr: (exerciseId, userId, reps, completed, date) => db.any(`
-    INSERT INTO completed_str
-    (id_exercise, id_user, reps, completed, date)
+  insertIntoWorkouts: (userId, date, isCompleted) => db.any(`
+    INSERT INTO workout_date
+    (id_user, date, completed)
     VALUES
-    ($1, $2, $3, $4, $5)
-  `, [exerciseId, userId, reps, completed, date]),
-
-  insertIntoCompCardio: (userId, exerciseId, date, lastTotalTime, bpm, distance, completed) => db.any(`
-    INSERT INTO completed_cardio
-    (id_user, id_exercise, date, last_tot_time, avg_bpm, distance, completed)
-    VALUES
-    ($1, $2, $3, $4, $5, $6, $7)
-  `, [userId, exerciseId, date, lastTotalTime, bpm, distance, completed]),
+    ($1, $2, $3)
+  `, [exerciseId, userId, isCompleted]),
 
   updateNoWO: (user_id, newWONum)=> db.any(`
       UPDATE users
@@ -158,17 +150,6 @@ module.exports = {
       last_exercise_id = $2
       WHERE id = $1
   `, [userID, last]),
-
-  updateCompCardio: (completed, userId, date, lastTotalTime, bpm) => db.any(`
-    UPDATE completed_cardio
-    SET
-    completed = $1
-    date = $3
-    last_tot_time = $4
-    avg_bpm = $5
-    WHERE
-    id_user = $2
-  `, [completed, userId, date, lastTotalTime, bpm]),
   
   updateGoogleSessionIdForUser: (username, sessionId) => db.any(`
   UPDATE users
@@ -177,16 +158,6 @@ module.exports = {
   WHERE
   preferred_username = $1
   `,[username, sessionId]),
-
-  updateCompStr: (completed, userId, date, reps) => db.any(`
-    UPDATE completed_str
-    SET
-    completed = $1
-    date = $3
-    reps = $4
-    WHERE
-    id_user = $2
-  `, [completed, userId, date, reps]),
   
   updateAlexaId: (email, alexaId) => db.any(`
   UPDATE users
@@ -206,5 +177,4 @@ module.exports = {
     WHERE user_email = $1
   `, [userEmail]),
 
-  //create function to access weather_images in database
 };

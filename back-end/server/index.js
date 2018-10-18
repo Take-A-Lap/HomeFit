@@ -78,7 +78,7 @@ app.get('/getCompletedWO', (req, res) => {
     })
     .then(({ id }) => {
       // use the id to query the completed str and cardio tables
-      return db.getCompStrByUserId(id)
+      return db.getCompletedWorkoutDates(id)
     })
     .then(compStr => {
       if (compStr) {
@@ -98,9 +98,9 @@ app.get('/homeFitAuth', (req, res) => {
   })
 })
 
-app.post('/completed', (req, res)=>{
+app.post('/completed', (req, res)=> {
   var d = new Date();
-  db.insertIntoCompStr(1, req.body.params.id, 10, true, d)
+  db.insertIntoWorkouts(req.body.params.id, d, true)
   .then(()=>res.send('tallied!'))
 })
 
@@ -355,6 +355,16 @@ alexaRouter.post('/fitnessTrainer', (req, res) => {
     }
   }
 });
+
+app.post('/savePartial', (req, res) => {
+  let { id, exerciseId } = req.body;
+  const d = new Date();
+  console.log(id, exerciseId, d);
+  db.insertPartialWorkout(id, exerciseId, d)
+    .then(res => console.log(res))
+    .catch(error => console.error());
+  res.send('got it')
+})
 
 const port = 3000;
 app.listen(port, () => {
