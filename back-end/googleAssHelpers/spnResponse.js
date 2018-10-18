@@ -156,27 +156,27 @@ const spanishGreetings = [
       Dígame conecta a mi cuenta e el nombre de la cuenta.
       </s>
     </p>
-  </speak>`,
-  `<speak>
-    <p>
-      Como debo saludar a nuestros usarios Roger?
-    </p>
-  </speak>`,
-  `<speak>
-    <p>
-      Como debo saludar a nuestros usarios Josh?
-    </p>
-  </speak>`,
-  `<speak>
-    <p>
-      Como debo saludar a nuestros usarios Cornelius?
-    </p>
-  </speak>`,
-  `<speak>
-    <p>
-      Como debo saludar a nuestros usarios Alex?
-    </p>
   </speak>`
+  // `<speak>
+  //   <p>
+  //     Como debo saludar a nuestros usarios Roger?
+  //   </p>
+  // </speak>`,
+  // `<speak>
+  //   <p>
+  //     Como debo saludar a nuestros usarios Josh?
+  //   </p>
+  // </speak>`,
+  // `<speak>
+  //   <p>
+  //     Como debo saludar a nuestros usarios Cornelius?
+  //   </p>
+  // </speak>`,
+  // `<speak>
+  //   <p>
+  //     Como debo saludar a nuestros usarios Alex?
+  //   </p>
+  // </speak>`
 ];
 
 module.exports = {
