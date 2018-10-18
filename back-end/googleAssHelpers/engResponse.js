@@ -82,7 +82,7 @@ const greetings = [
         I will need you to connect our session to your home fit account
       </s>
       <s>
-        To do that all you have to do is say link my account and say your account name
+        To do that all you have to do is say link my account and say your home fit account name
       </s>
       <s>
         after you link up we can begin today's workout
@@ -114,7 +114,7 @@ const greetings = [
           Don't forget you will need to connect our current session with your home fit username
         </s>
         <s>
-          all you have to do is say link my account and say your account name 
+          all you have to do is say link my account and say your home fit account name 
         </s>
         </prosody>
       </p>
