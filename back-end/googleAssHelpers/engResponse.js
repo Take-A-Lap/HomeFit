@@ -60,10 +60,17 @@ const greetings = [
   `<speak>
     <p>
       <s>
-        Welcome to Home fit trainer
+        <prosody rate="fast" volume="+3db" pitch="+25st" >
+          Welcome to Home fit trainer
+        </prosody>
       </s>
-      <s> 
-        The fitness trainer designed for your personal needs.
+      <s>
+        <prosody rate="fast" volume="+3db" pitch="+30st" >
+          The <break time="10ms" /> fitness trainer <break time="5ms" /> 
+        </prosody> 
+        <prosody rate="slow" volume="+1db" pitch="+15st" > 
+          designed for your personal needs.
+        </prosody>
       </s> 
     </p>
     <p>
@@ -84,17 +91,17 @@ const greetings = [
 
   `<speak> 
     <p>
-      <prosody rate="fast" volume="+3db" pitch="+25%" >
+      <prosody rate="fast" volume="+3db" pitch="+25st" >
         Hi
       </prosody>
     </p>
     <p>
-      <prosody rate="fast" pitch="+15%">
+      <prosody rate="fast" pitch="+15st">
         I am excited for our workout today
       </prosody>
     </p> 
     <p>
-      <prosody rate="slow" pitch="-10%">
+      <prosody rate="slow" pitch="-10st">
         <s>
           But
         </s>
