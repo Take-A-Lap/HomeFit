@@ -148,7 +148,7 @@ app.intent('describe exercise', conv => {
       .then(({ description }) =>{
         console.log('describe was invoked');
         
-        conv.ask("<speak>" + description + "</speak>");
+        conv.ask('<speak> <prosody rate="fast"> ' + description + " </prosody> </speak>");
       })
     // conv.ask("<speak> This is the description for" + current.name +" </speak>");
     // conv.ask("<speak>" + current.description + "</speak>");
