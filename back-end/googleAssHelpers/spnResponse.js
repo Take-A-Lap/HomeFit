@@ -10,15 +10,15 @@ const linkAccountObjResponsesMasculine = [
   },
   {
     before: '<speak> <s> Disculpa, por la molestia, </s> <p> <s>',
-    after: '</s> </p> <break time="750ms" /> <s> Hemos conectado a tu cuenta a la sesión actual con nosotros. </s> <s> Empezaremos con la sesión de ejecisio de hoy. </s> </speak>'
+    after: '</s> </p> <break time="750ms" /> <s> Hemos conectado a tu cuenta a la sesión actual con nosotros. </s> <s> Empezaremos con la sesión de entrenamiento de hoy. </s> </speak>'
   },
   {
     before: '<speak> <s> Bueno, </s> <p> <s>',
-    after: '</s> </p> <s> Todo bien, </s> <s> Empezamos con los ejercisios. </s> </speak>'
+    after: '</s> </p> <s> Todo bien, </s> <s> Empezamos con el entrenamiento. </s> </speak>'
   },
   {
     before: '<speak> <s> Me alegra de oírle ',
-    after: '</s> <s> si esté listo, podemos empezar con los ejercisios de hoy. </s> </speak>'
+    after: '</s> <s> si esté listo, podemos empezar con el entrenamiento de hoy. </s> </speak>'
   }
 ];
 
@@ -29,15 +29,15 @@ const linkAccountObjResponsesFeminine = [
   },
   {
     before: '<speak> <s> Disculpa, por la molestia, </s> <p> <s>',
-    after: '</s> </p> <break time="750ms" /> <s> Hemos conectado a su cuenta a la sesión actual con nosotros. </s> <s> Empezaremos con la sesión de ejecisio de hoy. </s> </speak>'
+    after: '</s> </p> <break time="750ms" /> <s> Hemos conectado a su cuenta a la sesión actual con nosotros. </s> <s> Empezaremos con la sesión de entrenamiento de hoy. </s> </speak>'
   },
   {
     before: '<speak> <s> Bueno, </s> <p> <s>',
-    after: '</s> </p> <s> Todo bien, </s> <s> Empezamos con los ejercisios. </s> </speak>'
+    after: '</s> </p> <s> Todo bien, </s> <s> Empezamos con el entrenamiento. </s> </speak>'
   },
   {
     before: '<speak> <s> Me alegra de oírle ',
-    after: '</s> <s> si esté lista, podemos empezar con los ejercisios de hoy. </s> </speak>'
+    after: '</s> <s> si esté lista, podemos empezar con el entrenamiento de hoy. </s> </speak>'
   }
 ];
 
@@ -107,69 +107,74 @@ const nextExerObjResponsesFeminine = [
   }
 ]
 
-const greetings = [
+const greetingsSpanish = [
   `<speak>
     <p>
       <s>
-        Welcome to Home fit trainer
+        Bienvenidos al Entrenador de Home Fit.
       </s>
       <s> 
-        The fitness trainer designed for your personal needs.
+        El entrenador se creyó para sus necesidades personales.
       </s> 
     </p>
     <p>
       <s>
-        Before we begin
+        Antes de empezemos
       </s>
       <s>
-        I will need you to connect our session to your home fit account
+        Necesito que conecte nuestra sesión a su cuenta de Home Fit.
       </s>
       <s>
-        To do that all you have to do is say link my account and say your account name
+        Para hacerlo, solamente tiene que decir conecta a mi cuenta con el nombre de la cuenta.
       </s>
       <s>
-        after you link up we can begin today's workout
+        despues de ha conectado, podemas empezar el entrenamiento de hoy.
       </s>
     </p>
   </speak>`,
   `<speak> 
     <p>
       <prosody rate"fast" volume="+3db" pitch="+25st" >
-        Hi
+        Hola
       </prosody>
     </p>
     <p>
       <prosody rate="fast" pitch="+15st">
-        I am excited for our workout today
+        Tengo muchas ganas de hacer a nuestro entrenamiento hoy.
       </prosody>
     </p> 
     <p>
       <prosody rate="slow" pitch="-10st">
         <s>
-          But
+          Sin embargo
         </s>
       </prosody>
       <s>
-        Don't forget you will need to connect our current session with your home fit username
+        No se olvide que necesitará conectar su nombre de usuario a nuestra sesión de hoy.
       </s>
       <s>
-        all you have to do is say link my account and say your account name 
+      Dígame conecta a mi cuenta e el nombre de la cuenta.
       </s>
     </p>
   </speak>`,
   `<speak>
     <p>
-      How should i greet our users roger?
+      ¿Como debo saludar a nuestros usarios Roger?
     </p>
   </speak>`,
   `<speak>
     <p>
-      How should i greet our users josh?
+      ¿Como debo saludar a nuestros usarios Josh?
     </p>
   </speak>`,
   `<speak>
     <p>
-      How should i greet our users cornelius?
+      ¿Como debo saludar a nuestros usarios Cornelius?
+    </p>
+  </speak>`,
+  `<speak>
+    <p>
+      ¿Como debo saludar a nuestros usarios Alex?
     </p>
   </speak>`
 ];
@@ -181,5 +186,6 @@ module.exports = {
   startWorkoutObjResponsesMasculine,
   startWorkoutObjResponsesFeminine,
   nextExerObjResponsesMasculine,
-  nextExerObjResponsesFeminine
+  nextExerObjResponsesFeminine,
+  greetingsSpanish
 }
