@@ -149,7 +149,7 @@ const spanishGreetings = [
       Dígame conecta a mi cuenta e el nombre de la cuenta.
       </s>
     </p>
-  </speak>`
+  </speak>`,
   // `<speak>
   //   <p>
   //     Como debo saludar a nuestros usarios Roger?
