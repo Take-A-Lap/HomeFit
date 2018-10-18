@@ -103,7 +103,13 @@ const greetings = [
           I am excited for our workout today
         </prosody>
       </p> 
-      
+      <p>
+        <prosody rate="slow" volume="-1db" pitch="-5%">
+          <s>
+            But
+          </s>
+        </prosody>
+      </p>
     </prosody>
   </speak>`,
 
