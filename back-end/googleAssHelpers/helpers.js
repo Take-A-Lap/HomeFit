@@ -210,7 +210,11 @@ app.intent('Default Fallback Intent', conv => {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
     let index = randomNumGen(errorResponses);
-    conv.ask(errorResponses[index]);
+    conv.ask(new SimpleResponse({
+        text: 'Something went wrong',
+        // speech: `<speak> <p> <s> I'm sorry something appears to have gone wrong. </s> Please try again </p> </speak>`
+        speech: errorResponses[index]
+      }));
   }
 });
 
