@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
     //function to get username added to getCookieInfo
     let cookie = document.cookie;
     let emailArr = cookie.split('=');
-    this.email = emailArr[1];
+    this.email = emailArr[emailArr.length - 1];
     console.log(this.email)
     return this.httpClient.get('/username', {
       params: {
