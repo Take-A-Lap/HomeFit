@@ -1,11 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const bluebird = require ('bluebird')
 const verifier = require('alexa-verifier-middleware');
 const db = require('../database/dbHelpers');
 const alexaHelp = require('../alexaHelpers/helpers');
 const weather = require('../weather/weatherHelpers');
 const app = express()
-const meal = require('../Algorithms/recipe.js');
+const meal = bluebird.promisifyAll(require('../Algorithms/recipe.js'));
 const workout = require('../Algorithms/workout.js');
 const sse = require('../../sse');
 const fs = require('fs');
@@ -43,7 +44,9 @@ app.get('/generateWO', (req, res)=> {
 })
 
 app.get('/test', (req, res)=>{
-  workout.generateWorkoutChest(3, 3, 39).then(wo=>res.send(wo)).catch(err=>console.error(err))
+  meal.getDinnerMeal('steak',0,1000)
+  .then(recipes=>res.send(recipes))
+  .catch(err=>console.error(err))
 })
 
 app.get('/getUser', (req, res) => {
@@ -148,64 +151,28 @@ app.post('/weather', (req, res) => {
 
 
   //get request to db to retrieve username
-  app.get('/username', (req, res) => {
+app.get('/username', (req, res) => {
     console.log(req.query);
     db.getUserInfoByEmail(req.query.user)
       .then((user) => res.send(user))
   })
 
-app.get('/dinner', (req,res)=> {
-  let meals;
-  let dinner = [];
-  Promise.all([
-    meal.getChicken(300, 700, "alcohol-free"), 
-    meal.getBeef(300, 700, "alcohol-free"), 
-    meal.getFish(300, 700, "alcohol-free"),
-    meal.getSteak(300, 700, "alcohol-free")
-  ])
-  .then(recipes => {
-    meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
-    return meals;
-  }).then(meals => {
-    return meal.narrowDown(meals)
-  }).then(randomArray => {
-    randomArray.forEach(index => dinner.push(meals[index]))
-  }).then(() => {
-    res.send(dinner)
-  }).catch(err => console.error(err))
-});
+app.get('/dinner', (req,res)=>{
+  meal.getDinner()
+    .then(dinner=>res.send(dinner))
+    .catch(err=>console.log(err));
+})
 
 app.get('/lunch', (req,res) => {
-  let meals;
-  let lunch = [];
-  meal.getLunch(0, 500, "alcohol-free")
-  .then(recipes => {
-    meals = recipes.reduce((acc, curr) => acc.concat(curr), [])
-    return meals;
-  }).then(meals => {
-    return meal.narrowDown(meals);
-  }).then(randomArray => {
-    randomArray.forEach(index => lunch.push(meals[index].recipe))
-  }).then(() => {
-    res.send(lunch)
-  }).catch(err => console.error(err))
-  .catch(err=>console.error(err))
+  meal.getLunch()
+    .then(lunch=>res.send(lunch))
+    .catch(err => console.error(err))
 })
 
 app.get('/breakfast', (req, res) => {
-  let meals;
-  let breakfast = [];
-  Promise.all([meal.getBreakfast(300, 700, "alcohol-free"), meal.getYogurt(300, 700, "alcohol-free"), meal.getEggs(300, 700, "alcohol-free")])
-  .then(recipes=>{
-    meals = recipes.reduce((acc,curr)=>acc.concat(curr),[])
-    return meals;
-  }).then(meals=>{
-    return meal.narrowDown(meals)
-  }).then(randomArray=>{
-    randomArray.forEach(index=>breakfast.push(meals[index].recipe))
-  }).then(()=>{
-    res.send(breakfast)
-  }).catch(err=>console.error(err))
+  meal.getBreakfast()
+    .then(dinner => res.send(dinner))
+    .catch(err => console.log(err));
 })
 
 app.post('/signUp', (req, res) =>{
@@ -367,7 +334,7 @@ app.post('/savePartial', (req, res) => {
   res.send('got it')
 })
 
-const port = 81;
+const port = 3000;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
