@@ -161,7 +161,7 @@ app.intent('start workout', conv => {
       if (genWorkout !== undefined) {
         googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
         console.log(lastUserExercise, ' last user exercise before being applied to googleworkout');
-        if(!hasRun && lastUserExercise !== undefined){
+        if(!hasRun && !lastUserExercise){
           googleWorkout.unshift(lastUserExercise);
           hasRun = true;
         }
