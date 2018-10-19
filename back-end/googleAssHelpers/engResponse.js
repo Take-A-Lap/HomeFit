@@ -148,10 +148,10 @@ const greetings = [
     </prosody>
     <break time="5ms" />
     <p>
-      <s>
-        Before we begin
-      </s>
-      <prosody pitch="+20%" volume="+2db" >
+      <prosody pitch="+10%" volume="+2db" >
+        <s>
+          Before we begin
+        </s>
         <s>
           I will need you to connect our session to your home fit account
         </s>
