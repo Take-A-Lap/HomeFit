@@ -40,7 +40,6 @@ const linkAccountObjResponses = [
     after: `
           </s> 
         </p> 
-        <break time ="5ms"/> 
         <s> 
           We have now linked your account to your current session with us. 
         </s> 
