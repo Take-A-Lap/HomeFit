@@ -123,7 +123,7 @@ app.intent('start workout', conv => {
           conv.ask(new SimpleResponse({
             text: 'Avísame cuando esté listo de empezar.',
             // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
-            speech: spanishStartWorkoutObjResponsesMasculine[index].before + current.name + spanishStartWorkoutObjResponsesMasculine[index].after
+            speech: spanishStartWorkoutObjResponsesMasculine[index].before + current.nombre + spanishStartWorkoutObjResponsesMasculine[index].after
           }));
 
         }
