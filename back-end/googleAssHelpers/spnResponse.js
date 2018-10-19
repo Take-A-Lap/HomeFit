@@ -1,7 +1,7 @@
 const spanishErrorResponse = [`<speak> <p> <s> Lo siento mucho, no le puedo entender. </s> <s> Podría preguntarme otra vez?  </s> </p> </speak>`,
 `<speak> <p> <s> Perdóname, no le entiendo. </s> <s> Puede repetirlo, por favor? </s> </p> </speak>`,
-`<speak> <p> <s> Me avergüenza decir, </s>  <s> pero le he entendí mal. </s> <s> Repitalo, por favor. </s> </p> </speak>`,
-`<speak> <p> <s> Perdón, </s> <s> dígame otra vez. </s> </p> </speak>`];
+`<speak> <p> <s> Disculpe, pero sign sin entenderle </s> <s> Repitalo, por favor. </s> </p> </speak>`,
+`<speak> <p> <s> Perdón, </s> <s> dígamelo otra vez. </s> </p> </speak>`];
 
 const spanishLinkAccountObjResponsesMasculine = [
   {
@@ -10,15 +10,15 @@ const spanishLinkAccountObjResponsesMasculine = [
   },
   {
     before: '<speak> <s> Disculpa, por la molestia, </s> <p> <s>',
-    after: '</s> </p> <break time="750ms" /> <s> Hemos conectado a tu cuenta a la sesión actual con nosotros. </s> <s> Empezaremos con la sesión de entrenamiento de hoy. </s> </speak>'
+    after: '</s> </p> <break time="750ms" /> <s> Hemos conectado su cuenta a la sesión actual con nosotros. </s> <s> Empezaremos con la sesión de entrenamiento de hoy. </s> </speak>'
   },
   {
     before: '<speak> <s> Bueno, </s> <p> <s>',
     after: '</s> </p> <s> Todo bien, </s> <s> Empezamos con el entrenamiento. </s> </speak>'
   },
   {
-    before: '<speak> <s> Me alegra de oírle ',
-    after: '</s> <s> si esté listo, podemos empezar con el entrenamiento de hoy. </s> </speak>'
+    before: '<speak> <s> Me alegra saber de usted',
+    after: '</s> <s> si está listo, podemos empezar con el entrenamiento de hoy. </s> </speak>'
   }
 ];
 
@@ -43,8 +43,8 @@ const spanishLinkAccountObjResponsesFeminine = [
 
 const spanishStartWorkoutObjResponsesMasculine = [
   {
-    before: '<speak> <s> Avísame cuando esté listo de empezar su ',
-    after: ' e en posición. </s> </speak>'
+    before: '<speak> <s> Avísame cuando esté listo para empezar su ',
+    after: ' en posición. </s> </speak>'
   },
   {
     before: '<speak> <s> Hacemos ',
@@ -55,7 +55,7 @@ const spanishStartWorkoutObjResponsesMasculine = [
     after: '</s> </speak>'
   },
   {
-    before: '<speak> <s> Es la hora de seguir, </s> <s> Comenzamos el siguiente ejercisio',
+    before: '<speak> <s> Es hora de seguir, </s> <s> Comenzamos el siguiente ejercicio',
     after: '</s> </speak>'
   }
 ];
@@ -63,7 +63,7 @@ const spanishStartWorkoutObjResponsesMasculine = [
 const spanishStartWorkoutObjResponsesFeminine = [
   {
     before: '<speak> <s> Avísame cuando esté lista de empezar su ',
-    after: ' e en posición. </s> </speak>'
+    after: ' en posición. </s> </speak>'
   },
   {
     before: '<speak> <s> Hacemos ',
@@ -74,7 +74,7 @@ const spanishStartWorkoutObjResponsesFeminine = [
     after: '</s> </speak>'
   },
   {
-    before: '<speak> <s> Es la hora de seguir, </s> <s> Comenzamos el siguiente ejercisio',
+    before: '<speak> <s> Es hora de seguir, </s> <s> Comenzamos el siguiente ejercisio',
     after: '</s> </speak>'
   }
 ];
@@ -87,7 +87,7 @@ const spanishNextExerObjResponsesMasculine = [
       after: ' segundos. </s> <s> Empezamos </s> <break time="500ms" />'
     },
     part2: {
-      before: ' <s> Descansamos.</s> <s> Avísame cuando esté listo de hacer la siguiente colección </s> <s> o podemos empezar ahora ',
+      before: ' <s> Descansamos.</s> <s> Avísame cuando esté listo para hacer la siguiente colección </s> <s> o podemos empezar ahora ',
       after: ', si le gustaría </s> </speak>'
     }
   }
@@ -116,16 +116,16 @@ const spanishGreetings = [
     </p>
     <p>
       <s>
-        Antes de empezemos
+        Antes de empezar
       </s>
       <s>
         Necesito que conecte nuestra sesión a su cuenta de Home Fit.
       </s>
       <s>
-        Solamente tiene que decir conecta a mi cuenta con el nombre de la cuenta.
+        Para hacerlo, solamente tiene que decir conecta a mi cuenta con el nombre de la cuenta.
       </s>
       <s>
-        despues de ha conectado, podemas empezar el entrenamiento de hoy.
+        despues de que se conecte, podemos empezar el entrenamiento de hoy.
       </s>
     </p>
   </speak>`,
@@ -134,7 +134,7 @@ const spanishGreetings = [
         Hola
     </p>
     <p>
-        Tengo muchas ganas de hacer a nuestro entrenamiento hoy.
+        Tengo muchas ganas de hacer el entrenamiento hoy.
       
     </p> 
     <p>
@@ -146,7 +146,7 @@ const spanishGreetings = [
         No se olvide que necesitará conectar su nombre de usuario a nuestra sesión de hoy.
       </s>
       <s>
-      Dígame conecta a mi cuenta e el nombre de la cuenta.
+      Díga conecta mi cuenta e el nombre de usuario.
       </s>
     </p>
   </speak>`,
