@@ -17,7 +17,8 @@
 
 .nav {
   border-radius: 0px;
-  background-color: #CCCCFF;
+  background-color: #CCD0F5;
+  color: #33CC33;
   text-align: center
 }
 
@@ -82,10 +83,13 @@ h4 {
 
 .workoutButton {
   width: 100%;
-  background-color: #CCCCFF;
-  color: #FFFFFF;
+  background-color: #CCD0F5;
+  color: #33CC33;
 }
 
+.welcome {
+  color: #33CC33
+}
 
 
 table { width: 100%; box-sizing: border-box; box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.1); font-family: 'Ubuntu'; /*border-collapse: collapse;*/ border-spacing: 0; background-color: #333333; }

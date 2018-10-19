@@ -18,12 +18,12 @@
 
 .nav {
   border-radius: 0px;
-  background-color:#CCCCFF;
+  background-color:#CCD0F5;
   text-align: center;
 }
 
 .nav a {
-  color: white;
+  color: #33CC33;
 }
 
 img {
@@ -65,21 +65,21 @@ iframe {
   border-radius: 10px;
 }
 h2 {
-  color: #CCCCFF;
+  color: #33CC33;
   font-family: sans-serif;
 }
 h3 {
   font-family: digital;
   font-size: 75px;
-  color: #CCCCFF;
+  color: #CCD0F5;
 }
 
 .reps_title {
   float: left;
 }
 .rep_button {
-  background-color: #CCCCFF;
-  color: white;
+  background-color: #CCD0F5;
+  color: #33CC33;
   position: absolute;
   width: 93%;
   height: 20%;

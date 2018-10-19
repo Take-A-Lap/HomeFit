@@ -11,22 +11,22 @@
 }
 
 label {
-  color: #CCCCFF;
+  color: #CCD0F5;
 }
 
 .nav {
   border-radius: 0px;
-  background-color:#CCCCFF;
+  background-color:#CCD0F5;
   text-align: center;
 }
 
 .nav a {
-  color: white;
+  color: #33CC33;
 }
 
 .next_button {
   width: 100%;
-  background-color: #CCCCFF;
+  background-color: #CCD0F5;
   text-align: center;
-  color: white;
+  color: #33CC33;
 }
