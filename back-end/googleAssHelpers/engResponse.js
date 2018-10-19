@@ -224,12 +224,12 @@ const greetings = [
   </speak>`,
 
   `<speak> 
-  <voice age="6" >
+  <voice gender="female" languages="en-US" required="languages gender variant">
     <p> 
       <s>
-
+        <prosody rate="" volume="+3db" pitch="+25%" >
           Welcome to Home Fit trainer
-
+        </prosody>
       </s>
       <s> 
         To begin, you must link your account to our current session. 
