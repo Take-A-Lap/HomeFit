@@ -48,3 +48,5 @@ back-end/config.js
 .env
 googleTranslation.json
 translations.js
+stdout.txt
+stderr.txt

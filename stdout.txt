@@ -1,362 +1,145 @@
 
-> home-fit@0.0.0 start /root/Homefit/HomeFit
+> home-fit@0.0.0 start /HomeFit
 > node back-end/server/index.js
 
 HomeFit is listening on port 81!
-spider@man
-{ id: 89,
-  weight: 165,
-  num_push_ups: 50,
-  jog_dist: 10,
-  age: 24,
-  sex: 'm',
-  height: 70,
-  squat_comf: 3,
-  workout_completes: 7,
-  goals: 3,
-  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
-  user_email: 'spider@man',
-  preferred_username: 'spider man',
-  password: 'mj',
-  google_session_id: null }
-7
-29.9797996 -90.07935789999999 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 80,
-  apparentTemp: 86,
-  humidity: 0.82,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-29.977417199999998 -90.0759118 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 80,
-  apparentTemp: 86,
-  humidity: 0.82,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-29.9797996 -90.07935789999999 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 80,
-  apparentTemp: 86,
-  humidity: 0.82,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-29.9797996 -90.07935789999999 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 81,
-  apparentTemp: 86,
-  humidity: 0.82,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-spider@man
-{ id: 89,
-  weight: 165,
-  num_push_ups: 50,
-  jog_dist: 10,
-  age: 24,
-  sex: 'm',
-  height: 70,
-  squat_comf: 3,
-  workout_completes: 7,
-  goals: 3,
-  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
-  user_email: 'spider@man',
-  preferred_username: 'spider man',
-  password: 'mj',
-  google_session_id: null }
-7
-29.9774346 -90.0759169 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 81,
-  apparentTemp: 87,
-  humidity: 0.81,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-spider@man
-{ id: 89,
-  weight: 165,
-  num_push_ups: 50,
-  jog_dist: 10,
-  age: 24,
-  sex: 'm',
-  height: 70,
-  squat_comf: 3,
-  workout_completes: 7,
-  goals: 3,
-  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
-  user_email: 'spider@man',
-  preferred_username: 'spider man',
-  password: 'mj',
-  google_session_id: null }
-7
-29.9797996 -90.07935789999999 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 81,
-  apparentTemp: 87,
-  humidity: 0.81,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-spider@man
-{ id: 89,
-  weight: 165,
-  num_push_ups: 50,
-  jog_dist: 10,
-  age: 24,
-  sex: 'm',
-  height: 70,
-  squat_comf: 3,
-  workout_completes: 7,
-  goals: 3,
-  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
-  user_email: 'spider@man',
-  preferred_username: 'spider man',
-  password: 'mj',
-  google_session_id: null }
-7
-29.9774171 -90.0759174 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 81,
-  apparentTemp: 87,
-  humidity: 0.81,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-spider@man
-{ id: 89,
-  weight: 165,
-  num_push_ups: 50,
-  jog_dist: 10,
-  age: 24,
-  sex: 'm',
-  height: 70,
-  squat_comf: 3,
-  workout_completes: 7,
-  goals: 3,
-  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
-  user_email: 'spider@man',
-  preferred_username: 'spider man',
-  password: 'mj',
-  google_session_id: null }
-7
-29.9774104 -90.0759233 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 81,
-  apparentTemp: 87,
-  humidity: 0.81,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-29.9797996 -90.07935789999999 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 81,
-  apparentTemp: 87,
-  humidity: 0.81,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-29.977440299999998 -90.0759428 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 81,
-  apparentTemp: 88,
-  humidity: 0.81,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-spider@man
-{ id: 89,
-  weight: 165,
-  num_push_ups: 50,
-  jog_dist: 10,
-  age: 24,
-  sex: 'm',
-  height: 70,
-  squat_comf: 3,
-  workout_completes: 7,
-  goals: 3,
-  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
-  user_email: 'spider@man',
-  preferred_username: 'spider man',
-  password: 'mj',
-  google_session_id: null }
-7
-29.977430599999995 -90.0759281 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 82,
-  apparentTemp: 89,
-  humidity: 0.79,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-29.977454500000004 -90.0759411 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 82,
-  apparentTemp: 89,
-  humidity: 0.78,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-spider@man
-{ id: 89,
-  weight: 165,
-  num_push_ups: 50,
-  jog_dist: 10,
-  age: 24,
-  sex: 'm',
-  height: 70,
-  squat_comf: 3,
-  workout_completes: 7,
-  goals: 3,
-  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
-  user_email: 'spider@man',
-  preferred_username: 'spider man',
-  password: 'mj',
-  google_session_id: null }
-7
-29.9774502 -90.0759284 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 82,
-  apparentTemp: 90,
-  humidity: 0.78,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-29.9774502 -90.0759284 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 82,
-  apparentTemp: 90,
-  humidity: 0.78,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-29.977442699999997 -90.0759301 work pretty please
-{ text: 'Humid and Partly Cloudy',
-  temp: 82,
-  apparentTemp: 90,
-  humidity: 0.78,
-  icon: 'partly-cloudy-day' } 'weatherInfo'
-day body
-spider@man
-{ id: 89,
-  weight: 165,
-  num_push_ups: 50,
-  jog_dist: 10,
-  age: 24,
-  sex: 'm',
-  height: 70,
-  squat_comf: 3,
-  workout_completes: 7,
-  goals: 3,
-  alexa_user_id: 'amzn1.ask.account.AFWHU5DLSJKR37FXXMVFLKDMCVZ3I76D7XRR4G4772UAFSUDXV63TM36PZWVEOP2NG4E7BPKX2QHY6D7ZMSEUY3HQSBC3XFQDPB5MG7VAQVK3NJFDERKW5YXCSKHI5J35DWLGLJQXEWQKS6DJKUJX5YVGYJOJNEVISHCU6U2RQ5VW7N3UCPQWCHVSB467UFO75NLB62WRBTVGRY',
-  user_email: 'spider@man',
-  preferred_username: 'spider man',
-  password: 'mj',
-  google_session_id: null }
-7
-15396152199123840694349  looking for the value of the session id
-15396152199123840694349  looking for the value of the session id
-15396152199123840694349  looking for the value of the session id
-15396152199123840694349  looking for the value of the session id
-15396152199123840694349  conv.id inside the start workout intent
-[ { id: 52,
-    name: 'Pushups',
-    rep_time: 1900,
-    youtube_link: 'https://www.youtube.com/embed/ZWdBqFLNljc',
-    id_muscle_group: 6,
-    difficulty: 1 },
-  { id: 52,
-    name: 'Pushups',
-    rep_time: 1900,
-    youtube_link: 'https://www.youtube.com/embed/ZWdBqFLNljc',
-    id_muscle_group: 6,
-    difficulty: 1 },
-  { id: 54,
-    name: 'Decline Pushups',
-    rep_time: 1700,
-    youtube_link: 'https://www.youtube.com/embed/WBmXffkfcXQ',
-    id_muscle_group: 6,
-    difficulty: 2 },
-  { id: 50,
-    name: 'Close Grip Pushups',
-    rep_time: 2200,
-    youtube_link: 'https://www.youtube.com/embed/av5zfxzSFEc',
-    id_muscle_group: 6,
-    difficulty: 2 },
-  { id: 43,
-    name: 'Body Up',
-    rep_time: 2100,
-    youtube_link: 'https://www.youtube.com/embed/VYgVTinbx_A',
-    id_muscle_group: 5,
-    difficulty: 2 },
-  { id: 44,
-    name: 'Tricep Pushup',
-    rep_time: 1200,
-    youtube_link: 'https://www.youtube.com/embed/L99AyyEDBYA',
-    id_muscle_group: 5,
-    difficulty: 2 },
-  { id: 20,
-    name: 'Spider Man',
-    rep_time: 2100,
-    youtube_link: 'https://www.youtube.com/embed/HVyHcalg61g',
-    id_muscle_group: 2,
-    difficulty: 2 },
-  { id: 17,
-    name: 'Dead Bug',
-    rep_time: 3000,
-    youtube_link: 'https://www.youtube.com/embed/4XLEnwUr1d8',
-    id_muscle_group: 2,
-    difficulty: 1 } ]
-{ id: 52,
-  name: 'Pushups',
-  rep_time: 1900,
-  youtube_link: 'https://www.youtube.com/embed/ZWdBqFLNljc',
+User {
+  raw: { locale: 'en-US', userId: '15399669498774266985589' },
+  storage: {},
+  _id: '15399669498774266985589',
+  locale: 'en-US',
+  permissions: [],
+  last: Last {},
+  name: Name { display: undefined, family: undefined, given: undefined },
+  entitlements: [],
+  access: Access { token: undefined },
+  profile: Profile { token: undefined } }
+2 ' greetings response index'
+2 ' link account response index'
+inside the start workout intent at the beginning
+inside the start workout intent
+47 ' last user exercise before being applied to googleworkout'
+{ id: 53,
+  name: 'Incline Pushups',
+  rep_time: 1200,
+  youtube_link: 'https://www.youtube.com/embed/YTfBUgAJB2c',
   id_muscle_group: 6,
-  difficulty: 1 } ' this should the current workout object'
-15396153708932371539584  looking for the value of the session id
-15396153708932371539584  conv.id inside the start workout intent
-[ { id: 48,
-    name: 'Clock Pushups',
-    rep_time: 2600,
-    youtube_link: 'https://www.youtube.com/embed/UNm1XpJTijM',
-    id_muscle_group: 6,
-    difficulty: 2 },
-  { id: 48,
-    name: 'Clock Pushups',
-    rep_time: 2600,
-    youtube_link: 'https://www.youtube.com/embed/UNm1XpJTijM',
-    id_muscle_group: 6,
-    difficulty: 2 },
-  { id: 48,
-    name: 'Clock Pushups',
-    rep_time: 2600,
-    youtube_link: 'https://www.youtube.com/embed/UNm1XpJTijM',
-    id_muscle_group: 6,
-    difficulty: 2 },
-  { id: 53,
-    name: 'Incline Pushups',
-    rep_time: 1200,
-    youtube_link: 'https://www.youtube.com/embed/YTfBUgAJB2c',
-    id_muscle_group: 6,
-    difficulty: 1 },
-  { id: 42,
-    name: 'Dips',
-    rep_time: 1800,
-    youtube_link: 'https://www.youtube.com/embed/6kALZikXxLc',
-    id_muscle_group: 5,
-    difficulty: 1 },
-  { id: 44,
-    name: 'Tricep Pushup',
-    rep_time: 1200,
-    youtube_link: 'https://www.youtube.com/embed/L99AyyEDBYA',
-    id_muscle_group: 5,
-    difficulty: 2 },
-  { id: 13,
-    name: 'Hip Raises',
-    rep_time: 1300,
-    youtube_link: 'https://www.youtube.com/embed/UixUHdUyShE',
-    id_muscle_group: 2,
-    difficulty: 2 },
-  { id: 13,
-    name: 'Hip Raises',
-    rep_time: 1300,
-    youtube_link: 'https://www.youtube.com/embed/UixUHdUyShE',
-    id_muscle_group: 2,
-    difficulty: 2 } ]
-{ id: 52,
-  name: 'Pushups',
-  rep_time: 1900,
-  youtube_link: 'https://www.youtube.com/embed/ZWdBqFLNljc',
+  difficulty: 1,
+  description: '<p><s>Get in the standard pushup position with your hands on an elevated surface slightly wider than shoulder width. </s><s>Your elbows should be completely locked out.</s></p><p><s>Keeping your body straight, lower your chest to the elevated surface.</s><s> Pause and push back to the starting position, keeping core engaged</s></p>',
+  spanish_description: '<p><s>Entre en la posición de la alza estándar de sus manos en una superficie elevada ligeramente más amplia que la anchura del hombro. </s><s>Los codos deben estar completamente cerrados.</s></p><p><s>Manteniendo el cuerpo recto, baje el pecho a la superficie elevada.</s><s> Pausa y empuje de nuevo a la posición de salida, manteniendo el núcleo enganchado</s></p>',
+  nombre: 'Flexiones de Cuesta' } ' this is google workout index 0'
+{ id: 53,
+  name: 'Incline Pushups',
+  rep_time: 1200,
+  youtube_link: 'https://www.youtube.com/embed/YTfBUgAJB2c',
   id_muscle_group: 6,
-  difficulty: 1 } ' this should the current workout object'
-15396153708932371539584  conv.id inside of the next exercise intent
+  difficulty: 1,
+  description: '<p><s>Get in the standard pushup position with your hands on an elevated surface slightly wider than shoulder width. </s><s>Your elbows should be completely locked out.</s></p><p><s>Keeping your body straight, lower your chest to the elevated surface.</s><s> Pause and push back to the starting position, keeping core engaged</s></p>',
+  spanish_description: '<p><s>Entre en la posición de la alza estándar de sus manos en una superficie elevada ligeramente más amplia que la anchura del hombro. </s><s>Los codos deben estar completamente cerrados.</s></p><p><s>Manteniendo el cuerpo recto, baje el pecho a la superficie elevada.</s><s> Pausa y empuje de nuevo a la posición de salida, manteniendo el núcleo enganchado</s></p>',
+  nombre: 'Flexiones de Cuesta' } ' the current exercise after first time'
+1 ' startWorkoutObjResponses response index'
+inside the describe intent
+inside the start workout intent at the beginning
+inside the start workout intent
+47 ' last user exercise before being applied to googleworkout'
+{ id: 55,
+  name: 'Pushups to Plank',
+  rep_time: 6000,
+  youtube_link: 'https://www.youtube.com/embed/wHC_KoaCu6U',
+  id_muscle_group: 6,
+  difficulty: 3,
+  description: '<p>Start in a plank position on your forearms with your feet shoulder width apart and your lower back flat.</p><p>Press your body up to a push-up position and then lower yourself back down into the plank.</p><p>Do all the reps on one side or alternate sides for the recommended number of reps.</p>',
+  spanish_description: '<p>Comience en una posición de tablón sobre sus antebrazos con los pies separados de la anchura de los hombros y la parte inferior de la espalda plana.</p><p>Press your body up to a push-up position and then lower yourself back down into the plank.</p><p>Haga a todos los representantes en un lado o alterne lados para el número recomendado de representantes.</p>',
+  nombre: 'Flexiones a Postura en Tabla' } ' this is google workout index 0'
+{ id: 55,
+  name: 'Pushups to Plank',
+  rep_time: 6000,
+  youtube_link: 'https://www.youtube.com/embed/wHC_KoaCu6U',
+  id_muscle_group: 6,
+  difficulty: 3,
+  description: '<p>Start in a plank position on your forearms with your feet shoulder width apart and your lower back flat.</p><p>Press your body up to a push-up position and then lower yourself back down into the plank.</p><p>Do all the reps on one side or alternate sides for the recommended number of reps.</p>',
+  spanish_description: '<p>Comience en una posición de tablón sobre sus antebrazos con los pies separados de la anchura de los hombros y la parte inferior de la espalda plana.</p><p>Press your body up to a push-up position and then lower yourself back down into the plank.</p><p>Haga a todos los representantes en un lado o alterne lados para el número recomendado de representantes.</p>',
+  nombre: 'Flexiones a Postura en Tabla' } ' the current exercise after first time'
+3 ' startWorkoutObjResponses response index'
+inside the start workout intent at the beginning
+inside the start workout intent
+47 ' last user exercise before being applied to googleworkout'
+{ id: 51,
+  name: 'Wide Grip Pushups',
+  rep_time: 2200,
+  youtube_link: 'https://www.youtube.com/embed/7A6Gy48pPR8',
+  id_muscle_group: 6,
+  difficulty: 1,
+  description: '<p>Assume a quadruped position on the floor with your hands outside your shoulders, toes tucked, and knees under hips.</p><p>Extend one leg at a time and assume a pushup position with the legs straight, elbows extended, and head in a neutral position looking at the floor.</p><p>Slowly descend to the floor by retracting the shoulder blades and unlocking the elbows.</p><p>Descend until the upper arms are parallel or your chest touches the floor.</p><p>Push back to the starting point by extending the elbows and driving your palms into the floor.</p><p>Repeat</p>',
+  spanish_description: '<p>Asuma una posición cuadrúpedo en el piso con las manos fuera de los hombros, los dedos de los pies escondidos y las rodillas bajo las caderas.</p><p>Extend one leg at a time and assume a pushup position with the legs straight, elbows extended, and head in a neutral position looking at the floor.</p><p>Despacio descienda al suelo retrayendo los omóplatos y abriendo los codos.</p><p>Descienda hasta que los brazos superiores estén paralelos o el pecho toque el suelo.</p><p>Empuje hacia atrás hasta el punto de partida extendiendo los codos y conduciendo las palmas hacia el suelo.</p><p>Repita</p>',
+  nombre: 'Flexiones de Sujeción Ancho' } ' this is google workout index 0'
+{ id: 51,
+  name: 'Wide Grip Pushups',
+  rep_time: 2200,
+  youtube_link: 'https://www.youtube.com/embed/7A6Gy48pPR8',
+  id_muscle_group: 6,
+  difficulty: 1,
+  description: '<p>Assume a quadruped position on the floor with your hands outside your shoulders, toes tucked, and knees under hips.</p><p>Extend one leg at a time and assume a pushup position with the legs straight, elbows extended, and head in a neutral position looking at the floor.</p><p>Slowly descend to the floor by retracting the shoulder blades and unlocking the elbows.</p><p>Descend until the upper arms are parallel or your chest touches the floor.</p><p>Push back to the starting point by extending the elbows and driving your palms into the floor.</p><p>Repeat</p>',
+  spanish_description: '<p>Asuma una posición cuadrúpedo en el piso con las manos fuera de los hombros, los dedos de los pies escondidos y las rodillas bajo las caderas.</p><p>Extend one leg at a time and assume a pushup position with the legs straight, elbows extended, and head in a neutral position looking at the floor.</p><p>Despacio descienda al suelo retrayendo los omóplatos y abriendo los codos.</p><p>Descienda hasta que los brazos superiores estén paralelos o el pecho toque el suelo.</p><p>Empuje hacia atrás hasta el punto de partida extendiendo los codos y conduciendo las palmas hacia el suelo.</p><p>Repita</p>',
+  nombre: 'Flexiones de Sujeción Ancho' } ' the current exercise after first time'
+1 ' startWorkoutObjResponses response index'
+inside the next intent
+0 ' nextExerObjResponses response index'
+51 ' the current exercise id that should be updating the database'
+added current workout to user profile before ending session
+User {
+  raw: 
+   { lastSeen: '2018-10-18T01:49:14Z',
+     locale: 'es-ES',
+     userId: 'ABwppHGLqn675Fm_YOFqhBz5qehetRt6w-f6LYSh0z9WiFQYRwjjcWXYTw4OaNbvwBk7JwCp07B4034P2g' },
+  storage: {},
+  _id: 'ABwppHGLqn675Fm_YOFqhBz5qehetRt6w-f6LYSh0z9WiFQYRwjjcWXYTw4OaNbvwBk7JwCp07B4034P2g',
+  locale: 'es-ES',
+  permissions: [],
+  last: Last { seen: 2018-10-18T01:49:14.000Z },
+  name: Name { display: undefined, family: undefined, given: undefined },
+  entitlements: [],
+  access: Access { token: undefined },
+  profile: Profile { token: undefined } }
+User {
+  raw: { locale: 'en-US', userId: '1539969200176423873043' },
+  storage: {},
+  _id: '1539969200176423873043',
+  locale: 'en-US',
+  permissions: [],
+  last: Last {},
+  name: Name { display: undefined, family: undefined, given: undefined },
+  entitlements: [],
+  access: Access { token: undefined },
+  profile: Profile { token: undefined } }
+2 ' greetings response index'
+51 ' the current exercise id that should be updating the database'
+User {
+  raw: 
+   { lastSeen: '2018-10-19T17:12:14Z',
+     locale: 'es-ES',
+     userId: 'ABwppHGLqn675Fm_YOFqhBz5qehetRt6w-f6LYSh0z9WiFQYRwjjcWXYTw4OaNbvwBk7JwCp07B4034P2g' },
+  storage: {},
+  _id: 'ABwppHGLqn675Fm_YOFqhBz5qehetRt6w-f6LYSh0z9WiFQYRwjjcWXYTw4OaNbvwBk7JwCp07B4034P2g',
+  locale: 'es-ES',
+  permissions: [],
+  last: Last { seen: 2018-10-19T17:12:14.000Z },
+  name: Name { display: undefined, family: undefined, given: undefined },
+  entitlements: [],
+  access: Access { token: undefined },
+  profile: Profile { token: undefined } }
+User {
+  raw: { locale: 'en-US', userId: '15399735248211596547729' },
+  storage: {},
+  _id: '15399735248211596547729',
+  locale: 'en-US',
+  permissions: [],
+  last: Last {},
+  name: Name { display: undefined, family: undefined, given: undefined },
+  entitlements: [],
+  access: Access { token: undefined },
+  profile: Profile { token: undefined } }
+2 ' greetings response index'
+0 ' link account response index'
+51 ' the current exercise id that should be updating the database'
+added current workout to user profile before ending session
