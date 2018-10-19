@@ -26,7 +26,7 @@ app.intent('Default Welcome Intent', conv =>{
 
     // console.log(conv.user.raw.locale, ' this is should be a this is the user property')
     
-    conv.ask(greetings[1]);
+    conv.ask(greetings[index]);
 
   }
 });
@@ -89,10 +89,14 @@ app.intent('link account', conv => {
 
 
 app.intent('start workout', conv => {
+  console.log('inside the start workout intent at the beginning');
+
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
+    let gender = null;
     return db.getUserInfoByGoogleSessionId(conv.id)
       .then(user => {
         if (user !== undefined) {
+          gender = user.sex;
           const squatComf = user.squat_comf;
           const numWorkouts = user.workout_completes;
           return workout.generateWorkout(numWorkouts, squatComf);
@@ -103,7 +107,7 @@ app.intent('start workout', conv => {
           }));
         }
       })
-      .then(genWorkout => {
+      .then((genWorkout) => {
         if (genWorkout !== undefined) {
           googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
           return googleWorkout.splice(0, 1);
@@ -112,14 +116,12 @@ app.intent('start workout', conv => {
       .then(([currentExercise]) => {
         if (currentExercise !== undefined) {
           current = currentExercise;
-          // console.log(current, ' this should the current workout object');
 
           let index = randomNumGen(spanishStartWorkoutObjResponsesMasculine.length);
 
           conv.ask(new SimpleResponse({
             text: 'Avísame cuando esté listo de empezar.',
-            // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
-            speech: spanishStartWorkoutObjResponsesMasculine[index].before + current.name + spanishStartWorkoutObjResponsesMasculine[index].after
+            speech: spanishStartWorkoutObjResponsesMasculine[index].before + current.nombre + spanishStartWorkoutObjResponsesMasculine[index].after
           }));
 
         }
@@ -137,7 +139,7 @@ app.intent('start workout', conv => {
     // conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    // console.log(conv.id, ' conv.id inside the start workout intent');
+    console.log('inside the start workout intent');
     // need to remember to grab the conversation id
     return db.getUserInfoByGoogleSessionId(conv.id)
     .then(user => {
@@ -188,6 +190,8 @@ app.intent('start workout', conv => {
 });
 
 app.intent('describe exercise', conv => {
+  console.log('inside the describe intent');
+
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     return db.getExerciseDescription()
       .then(({ description }) => {
@@ -196,11 +200,14 @@ app.intent('describe exercise', conv => {
       })
   } else {
 
-    return db.getExerciseDescription(11)
-      .then(({ description }) =>{
+    conv.ask('<speak> <prosody pitch="+16%"> ' + current.description + " </prosody> </speak>");
+    // return db.getExerciseDescription(49)
+    //   .then(({ description }) =>{
         
-        conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
-      })
+    //     conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
+    //   }).catch(err =>{
+    //     console.error(err);
+    //   });
     // conv.ask("<speak> This is the description for" + current.name +" </speak>");
     // conv.ask("<speak>" + current.description + "</speak>");
   }
@@ -208,7 +215,11 @@ app.intent('describe exercise', conv => {
 
 app.intent('take a break', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
+<<<<<<< HEAD
     conv.close(`De, acuerdo, seguimos más tarde.`);
+=======
+    conv.close(`De acuerdo, seguimos mas tarde.`);
+>>>>>>> 7919d9a1d36a39a84504cc71b7ac3e52b3f17189
   } else {
     conv.close(`Okay, we will pick this up again later`);
   }
@@ -216,6 +227,8 @@ app.intent('take a break', conv => {
 
 app.intent('next exercise', conv => {
   // console.log(conv.id, " conv.id inside of the next exercise intent");
+  console.log('inside the next intent');
+
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     return db.getUserInfoByGoogleSessionId(conv.id)
       .then(user => {
@@ -310,12 +323,14 @@ app.intent('next exercise', conv => {
         text: 'Something went wrong',
         // speech: `<speak> <p> <s> I'm sorry something appears to have gone wrong. </s> Please try again </p> </speak>`
         speech: errorResponses[index]
-      }));
+      })); 
       })
     }
 });
 
 app.intent('Default Fallback Intent', conv => {
+  console.log('inside the fallback intent');
+
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`Hola, mi llamo alexa`);
   } else {

@@ -106,7 +106,22 @@ module.exports = {
   },
 
   generateWorkoutLeg: function(difficulty, index, prev){
-    if(index === 1){
+    if (index === 0) {
+      return Promise.all([
+          generateQuadExercise(difficulty),
+          generateQuadExercise(difficulty),
+          generateQuadExercise(difficulty),
+          generateQuadExercise(difficulty),
+          generateLegExercise(difficulty),
+          generateLegExercise(difficulty),
+          generateAbExercise(difficulty),
+          generateAbExercise(difficulty)
+        ])
+        .then(results => results.reduce((final, curr) => final.concat(curr), []))
+        .catch((err) => {
+          console.error(err)
+        })
+    } else if(index === 1){
       return Promise.all([
         generateQuadExercise(difficulty),
         db.getExerciseById(prev),
@@ -197,7 +212,7 @@ module.exports = {
       .catch((err) => {
         console.error(err)
       })
-    }else if(index === 7){
+    }else {
       return Promise.all([
         generateQuadExercise(difficulty),
         generateQuadExercise(difficulty),
@@ -212,22 +227,7 @@ module.exports = {
       .catch((err) => {
         console.error(err)
       })
-    } else {
-      return Promise.all([
-          generateQuadExercise(difficulty),
-          generateQuadExercise(difficulty),
-          generateQuadExercise(difficulty),
-          generateQuadExercise(difficulty),
-          generateLegExercise(difficulty),
-          generateLegExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty)
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), []))
-        .catch((err) => {
-          console.error(err)
-        })
-    }
+    } 
   },
 
   generateWorkoutBack: function(difficulty, index, prev){
@@ -336,7 +336,7 @@ module.exports = {
         .catch((err) => {
           console.error(err)
         })
-    } else if (index === 7){
+    } else{
       return Promise.all([
         generateBackExercise(difficulty),
         generateBackExercise(difficulty),
@@ -461,7 +461,7 @@ module.exports = {
       .catch((err) => {
         console.error(err)
       })
-    } else if (index === 7){
+    } else {
       return Promise.all([
         generateChestExercise(difficulty),
         generateChestExercise(difficulty),
@@ -480,8 +480,21 @@ module.exports = {
   },
 
   generateWorkoutCardio: function(difficulty, index, prev){
-   console.log('hhh')
-  if (index === 1){
+    if(!index){
+    return Promise.all([
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateCardioExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+      generateAbExercise(difficulty),
+    ])
+    .then(results => results.reduce((final, curr) => final.concat(curr), []))
+    .catch(err => console.error(err));
+    }
+    if (index === 1){
     return Promise.all([
       generateCardioExercise(difficulty),
       db.getExerciseById(prev),
@@ -560,7 +573,7 @@ module.exports = {
     ])
     .then(results => results.reduce((final, curr) => final.concat(curr), []))
     .catch(err => console.error(err));
-    } else if ( index === 7){
+    } else{
     return Promise.all([
       generateCardioExercise(difficulty),
       generateCardioExercise(difficulty),
@@ -573,20 +586,7 @@ module.exports = {
     ])
     .then(results => results.reduce((final, curr) => final.concat(curr), []))
     .catch(err => console.error(err));
-    } else {
-      return Promise.all([
-          generateCardioExercise(difficulty),
-          generateCardioExercise(difficulty),
-          generateCardioExercise(difficulty),
-          generateCardioExercise(difficulty),
-          generateCardioExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-          generateAbExercise(difficulty),
-        ])
-        .then(results => results.reduce((final, curr) => final.concat(curr), []))
-        .catch(err => console.error(err));
-  }
+    }
 },
   generateWorkout: function(wo_num, difficulty, prev, index){
     return new Promise((resolve, reject)=>{
@@ -644,7 +644,6 @@ module.exports = {
  
 function otherCardio(difficulty, index, prev){
   return new Promise((resolve, reject) => {
-    console.log('hhh')
     let solution = [];
     let i = 0;
     while (i < 8) {

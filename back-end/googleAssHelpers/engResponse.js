@@ -6,12 +6,12 @@ const errorResponses = [`<speak> <p> <s> <prosody rate="slow" volume="-2db"> I'm
 
 const linkAccountObjResponses = [
   {
-    before: '<speak> <s> <prosody pitch="+10%" rate="fast"> Thank </prosody> <prosody pitch="-3%" rate="fast"> you </prosody> <prosody rate="fast"></s> <s> ',
+    before: '<speak> <s> <prosody pitch="+10%" rate="fast"> Thank </prosody> <prosody pitch="-3%" rate="fast"> you </prosody> </s> <prosody rate="fast"><s> ',
     after: '</s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </prosody></speak>'
   },
   {
     before: '<speak><prosody rate="fast"> <s> <prosody pitch="+10%"> We apologize </prosody> for the <prosody pitch="-10%"> inconvenience </prosody> </s> <p> <s>',
-    after: '</s> </p> <break time ="50ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s> </prosody> </speak>'
+    after: '</s> </p> <break time ="5ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s> </prosody> </speak>'
   },
   {
     before: '<speak> <s> <prosody pitch="-5%" rate="slow"> Well </prosody> </s> <p> <s>',
@@ -25,19 +25,19 @@ const linkAccountObjResponses = [
 
 const startWorkoutObjResponses = [
   {
-    before: '<speak> <prosody volume="loud" pitch="+30%"> <s> Let me know when you are ready to begin your ',
+    before: '<speak> <prosody volume="loud" pitch="+20%"> <s> Let me know when you are ready to begin your ',
     after: ' and are in position. </s> </prosody> </speak>'
   },
   {
-    before: '<speak> <prosody volume="loud" pitch="+30%"> <s> Lets do some',
+    before: '<speak> <prosody volume="loud" pitch="+20%"> <s> Lets do some',
     after: '</s> <s> Let me know when you are ready</s> </prosody> </speak>'
   },
   {
-    before: '<speak> <prosody rate="fast" volume="loud" pitch="+30%"> <s> <prosody pitch="+20%" ><emphasis level="reduced"> cowabunga  </emphasis></prosody> </s><s>lets do some',
-    after: '</s> <break time="500ms" /> <prosody pitch="30%" volume="loud"> Come on <break time="5ms" /> Are you ready? </prosody> </prosody> </speak>'
+    before: '<speak> <prosody rate="fast" volume="loud" pitch="+20%"> <s> <emphasis level="reduced"> cowabunga  </emphasis></s><s>lets do some',
+    after: '</s> <break time="500ms" /> Come on <break time="5ms" /> Are you ready? </prosody> </speak>'
   },
   {
-    before: '<speak> <prosody rate="fast" volume="loud" pitch="+30%"> <s> Alright it is ',
+    before: '<speak> <prosody rate="fast" volume="loud" pitch="+20%"> <s> Alright it is ',
     after: ' time </s> <s> Let\'s get going! </s> <s> You ready? </s> </prosody>  </speak>'
   }
 ];
@@ -45,13 +45,13 @@ const startWorkoutObjResponses = [
 const nextExerObjResponses = [
   {
     part1: {
-      before: '<speak> <s> The recommended pace for ',
+      before: '<speak> <prosody pitch="+15%"> <s> The recommended pace for ',
       prep: 'is',
       after: ' seconds. </s> <s> Let\'s begin </s> <break time="500ms" />'
     },
     part2: {
-      before: ' <s> Let\ss take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
-      after: ', we can do that as well</s> </speak>'
+      before: ' <s> Let\'s take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
+      after: ', we can do that as well</s> </prosody> </speak>'
     }
   }
 ];
@@ -82,7 +82,7 @@ const greetings = [
         I will need you to connect our session to your home fit account
       </s>
       <s>
-        To do that all you have to do is say link my account and say your account name
+        To do that all you have to do is say link my account and say your home fit account name
       </s>
       <s>
         after you link up we can begin today's workout
@@ -114,7 +114,7 @@ const greetings = [
           Don't forget you will need to connect our current session with your home fit username
         </s>
         <s>
-          all you have to do is say link my account and say your account name 
+          all you have to do is say link my account and say your home fit account name 
         </s>
         </prosody>
       </p>
@@ -140,10 +140,18 @@ const greetings = [
         The only trainer you will ever need.
       </s>
     </p>
+    <p>
+      Link your session and we can begin
+    </p>
   </speak>`,
 
   `<speak> 
     <p> 
+      <s>
+        <prosody volume="+3db" pitch="+25%" >
+          Welcome to Home Fit trainer
+        </prosody>
+      </s>
       <s> 
         To begin, you must link your account to our current session. 
       </s>

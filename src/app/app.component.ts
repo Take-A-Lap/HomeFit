@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private router: Router) {}
   changePage(page) {
-    // console.log(this.winRef.nativeWindow.data);
     this.router.navigate([page]);
   }
   ngOnInit() {
