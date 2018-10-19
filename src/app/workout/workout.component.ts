@@ -121,8 +121,7 @@ export class WorkoutComponent implements OnInit {
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
         this.start = true;
       } else {
-        Promise.all([this.storeCompleted(), this.storeInProgress(this.id, this.previous, 0), this.increaseWONum()])
-          .then(() => this.home())
+        Promise.all([this.storeCompleted(), this.storeInProgress(this.id, this.previous, 0), this.increaseWONum(), this.home()])
           .catch(err => console.error(err))
         ;        
       }
