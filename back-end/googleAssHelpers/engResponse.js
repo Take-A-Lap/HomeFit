@@ -10,10 +10,7 @@ const linkAccountObjResponses = [
     <speak> 
       <prosody pitch="+10%" rate="fast">
         <s> 
-          Thank 
-          <prosody pitch="-3%" >
-            you 
-          </prosody> 
+          Thank you 
         </s> 
         <s> `,
     after: `
@@ -30,16 +27,75 @@ const linkAccountObjResponses = [
     </speak>`
   },
   {
-    before: '<speak><prosody rate="fast"> <s> <prosody pitch="+10%"> We apologize </prosody> for the <prosody pitch="-10%"> inconvenience </prosody> </s> <p> <s>',
-    after: '</s> </p> <break time ="5ms"/> <s> We have now linked your account to your current session with us. </s> <s> Lets get you moving </s> </prosody> </speak>'
+    before: `
+    <speak>
+      <prosody rate="fast"> 
+        <s> 
+          <prosody pitch="+10%"> 
+            We apologize 
+          </prosody> 
+          for the 
+          <prosody pitch="-10%"> 
+            inconvenience 
+          </prosody> 
+        </s> 
+        <p> 
+          <s>`,
+    after: `
+          </s> 
+        </p> 
+        <break time ="5ms"/> 
+        <s> 
+          We have now linked your account to your current session with us. 
+        </s> 
+        <s> 
+          Lets get you moving 
+        </s> 
+      </prosody> 
+    </speak>`
   },
   {
-    before: '<speak> <s> <prosody pitch="-5%" rate="slow"> Well </prosody> </s> <p> <s>',
-    after: '</s> </p> <break time="5ms" /> <prosody rate="fast"><s> Looks like we are all set </s> <s> lets get started with those exercises </s> </prosody> </speak>'
+    before: `
+    <speak> 
+      <s> 
+        <prosody pitch="-5%" rate="slow">
+          Well 
+        </prosody> 
+      </s> 
+      <p> 
+        <s>`,
+    after: `
+        </s> 
+      </p> 
+      <break time="5ms" /> 
+      <prosody rate="fast">
+        <s> 
+          Looks like we are all set 
+        </s> 
+        <s> 
+          lets get started with those exercises 
+        </s> 
+      </prosody> 
+    </speak>`
   },
   {
-    before: '<speak> <prosody rate="fast"> <s> <prosody pitch="+20%">>Glad to have you back ',
-    after: ' </prosody> </s> <s> Now that we got all the technical stuff out of the way </s> <s> Lets get ready to start that workout </s> </prosody> </speak>'
+    before: `
+    <speak> 
+      <prosody rate="fast"> 
+        <s> 
+          <prosody pitch="+20%">
+            Glad to have you back `,
+    after: ` 
+          </prosody> 
+        </s> 
+        <s>
+          Now that we got all the technical stuff out of the way 
+        </s> 
+        <s> 
+          Lets get ready to start that workout 
+        </s> 
+      </prosody> 
+    </speak>`
   }
 ];
 
