@@ -146,6 +146,7 @@ const greetings = [
       </s> 
     </p>
     </prosody>
+    <break time="5ms" />
     <p>
       <s>
         Before we begin
