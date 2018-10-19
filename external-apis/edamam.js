@@ -45,7 +45,7 @@ module.exports.getBreakfast = (calorieMin, calorieMax, dietaryRestrictions, call
         callback(breakfastRecipes);
       })
       .catch(error => {
-        console.log(error);
+        console.error(error);
       });
 }
 
@@ -92,7 +92,7 @@ module.exports.getLunchOrDinner = (calorieMin, calorieMax, dietaryRestrictions, 
       callback(lunchOrDinnerRecipes);
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 }
 

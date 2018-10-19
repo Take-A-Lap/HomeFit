@@ -17,9 +17,6 @@ export class SignUpComponent implements OnInit {
 
   onSignIn() {
   }
-  printWindow(){
-    console.log(this);
-  }
 
   socialSignIn(/*socialPlatform: string*/) {
     let socialPlatformProvider;
@@ -33,7 +30,6 @@ export class SignUpComponent implements OnInit {
 
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
-        console.log("sign in data : ", userData);
         // Now sign-in with userData
         // ...
 
