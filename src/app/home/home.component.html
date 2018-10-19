@@ -16,7 +16,6 @@
         <h2 class="welcome">Welcome {{username}}</h2>
       </div>
   </div>
-  <br>
   <div class="row">
     <div class="col-12" *ngFor="let weather of currentWeather">
       <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
@@ -33,12 +32,14 @@
       </div>
     </div>
   </div>
-  <br>
+  
   <div class="row">
-
     <div class="col-xs-12 col-md-12">
       <!-- <h3>Workout Log</h3> -->
       <a routerLink="/workout"><button class="workoutButton">Workout</button></a>
+<br>
+<br>
+<br>
       <table class="table" cellpadding="15">
         <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <thead>

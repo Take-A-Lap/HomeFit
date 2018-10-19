@@ -35,6 +35,7 @@
   color: white;
   margin: 0 auto;
   background-size: cover;
+  max-height: 80%;
 }
 
 .clock {
@@ -82,9 +83,12 @@ h4 {
 }
 
 .workoutButton {
-  width: 100%;
-  background-color: #CCD0F5;
-  color: #33CC33;
+ border-radius: 25px;
+ background-color: #CCD0F5;
+ color: #33CC33;
+ position: absolute;
+ width: 93%;
+ height: 30%;
 }
 
 .welcome {
