@@ -71,16 +71,17 @@ h2 {
 h3 {
   font-family: digital;
   font-size: 75px;
-  color: #CCD0F5;
+  color: #33CC33;
 }
 
 .reps_title {
   float: left;
 }
 .rep_button {
+  border-radius: 25px;
   background-color: #CCD0F5;
   color: #33CC33;
   position: absolute;
   width: 93%;
-  height: 20%;
+  height: 30%;
 }
