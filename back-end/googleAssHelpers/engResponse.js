@@ -50,7 +50,7 @@ const nextExerObjResponses = [
       after: ' seconds. </s> <s> Let\'s begin </s> <break time="500ms" />'
     },
     part2: {
-      before: ' <s> Let\ss take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
+      before: ' <s> Let\'s take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
       after: ', we can do that as well</s> </prosody> </speak>'
     }
   }
