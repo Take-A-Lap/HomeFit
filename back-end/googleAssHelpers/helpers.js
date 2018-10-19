@@ -161,11 +161,14 @@ app.intent('start workout', conv => {
       if (genWorkout !== undefined) {
         googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
         console.log(lastUserExercise, ' last user exercise before being applied to googleworkout');
-        if(!hasRun && lastUserExercise !== undefined){
+        if(!hasRun && !lastUserExercise){
           googleWorkout.unshift(lastUserExercise);
           hasRun = true;
         }
-        console.log(googleWorkout, ' this is google workout');
+        console.log(googleWorkout[0], ' this is google workout index 0');
+        if(googleWorkout[0] === null){
+          googleWorkout.splice(0, 1);
+        }
         return googleWorkout.splice(0, 1);
       }
     })
@@ -188,8 +191,10 @@ app.intent('start workout', conv => {
         return db.getExerciseById(currentExercise);
       }
     })
-    .then(([currentExercise]) =>{
+    .then((currentExercise) =>{
+
       if (currentExercise !== undefined) {
+        [currentExercise] = currentExercise;
         current = currentExercise;
         // console.log(current, ' this should the current workout object');
 
@@ -252,8 +257,10 @@ app.intent('take a break', conv => {
     conv.close(`De, acuerdo, seguimos más tarde.`);
   } else {
     db.getUserInfoByGoogleSessionId(conv.id)
-    .then(user => {
-      return db.updateLastWO((user.id, current.id))
+    .then((user) => {
+      console.log(current.id, ' the current exercise id that should be updating the database');
+      
+      return db.updateLastWO((user.id, current.id));
     })
     .then(() => {
       console.log('added current workout to user profile before ending session');
