@@ -192,7 +192,7 @@ app.intent('describe exercise', conv => {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    return db.getExerciseDescription(41)
+    return db.getExerciseDescription(42)
       .then(({ description }) =>{
         
         conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
