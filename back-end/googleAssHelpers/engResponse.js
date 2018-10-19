@@ -224,9 +224,10 @@ const greetings = [
   </speak>`,
 
   `<speak> 
+  <voice gender="male" age="7" required="gender age variant">
     <p> 
       <s>
-        <prosody volume="+3db" pitch="+25%" >
+        <prosody rate="" volume="+3db" pitch="+25%" >
           Welcome to Home Fit trainer
         </prosody>
       </s>
@@ -237,6 +238,7 @@ const greetings = [
         To achieve this, simply say link my account and your username.
       </s>
     </p>
+  </voice>
   </speak>`
 
   // `<speak>
