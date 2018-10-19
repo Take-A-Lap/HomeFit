@@ -28,7 +28,7 @@ app.intent('Default Welcome Intent', conv =>{
 
     // console.log(conv.user.raw.locale, ' this is should be a this is the user property')
     
-    conv.ask(greetings[0]);
+    conv.ask(greetings[1]);
 
   }
 });
