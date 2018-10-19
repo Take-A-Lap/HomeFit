@@ -24,6 +24,7 @@
 
 .nav a {
   font-family: 'Ubuntu';
+  text-transform: uppercase;
   color: #F5F4F3;
 }
 
@@ -67,6 +68,8 @@ iframe {
 }
 h2 {
   color: #F5F4F3;
+  font-size: 35px;
+  text-align: center;
   font-family: 'Ubuntu';
 }
 h3 {
@@ -81,11 +84,11 @@ h3 {
 .rep_button {
   font-family: 'Ubuntu';
   text-transform: uppercase;
-  border-radius: 25px;
+  border-radius: 5px;
   background-color: #B73A58;
   color: #F5F4F3;
   font-size: 2em;
-  font-weight: 900;
+  /* font-weight: bold; */
   position: absolute;
   width: 93%;
   height: 30%;

@@ -48,10 +48,10 @@
 }
 .forecastText {
   font-family: 'Ubuntu';
-  color: white;
+  color: #F5F4F3;
   font-weight: bold;
   padding-left: 10px;
-  text-shadow: 2px 2px #000000;
+  text-shadow: 2px 2px #27213B;
 }
 
 .weatherImage {
