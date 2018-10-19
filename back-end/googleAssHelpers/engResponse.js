@@ -183,9 +183,9 @@ const greetings = [
       </p> 
       <p>
         <prosody rate="slow" volume="-1db" pitch="-5%">
-          <s>
+          
             But
-          </s>
+          
         </prosody>
         <prosody volume="+1db" pitch="+5%">
         <s>
