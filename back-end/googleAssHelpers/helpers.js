@@ -196,13 +196,14 @@ app.intent('describe exercise', conv => {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    return db.getExerciseDescription(49)
-      .then(({ description }) =>{
+    conv.ask('<speak> <prosody pitch="+16%"> ' + current.description + " </prosody> </speak>");
+    // return db.getExerciseDescription(49)
+    //   .then(({ description }) =>{
         
-        conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
-      }).catch(err =>{
-        console.error(err);
-      });
+    //     conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
+    //   }).catch(err =>{
+    //     console.error(err);
+    //   });
     // conv.ask("<speak> This is the description for" + current.name +" </speak>");
     // conv.ask("<speak>" + current.description + "</speak>");
   }
