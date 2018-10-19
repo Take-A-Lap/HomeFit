@@ -186,7 +186,7 @@ app.intent('start workout', conv => {
       }
     })
     .then(([currentExercise]) =>{
-      if (currentExercise !== undefined && typeof currentExercise !== 'number') {
+      if (currentExercise !== undefined) {
         current = currentExercise;
         // console.log(current, ' this should the current workout object');
 
