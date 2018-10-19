@@ -189,7 +189,11 @@ app.intent('start workout', conv => {
 
 app.intent('describe exercise', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    conv.ask(`Hola, mi llamo alexa`);
+    return db.getExerciseDescription()
+      .then(({ description }) => {
+
+        conv.ask(`<speak> ${description} </speak>`);
+      })
   } else {
 
     return db.getExerciseDescription(11)
