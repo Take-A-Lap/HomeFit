@@ -145,6 +145,8 @@ const greetings = [
         </prosody>
       </s> 
     </p>
+    </prosody>
+    <break time="5ms" />
     <p>
       <s>
         Before we begin
@@ -159,7 +161,6 @@ const greetings = [
         after you link up we can begin today's workout
       </s>
     </p>
-    </prosody>
   </speak>`,
 
   `<speak> 
