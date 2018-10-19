@@ -74,7 +74,7 @@ app.intent('link account', conv => {
         conv.ask(new SimpleResponse({
           text: `Thank You!`,
           // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
-          speech: linkAccountObjResponses[2].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[2].after
+          speech: linkAccountObjResponses[3].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[3].after
 
           // speech: linkAccountObjResponses[index].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[index].after
         }));
