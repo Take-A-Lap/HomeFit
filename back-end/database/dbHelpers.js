@@ -128,7 +128,7 @@ module.exports = {
     (id_user, date, completed)
     VALUES
     ($1, $2, $3)
-  `, [exerciseId, userId, isCompleted]),
+  `, [userId, date, isCompleted]),
 
   updateNoWO: (user_id, newWONum)=> db.any(`
       UPDATE users
