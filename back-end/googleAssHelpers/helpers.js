@@ -97,7 +97,7 @@ app.intent('start workout', conv => {
           gender = user.sex;
           const squatComf = user.squat_comf;
           const numWorkouts = user.workout_completes;
-          // console.log('we should have assigned gender ', gender);
+          console.log('we should have assigned gender ', gender);
           return workout.generateWorkout(numWorkouts, squatComf);
         } else {
           conv.ask(new SimpleResponse({
