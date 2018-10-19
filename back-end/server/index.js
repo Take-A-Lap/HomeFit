@@ -155,7 +155,7 @@ app.get('/dinner', (req,res)=>{
   meal.getDinner()
   .then(recipes=> recipes.map(recipe=>recipe.recipe))
     .then(dinner=>res.send(dinner))
-    .catch(err=>console.log(err));
+    .catch(err=>console.error(err));
 })
 
 app.get('/lunch', (req,res) => {
@@ -169,7 +169,7 @@ app.get('/breakfast', (req, res) => {
   meal.getBreakfast()
     .then(recipes => recipes.map(recipe => recipe.recipe))
     .then(dinner => res.send(dinner))
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 })
 
 app.post('/signUp', (req, res) =>{
@@ -325,7 +325,7 @@ app.post('/savePartial', (req, res) => {
   let { id, exerciseId } = req.body;
   const d = new Date();
   db.insertPartialWorkout(id, exerciseId, d)
-    .then(res => console.log(res))
+    .then()
     .catch(error => console.error());
   res.send('got it')
 })
