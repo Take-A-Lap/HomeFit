@@ -33,8 +33,8 @@ const startWorkoutObjResponses = [
     after: '</s> <s> Let me know when you are ready</s> </prosody> </speak>'
   },
   {
-    before: '<speak> <prosody rate="fast" volume="loud" pitch="+30%"> <s> <prosody pitch="+20%" ><emphasis level="reduced"> cowabunga  </emphasis></prosody> </s><s>lets do some',
-    after: '</s> <break time="500ms" /> <prosody pitch="30%" volume="loud"> Come on <break time="5ms" /> Are you ready? </prosody> </prosody> </speak>'
+    before: '<speak> <prosody rate="fast" volume="loud" pitch="+30%"> <s> <emphasis level="reduced"> cowabunga  </emphasis></s><s>lets do some',
+    after: '</s> <break time="500ms" /> Come on <break time="5ms" /> Are you ready? </prosody> </speak>'
   },
   {
     before: '<speak> <prosody rate="fast" volume="loud" pitch="+30%"> <s> Alright it is ',

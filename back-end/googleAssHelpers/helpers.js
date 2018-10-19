@@ -314,7 +314,7 @@ app.intent('next exercise', conv => {
         text: 'Something went wrong',
         // speech: `<speak> <p> <s> I'm sorry something appears to have gone wrong. </s> Please try again </p> </speak>`
         speech: errorResponses[index]
-      }));
+      })); 
       })
     }
 });
