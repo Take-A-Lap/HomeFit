@@ -1,5 +1,5 @@
-const spanishErrorResponse = [`<speak> <p> <s> Lo siento mucho, no le puedo entender. </s> <s> <prosody pitch="+10%"> Podría preguntarme otra vez? </prosody> </s> </p> </speak>`,
-`<speak> <p> <s> Perdóname, no le entiendo. </s> <s> <prosody pitch="+10%"> Puede repetirlo, por favor?</prosody> </s> </p> </speak>`,
+const spanishErrorResponse = [`<speak> <p> <s> Lo siento mucho, no le puedo entender. </s> <s> Podría preguntarme otra vez?  </s> </p> </speak>`,
+`<speak> <p> <s> Perdóname, no le entiendo. </s> <s> Puede repetirlo, por favor? </s> </p> </speak>`,
 `<speak> <p> <s> Me avergüenza decir, </s>  <s> pero le he entendí mal. </s> <s> Repitalo, por favor. </s> </p> </speak>`,
 `<speak> <p> <s> Perdón, </s> <s> dígame otra vez. </s> </p> </speak>`];
 
@@ -113,9 +113,6 @@ const spanishGreetings = [
       <s>
         Bienvenidos al Entrenador de Home Fit.
       </s>
-      <s> 
-        El entrenador se creyó para sus necesidades personales.
-      </s> 
     </p>
     <p>
       <s>
@@ -125,7 +122,7 @@ const spanishGreetings = [
         Necesito que conecte nuestra sesión a su cuenta de Home Fit.
       </s>
       <s>
-        Para hacerlo, solamente tiene que decir conecta a mi cuenta con el nombre de la cuenta.
+        Solamente tiene que decir conecta a mi cuenta con el nombre de la cuenta.
       </s>
       <s>
         despues de ha conectado, podemas empezar el entrenamiento de hoy.
@@ -134,21 +131,17 @@ const spanishGreetings = [
   </speak>`,
   `<speak> 
     <p>
-      <prosody >
         Hola
-      </prosody>
     </p>
     <p>
-      <prosody >
         Tengo muchas ganas de hacer a nuestro entrenamiento hoy.
-      </prosody>
+      
     </p> 
     <p>
-      <prosody >
         <s>
           Sin embargo
         </s>
-      </prosody>
+      
       <s>
         No se olvide que necesitará conectar su nombre de usuario a nuestra sesión de hoy.
       </s>
@@ -156,17 +149,30 @@ const spanishGreetings = [
       Dígame conecta a mi cuenta e el nombre de la cuenta.
       </s>
     </p>
-  </speak>`
+  </speak>`,
   // `<speak>
   //   <p>
   //     Como debo saludar a nuestros usarios Roger?
   //   </p>
   // </speak>`,
-  // `<speak>
-  //   <p>
-  //     Como debo saludar a nuestros usarios Josh?
-  //   </p>
-  // </speak>`,
+    `<speak>
+    <p>
+      <s> 
+        Hola del Entrenador de Home Fit.
+      </s>
+    </p>
+    <p> 
+      <s> 
+        El único entrenador necesitará.
+      </s>
+      <s> 
+        Para empezar, debe conectar a su cuenta a nuestra sesión actual.
+      </s>
+      <s> 
+        Para lograrlo, diga conecta a mi cuenta y su nombre de usuario.
+      </s>
+    </p>
+  </speak>`
   // `<speak>
   //   <p>
   //     Como debo saludar a nuestros usarios Cornelius?
