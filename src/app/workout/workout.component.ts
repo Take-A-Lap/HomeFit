@@ -106,14 +106,13 @@ export class WorkoutComponent implements OnInit {
 
     switchExercise() {
       this.index++;
-      this.storeInProgress(this.id, this.previous, this.index);
       this.exercise = this.workout[this.index];
+      this.storeInProgress(this.id, this.exercise.id, this.index);
       this.name = this.exercise.name;
     }
 
 
     increment() {
-      console.log(this.index)
       if (this.index < 7) {
         this.switchExercise();
         this.previous = this.exercise.id;
