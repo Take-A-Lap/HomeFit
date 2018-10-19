@@ -13,17 +13,19 @@
 }
 
 .container {
-  background-color: #000000;
+  background-color: #27213B;
 }
 
 .nav {
   border-radius: 0px;
-  background-color:#CCD0F5;
+  background-color:#729085;
   text-align: center;
 }
 
 .nav a {
-  color: #33CC33;
+  font-family: 'Ubuntu';
+  text-transform: uppercase;
+  color: #F5F4F3;
 }
 
 img {
@@ -41,7 +43,7 @@ iframe {
 }
 
 .jumbotron {
-  background-color: #333366;
+  background-color: #729085;
   /* background-color: #638493; */
   max-width: 50%;
   max-height: 100%;
@@ -55,7 +57,7 @@ iframe {
   margin-right: 15px
 }
 .jumbotronSet {
-  background-color: #333366;
+  background-color: #729085;
   /* background-color: #638493; */
   max-width: 100%;
   display: flex;
@@ -65,24 +67,28 @@ iframe {
   border-radius: 10px;
 }
 h2 {
-  color: #33CC33;
-  font-family: sans-serif;
+  color: #F5F4F3;
+  font-size: 35px;
+  text-align: center;
+  font-family: 'Ubuntu';
 }
 h3 {
   font-family: digital;
   font-size: 75px;
-  color: #33CC33;
+  color: #F5F4F3;
 }
 
 .reps_title {
   float: left;
 }
 .rep_button {
-  border-radius: 25px;
-  background-color: #CCD0F5;
-  color: #33CC33;
+  font-family: 'Ubuntu';
+  text-transform: uppercase;
+  border-radius: 5px;
+  background-color: #B73A58;
+  color: #F5F4F3;
   font-size: 2em;
-  font-weight: 900;
+  /* font-weight: bold; */
   position: absolute;
   width: 93%;
   height: 30%;
