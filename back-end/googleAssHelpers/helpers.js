@@ -90,20 +90,15 @@ app.intent('link account', conv => {
 
 app.intent('start workout', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
+    let gender = null;
     return db.getUserInfoByGoogleSessionId(conv.id)
       .then(user => {
         if (user !== undefined) {
-          const gender = user.sex;
+          gender = user.sex;
           const squatComf = user.squat_comf;
           const numWorkouts = user.workout_completes;
-          const genWorkout = workout.generateWorkout(numWorkouts, squatComf);
-          console.log(genWorkout, " this is gen workout");
           
-          const returnObj = {
-            genWorkout,
-            gender
-          };
-          return returnObj;
+          return workout.generateWorkout(numWorkouts, squatComf);
         } else {
           conv.ask(new SimpleResponse({
             text: 'Por favor, conecta a su cuenta a la sesión.',
@@ -111,7 +106,7 @@ app.intent('start workout', conv => {
           }));
         }
       })
-      .then(({ genWorkout, gender}) => {
+      .then((genWorkout) => {
         console.log(gender, ' this is gender letter m o f');
         if (genWorkout !== undefined) {
           googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
