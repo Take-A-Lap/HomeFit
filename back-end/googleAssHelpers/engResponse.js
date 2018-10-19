@@ -32,11 +32,7 @@ const linkAccountObjResponses = [
       <prosody rate="fast"> 
         <s> 
           <prosody pitch="+10%"> 
-            We apologize 
-            for the 
-          </prosody>
-          <prosody pitch="-10%"> 
-            inconvenience 
+            We apologize for the inconvenience 
           </prosody> 
         </s> 
         <p> 
