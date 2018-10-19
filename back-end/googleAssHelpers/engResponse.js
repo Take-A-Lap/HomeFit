@@ -79,8 +79,23 @@ const linkAccountObjResponses = [
     </speak>`
   },
   {
-    before: '<speak> <prosody rate="fast"> <s> <prosody pitch="+20%">>Glad to have you back ',
-    after: ' </prosody> </s> <s> Now that we got all the technical stuff out of the way </s> <s> Lets get ready to start that workout </s> </prosody> </speak>'
+    before: `
+    <speak> 
+      <prosody rate="fast"> 
+        <s> 
+          <prosody pitch="+20%">
+            Glad to have you back `,
+    after: ` 
+          </prosody> 
+        </s> 
+        <s>
+          Now that we got all the technical stuff out of the way 
+        </s> 
+        <s> 
+          Lets get ready to start that workout 
+        </s> 
+      </prosody> 
+    </speak>`
   }
 ];
 
