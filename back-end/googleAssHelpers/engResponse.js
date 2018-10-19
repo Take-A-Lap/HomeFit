@@ -206,16 +206,16 @@ const greetings = [
   // </speak>`,
 
   `<speak>
-    <p>
-      <s> 
+    <prosody rate="fast" pitch="+5%" volume="+1db">
+      <p>
         Welcome to Home Fit trainer.
-      </s>
-    </p>
-    <p> 
+      </p>
+    </prosody>
+    <prosody rate="slow" pitch="+15%" volume="+3db">
       <s> 
         The only trainer you will ever need.
       </s>
-    </p>
+    </prosody>
     <p>
       Link your session and we can begin
     </p>
