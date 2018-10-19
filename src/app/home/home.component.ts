@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   imageUrls;;
   mealImages = [];
   meals;
+  user;
   currentWeather = [];
   recommendation;
   workoutDates = [];
@@ -86,11 +87,8 @@ export class HomeComponent implements OnInit {
       }
     })
     .subscribe(user => {
-      let filteredKey = Object.keys(user).filter(key => {
-        return key === 'preferred_username'
-      })
-      let usernameKey = filteredKey[0];
-      this.username = user[usernameKey];
+      this.user = user;
+      console.log(this.user)
     }, 
     error => {
       console.error(error, 'error');
@@ -105,6 +103,7 @@ export class HomeComponent implements OnInit {
         if (compWorkOuts) {
           // concat the dates to the workoutDates stored on the component
           this.workoutDates = this.workoutDates.concat(compWorkOuts);
+          console.log(this.workoutDates)
         }
       });
   }
@@ -205,7 +204,6 @@ export class HomeComponent implements OnInit {
   }
 
   displayMeal(){
-    this.getTime();
     if (this.time >= 21 || this.time < 10) {
       this.getBreakfast();
     } else if (this.time >= 10 && this.time < 14) {
@@ -238,7 +236,6 @@ export class HomeComponent implements OnInit {
     setInterval(() => {
       this.Clock = Date.now();
     }, 1000);
-    // this.clockDisplay();
   }
 
 

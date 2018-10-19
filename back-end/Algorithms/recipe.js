@@ -9,7 +9,7 @@ const axios = require('axios');
 
 const getMeal = function (meat, calorieMin, calorieMax, dietaryRestrictions) {
   const adjustment = dietaryRestrictions ? `&health=${dietaryRestrictions}` : '';
-  return axios.get(`https://api.edamam.com/search?q=${meat}&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`)
+  return axios.get(`https://api.edamam.com/search?q=${meat}&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=20&calories=${calorieMin}-${calorieMax}${adjustment}`)
     .then(recipes => recipes.data.hits)
 };
 const narrowDown = function (array) {
@@ -32,7 +32,7 @@ const narrowDown = function (array) {
 
 module.exports = {
 
-  getBreakfast: ()=>{
+  getBreakfast: (calorieMin, calorieMax, dietaryRestrictions)=>{
     const meats = ['eggs', 'yogurt', 'breakfast']
     return bluebird.map(meats, meat => getMeal(meat, 0, 1000))
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
@@ -41,9 +41,16 @@ module.exports = {
     return getMeal('lunch', 0, 1000)
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
   },
-  getDinner: ()=>{
+  getDinner: (calorieMin, calorieMax, dietaryRestrictions)=>{
     const meats = ['steak', 'chicken', 'beef', 'fish']
     return bluebird.map(meats, meat=>getMeal(meat, 0, 1000))
       .then(meals => narrowDown(meals.reduce((all, curr)=> all.concat(curr), [])))
+  },
+
+  setCalories: (user, today)=>{
+    
+    if(user){
+
+    }
   }
 }

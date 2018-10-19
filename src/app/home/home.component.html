@@ -13,7 +13,7 @@
 </div>
   <div class="row">
       <div class="col-xs-12 col-md-12">
-        <h2 class="welcome">Welcome {{username}}</h2>
+        <h2 class="welcome" *ngIf="user">Welcome {{user.preferred_username}}</h2>
       </div>
   </div>
   <div class="row">
