@@ -224,7 +224,7 @@ const greetings = [
   </speak>`,
 
   `<speak> 
-  <voice gender="male" age="7" required="gender age variant">
+  <voice age="7" >
     <p> 
       <s>
         <prosody rate="" volume="+3db" pitch="+25%" >
