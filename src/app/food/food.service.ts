@@ -16,10 +16,7 @@ export class FoodService {
 
   getLunch() {
     return this.httpClient.get('/lunch')
-      // .subscribe(data => {
-      //   console.log('works', data);
-      // })
-  }
+    }
 
   getDinner() {
     return this.httpClient.get('/dinner');

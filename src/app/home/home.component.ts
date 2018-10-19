@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
     getCurrentTime() {
       this.timeStamp = new Date();
       this.timeStampString = this.timeStamp.toString();
-      // console.log(this.timeStampString);
     }
 
     Clock = Date.now();
@@ -152,7 +151,6 @@ export class HomeComponent implements OnInit {
     return new Promise((resolve, reject)=>{
       this.foodService.getDinner()
         .subscribe(dinnerFood => {
-          console.log(dinnerFood)
           this.meals = dinnerFood;
            let imageUrls = this.meals.map(meal => {
             return {
@@ -214,7 +212,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.getDinner()
       .then((result)=>{
-        console.log(result)
         this.imageUrls = result;
       })
     }

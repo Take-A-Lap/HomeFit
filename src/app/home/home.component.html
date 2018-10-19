@@ -20,14 +20,13 @@
     <div class="col-12" *ngFor="let weather of currentWeather">
       <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
         <div class="forecastText">
-          <div class="clock">{{Clock | date: 'HH:mm:ss'}}</div>
           <div class="weatherText">
             {{weather.city}}, {{weather.state}} {{weather.temp}}˚
             <div>
               {{weather.text}}
             </div> 
           </div>
-          Outdoor Running Conditions: {{weather.recommendation}}
+          Outdoor Exercise Conditions: {{weather.recommendation}}
         </div>
       </div>
     </div>
