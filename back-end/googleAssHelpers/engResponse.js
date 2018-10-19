@@ -151,15 +151,21 @@ const greetings = [
       <s>
         Before we begin
       </s>
-      <s>
-        I will need you to connect our session to your home fit account
-      </s>
-      <s>
-        To do that all you have to do is say link my account and say your home fit account name
-      </s>
-      <s>
-        after you link up we can begin today's workout
-      </s>
+      <prosody pitch="+20%" volume="+2db" >
+        <s>
+          I will need you to connect our session to your home fit account
+        </s>
+      </prosody>
+      <prosody pitch="+15%" volume="+1db">
+        <s>
+          To do that all you have to do is say link my account and say your home fit account name
+        </s>
+      </prosody>
+      <prosody pitch="+10%" >
+        <s>
+          after you link up we can begin today's workout
+        </s>
+      </prosody>
     </p>
   </speak>`,
 
