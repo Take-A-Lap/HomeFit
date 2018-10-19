@@ -8,6 +8,8 @@ const { spanishErrorResponse, spanishLinkAccountObjResponsesFeminine, spanishLin
 const { greetings, nextExerObjResponses, startWorkoutObjResponses, linkAccountObjResponses, errorResponses} = require('./engResponse');
 let googleWorkout = [];
 let current;
+let hasRun = false;
+let lastUserExercise;
 const randomNumGen = (numOptions) => {
   return Math.floor(Math.random() * numOptions);
 };
@@ -146,6 +148,7 @@ app.intent('start workout', conv => {
       if (user !== undefined) {
         const squatComf = user.squat_comf;
         const numWorkouts = user.workout_completes;
+        lastUserExercise = user.last_exercise_id;
         return workout.generateWorkout(numWorkouts, squatComf);
       } else {
         conv.ask(new SimpleResponse({
@@ -157,11 +160,15 @@ app.intent('start workout', conv => {
     .then(genWorkout => {
       if (genWorkout !== undefined) {
         googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
+        if(!hasRun && lastUserExercise !== undefined){
+          googleWorkout.unshift(lastUserExercise);
+          hasRun = true;
+        }
         return googleWorkout.splice(0, 1);
       }
     })
     .then(([currentExercise]) => {
-      if (currentExercise !== undefined) {
+      if (currentExercise !== undefined && typeof currentExercise !== 'number') {
         current = currentExercise;
         // console.log(current, ' this should the current workout object');
         
@@ -174,7 +181,23 @@ app.intent('start workout', conv => {
           speech: startWorkoutObjResponses[index].before + current.name + startWorkoutObjResponses[index].after
         }));
         
+      } else {
+        return db.getExerciseById(currentExercise);
       }
+    })
+    .then(([currentExercise]) =>{
+      if (currentExercise !== undefined && typeof currentExercise !== 'number') {
+        current = currentExercise;
+        // console.log(current, ' this should the current workout object');
+
+        let index = randomNumGen(startWorkoutObjResponses.length);
+        console.log(index, ' startWorkoutObjResponses response index');
+
+        conv.ask(new SimpleResponse({
+          text: 'Let me know when you are ready to begin.',
+          // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
+          speech: startWorkoutObjResponses[index].before + current.name + startWorkoutObjResponses[index].after
+        }));
     })
     .catch(err => {
       console.error(err);
@@ -220,9 +243,20 @@ app.intent('describe exercise', conv => {
 });
 
 app.intent('take a break', conv => {
+  hasRun = false;
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.close(`De, acuerdo, seguimos más tarde.`);
   } else {
+    db.getUserInfoByGoogleSessionId(conv.id)
+    .then(user => {
+      return db.updateLastWO((user.id, current.id))
+    })
+    .then(() => {
+      console.log('added current workout to user profile before ending session');
+    })
+    .catch(err => {
+      console.error(err);
+    })
     conv.close(`Okay, we will pick this up again later`);
   }
 })
