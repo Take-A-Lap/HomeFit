@@ -137,7 +137,7 @@ app.intent('start workout', conv => {
     // conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    // console.log(conv.id, ' conv.id inside the start workout intent');
+    console.log(conv.id, ' conv.id inside the start workout intent');
     // need to remember to grab the conversation id
     return db.getUserInfoByGoogleSessionId(conv.id)
     .then(user => {
