@@ -28,7 +28,7 @@ app.intent('Default Welcome Intent', conv =>{
 
     // console.log(conv.user.raw.locale, ' this is should be a this is the user property')
     
-    conv.ask(greetings[index]);
+    conv.ask(greetings[0]);
 
   }
 });
@@ -74,7 +74,7 @@ app.intent('link account', conv => {
         conv.ask(new SimpleResponse({
           text: `Thank You!`,
           // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
-          speech: linkAccountObjResponses[3].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[3].after
+          speech: linkAccountObjResponses[index].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[index].after
 
           // speech: linkAccountObjResponses[index].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[index].after
         }));
