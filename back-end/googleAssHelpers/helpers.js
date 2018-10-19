@@ -194,17 +194,28 @@ app.intent('describe exercise', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`<speak> ${current.spanish_description} </speak>`);
   } else {
+    if(current !== undefined){
 
-    conv.ask('<speak> <prosody pitch="+16%"> ' + current.description + " </prosody> </speak>");
-    // return db.getExerciseDescription(49)
-    //   .then(({ description }) =>{
-        
-    //     conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
-    //   }).catch(err =>{
-    //     console.error(err);
-    //   });
-    // conv.ask("<speak> This is the description for" + current.name +" </speak>");
-    // conv.ask("<speak>" + current.description + "</speak>");
+      conv.ask('<speak> <prosody pitch="+16%"> ' + current.description + " </prosody> </speak>");
+      // return db.getExerciseDescription(49)
+      //   .then(({ description }) =>{
+          
+      //     conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
+      //   }).catch(err =>{
+      //     console.error(err);
+      //   });
+      // conv.ask("<speak> This is the description for" + current.name +" </speak>");
+      // conv.ask("<speak>" + current.description + "</speak>");
+    } else {
+      conv.ask(`
+      <speak>
+        <prosody pitch="-5%">
+          <s>
+            I will need you to have started your workout routine indorder to describe to you what workout you will be doing.
+          </s>
+        </prosody>
+      </speak>`);
+    }
   }
 });
 
