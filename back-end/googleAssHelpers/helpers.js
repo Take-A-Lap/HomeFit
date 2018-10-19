@@ -191,13 +191,8 @@ app.intent('start workout', conv => {
 
 app.intent('describe exercise', conv => {
   console.log('inside the describe intent');
-
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    return db.getExerciseDescription()
-      .then(({ description }) => {
-
-        conv.ask(`<speak> ${description} </speak>`);
-      })
+    conv.ask(`<speak> ${current.spanish_description} </speak>`);
   } else {
 
     conv.ask('<speak> <prosody pitch="+16%"> ' + current.description + " </prosody> </speak>");
@@ -215,11 +210,7 @@ app.intent('describe exercise', conv => {
 
 app.intent('take a break', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-<<<<<<< HEAD
     conv.close(`De, acuerdo, seguimos más tarde.`);
-=======
-    conv.close(`De acuerdo, seguimos mas tarde.`);
->>>>>>> 7919d9a1d36a39a84504cc71b7ac3e52b3f17189
   } else {
     conv.close(`Okay, we will pick this up again later`);
   }
@@ -332,7 +323,12 @@ app.intent('Default Fallback Intent', conv => {
   console.log('inside the fallback intent');
 
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    conv.ask(`Hola, mi llamo alexa`);
+    let index = randomNumGen(spanishErrorResponse);
+    conv.ask(new SimpleResponse({
+      text: 'Perdón, hemos tenido un problema',
+      speech: spanishErrorResponse[index]
+    }));
+    // conv.ask(`Hola, mi llamo alexa`);
   } else {
     let index = randomNumGen(errorResponses);
     conv.ask(new SimpleResponse({
