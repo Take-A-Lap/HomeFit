@@ -216,9 +216,11 @@ const greetings = [
         The only trainer you will ever need.
       </s>
     </prosody>
-    <p>
-      Link your session and we can begin
-    </p>
+    <prosody rate="fast" pitch="+10%" volume="+2db">
+      <p>
+        Link your session and we can begin
+      </p>
+    </prosody>
   </speak>`,
 
   `<speak> 
