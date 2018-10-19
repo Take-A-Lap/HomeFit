@@ -96,7 +96,7 @@ const linkAccountObjResponses = [
 
 const startWorkoutObjResponses = [
   {
-    before: '<speak> <prosody volume="loud" pitch="+20%"> <s> Let me know when you are ready to begin your ',
+    before: '<speak> <prosody volume="+3db" pitch="+25%"> <s> Let me know when you are ready to begin your ',
     after: ' and are in position. </s> </prosody> </speak>'
   },
   {
