@@ -211,7 +211,7 @@ const greetings = [
         Welcome to Home Fit trainer.
       </p>
     </prosody>
-    <prosody rate="slow" pitch="+15%" volume="+3db">
+    <prosody pitch="+15%" volume="+3db">
       <s> 
         The only trainer you will ever need.
       </s>
