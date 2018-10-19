@@ -89,6 +89,8 @@ app.intent('link account', conv => {
 
 
 app.intent('start workout', conv => {
+  console.log('inside the start workout intent at the beginning');
+
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     let gender = null;
     return db.getUserInfoByGoogleSessionId(conv.id)
@@ -137,7 +139,7 @@ app.intent('start workout', conv => {
     // conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    console.log(conv.id, ' conv.id inside the start workout intent');
+    console.log('inside the start workout intent');
     // need to remember to grab the conversation id
     return db.getUserInfoByGoogleSessionId(conv.id)
     .then(user => {
@@ -188,6 +190,8 @@ app.intent('start workout', conv => {
 });
 
 app.intent('describe exercise', conv => {
+  console.log('inside the describe intent');
+
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
@@ -214,6 +218,8 @@ app.intent('take a break', conv => {
 
 app.intent('next exercise', conv => {
   // console.log(conv.id, " conv.id inside of the next exercise intent");
+  console.log('inside the next intent');
+
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     return db.getUserInfoByGoogleSessionId(conv.id)
       .then(user => {
@@ -314,6 +320,8 @@ app.intent('next exercise', conv => {
 });
 
 app.intent('Default Fallback Intent', conv => {
+  console.log('inside the fallback intent');
+
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
