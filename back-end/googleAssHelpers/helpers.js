@@ -97,9 +97,9 @@ app.intent('start workout', conv => {
           const squatComf = user.squat_comf;
           const numWorkouts = user.workout_completes;
           const returnObj = {
-            workout: workout.generateWorkout(numWorkouts, squatComf),
+            genWorkout: workout.generateWorkout(numWorkouts, squatComf),
             gender
-          }
+          };
           return returnObj;
         } else {
           conv.ask(new SimpleResponse({
@@ -108,7 +108,7 @@ app.intent('start workout', conv => {
           }));
         }
       })
-      .then(({workout: genWorkout, gender}) => {
+      .then(({ genWorkout, gender}) => {
         console.log(gender, ' this is gender letter m o f');
         if (genWorkout !== undefined) {
           googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
