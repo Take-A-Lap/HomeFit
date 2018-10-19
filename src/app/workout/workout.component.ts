@@ -113,6 +113,7 @@ export class WorkoutComponent implements OnInit {
 
 
     increment() {
+      console.log(this.index)
       if (this.index < 7) {
         this.switchExercise();
         this.previous = this.exercise.id;
@@ -120,9 +121,7 @@ export class WorkoutComponent implements OnInit {
         this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
         this.start = true;
       } else {
-        this.increaseWONum()
-          .then(() => this.storeCompleted())
-          .then(() => this.storeInProgress(this.id, this.previous, 0))
+        Promise.all([this.storeCompleted(), this.storeInProgress(this.id, this.previous, 0), this.increaseWONum()])
           .then(() => this.home())
           .catch(err => console.error(err))
         ;        
@@ -225,6 +224,8 @@ export class WorkoutComponent implements OnInit {
     }
 
     increaseWONum(){
+      console.log('value', this.wo_num)
+      console.log('id', this.id)
       return new Promise((resolve, reject)=>{
         let value = this.wo_num + 1;
         let id = this.id;
