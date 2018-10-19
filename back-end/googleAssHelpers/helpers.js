@@ -257,8 +257,10 @@ app.intent('take a break', conv => {
     conv.close(`De, acuerdo, seguimos más tarde.`);
   } else {
     db.getUserInfoByGoogleSessionId(conv.id)
-    .then(user => {
-      return db.updateLastWO((user.id, current.id))
+    .then((user) => {
+      console.log(current.id, ' the current exercise id that should be updating the database');
+      
+      return db.updateLastWO((user.id, current.id));
     })
     .then(() => {
       console.log('added current workout to user profile before ending session');
