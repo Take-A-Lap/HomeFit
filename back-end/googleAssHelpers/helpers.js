@@ -191,8 +191,10 @@ app.intent('start workout', conv => {
         return db.getExerciseById(currentExercise);
       }
     })
-    .then(([currentExercise]) =>{
+    .then((currentExercise) =>{
+
       if (currentExercise !== undefined) {
+        [currentExercise] = currentExercise;
         current = currentExercise;
         // console.log(current, ' this should the current workout object');
 
