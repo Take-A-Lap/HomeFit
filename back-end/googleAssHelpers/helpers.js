@@ -90,15 +90,14 @@ app.intent('link account', conv => {
 
 app.intent('start workout', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    let gender = null;
+    // let gender = null;
     return db.getUserInfoByGoogleSessionId(conv.id)
       .then(user => {
         if (user !== undefined) {
-          gender = user.sex;
+          // gender = user.sex;
           const squatComf = user.squat_comf;
           const numWorkouts = user.workout_completes;
-          console.log('we should have assigned gender ', gender);
-          
+          // console.log('we should have assigned gender ', gender);
           return workout.generateWorkout(numWorkouts, squatComf);
         } else {
           conv.ask(new SimpleResponse({
@@ -108,7 +107,7 @@ app.intent('start workout', conv => {
         }
       })
       .then((genWorkout) => {
-        console.log(gender, ' this is gender letter m o f');
+        // console.log(gender, ' this is gender letter m o f');
         if (genWorkout !== undefined) {
           googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
           return googleWorkout.splice(0, 1);
