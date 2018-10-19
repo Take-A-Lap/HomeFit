@@ -309,6 +309,16 @@ app.intent('next exercise', conv => {
             text: `Try and keep pace`,
             speech: cadence
           }));
+        } else {
+          conv.ask(`
+          <speak>
+            <prosody pitch="-5%">
+              <s>
+                You will need to begin your workout inorder for me to count down your current exercise
+              </s>
+            </prosody>
+          </speak>
+          `);
         }
       } else {
   
