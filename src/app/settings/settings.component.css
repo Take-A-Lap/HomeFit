@@ -12,21 +12,21 @@
 }
 
 h2 {
-  color: #CCCCFF;
+  color: #33CC33;
 }
 
 p {
-  color: #CCCCFF;
+  color: #33CC33;
 }
 
 
 .button {
-  background-color: #CCCCFF;
-  color: #FFFFFF;
+  background-color: #CCD0F5;
+  color: #33CC33;
 }
 
 .next_button {
-  background-color: #CCCCFF;
-  color: #FFFFFF;
+  background-color: #CCD0F5;
+  color: #33CC33;
   width: 100%;
 }

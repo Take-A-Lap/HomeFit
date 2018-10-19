@@ -21,11 +21,18 @@
 
 .sign-in_button {
   /* background-color: #FAA24A; */
-  background-color: #CCCCFF;
-  color: white;
+  background-color: #CCD0F5;
+  color: #33CC33;
 }
 
 .op_spark_logo {
   float: right;
   position: relative;
+  max-height: 50%;
+  max-width: 50%;
+}
+
+.google_logo {
+  max-height: 50%;
+  max-width: 50%;
 }
