@@ -165,7 +165,10 @@ app.intent('start workout', conv => {
           googleWorkout.unshift(lastUserExercise);
           hasRun = true;
         }
-        console.log(googleWorkout, ' this is google workout');
+        console.log(googleWorkout[0], ' this is google workout index 0');
+        if(googleWorkout[0] === null){
+          googleWorkout.splice(0, 1);
+        }
         return googleWorkout.splice(0, 1);
       }
     })
