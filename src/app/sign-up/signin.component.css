@@ -28,4 +28,11 @@
 .op_spark_logo {
   float: right;
   position: relative;
+  max-height: 50%;
+  max-width: 50%;
+}
+
+.google_logo {
+  max-height: 50%;
+  max-width: 50%;
 }
