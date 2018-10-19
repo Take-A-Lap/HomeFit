@@ -12,9 +12,12 @@
 }
 
 .button {
-  background-color:#CCD0F5;
+  border-radius: 25px;
+  background-color: #CCD0F5;
   color: #33CC33;
-  width: 100%;
+  position: absolute;
+  width: 93%;
+  height: 10%;
 }
 
 label {
