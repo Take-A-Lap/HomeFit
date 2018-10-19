@@ -90,11 +90,14 @@ app.intent('link account', conv => {
 
 app.intent('start workout', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
+    // let gender = null;
     return db.getUserInfoByGoogleSessionId(conv.id)
       .then(user => {
         if (user !== undefined) {
+          // gender = user.sex;
           const squatComf = user.squat_comf;
           const numWorkouts = user.workout_completes;
+          // console.log('we should have assigned gender ', gender);
           return workout.generateWorkout(numWorkouts, squatComf);
         } else {
           conv.ask(new SimpleResponse({
@@ -103,7 +106,8 @@ app.intent('start workout', conv => {
           }));
         }
       })
-      .then(genWorkout => {
+      .then((genWorkout) => {
+        // console.log(gender, ' this is gender letter m o f');
         if (genWorkout !== undefined) {
           googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
           return googleWorkout.splice(0, 1);
@@ -119,7 +123,7 @@ app.intent('start workout', conv => {
           conv.ask(new SimpleResponse({
             text: 'Avísame cuando esté listo de empezar.',
             // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
-            speech: spanishStartWorkoutObjResponsesMasculine[index].before + current.name + spanishStartWorkoutObjResponsesMasculine[index].after
+            speech: spanishStartWorkoutObjResponsesMasculine[index].before + current.nombre + spanishStartWorkoutObjResponsesMasculine[index].after
           }));
 
         }
@@ -192,11 +196,13 @@ app.intent('describe exercise', conv => {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    return db.getExerciseDescription(34)
+    return db.getExerciseDescription(45)
       .then(({ description }) =>{
         
         conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
-      })
+      }).catch(err =>{
+        console.error(err);
+      });
     // conv.ask("<speak> This is the description for" + current.name +" </speak>");
     // conv.ask("<speak>" + current.description + "</speak>");
   }
