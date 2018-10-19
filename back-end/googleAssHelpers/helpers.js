@@ -96,8 +96,11 @@ app.intent('start workout', conv => {
           const gender = user.sex;
           const squatComf = user.squat_comf;
           const numWorkouts = user.workout_completes;
+          const genWorkout = workout.generateWorkout(numWorkouts, squatComf);
+          console.log(genWorkout, " this is gen workout");
+          
           const returnObj = {
-            genWorkout: workout.generateWorkout(numWorkouts, squatComf),
+            genWorkout,
             gender
           };
           return returnObj;
