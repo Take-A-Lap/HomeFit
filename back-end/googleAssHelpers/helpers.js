@@ -90,14 +90,13 @@ app.intent('link account', conv => {
 
 app.intent('start workout', conv => {
   if (conv.user.raw.locale.slice(0, 2) === 'es') {
-    // let gender = null;
+    let gender = null;
     return db.getUserInfoByGoogleSessionId(conv.id)
       .then(user => {
         if (user !== undefined) {
-          // gender = user.sex;
+          gender = user.sex;
           const squatComf = user.squat_comf;
           const numWorkouts = user.workout_completes;
-          // console.log('we should have assigned gender ', gender);
           return workout.generateWorkout(numWorkouts, squatComf);
         } else {
           conv.ask(new SimpleResponse({
@@ -107,7 +106,6 @@ app.intent('start workout', conv => {
         }
       })
       .then((genWorkout) => {
-        // console.log(gender, ' this is gender letter m o f');
         if (genWorkout !== undefined) {
           googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
           return googleWorkout.splice(0, 1);
@@ -116,13 +114,11 @@ app.intent('start workout', conv => {
       .then(([currentExercise]) => {
         if (currentExercise !== undefined) {
           current = currentExercise;
-          // console.log(current, ' this should the current workout object');
 
           let index = randomNumGen(spanishStartWorkoutObjResponsesMasculine.length);
 
           conv.ask(new SimpleResponse({
             text: 'Avísame cuando esté listo de empezar.',
-            // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
             speech: spanishStartWorkoutObjResponsesMasculine[index].before + current.nombre + spanishStartWorkoutObjResponsesMasculine[index].after
           }));
 
@@ -141,7 +137,7 @@ app.intent('start workout', conv => {
     // conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    // console.log(conv.id, ' conv.id inside the start workout intent');
+    console.log(conv.id, ' conv.id inside the start workout intent');
     // need to remember to grab the conversation id
     return db.getUserInfoByGoogleSessionId(conv.id)
     .then(user => {
@@ -196,7 +192,7 @@ app.intent('describe exercise', conv => {
     conv.ask(`Hola, mi llamo alexa`);
   } else {
 
-    return db.getExerciseDescription(45)
+    return db.getExerciseDescription(48)
       .then(({ description }) =>{
         
         conv.ask('<speak> <prosody pitch="+16%"> ' + description + " </prosody> </speak>");
