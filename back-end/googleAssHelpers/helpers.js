@@ -228,12 +228,12 @@ app.intent('next exercise', conv => {
             if (user.sex === 'm') {
             let index = randomNumGen(spanishNextExerObjResponsesMasculine.length);
             // let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/>`;
-            let cadence = spanishLinkAccountObjResponsesMasculine[index].part1.before + current.name + spanishLinkAccountObjResponsesMasculine[index].part1.prep + (current.rep_time / 1000) + spanishLinkAccountObjResponsesMasculine[index].part1.after;
+            let cadence = spanishLinkAccountObjResponsesMasculine[index].part1.before + current.nombre + spanishLinkAccountObjResponsesMasculine[index].part1.prep + (current.rep_time / 1000) + spanishLinkAccountObjResponsesMasculine[index].part1.after;
             for (let i = 1; i < 11; i++) {
               cadence += ` dame ${i} <break time="${current.rep_time}ms"/>`;
             }
             // cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
-            cadence += spanishLinkAccountObjResponsesMasculine[index].part2.before + googleWorkout[0].name + spanishLinkAccountObjResponsesMasculine[index].part2.after;
+            cadence += spanishLinkAccountObjResponsesMasculine[index].part2.before + googleWorkout[0].nombre + spanishLinkAccountObjResponsesMasculine[index].part2.after;
             console.log(index, ' spanishLinkAccountObjResponsesMasculine response index');
 
             conv.ask(new SimpleResponse({
@@ -244,12 +244,12 @@ app.intent('next exercise', conv => {
           if (user.sex === 'f') {
             let index = randomNumGen(spanishLinkAccountObjResponsesFeminine.length);
             // let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/>`;
-            let cadence = spanishLinkAccountObjResponsesFeminine[index].part1.before + current.name + spanishLinkAccountObjResponsesFeminine[index].part1.prep + (current.rep_time / 1000) + spanishLinkAccountObjResponsesFeminine[index].part1.after;
+            let cadence = spanishLinkAccountObjResponsesFeminine[index].part1.before + current.nombre + spanishLinkAccountObjResponsesFeminine[index].part1.prep + (current.rep_time / 1000) + spanishLinkAccountObjResponsesFeminine[index].part1.after;
             for (let i = 1; i < 11; i++) {
               cadence += ` dame ${i} <break time="${current.rep_time}ms"/>`;
             }
             // cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
-            cadence += spanishLinkAccountObjResponsesFeminine[index].part2.before + googleWorkout[0].name + spanishLinkAccountObjResponsesFeminine[index].part2.after;
+            cadence += spanishLinkAccountObjResponsesFeminine[index].part2.before + googleWorkout[0].nombre + spanishLinkAccountObjResponsesFeminine[index].part2.after;
             console.log(index, ' spanishLinkAccountObjResponsesFeminine response index');
 
             conv.ask(new SimpleResponse({
