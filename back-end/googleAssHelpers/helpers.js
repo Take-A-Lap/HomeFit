@@ -160,14 +160,17 @@ app.intent('start workout', conv => {
     .then(genWorkout => {
       if (genWorkout !== undefined) {
         googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
+        console.log(lastUserExercise, ' last user exercise before being applied to googleworkout');
         if(!hasRun && lastUserExercise !== undefined){
           googleWorkout.unshift(lastUserExercise);
           hasRun = true;
         }
+        console.log(googleWorkout, ' this is google workout');
         return googleWorkout.splice(0, 1);
       }
     })
     .then(([currentExercise]) => {
+      console.log(currentExercise, ' the current exercise after first time');
       if (currentExercise !== undefined && typeof currentExercise !== 'number') {
         current = currentExercise;
         // console.log(current, ' this should the current workout object');
@@ -186,7 +189,7 @@ app.intent('start workout', conv => {
       }
     })
     .then(([currentExercise]) =>{
-      if (currentExercise !== undefined && typeof currentExercise !== 'number') {
+      if (currentExercise !== undefined) {
         current = currentExercise;
         // console.log(current, ' this should the current workout object');
 
