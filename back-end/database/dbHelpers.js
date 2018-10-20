@@ -1,6 +1,7 @@
 // require pg-promise
 const pgp = require('pg-promise')();
 //require the config js to get the libPass
+const bcrypt = require('bcrypt');
 const { libPass } = require('../../config');
 
 const connection = {
@@ -106,13 +107,19 @@ module.exports = {
     WHERE user_email = $1
   `, [email]).then(([id]) => id),
 
-  
-  addNewUser: (weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredUsername, password) => db.any(`
+  //refactor adding user to for hashing passwords
+  // addUserWithHashedPassword: (preferredUsername, email, password) => db.any(`
+  //     INSERT INTO users (preferred_username, user_email, password)
+  //     VALUES ($1, $2, $3)
+  // `, [preferredUsername, email, password]),
+
+  //
+  addNewUser: (weight, numPushUps, jogDist, age, sex, height, squatComf, goals, preferredUsername, email, password) => db.any(`
     INSERT INTO users 
-    (weight, num_push_ups, jog_dist, age, sex, height, squat_comf, workout_completes, goals, user_email, preferred_username, password)
+    (weight, num_push_ups, jog_dist, age, sex, height, squat_comf, workout_completes, goals, preferred_username, user_email, password)
     VALUES
     ($1, $2, $3, $4, $5, $6, $7, 0, $8, $9, $10, $11)
-  `, [weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, preferredUsername, password]),
+  `, [weight, numPushUps, jogDist, age, sex, height, squatComf, goals, preferredUsername, email, password]),
 
 
   // will most likely need to call this within a loop over the different diet ids
