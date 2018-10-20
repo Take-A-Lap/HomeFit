@@ -27,16 +27,17 @@ export class LoginComponent implements OnInit {
   }
 
   joinUs(){
-    this.router.navigate(['/settings-personal-info'])
+    this.router.navigate(['/personalInfo'])
   }
 
   authenticate(){
     this.httpClient.get('/homeFitAuth', {
-      params: { email: this.email }
-    }).subscribe(password=>{
-      const value = Object.values(password)
-
-      if(value[0] === this.password){
+      params: { 
+        email: this.email,
+        password: this.password
+      }
+    }).subscribe(result => {
+      if(result === true){
         document.cookie = `homeFit=${this.email}`;
         this.goHome();
       } else {
