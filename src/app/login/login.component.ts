@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   joinUs(){
-    this.router.navigate(['/settings-personal-info'])
+    this.router.navigate(['/personalInfo'])
   }
 
   authenticate(){
