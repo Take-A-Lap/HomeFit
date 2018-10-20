@@ -88,7 +88,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
         password: this.password,
       }
     
-    }).subscribe()
+    }).subscribe(()=>document.cookie = `homeFit=${this.email}`)
   }
   
   // ngAfterViewInit() {
