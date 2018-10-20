@@ -10,6 +10,13 @@
   background-color: #27213B;
 }
 
+.scrollable-menu {
+  font-family: 'Ubuntu';
+  background-color:#729085;
+  color: #F5F4F3;
+  width: 100%
+}
+
 label {
   font-family: 'Ubuntu';
   color: #F5F4F3;
