@@ -152,7 +152,8 @@ app.get('/username', (req, res) => {
   })
 
 app.get('/dinner', (req,res)=>{
-  meal.getDinner()
+  console.log(req);
+  meal.getDinner(req.query.user,)
   .then(recipes=> recipes.map(recipe=>recipe.recipe))
     .then(dinner=>res.send(dinner))
     .catch(err=>console.error(err));
@@ -329,8 +330,17 @@ app.post('/savePartial', (req, res) => {
     .catch(error => console.error());
   res.send('got it')
 })
+
+app.get('/calories', (req,res)=>{
+  meal.setCalories(req.query.user, req.query.completes, req.query.today)
+  .then(calorieProfile=>{
+    res.send(calorieProfile)
+  })
+  .catch(err=>console.error(err))
+})
 const port = 81;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
 });
+

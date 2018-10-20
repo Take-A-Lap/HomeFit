@@ -41,16 +41,101 @@ module.exports = {
     return getMeal('lunch', 0, 1000)
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
   },
-  getDinner: (calorieMin, calorieMax, dietaryRestrictions)=>{
+  getDinner: (user, completes, today, dietaryRestrictions)=>{
     const meats = ['steak', 'chicken', 'beef', 'fish']
-    return bluebird.map(meats, meat=>getMeal(meat, 0, 1000))
+    const userValues = this.setCalories(user, completes, today)
+    return bluebird.map(meats, meat=>getMeal(meat, 0, userValues.dinnerMax))
       .then(meals => narrowDown(meals.reduce((all, curr)=> all.concat(curr), [])))
   },
 
-  setCalories: (user, today)=>{
-    
-    if(user){
-
+  setCalories: (user, completes, today)=>{
+    let calories = {};
+    user = JSON.parse(user);
+    completes = parseInt(completes);
+    if(typeof today === 'string'){
+      today = parseInt(today)
     }
+    console.log(user, completes, today)
+    console.log(user.sex, user.goals)
+    return new Promise((resolve,reject)=>{
+      if (user.sex === 'm'){
+        if(user.goals === 1){
+          calories = {
+            breakfastMin: 0,
+            breakfastMax: 700,
+            lunchMin: 0,
+            lunchMax: 500,
+            dinnerMin: 0,
+            dinnerMax: 400
+          }
+        } if(user.goals === 2){
+          calories = {
+            breakfastMin: 0,
+            breakfastMax: 975,
+            lunchMin: 0,
+            lunchMax: 700,
+            dinnerMin: 0,
+            dinnerMax: 550
+        }
+      } else if(user.goals === 3){
+        calories = {
+          breakfastMin: 0,
+          breakfastMax: 1225,
+          lunchMin: 0,
+          lunchMax: 875,
+          dinnerMin: 0,
+          dinnerMax: 700
+        }
+      }
+    } else if (user.sex === 'f'){
+      if (user.goals === 1) {
+        calories = {
+          breakfastMin: 0,
+          breakfastMax: 550,
+          lunchMin: 0,
+          lunchMax: 400,
+          dinnerMin: 0,
+          dinnerMax: 300
+        }
+      }
+      if (user.goals === 2) {
+        calories = {
+          breakfastMin: 0,
+          breakfastMax: 750,
+          lunchMin: 0,
+          lunchMax: 550,
+          dinnerMin: 0,
+          dinnerMax: 425
+        }
+      } else if (user.goals === 3) {
+        calories = {
+          breakfastMin: 0,
+          breakfastMax: 1050,
+          lunchMin: 0,
+          lunchMax: 750,
+          dinnerMin: 0,
+          dinnerMax: 600
+        }
+      }
+    }
+    if(Array.isArray(completes)){
+      if(completes.includes(today)){
+        calories.breakfastMax = calories.breakfastMax + 100;
+        calories.lunchMax = calories.lunchMax + 150;
+        calories.dinnerMax = calories.dinnerMax + 100;
+      }
+    } else if(completes === today){
+      calories.breakfastMax = calories.breakfastMax + 100;
+      calories.lunchMax = calories.lunchMax + 150;
+      calories.dinnerMax = calories.dinnerMax + 100;
+    }
+    if(user){
+      console.log(calories)
+      resolve(calories)
+    }else {
+      reject('calorie rejection')
+    }
+    
+    })
   }
 }
