@@ -341,7 +341,7 @@ app.get('/calories', (req,res)=>{
   })
   .catch(err=>console.error(err))
 })
-const port = 81;
+const port = 3000;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
