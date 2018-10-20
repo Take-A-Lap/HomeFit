@@ -177,7 +177,7 @@ app.get('/breakfast', (req, res) => {
 })
 
 app.post('/signUp', (req, res) =>{
-  console.log(req.query.goals)
+  console.log(req.query)
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;
   let jogDist = req.body.params.miles;
