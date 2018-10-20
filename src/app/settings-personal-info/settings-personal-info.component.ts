@@ -48,8 +48,10 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.weight = e.target.value;
   }
   
-  updateGoals(e) {
-    this.goals = e.target.value;
+  updateGoals() {
+    var inputValue = parseInt((<HTMLInputElement>document.getElementById('goalId')).value);
+    console.log(inputValue);
+    this.goals = inputValue;
   }
 
   updatePushUps(e) {
@@ -69,7 +71,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
 
   addUser() {
-    let user;
+    console.log(this.goals)
     this.httpClient.post('/signUp', {
       params: {
         weight: this.weight,
