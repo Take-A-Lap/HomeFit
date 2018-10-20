@@ -177,6 +177,7 @@ app.get('/breakfast', (req, res) => {
 })
 
 app.post('/signUp', (req, res) =>{
+  console.log(req.query.goals)
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;
   let jogDist = req.body.params.miles;
@@ -189,18 +190,6 @@ app.post('/signUp', (req, res) =>{
   let username = req.body.params.userName;
   let password = req.body.params.password;
   db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
-    .then(()=>{
-      return Promise.all([db.getUserIdByEmail(email)])
-        .catch(err=>console.error(err));
-    })
-    .then(([user,regimen])=> {
-      const ins = [];
-      regimen.forEach(exer=>{
-        ins.push(JSON.stringify(exer))
-      })
-      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
-    })
-    .catch(err=>console.error(err));
   res.end();
 });
 

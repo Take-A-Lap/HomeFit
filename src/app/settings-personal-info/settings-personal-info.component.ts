@@ -48,8 +48,9 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.weight = e.target.value;
   }
   
-  updateGoals(e) {
-    this.goals = e.target.value;
+  updateGoals() {
+    var inputValue = parseInt((<HTMLInputElement>document.getElementById('goalId')).value);
+    this.goals = inputValue;
   }
 
   updatePushUps(e) {
@@ -69,7 +70,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
 
   addUser() {
-    let user;
+    console.log(this.goals)
     this.httpClient.post('/signUp', {
       params: {
         weight: this.weight,
@@ -79,7 +80,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
         sex: this.sex,
         height: this.height,
         squats: this.squats,
-        goals: this.goals,
+        goals: parseInt((<HTMLInputElement>document.getElementById('goalId')).value),
         email: this.email === 'Enter email' ? '' : this.email,
         userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
