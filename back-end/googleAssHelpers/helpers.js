@@ -28,7 +28,7 @@ app.intent('Default Welcome Intent', conv =>{
 
     // console.log(conv.user.raw.locale, ' this is should be a this is the user property')
     
-    conv.ask(greetings[2]);
+    conv.ask(greetings[index]);
 
   }
 });
@@ -186,7 +186,7 @@ app.intent('start workout', conv => {
         conv.ask(new SimpleResponse({
           text: 'Let me know when you are ready to begin.',
           // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
-          speech: startWorkoutObjResponses[index].before + current.name + startWorkoutObjResponses[index].after
+          speech: startWorkoutObjResponses[0].before + current.name + startWorkoutObjResponses[0].after
         }));
         
       } else {

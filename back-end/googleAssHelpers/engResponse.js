@@ -96,7 +96,7 @@ const linkAccountObjResponses = [
 
 const startWorkoutObjResponses = [
   {
-    before: '<speak> <prosody volume="loud" pitch="+20%"> <s> Let me know when you are ready to begin your ',
+    before: '<speak> <prosody volume="+3db" pitch="+25%"> <s> Let me know when you are ready to begin your ',
     after: ' and are in position. </s> </prosody> </speak>'
   },
   {
@@ -224,9 +224,10 @@ const greetings = [
   </speak>`,
 
   `<speak> 
+  <voice gender="female" languages="es-ES" age="21" required="age languages gender variant">
     <p> 
       <s>
-        <prosody volume="+3db" pitch="+25%" >
+        <prosody rate="" volume="+3db" pitch="+25%" >
           Welcome to Home Fit trainer
         </prosody>
       </s>
@@ -237,6 +238,7 @@ const greetings = [
         To achieve this, simply say link my account and your username.
       </s>
     </p>
+  </voice>
   </speak>`
 
   // `<speak>
