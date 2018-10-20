@@ -50,7 +50,6 @@ export class SettingsPersonalInfoComponent implements OnInit {
   
   updateGoals() {
     var inputValue = parseInt((<HTMLInputElement>document.getElementById('goalId')).value);
-    console.log(inputValue);
     this.goals = inputValue;
   }
 
@@ -81,7 +80,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
         sex: this.sex,
         height: this.height,
         squats: this.squats,
-        goals: this.goals,
+        goals: parseInt((<HTMLInputElement>document.getElementById('goalId')).value),
         email: this.email === 'Enter email' ? '' : this.email,
         userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
