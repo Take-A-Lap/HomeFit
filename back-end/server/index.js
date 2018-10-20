@@ -209,16 +209,6 @@ app.post('/signUp', (req, res) =>{
           return Promise.all([db.getUserIdByEmail(user.email)])
             .catch(err=>console.error(err));
         })
-    
-  
-  // })
-    .then(([user,regimen])=> {
-      const ins = [];
-      regimen.forEach(exer=>{
-        ins.push(JSON.stringify(exer))
-      })
-      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
-    })
     .catch(err=>console.error(err));
   res.end();
 });
