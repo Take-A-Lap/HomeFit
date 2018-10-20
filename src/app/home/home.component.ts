@@ -17,9 +17,12 @@ import { IImage } from './iImage';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-  imageUrls;;
+  imageUrls;
+  d;
   mealImages = [];
   meals;
+  calorieProfile;
+  user;
   currentWeather = [];
   recommendation;
   workoutDates = [];
@@ -75,41 +78,53 @@ export class HomeComponent implements OnInit {
   }
   
   getCookieInfo() {
+    console.log('cookie')
     //function to get username added to getCookieInfo
-    let cookie = document.cookie;
-    let emailArr = cookie.split('=');
-    this.email = emailArr[emailArr.length - 1];
-    return this.httpClient.get('/username', {
-      params: {
-        user: this.email
-      }
-    })
-    .subscribe(user => {
-      let filteredKey = Object.keys(user).filter(key => {
-        return key === 'preferred_username'
-      })
-      let usernameKey = filteredKey[0];
-      this.username = user[usernameKey];
-    }, 
-    error => {
-      console.error(error, 'error');
-    })
-  }
-  // function that gets completed WO dates for calender
-  getCompletedWorkouts() {
-    // use the WO service completed WO function with user email stored on the component
-    this.workoutService.getCompletedWorkouts(this.email)
-      .subscribe(compWorkOuts => {
-        // if the func returns dates
-        if (compWorkOuts) {
-          // concat the dates to the workoutDates stored on the component
-          this.workoutDates = this.workoutDates.concat(compWorkOuts);
+    return new Promise((resolve,reject)=>{
+      let cookie = document.cookie;
+      let emailArr = cookie.split('=');
+      this.email = emailArr[emailArr.length - 1];
+      return this.httpClient.get('/username', {
+        params: {
+          user: this.email
         }
-      });
+      })
+        .subscribe(user => {
+          this.user = user;
+          console.log(this.user)
+          if(user){
+            console.log(user)
+            resolve(user)
+          } else {
+            reject('user rejection')
+          }
+        },
+          error => {
+            console.error(error, 'error');
+          })
+    })
+    
+  }
+  getCompletedWorkouts(email) {
+    return new Promise((resolve, reject)=>{
+      this.workoutService.getCompletedWorkouts(email)
+        .subscribe(compWorkOuts => {
+          if (compWorkOuts) {
+            this.workoutDates = this.workoutDates.concat(compWorkOuts);
+            resolve(this.workoutDates);
+          } else {
+            reject('Completed Rejection')
+          }
+        });
+    })
   }
 
-  getBreakfast() {
-    return this.httpClient.get('/breakfast')
+  getBreakfast(calorieProfile, dietaryRestrictions) {
+    return this.httpClient.get('/breakfast', {
+      params: {
+        calorieProfile, dietaryRestrictions
+      }
+    })
       .subscribe(breakfastFood => {
         this.meals = breakfastFood
         this.imageUrls = this.meals.map(meal => {
@@ -126,9 +141,14 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  getLunch() {
+  getLunch(calorieProfile, dietaryRestrictions) {
+    console.log(calorieProfile, dietaryRestrictions)
     return new Promise((resolve,reject)=>{
-      this.foodService.getLunch()
+      this.httpClient.get('/lunch', {
+        params: {
+          calorieProfile, dietaryRestrictions
+        }
+      })
       .subscribe(lunchFood => {
         this.meals = lunchFood;
         let imageUrls = this.meals.map(meal => {
@@ -147,10 +167,13 @@ export class HomeComponent implements OnInit {
     })
   }
 
-
-  getDinner() {
+  getDinner(calorieProfile, dietaryRestrictions) {
     return new Promise((resolve, reject)=>{
-      this.foodService.getDinner()
+      this.httpClient.get('/dinner', {
+        params: {
+          calorieProfile, dietaryRestrictions
+        }
+      })
         .subscribe(dinnerFood => {
           this.meals = dinnerFood;
            let imageUrls = this.meals.map(meal => {
@@ -172,6 +195,7 @@ export class HomeComponent implements OnInit {
   getTime() {
     return new Promise((resolve, reject)=>{
       let d = new Date();
+      this.d = d;
       this.time = d.getHours();
       // the current day of the week is
       let day = d.getDay();
@@ -189,6 +213,7 @@ export class HomeComponent implements OnInit {
         count++;
       }
       if (d){
+        console.log(d)
         resolve(d)
       } else {
         reject('error getting time')
@@ -202,17 +227,16 @@ export class HomeComponent implements OnInit {
     let email = emailArr[1]
   }
 
-  displayMeal(){
-    this.getTime();
+  displayMeal(calorieProfile, dietaryRestrictions){
     if (this.time >= 21 || this.time < 10) {
-      this.getBreakfast();
+      this.getBreakfast(calorieProfile, dietaryRestrictions)
     } else if (this.time >= 10 && this.time < 14) {
-      this.getLunch()
+      this.getLunch(calorieProfile, dietaryRestrictions)
       .then((result)=>{
         this.imageUrls = result;
       })
     } else {
-      this.getDinner()
+      this.getDinner(calorieProfile, dietaryRestrictions)
       .then((result)=>{
         this.imageUrls = result;
       })
@@ -223,20 +247,49 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/personalInfo']);
   }
 
+  setCalories(user, completes, today){
+    console.log(user)
+    return new Promise((resolve, reject)=>{
+      this.httpClient.get('/calories', {
+        params: {
+          user: JSON.stringify(user), completes, today
+        }
+      }).subscribe(result=>{
+        this.calorieProfile = result
+        if(result){
+          resolve(result)
+        } else {
+          reject('Calorie Front Rejection')
+        }
+      })
+    })
+  }
+
+  launch(){
+  let user;
+    this.getCookieInfo()
+    .then(userResult=>{
+      user = userResult
+      return Promise.all([this.getTime(), this.getCompletedWorkouts(user.user_email)])
+    })
+    .then(results => results.concat(user))
+    .then(results=>{
+      return this.setCalories(results[2], results[1], this.d.getDate())
+    })
+    .then(result=>{
+      return this.displayMeal(result, '')
+    })
+    }
   
 
   ngOnInit() {
     // this.getCurrentTime();
-    this.getTime();  
+     
     this.getLocation();
-    this.displayMeal();
-    this.getCookieInfo(); 
-    this.getCompletedWorkouts();
-    setInterval(() => {
-      this.Clock = Date.now();
-    }, 1000);
-    // this.clockDisplay();
+    this.launch()
+    // .then
+    // this.displayMeal();
   }
 
-
+  
 }
