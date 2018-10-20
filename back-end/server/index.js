@@ -43,7 +43,7 @@ app.get('/generateWO', (req, res)=> {
 })
 
 app.get('/test', (req, res)=>{
-  meal.getDinnerMeal('steak',0,1000)
+  meal.testGet()
   .then(recipes=>res.send(recipes))
   .catch(err=>console.error(err))
 })
@@ -152,22 +152,24 @@ app.get('/username', (req, res) => {
   })
 
 app.get('/dinner', (req,res)=>{
-  console.log(req);
-  meal.getDinner(req.query.user,)
+  const cal = JSON.parse(req.query.calorieProfile)
+  meal.getDinner(cal.lunchMin, cal.lunchMax, '')
   .then(recipes=> recipes.map(recipe=>recipe.recipe))
     .then(dinner=>res.send(dinner))
     .catch(err=>console.error(err));
 })
 
 app.get('/lunch', (req,res) => {
-  meal.getLunch()
+  const cal = JSON.parse(req.query.calorieProfile)
+  meal.getLunch(cal.lunchMin, cal.lunchMax, '')
     .then(recipes => recipes.map(recipe => recipe.recipe))
     .then(lunch=>res.send(lunch))
     .catch(err => console.error(err))
 })
 
 app.get('/breakfast', (req, res) => {
-  meal.getBreakfast()
+  const cal = JSON.parse(req.query.calorieProfile)
+  meal.getBreakfast(cal.lunchMin, cal.lunchMax, '')
     .then(recipes => recipes.map(recipe => recipe.recipe))
     .then(dinner => res.send(dinner))
     .catch(err => console.error(err));

@@ -9,7 +9,7 @@ const axios = require('axios');
 
 const getMeal = function (meat, calorieMin, calorieMax, dietaryRestrictions) {
   const adjustment = dietaryRestrictions ? `&health=${dietaryRestrictions}` : '';
-  return axios.get(`https://api.edamam.com/search?q=${meat}&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=20&calories=${calorieMin}-${calorieMax}${adjustment}`)
+  return axios.get(`https://api.edamam.com/search?q=${meat}&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=30&calories=${calorieMin}-${calorieMax}${adjustment}`)
     .then(recipes => recipes.data.hits)
 };
 const narrowDown = function (array) {
@@ -31,23 +31,21 @@ const narrowDown = function (array) {
 }
 
 module.exports = {
-
   getBreakfast: (calorieMin, calorieMax, dietaryRestrictions)=>{
     const meats = ['eggs', 'yogurt', 'breakfast']
-    return bluebird.map(meats, meat => getMeal(meat, 0, 1000))
+    return bluebird.map(meats, meat => getMeal(meat, calorieMin, calorieMax))
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
   },
   getLunch: (calorieMin, calorieMax, dietaryRestrictions)=> {
-    return getMeal('lunch', 0, 1000)
+    const meats = ['taco', 'sandwich', 'salad']
+    return bluebird.map(meats, meat=> getMeal(meat, calorieMin, calorieMax))
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
   },
-  getDinner: (user, completes, today, dietaryRestrictions)=>{
+  getDinner: (calorieMin, calorieMax, dietaryRestrictions) => {
     const meats = ['steak', 'chicken', 'beef', 'fish']
-    const userValues = this.setCalories(user, completes, today)
-    return bluebird.map(meats, meat=>getMeal(meat, 0, userValues.dinnerMax))
+    return bluebird.map(meats, meat=>getMeal(meat, calorieMin, calorieMax))
       .then(meals => narrowDown(meals.reduce((all, curr)=> all.concat(curr), [])))
   },
-
   setCalories: (user, completes, today)=>{
     let calories = {};
     user = JSON.parse(user);
@@ -55,8 +53,6 @@ module.exports = {
     if(typeof today === 'string'){
       today = parseInt(today)
     }
-    console.log(user, completes, today)
-    console.log(user.sex, user.goals)
     return new Promise((resolve,reject)=>{
       if (user.sex === 'm'){
         if(user.goals === 1){
@@ -130,12 +126,14 @@ module.exports = {
       calories.dinnerMax = calories.dinnerMax + 100;
     }
     if(user){
-      console.log(calories)
       resolve(calories)
     }else {
       reject('calorie rejection')
     }
     
     })
+  },
+  testGet: ()=>{
+    return getMeal('steak', 0, 1000, '')
   }
 }

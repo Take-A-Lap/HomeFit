@@ -78,7 +78,6 @@ export class HomeComponent implements OnInit {
   }
   
   getCookieInfo() {
-    console.log('cookie')
     //function to get username added to getCookieInfo
     return new Promise((resolve,reject)=>{
       let cookie = document.cookie;
@@ -91,9 +90,7 @@ export class HomeComponent implements OnInit {
       })
         .subscribe(user => {
           this.user = user;
-          console.log(this.user)
           if(user){
-            console.log(user)
             resolve(user)
           } else {
             reject('user rejection')
@@ -120,9 +117,10 @@ export class HomeComponent implements OnInit {
   }
 
   getBreakfast(calorieProfile, dietaryRestrictions) {
+    let cal = JSON.stringify(calorieProfile)
     return this.httpClient.get('/breakfast', {
       params: {
-        calorieProfile, dietaryRestrictions
+        calorieProfile: cal, dietaryRestrictions
       }
     })
       .subscribe(breakfastFood => {
@@ -142,11 +140,11 @@ export class HomeComponent implements OnInit {
   }
 
   getLunch(calorieProfile, dietaryRestrictions) {
-    console.log(calorieProfile, dietaryRestrictions)
+    let cal = JSON.stringify(calorieProfile)
     return new Promise((resolve,reject)=>{
       this.httpClient.get('/lunch', {
         params: {
-          calorieProfile, dietaryRestrictions
+          calorieProfile: cal, dietaryRestrictions
         }
       })
       .subscribe(lunchFood => {
@@ -168,10 +166,11 @@ export class HomeComponent implements OnInit {
   }
 
   getDinner(calorieProfile, dietaryRestrictions) {
+    let cal = JSON.stringify(calorieProfile)
     return new Promise((resolve, reject)=>{
       this.httpClient.get('/dinner', {
         params: {
-          calorieProfile, dietaryRestrictions
+          calorieProfile: cal, dietaryRestrictions
         }
       })
         .subscribe(dinnerFood => {
@@ -213,7 +212,6 @@ export class HomeComponent implements OnInit {
         count++;
       }
       if (d){
-        console.log(d)
         resolve(d)
       } else {
         reject('error getting time')
@@ -248,7 +246,6 @@ export class HomeComponent implements OnInit {
   }
 
   setCalories(user, completes, today){
-    console.log(user)
     return new Promise((resolve, reject)=>{
       this.httpClient.get('/calories', {
         params: {
