@@ -294,7 +294,7 @@ app.intent('next exercise', conv => {
               cadence += ` dame ${i} <break time="${current.rep_time}ms"/>`;
             }
             // cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
-            cadence += spanishLinkAccountObjResponsesMasculine[index].part2.before + googleWorkout[0].nombre + spanishNextExerObjResponsesMasculine[index].part2.after;
+            cadence += spanishNextExerObjResponsesMasculine[index].part2.before + googleWorkout[0].nombre + spanishNextExerObjResponsesMasculine[index].part2.after;
             console.log(index, ' spanishNextExerObjResponsesMasculine response index');
 
             conv.ask(new SimpleResponse({
