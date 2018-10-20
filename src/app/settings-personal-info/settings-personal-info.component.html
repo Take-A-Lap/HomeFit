@@ -1,4 +1,5 @@
 <router-outlet></router-outlet>
+<script src="js/bootstrap.min.js"></script>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
@@ -68,13 +69,12 @@
                   [value]="text"
                   (input)="updateWeight($event)"/>
         </div>
-         <div class="form-group">
-          <label for="goals">Goal</label>
-          <input  type="number" 
-                  class="form-control" 
-                  id="goal" 
-                  [value]="text"
-                  (input)="updateGoals($event)"/>
+        <div class="form-group">
+          <select class="scrollable-menu" id="goalId" (click)="updateGoals()">
+            <option value="2">Stay Active</option>
+            <option value="1">Lose Weight</option>
+            <option value="3">Gain Mass</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="pushups">Pushups</label>
@@ -135,7 +135,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <a routerLink="/dietaryRestrictions">
+      <a routerLink="/home">
         <button type="button" class="next_button" (click)="addUser()" (click)="newUsername()">Next</button>
       </a>
     </div>
