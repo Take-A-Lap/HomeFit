@@ -7,26 +7,37 @@
 }
 
 .container {
-  background-color: #000000;
+  background-color: #27213B;
+}
+
+.scrollable-menu {
+  font-family: 'Ubuntu';
+  background-color:#729085;
+  color: #F5F4F3;
+  width: 100%
 }
 
 label {
-  color: #CCD0F5;
+  font-family: 'Ubuntu';
+  color: #F5F4F3;
 }
 
 .nav {
   border-radius: 0px;
-  background-color:#CCD0F5;
+  background-color:#729085;
   text-align: center;
 }
 
 .nav a {
-  color: #33CC33;
+  font-family: 'Ubuntu';
+  color: #F5F4F3;
 }
 
 .next_button {
   width: 100%;
-  background-color: #CCD0F5;
+  font-family: 'Ubuntu';
+  text-transform: uppercase;
+  background-color: #B73A58;
   text-align: center;
-  color: #33CC33;
+  color: #F5F4F3;
 }
