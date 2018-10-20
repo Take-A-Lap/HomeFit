@@ -86,12 +86,12 @@
                   (input)="updatePushUps($event)"/>
         </div>
         <div class="form-group">
-          <label for="squats">Squats</label>
-          <input  type="number" 
-                  class="form-control" 
-                  id="squats" 
-                  [value]="text"
-                  (input)="updateSquats($event)"/>
+          <label for="squats">How comfortable are you with squats</label>
+          <select class="scrollable-menu" id="squats" (click)="updateSquats()">
+            <option value="2">Moderately Comfortable</option>
+            <option value="1">Not At All</option>
+            <option value="3">Very Comfortable</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="miles">Jogging</label>
