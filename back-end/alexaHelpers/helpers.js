@@ -58,7 +58,6 @@ const buildResponseWithPrompt = (speechText, shouldSessionEnd, cardText, repromp
 
 module.exports = {
   invocationIntent: (name) => {
-    console.log(name);
     let greetingSpeech = '';
     if (name === "not linked yet" || name === undefined){
       // says something to prompt the user to add their alexa id
@@ -87,7 +86,6 @@ module.exports = {
   },
   // move on to the next exercise
   coachExercise: (exercise) => {
-    console.log(exercise, ' --- what is this? alexa needs to know');
     if(exercise === undefined){
       const speechOutput = "<p> <s>That is it for this exercise.</s> Let me know when you want to start the next exercise. </p>";
       const response = buildResponse(speechOutput, false, "Next exercise");

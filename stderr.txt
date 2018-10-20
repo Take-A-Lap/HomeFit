@@ -1,28 +1,4 @@
-{ error: null value in column "weight" violates not-null constraint
-    at Connection.parseE (/root/Homefit/HomeFit/node_modules/pg/lib/connection.js:553:11)
-    at Connection.parseMessage (/root/Homefit/HomeFit/node_modules/pg/lib/connection.js:378:19)
-    at Socket.<anonymous> (/root/Homefit/HomeFit/node_modules/pg/lib/connection.js:119:22)
-    at emitOne (events.js:116:13)
-    at Socket.emit (events.js:211:7)
-    at addChunk (_stream_readable.js:263:12)
-    at readableAddChunk (_stream_readable.js:250:11)
-    at Socket.Readable.push (_stream_readable.js:208:10)
-    at TCP.onread (net.js:607:20)
-  name: 'error',
-  length: 258,
-  severity: 'ERROR',
-  code: '23502',
-  detail: 'Failing row contains (92, null, null, null, null, null, null, null, 0, null, null, null, default username, null, null).',
-  hint: undefined,
-  position: undefined,
-  internalPosition: undefined,
-  internalQuery: undefined,
-  where: undefined,
-  schema: 'public',
-  table: 'users',
-  column: 'weight',
-  dataType: undefined,
-  constraint: undefined,
-  file: 'execMain.c',
-  line: '1699',
-  routine: 'ExecConstraints' }
+TypeError: Cannot read property 'id' of undefined
+    at db.getUserInfoByGoogleSessionId.then (/HomeFit/back-end/googleAssHelpers/helpers.js:263:36)
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:188:7)

@@ -75,6 +75,8 @@ app.intent('link account', conv => {
           text: `Thank You!`,
           // speech: `<speak> <s> Thank you </s> <s> ${conv.body.queryResult.parameters.accountName} </s> <s> for linking your account to your current session. </s> <s> Lets get started </s> </speak>`
           speech: linkAccountObjResponses[index].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[index].after
+
+          // speech: linkAccountObjResponses[index].before + conv.body.queryResult.parameters.accountName + linkAccountObjResponses[index].after
         }));
         return db.updateGoogleSessionIdForUser(conv.body.queryResult.parameters.accountName, conv.id);
       }
@@ -184,15 +186,17 @@ app.intent('start workout', conv => {
         conv.ask(new SimpleResponse({
           text: 'Let me know when you are ready to begin.',
           // speech: '<speak> <s> Let me know when you are ready to begin your ' + current.name + ' exercise and are in position. </s> </speak>'
-          speech: startWorkoutObjResponses[index].before + current.name + startWorkoutObjResponses[index].after
+          speech: startWorkoutObjResponses[0].before + current.name + startWorkoutObjResponses[0].after
         }));
         
       } else {
         return db.getExerciseById(currentExercise);
       }
     })
-    .then(([currentExercise]) =>{
+    .then((currentExercise) =>{
+
       if (currentExercise !== undefined) {
+        [currentExercise] = currentExercise;
         current = currentExercise;
         // console.log(current, ' this should the current workout object');
 
@@ -255,8 +259,10 @@ app.intent('take a break', conv => {
     conv.close(`De, acuerdo, seguimos más tarde.`);
   } else {
     db.getUserInfoByGoogleSessionId(conv.id)
-    .then(user => {
-      return db.updateLastWO((user.id, current.id))
+    .then((user) => {
+      console.log(current.id, ' the current exercise id that should be updating the database');
+      
+      return db.updateLastWO((user.id, current.id));
     })
     .then(() => {
       console.log('added current workout to user profile before ending session');

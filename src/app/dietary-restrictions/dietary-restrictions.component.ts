@@ -14,17 +14,12 @@ export class DietaryRestrictionsComponent implements OnInit {
 
   constructor(private data: UsernameService) { }
 
-  printUsername() {
-    console.log(this.username);
-  }
-
   ngAfterViewInit() {
     // this.username = this.SettingsPersonalInfoComponent.username;
     // this.printUsername();
   }
   ngOnInit() {
     this.data.currentUsername.subscribe(username => this.username = username)
-    this.printUsername();
   }
 
 }
