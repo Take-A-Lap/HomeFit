@@ -286,7 +286,8 @@ app.intent('next exercise', conv => {
             if (user.sex === 'm') {
             let index = randomNumGen(spanishNextExerObjResponsesMasculine.length);
             // let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/>`;
-            let cadence = spanishNextExerObjResponsesMasculine[index].part1.before + current.nombre + spanishNextExerObjResponsesMasculine[index].part1.prep + (current.rep_time / 1000) + spanishNextExerObjResponsesMasculine[index].part1.after;
+            // let cadence = spanishNextExerObjResponsesMasculine[index].part1.before + current.nombre + spanishNextExerObjResponsesMasculine[index].part1.prep + (current.rep_time / 1000) + spanishNextExerObjResponsesMasculine[index].part1.after;
+              let cadence = spanishNextExerObjResponsesMasculine[0].part1.before + current.nombre + spanishNextExerObjResponsesMasculine[0].part1.prep + (current.rep_time / 1000) + spanishNextExerObjResponsesMasculine[0].part1.after;
             for (let i = 1; i < 11; i++) {
               cadence += ` dame ${i} <break time="${current.rep_time}ms"/>`;
             }
