@@ -285,13 +285,16 @@ app.intent('next exercise', conv => {
           if (current !== undefined) {
             if (user.sex === 'm') {
             let index = randomNumGen(spanishNextExerObjResponsesMasculine.length);
+            console.log(spanishNextExerObjResponsesMasculine[index].part2.before, 'spanishNextExerObjResponsesM[index].part2');
+            
             // let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/>`;
-            let cadence = spanishNextExerObjResponsesMasculine[index].part1.before + current.nombre + spanishNextExerObjResponsesMasculine[index].part1.prep + (current.rep_time / 1000) + spanishNextExerObjResponsesMasculine[index].part1.after;
+            // let cadence = spanishNextExerObjResponsesMasculine[index].part1.before + current.nombre + spanishNextExerObjResponsesMasculine[index].part1.prep + (current.rep_time / 1000) + spanishNextExerObjResponsesMasculine[index].part1.after;
+              let cadence = spanishNextExerObjResponsesMasculine[0].part1.before + current.nombre + spanishNextExerObjResponsesMasculine[0].part1.prep + (current.rep_time / 1000) + spanishNextExerObjResponsesMasculine[0].part1.after;
             for (let i = 1; i < 11; i++) {
               cadence += ` dame ${i} <break time="${current.rep_time}ms"/>`;
             }
             // cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
-            cadence += spanishLinkAccountObjResponsesMasculine[index].part2.before + googleWorkout[0].nombre + spanishNextExerObjResponsesMasculine[index].part2.after;
+            cadence += spanishNextExerObjResponsesMasculine[index].part2.before + googleWorkout[0].nombre + spanishNextExerObjResponsesMasculine[index].part2.after;
             console.log(index, ' spanishNextExerObjResponsesMasculine response index');
 
             conv.ask(new SimpleResponse({
