@@ -117,9 +117,10 @@ export class HomeComponent implements OnInit {
   }
 
   getBreakfast(calorieProfile, dietaryRestrictions) {
+    let cal = JSON.stringify(calorieProfile)
     return this.httpClient.get('/breakfast', {
       params: {
-        calorieProfile, dietaryRestrictions
+        calorieProfile: cal, dietaryRestrictions
       }
     })
       .subscribe(breakfastFood => {
@@ -139,7 +140,6 @@ export class HomeComponent implements OnInit {
   }
 
   getLunch(calorieProfile, dietaryRestrictions) {
-    console.log(calorieProfile, dietaryRestrictions)
     let cal = JSON.stringify(calorieProfile)
     return new Promise((resolve,reject)=>{
       this.httpClient.get('/lunch', {
@@ -166,10 +166,11 @@ export class HomeComponent implements OnInit {
   }
 
   getDinner(calorieProfile, dietaryRestrictions) {
+    let cal = JSON.stringify(calorieProfile)
     return new Promise((resolve, reject)=>{
       this.httpClient.get('/dinner', {
         params: {
-          calorieProfile, dietaryRestrictions
+          calorieProfile: cal, dietaryRestrictions
         }
       })
         .subscribe(dinnerFood => {
