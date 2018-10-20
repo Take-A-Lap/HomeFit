@@ -81,7 +81,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
         age: this.age,
         sex: (<HTMLInputElement>document.getElementById('sex')).value,
         height: this.height,
-        squats: this.squats,
+        squats: parseInt((<HTMLInputElement>document.getElementById('goalId')).value),
         goals: parseInt((<HTMLInputElement>document.getElementById('goalId')).value),
         email: this.email === 'Enter email' ? '' : this.email,
         userName: this.username === 'What name do you go by ?' ? '' : this.username,
