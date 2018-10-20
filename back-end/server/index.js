@@ -11,6 +11,7 @@ const workout = require('../Algorithms/workout.js');
 const sse = require('../../sse');
 const fs = require('fs');
 const google = require('../googleAssHelpers/helpers');
+const bcrypt = require('bcrypt');
 const alexaRouter = express.Router()
 
 
@@ -188,11 +189,19 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
-  db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
-    .then(()=>{
-      return Promise.all([db.getUserIdByEmail(email)])
-        .catch(err=>console.error(err));
-    })
+
+  // bcrypt.hash(password, (err, hash) => {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(password, salt, function (err, hash) {
+      // Store hash in your password DB.
+      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, hash)
+        .then((user)=>{
+          return Promise.all([db.getUserIdByEmail(user.email)])
+            .catch(err=>console.error(err));
+        })
+    
+  
+  // })
     .then(([user,regimen])=> {
       const ins = [];
       regimen.forEach(exer=>{
@@ -203,6 +212,8 @@ app.post('/signUp', (req, res) =>{
     .catch(err=>console.error(err));
   res.end();
 });
+  });
+})
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
