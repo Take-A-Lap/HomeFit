@@ -108,10 +108,10 @@ module.exports = {
   `, [email]).then(([id]) => id),
 
   //refactor adding user to for hashing passwords
-  addUserWithHashedPassword: (preferredUsername, email, password) => db.any(`
-      INSERT INTO users (preferred_username, user_email, password)
-      VALUES ($1, $2, $3)
-  `, [preferredUsername, email, password]),
+  // addUserWithHashedPassword: (preferredUsername, email, password) => db.any(`
+  //     INSERT INTO users (preferred_username, user_email, password)
+  //     VALUES ($1, $2, $3)
+  // `, [preferredUsername, email, password]),
 
   //
   addNewUser: (weight, numPushUps, jogDist, age, sex, height, squatComf, goals, preferredUsername, email, password) => db.any(`

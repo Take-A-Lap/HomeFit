@@ -96,7 +96,16 @@ app.get('/getCompletedWO', (req, res) => {
 app.get('/homeFitAuth', (req, res) => {
   db.getPasswordByEmail(req.query.email)
   .then(password=> {
-    res.send(password)
+    console.log(password);
+    bcrypt.compare(req.query.password, password.password, (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        res.send(result);
+      }
+    })
+    // console.log(req.query.password, 'hello');
+    // res.send(password)
   })
 })
 
@@ -195,7 +204,7 @@ app.post('/signUp', (req, res) =>{
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(password, salt, function (err, hash) {
       // Store hash in your password DB.
-      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, hash)
+      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, hash)
         .then((user)=>{
           return Promise.all([db.getUserIdByEmail(user.email)])
             .catch(err=>console.error(err));
