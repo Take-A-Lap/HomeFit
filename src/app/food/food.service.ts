@@ -18,8 +18,12 @@ export class FoodService {
     return this.httpClient.get('/lunch')
     }
 
-  getDinner() {
-    return this.httpClient.get('/dinner');
+  getDinner(user, completes, today, dietaryRestrictions) {
+    return this.httpClient.get('/dinner', {
+      params: {
+        user, completes, today, dietaryRestrictions
+      }
+    })
   }
   
 }
