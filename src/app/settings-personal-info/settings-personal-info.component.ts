@@ -76,6 +76,9 @@ export class SettingsPersonalInfoComponent implements OnInit {
   addUser() {
     console.log(this.goals)
     document.cookie = `homeFit=${this.email}`
+    if(this.email === '???'){
+      window.alert('Invalid Email Address')
+    } else {
     this.httpClient.post('/signUp', {
       params: {
         weight: this.weight,
@@ -92,6 +95,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
       }
     
     }).subscribe(()=>this.splash())
+  }
   }
 
   splash() {
