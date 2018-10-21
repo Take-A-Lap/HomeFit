@@ -235,7 +235,8 @@ export class HomeComponent implements OnInit {
     })
   }
   logout(){
-    this.deleteCookie(document.cookie).then(()=>this.splash())
+    const cookie = document.cookie
+    this.deleteCookie(cookie).then(()=>this.splash())
   }
   
   testClick(){

@@ -239,7 +239,8 @@ export class WorkoutComponent implements OnInit {
     })
   }
   logout() {
-    this.deleteCookie(document.cookie).then(() => this.splash())
+    const cookie = document.cookie
+    this.deleteCookie(cookie).then(() => this.splash())
   }
     searchAndGenerate() {
       this.getUserInfo()
