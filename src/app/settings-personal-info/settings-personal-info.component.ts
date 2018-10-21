@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsernameService } from '../username.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -10,6 +11,7 @@ import { UsernameService } from '../username.service';
 export class SettingsPersonalInfoComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
+              private router: Router,
               private data: UsernameService) { }
 
   email: string;
@@ -89,12 +91,12 @@ export class SettingsPersonalInfoComponent implements OnInit {
         password: this.password,
       }
     
-    }).subscribe()
+    }).subscribe(()=>this.splash())
   }
-  
-  // ngAfterViewInit() {
-  //   this.username = this.child.username;
-  // }
+
+  splash() {
+    this.router.navigate(['/signup']);
+  }
 
   ngOnInit() {
     this.data.currentUsername.subscribe(username => this.username = username);
