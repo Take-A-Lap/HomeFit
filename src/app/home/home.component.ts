@@ -223,16 +223,19 @@ export class HomeComponent implements OnInit {
   }
   deleteCookie(name){
     return new Promise((resolve,reject)=>{
-      document.cookie = 'homefit=???';
-      if (document.cookie){
-        resolve('success')
+      function del_cookie(name) {
+        document.cookie = 'roundcube_sessauth' +
+          '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+      } 
+      if (!document.cookie){
+        reject('Could not delete cookie')
       } else {
-        reject('could not delete cookie')
+        resolve('success')
       }
     })
   }
   logout(){
-    this.deleteCookie(this.email).then(()=>this.splash())
+    this.deleteCookie(document.cookie).then(()=>this.splash())
   }
   
   testClick(){
