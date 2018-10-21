@@ -240,7 +240,11 @@ export class WorkoutComponent implements OnInit {
   }
   logout() {
     const cookie = document.cookie
-    this.deleteCookie(cookie).then(() => this.splash())
+    if (cookie) {
+      this.deleteCookie(cookie).then(() => this.splash())
+    } else {
+      this.splash();
+    }
   }
     searchAndGenerate() {
       this.getUserInfo()

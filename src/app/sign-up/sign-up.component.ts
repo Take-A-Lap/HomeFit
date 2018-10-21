@@ -74,11 +74,13 @@ export class SignUpComponent implements OnInit {
     this.router.navigate(['/home']);
   }
   checkCredentials(){
-    this.getCookieInfo().then(user=>{
-      if(user){
-        this.home();
-      }
-    })
+    if(document.cookie){
+      this.getCookieInfo().then(user=>{
+        if(user){
+          this.home();
+        }
+      })
+    }
   }
   ngOnInit() {
     this.checkCredentials()
