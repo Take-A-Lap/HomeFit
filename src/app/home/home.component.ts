@@ -218,7 +218,23 @@ export class HomeComponent implements OnInit {
       }
     })
   }
-
+  splash() {
+    this.router.navigate(['/signup']);
+  }
+  deleteCookie(name){
+    return new Promise((resolve,reject)=>{
+      document.cookie = 'homefit=???';
+      if (document.cookie){
+        resolve('success')
+      } else {
+        reject('could not delete cookie')
+      }
+    })
+  }
+  logout(){
+    this.deleteCookie(this.email).then(()=>this.splash())
+  }
+  
   testClick(){
     let cookie = document.cookie;
     let emailArr = cookie.split('=')

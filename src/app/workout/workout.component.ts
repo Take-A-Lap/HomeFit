@@ -222,7 +222,22 @@ export class WorkoutComponent implements OnInit {
         }).subscribe()
       })
     }
-
+    splash() {
+      this.router.navigate(['/signup']);
+    }
+    deleteCookie(name) {
+      return new Promise((resolve, reject) => {
+        document.cookie = 'homefit=???';
+        if (document.cookie) {
+          resolve('success')
+        } else {
+          reject('could not delete cookie')
+        }
+      })
+    }
+    logout() {
+      this.deleteCookie(this.email).then(() => this.splash())
+    }
     searchAndGenerate() {
       this.getUserInfo()
       .then(()=>{
