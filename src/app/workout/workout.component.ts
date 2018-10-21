@@ -225,19 +225,23 @@ export class WorkoutComponent implements OnInit {
     splash() {
       this.router.navigate(['/signup']);
     }
-    deleteCookie(name) {
-      return new Promise((resolve, reject) => {
-        document.cookie = 'homefit=???';
-        if (document.cookie) {
-          resolve('success')
-        } else {
-          reject('could not delete cookie')
-        }
-      })
-    }
-    logout() {
-      this.deleteCookie(this.email).then(() => this.splash())
-    }
+  deleteCookie(name) {
+    return new Promise((resolve, reject) => {
+      function del_cookie(name) {
+        document.cookie = 'roundcube_sessauth' +
+          '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+      }
+      if (!document.cookie) {
+        reject('Could not delete cookie')
+      } else {
+        resolve('success')
+      }
+    })
+  }
+  logout() {
+    const cookie = document.cookie
+    this.deleteCookie(cookie).then(() => this.splash())
+  }
     searchAndGenerate() {
       this.getUserInfo()
       .then(()=>{
