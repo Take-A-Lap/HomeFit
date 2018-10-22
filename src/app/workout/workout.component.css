@@ -20,6 +20,11 @@
   border-radius: 0px;
   background-color:#729085;
   text-align: center;
+  font-family: 'Ubuntu';
+}
+
+.nav-item {
+  font-family: Ubuntu;
 }
 
 .nav a {
@@ -66,12 +71,14 @@ iframe {
   align-items: center;
   border-radius: 10px;
 }
+
 h2 {
   color: #F5F4F3;
   font-size: 35px;
   text-align: center;
-  font-family: 'Ubuntu';
+  font-family: Ubuntu;
 }
+
 h3 {
   font-family: digital;
   font-size: 75px;
