@@ -162,12 +162,12 @@ app.intent('start workout', conv => {
     .then(genWorkout => {
       if (genWorkout !== undefined) {
         googleWorkout = googleWorkout.length > 0 ? googleWorkout : genWorkout;
-        console.log(lastUserExercise, ' last user exercise before being applied to googleworkout');
+        // console.log(lastUserExercise, ' last user exercise before being applied to googleworkout');
         if(!hasRun && !lastUserExercise){
           googleWorkout.unshift(lastUserExercise);
           hasRun = true;
         }
-        console.log(googleWorkout[0], ' this is google workout index 0');
+        // console.log(googleWorkout[0], ' this is google workout index 0');
         if(googleWorkout[0] === null){
           googleWorkout.splice(0, 1);
         }
@@ -175,7 +175,7 @@ app.intent('start workout', conv => {
       }
     })
     .then(([currentExercise]) => {
-      console.log(currentExercise, ' the current exercise after first time');
+      // console.log(currentExercise, ' the current exercise after first time');
       if (currentExercise !== undefined && typeof currentExercise !== 'number') {
         current = currentExercise;
         // console.log(current, ' this should the current workout object');
@@ -329,7 +329,7 @@ app.intent('next exercise', conv => {
       })
       .catch(err => {
         let index = randomNumGen(spanishErrorResponse);
-        console.log(err);
+        console.error(err);
         conv.ask(new SimpleResponse({
           text: 'Hay un problema',
           // speech: `<speak> <p> <s> I'm sorry something appears to have gone wrong. </s> Please try again </p> </speak>`
@@ -345,13 +345,13 @@ app.intent('next exercise', conv => {
         if (current !== undefined){
           let index = randomNumGen(nextExerObjResponses.length);
           // let cadence = `<speak> <s> The recommended pace for ${current.name} is ${current.rep_time / 1000} seconds. </s> <s> Let's begin </s> <break time="500ms"/>`;
-          let cadence = nextExerObjResponses[1].part1.before + current.name + nextExerObjResponses[1].part1.prep + (current.rep_time / 1000) + nextExerObjResponses[1].part1.after;
+          let cadence = nextExerObjResponses[index].part1.before + current.name + nextExerObjResponses[index].part1.prep + (current.rep_time / 1000) + nextExerObjResponses[index].part1.after;
           for (let i = 1; i < 11; i++) {
             cadence += ` give me a ${i} <break time="${current.rep_time}ms"/>`;
           }
           // cadence += ` <s> Lets take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ${googleWorkout[0].name}, we can do that as well</s> </speak>`;
-          cadence += nextExerObjResponses[1].part2.before + googleWorkout[0].name + nextExerObjResponses[1].part2.after;
-          console.log(1, ' nextExerObjResponses response index');
+          cadence += nextExerObjResponses[index].part2.before + googleWorkout[0].name + nextExerObjResponses[index].part2.after;
+          console.log(index, ' nextExerObjResponses response index');
 
           conv.ask(new SimpleResponse({
             text: `Try and keep pace`,
@@ -362,7 +362,7 @@ app.intent('next exercise', conv => {
           <speak>
             <prosody pitch="-5%">
               <s>
-                You will need to begin your workout inorder for me to count down your current exercise
+                You will need to begin your workout in order for me to count down your current exercise
               </s>
             </prosody>
           </speak>
@@ -378,7 +378,7 @@ app.intent('next exercise', conv => {
     })
     .catch(err => {
       let index = randomNumGen(errorResponses);
-      console.log(err);
+      console.error(err);
       conv.ask(new SimpleResponse({
         text: 'Something went wrong',
         // speech: `<speak> <p> <s> I'm sorry something appears to have gone wrong. </s> Please try again </p> </speak>`
