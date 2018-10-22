@@ -33,6 +33,7 @@ export class WorkoutComponent implements OnInit {
   options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   beep = new Audio('../../assets/sound/beep.wav');
   kudos = new Audio('../../assets/sound/8bit-coin.wav');
+  thud = new Audio('../../assets/sound/cuerp-choque-puerta.wav');
   
   youtube = ''
   trustedUrl: SafeUrl;
@@ -49,6 +50,7 @@ export class WorkoutComponent implements OnInit {
         return new Promise((resolve,reject)=>{
           let repIncrement = setInterval(() => {
             if (this.rep < 10) {
+              this.thud.play();
               this.rep++;
             } else {
               clearInterval(repIncrement);
@@ -94,6 +96,7 @@ export class WorkoutComponent implements OnInit {
       this.start = false;
       this.plus()
       .then(()=>{
+        this.beep.play();
         this.question();
       })
     }
@@ -103,7 +106,12 @@ export class WorkoutComponent implements OnInit {
     this.ready = true;
     this.clickMessage = '';
     this.rep = 0;
-    this.workinDatBody();
+    if(this.set < 4){
+      this.workinDatBody();
+    } else {
+      this.kudos.play();
+      this.workinDatBody();
+    }
   }
 
     switchExercise() {
@@ -112,10 +120,6 @@ export class WorkoutComponent implements OnInit {
       this.storeInProgress(this.id, this.exercise.id, this.index);
       this.name = this.exercise.name;
     }
-    boop(){
-      this.beep.play();
-    }
-
     increment() {
       if (this.index < 7) {
         this.switchExercise();
