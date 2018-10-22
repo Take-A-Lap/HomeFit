@@ -74,7 +74,6 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
 
   addUser() {
-    console.log(this.goals)
     document.cookie = `homeFit=${this.email}`
     if(this.email === '???'){
       window.alert('Invalid Email Address')

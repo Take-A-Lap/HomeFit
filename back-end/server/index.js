@@ -96,7 +96,6 @@ app.get('/getCompletedWO', (req, res) => {
 app.get('/homeFitAuth', (req, res) => {
   db.getPasswordByEmail(req.query.email)
   .then(password=> {
-    console.log(password);
     bcrypt.compare(req.query.password, password.password, (err, result) => {
       if (err) {
         console.error(err);
@@ -104,8 +103,6 @@ app.get('/homeFitAuth', (req, res) => {
         res.send(result);
       }
     })
-    // console.log(req.query.password, 'hello');
-    // res.send(password)
   })
 })
 
@@ -137,7 +134,6 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
-      console.log(weatherInfo)
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)
@@ -187,7 +183,6 @@ app.get('/breakfast', (req, res) => {
 })
 
 app.post('/signUp', (req, res) =>{
-  console.log(req.query)
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;
   let jogDist = req.body.params.miles;
