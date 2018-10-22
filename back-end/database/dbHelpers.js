@@ -150,6 +150,12 @@ module.exports = {
     WHERE id = $1
   `, [userID, index]),
 
+  updateVoiceInterfaceSets: (userId, sets) => db.any(`
+    UPDATE users
+    SET
+    voice_interface_sets = $2
+    WHERE id = $1
+  `,[userId, sets])
 
   updateLastWO: (userID, last)=> db.any(`
       UPDATE users
