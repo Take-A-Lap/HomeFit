@@ -22,7 +22,7 @@
   border-radius: 0px;
   background-color: #729085;
   color: #F5F4F3;
-  text-align: center
+  text-align: center;
 }
 
 .nav a {
@@ -46,6 +46,7 @@
 .clock {
   font-size: 20px;
 }
+
 .forecastText {
   font-family: 'Ubuntu';
   color: #F5F4F3;

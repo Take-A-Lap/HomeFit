@@ -6,7 +6,7 @@
         <a class="nav-link" routerLink="/personalInfo">Account Info</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/logout">Logout</a>
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
     </ul>
   </div>
@@ -40,7 +40,6 @@
 <br>
 <br>
       <table class="table" cellpadding="15">
-        <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <thead>
           <tr>
             <th class="day-name">Sun</th>

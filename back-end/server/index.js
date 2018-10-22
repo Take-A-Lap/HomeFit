@@ -11,6 +11,7 @@ const workout = require('../Algorithms/workout.js');
 const sse = require('../../sse');
 const fs = require('fs');
 const google = require('../googleAssHelpers/helpers');
+const bcrypt = require('bcrypt');
 const alexaRouter = express.Router()
 
 
@@ -95,7 +96,13 @@ app.get('/getCompletedWO', (req, res) => {
 app.get('/homeFitAuth', (req, res) => {
   db.getPasswordByEmail(req.query.email)
   .then(password=> {
-    res.send(password)
+    bcrypt.compare(req.query.password, password.password, (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        res.send(result);
+      }
+    })
   })
 })
 
@@ -127,7 +134,6 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
-      console.log(weatherInfo)
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)
@@ -188,21 +194,21 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
-  db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
-    .then(()=>{
-      return Promise.all([db.getUserIdByEmail(email)])
-        .catch(err=>console.error(err));
-    })
-    .then(([user,regimen])=> {
-      const ins = [];
-      regimen.forEach(exer=>{
-        ins.push(JSON.stringify(exer))
-      })
-      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
-    })
+
+  // bcrypt.hash(password, (err, hash) => {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(password, salt, function (err, hash) {
+      // Store hash in your password DB.
+      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, hash)
+        .then((user)=>{
+          return Promise.all([db.getUserIdByEmail(user.email)])
+            .catch(err=>console.error(err));
+        })
     .catch(err=>console.error(err));
   res.end();
 });
+  });
+})
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
@@ -341,7 +347,7 @@ app.get('/calories', (req,res)=>{
   })
   .catch(err=>console.error(err))
 })
-const port = 81;
+const port = 3000;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;

@@ -109,7 +109,6 @@ const spanishNextExerObjResponsesFeminine = [
 
 const spanishGreetings = [
   `
-  <voice gender="male">
   <speak>
     <p>
       <s>
@@ -131,9 +130,9 @@ const spanishGreetings = [
       </s>
     </p>
   </speak>
-  </voice>
   `,
-  `<speak> 
+  `
+  <speak> 
     <p>
         Hola
     </p>
@@ -153,7 +152,8 @@ const spanishGreetings = [
       Díga conecta mi cuenta e el nombre de usuario.
       </s>
     </p>
-  </speak>`,
+  </speak>`
+  ,
   // `<speak>
   //   <p>
   //     Como debo saludar a nuestros usarios Roger?
