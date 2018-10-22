@@ -31,6 +31,8 @@ export class WorkoutComponent implements OnInit {
   set = 1;
   email;
   options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  beep = new Audio('../../assets/sound/beep.wav');
+  kudos = new Audio('../../assets/sound/8bit-coin.wav');
   
   youtube = ''
   trustedUrl: SafeUrl;
@@ -110,7 +112,9 @@ export class WorkoutComponent implements OnInit {
       this.storeInProgress(this.id, this.exercise.id, this.index);
       this.name = this.exercise.name;
     }
-
+    boop(){
+      this.beep.play();
+    }
 
     increment() {
       if (this.index < 7) {
@@ -252,7 +256,7 @@ export class WorkoutComponent implements OnInit {
         this.generateWO()
       })
     }
-
+    
     ngOnInit() {
       this.getCookieInfo();
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
