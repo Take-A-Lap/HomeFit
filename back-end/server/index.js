@@ -119,6 +119,7 @@ app.post('/updateWorkouts', (req, res)=>{
 
 app.post('/weather', (req, res) => {
   let weatherInfo = {};
+  console.log(req.body.params.timeStamp);
   Promise.all([
       weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
       weather.createDayNightLabel(req.body.params.timeStamp),
