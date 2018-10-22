@@ -85,13 +85,16 @@ module.exports = {
   createDayNightLabel: (number, callback) => {
     let text;
     return new Promise((resolve, reject) => {
+      console.log(number, 'number');
       if (number > 5 && number < 19) {
+
         text = 'day';
       } else if (number > -1 && number < 6 || number > 18) {
         text = 'night';
       }
       if (text === 'day' || text === 'night') {
-        resolve(text)
+        console.log(text);
+        resolve(text, 'text')
       } else {
         reject('time of day label rejection')
       }

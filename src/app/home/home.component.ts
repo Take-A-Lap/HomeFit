@@ -305,7 +305,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     // this.getCurrentTime();
-     
+    this.getTime();
     this.getLocation();
     this.launch()
     // .then
