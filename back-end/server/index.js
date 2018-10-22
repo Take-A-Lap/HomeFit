@@ -122,6 +122,7 @@ app.post('/updateWorkouts', (req, res)=>{
 
 app.post('/weather', (req, res) => {
   let weatherInfo = {};
+  console.log(req.body.params.timeStamp);
   Promise.all([
       weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
       weather.createDayNightLabel(req.body.params.timeStamp),
@@ -352,7 +353,7 @@ app.get('/calories', (req,res)=>{
   })
   .catch(err=>console.error(err))
 })
-const port = 3000;
+const port = 81;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
