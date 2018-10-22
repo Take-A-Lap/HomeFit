@@ -222,7 +222,30 @@ export class WorkoutComponent implements OnInit {
         }).subscribe()
       })
     }
-
+    splash() {
+      this.router.navigate(['/signup']);
+    }
+  deleteCookie(name) {
+    return new Promise((resolve, reject) => {
+      function del_cookie(name) {
+        document.cookie = 'roundcube_sessauth' +
+          '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+      }
+      if (!document.cookie) {
+        reject('Could not delete cookie')
+      } else {
+        resolve('success')
+      }
+    })
+  }
+  logout() {
+    const cookie = document.cookie
+    if (cookie) {
+      this.deleteCookie(cookie).then(() => this.splash())
+    } else {
+      this.splash();
+    }
+  }
     searchAndGenerate() {
       this.getUserInfo()
       .then(()=>{

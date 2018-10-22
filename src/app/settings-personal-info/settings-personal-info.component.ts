@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsernameService } from '../username.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -10,6 +11,7 @@ import { UsernameService } from '../username.service';
 export class SettingsPersonalInfoComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
+              private router: Router,
               private data: UsernameService) { }
 
   email: string;
@@ -73,6 +75,10 @@ export class SettingsPersonalInfoComponent implements OnInit {
 
   addUser() {
     console.log(this.goals)
+    document.cookie = `homeFit=${this.email}`
+    if(this.email === '???'){
+      window.alert('Invalid Email Address')
+    } else {
     this.httpClient.post('/signUp', {
       params: {
         weight: this.weight,
@@ -81,19 +87,20 @@ export class SettingsPersonalInfoComponent implements OnInit {
         age: this.age,
         sex: (<HTMLInputElement>document.getElementById('sex')).value,
         height: this.height,
-        squats: this.squats,
+        squats: parseInt((<HTMLInputElement>document.getElementById('squats')).value),
         goals: parseInt((<HTMLInputElement>document.getElementById('goalId')).value),
         email: this.email === 'Enter email' ? '' : this.email,
         userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
       }
     
-    }).subscribe()
+    }).subscribe(()=>this.splash())
   }
-  
-  // ngAfterViewInit() {
-  //   this.username = this.child.username;
-  // }
+  }
+
+  splash() {
+    this.router.navigate(['/signup']);
+  }
 
   ngOnInit() {
     this.data.currentUsername.subscribe(username => this.username = username);
