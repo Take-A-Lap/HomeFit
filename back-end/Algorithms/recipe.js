@@ -9,7 +9,7 @@ const axios = require('axios');
 
 const getMeal = function (meat, calorieMin, calorieMax, dietaryRestrictions) {
   const adjustment = dietaryRestrictions ? `&health=${dietaryRestrictions}` : '';
-  return axios.get(`https://api.edamam.com/search?q=${meat}&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=10&calories=${calorieMin}-${calorieMax}${adjustment}`)
+  return axios.get(`https://api.edamam.com/search?q=${meat}&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=30&calories=${calorieMin}-${calorieMax}${adjustment}`)
     .then(recipes => recipes.data.hits)
 };
 const narrowDown = function (array) {
@@ -31,19 +31,109 @@ const narrowDown = function (array) {
 }
 
 module.exports = {
-
-  getBreakfast: ()=>{
+  getBreakfast: (calorieMin, calorieMax, dietaryRestrictions)=>{
     const meats = ['eggs', 'yogurt', 'breakfast']
-    return bluebird.map(meats, meat => getMeal(meat, 0, 1000))
+    return bluebird.map(meats, meat => getMeal(meat, calorieMin, calorieMax))
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
   },
   getLunch: (calorieMin, calorieMax, dietaryRestrictions)=> {
-    return getMeal('lunch', 0, 1000)
+    const meats = ['taco', 'sandwich', 'salad']
+    return bluebird.map(meats, meat=> getMeal(meat, calorieMin, calorieMax))
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
   },
-  getDinner: ()=>{
+  getDinner: (calorieMin, calorieMax, dietaryRestrictions) => {
     const meats = ['steak', 'chicken', 'beef', 'fish']
-    return bluebird.map(meats, meat=>getMeal(meat, 0, 1000))
+    return bluebird.map(meats, meat=>getMeal(meat, calorieMin, calorieMax))
       .then(meals => narrowDown(meals.reduce((all, curr)=> all.concat(curr), [])))
+  },
+  setCalories: (user, completes, today)=>{
+    let calories = {};
+    user = JSON.parse(user);
+    completes = parseInt(completes);
+    if(typeof today === 'string'){
+      today = parseInt(today)
+    }
+    return new Promise((resolve,reject)=>{
+      if (user.sex === 'm'){
+        if(user.goals === 1){
+          calories = {
+            breakfastMin: 0,
+            breakfastMax: 700,
+            lunchMin: 0,
+            lunchMax: 500,
+            dinnerMin: 0,
+            dinnerMax: 400
+          }
+        } if(user.goals === 2){
+          calories = {
+            breakfastMin: 0,
+            breakfastMax: 975,
+            lunchMin: 0,
+            lunchMax: 700,
+            dinnerMin: 0,
+            dinnerMax: 550
+        }
+      } else if(user.goals === 3){
+        calories = {
+          breakfastMin: 0,
+          breakfastMax: 1225,
+          lunchMin: 0,
+          lunchMax: 875,
+          dinnerMin: 0,
+          dinnerMax: 700
+        }
+      }
+    } else if (user.sex === 'f'){
+      if (user.goals === 1) {
+        calories = {
+          breakfastMin: 0,
+          breakfastMax: 550,
+          lunchMin: 0,
+          lunchMax: 400,
+          dinnerMin: 0,
+          dinnerMax: 300
+        }
+      }
+      if (user.goals === 2) {
+        calories = {
+          breakfastMin: 0,
+          breakfastMax: 750,
+          lunchMin: 0,
+          lunchMax: 550,
+          dinnerMin: 0,
+          dinnerMax: 425
+        }
+      } else if (user.goals === 3) {
+        calories = {
+          breakfastMin: 0,
+          breakfastMax: 1050,
+          lunchMin: 0,
+          lunchMax: 750,
+          dinnerMin: 0,
+          dinnerMax: 600
+        }
+      }
+    }
+    if(Array.isArray(completes)){
+      if(completes.includes(today)){
+        calories.breakfastMax = calories.breakfastMax + 100;
+        calories.lunchMax = calories.lunchMax + 150;
+        calories.dinnerMax = calories.dinnerMax + 100;
+      }
+    } else if(completes === today){
+      calories.breakfastMax = calories.breakfastMax + 100;
+      calories.lunchMax = calories.lunchMax + 150;
+      calories.dinnerMax = calories.dinnerMax + 100;
+    }
+    if(user){
+      resolve(calories)
+    }else {
+      reject('calorie rejection')
+    }
+    
+    })
+  },
+  testGet: ()=>{
+    return getMeal('steak', 0, 1000, '')
   }
 }

@@ -6,21 +6,20 @@
         <a class="nav-link" routerLink="/personalInfo">Account Info</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/logout">Logout</a>
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
     </ul>
   </div>
 </div>
   <div class="row">
       <div class="col-xs-12 col-md-12">
-        <h2 class="welcome">Welcome {{username}}</h2>
+        <h2 class="welcome" *ngIf="user">Welcome {{user.preferred_username}}</h2>
       </div>
   </div>
   <div class="row">
     <div class="col-12" *ngFor="let weather of currentWeather">
       <div class="jumbotron" [style.backgroundImage]="'url('+ weather.url +')'">
         <div class="forecastText">
-          <div class="clock">{{Clock | date: 'HH:mm:ss'}}</div>
           <div class="weatherText">
             {{weather.city}}, {{weather.state}} {{weather.temp}}˚
             <div>

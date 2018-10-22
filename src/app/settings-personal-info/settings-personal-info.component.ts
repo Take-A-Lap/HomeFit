@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsernameService } from '../username.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -10,6 +11,7 @@ import { UsernameService } from '../username.service';
 export class SettingsPersonalInfoComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
+              private router: Router,
               private data: UsernameService) { }
 
   email: string;
@@ -24,8 +26,9 @@ export class SettingsPersonalInfoComponent implements OnInit {
   username: string;
   sex: string;
 
-  updateSex(e) {
-    this.sex = e.target.value;
+  updateSex() {
+    var inputValue = (<HTMLInputElement>document.getElementById('sex')).value;
+    this.sex = inputValue;
   }
 
   updateEmail(e) {
@@ -48,8 +51,9 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.weight = e.target.value;
   }
   
-  updateGoals(e) {
-    this.goals = e.target.value;
+  updateGoals() {
+    var inputValue = parseInt((<HTMLInputElement>document.getElementById('goalId')).value);
+    this.goals = inputValue;
   }
 
   updatePushUps(e) {
@@ -57,7 +61,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
 
   updateSquats(e) {
-    this.squats = e.target.value;
+    var inputValue = parseInt((<HTMLInputElement>document.getElementById('squats')).value);
+    this.squats = inputValue;
   }
 
   updateMiles(e) {
@@ -69,28 +74,33 @@ export class SettingsPersonalInfoComponent implements OnInit {
   }
 
   addUser() {
-    let user;
+    console.log(this.goals)
+    document.cookie = `homeFit=${this.email}`
+    if(this.email === '???'){
+      window.alert('Invalid Email Address')
+    } else {
     this.httpClient.post('/signUp', {
       params: {
         weight: this.weight,
         push_ups: this.push_ups,
         miles: this.miles,
         age: this.age,
-        sex: this.sex,
+        sex: (<HTMLInputElement>document.getElementById('sex')).value,
         height: this.height,
-        squats: this.squats,
-        goals: this.goals,
+        squats: parseInt((<HTMLInputElement>document.getElementById('squats')).value),
+        goals: parseInt((<HTMLInputElement>document.getElementById('goalId')).value),
         email: this.email === 'Enter email' ? '' : this.email,
         userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
       }
     
-    }).subscribe()
+    }).subscribe(()=>this.splash())
   }
-  
-  // ngAfterViewInit() {
-  //   this.username = this.child.username;
-  // }
+  }
+
+  splash() {
+    this.router.navigate(['/signup']);
+  }
 
   ngOnInit() {
     this.data.currentUsername.subscribe(username => this.username = username);

@@ -108,7 +108,8 @@ const spanishNextExerObjResponsesFeminine = [
 ]
 
 const spanishGreetings = [
-  `<speak>
+  `
+  <speak>
     <p>
       <s>
         Bienvenidos al Entrenador de Home Fit.
@@ -128,8 +129,10 @@ const spanishGreetings = [
         despues de que se conecte, podemos empezar el entrenamiento de hoy.
       </s>
     </p>
-  </speak>`,
-  `<speak> 
+  </speak>
+  `,
+  `
+  <speak> 
     <p>
         Hola
     </p>
@@ -149,7 +152,8 @@ const spanishGreetings = [
       Díga conecta mi cuenta e el nombre de usuario.
       </s>
     </p>
-  </speak>`,
+  </speak>`
+  ,
   // `<speak>
   //   <p>
   //     Como debo saludar a nuestros usarios Roger?

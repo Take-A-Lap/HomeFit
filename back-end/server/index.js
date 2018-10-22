@@ -11,6 +11,7 @@ const workout = require('../Algorithms/workout.js');
 const sse = require('../../sse');
 const fs = require('fs');
 const google = require('../googleAssHelpers/helpers');
+const bcrypt = require('bcrypt');
 const alexaRouter = express.Router()
 
 
@@ -43,7 +44,7 @@ app.get('/generateWO', (req, res)=> {
 })
 
 app.get('/test', (req, res)=>{
-  meal.getDinnerMeal('steak',0,1000)
+  meal.testGet()
   .then(recipes=>res.send(recipes))
   .catch(err=>console.error(err))
 })
@@ -95,7 +96,16 @@ app.get('/getCompletedWO', (req, res) => {
 app.get('/homeFitAuth', (req, res) => {
   db.getPasswordByEmail(req.query.email)
   .then(password=> {
-    res.send(password)
+    console.log(password);
+    bcrypt.compare(req.query.password, password.password, (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        res.send(result);
+      }
+    })
+    // console.log(req.query.password, 'hello');
+    // res.send(password)
   })
 })
 
@@ -127,6 +137,7 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
+      console.log(weatherInfo)
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)
@@ -152,27 +163,31 @@ app.get('/username', (req, res) => {
   })
 
 app.get('/dinner', (req,res)=>{
-  meal.getDinner()
+  const cal = JSON.parse(req.query.calorieProfile)
+  meal.getDinner(cal.lunchMin, cal.lunchMax, '')
   .then(recipes=> recipes.map(recipe=>recipe.recipe))
     .then(dinner=>res.send(dinner))
     .catch(err=>console.error(err));
 })
 
 app.get('/lunch', (req,res) => {
-  meal.getLunch()
+  const cal = JSON.parse(req.query.calorieProfile)
+  meal.getLunch(cal.lunchMin, cal.lunchMax, '')
     .then(recipes => recipes.map(recipe => recipe.recipe))
     .then(lunch=>res.send(lunch))
     .catch(err => console.error(err))
 })
 
 app.get('/breakfast', (req, res) => {
-  meal.getBreakfast()
+  const cal = JSON.parse(req.query.calorieProfile)
+  meal.getBreakfast(cal.lunchMin, cal.lunchMax, '')
     .then(recipes => recipes.map(recipe => recipe.recipe))
     .then(dinner => res.send(dinner))
     .catch(err => console.error(err));
 })
 
 app.post('/signUp', (req, res) =>{
+  console.log(req.query)
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;
   let jogDist = req.body.params.miles;
@@ -184,21 +199,21 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
-  db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, email, username, password)
-    .then(()=>{
-      return Promise.all([db.getUserIdByEmail(email)])
-        .catch(err=>console.error(err));
-    })
-    .then(([user,regimen])=> {
-      const ins = [];
-      regimen.forEach(exer=>{
-        ins.push(JSON.stringify(exer))
-      })
-      db.insertIntoExerciseWorkoutsByUserIdAndArrayOfJson(user.id, ins)
-    })
+
+  // bcrypt.hash(password, (err, hash) => {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(password, salt, function (err, hash) {
+      // Store hash in your password DB.
+      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, hash)
+        .then((user)=>{
+          return Promise.all([db.getUserIdByEmail(user.email)])
+            .catch(err=>console.error(err));
+        })
     .catch(err=>console.error(err));
   res.end();
 });
+  });
+})
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
@@ -329,8 +344,17 @@ app.post('/savePartial', (req, res) => {
     .catch(error => console.error());
   res.send('got it')
 })
+
+app.get('/calories', (req,res)=>{
+  meal.setCalories(req.query.user, req.query.completes, req.query.today)
+  .then(calorieProfile=>{
+    res.send(calorieProfile)
+  })
+  .catch(err=>console.error(err))
+})
 const port = 81;
 app.listen(port, () => {
   console.log(`HomeFit is listening on port ${port}!`);
   app.keepAliveTimeout = 0;
 });
+

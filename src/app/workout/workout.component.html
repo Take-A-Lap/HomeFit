@@ -6,7 +6,7 @@
           <a class="nav-link active" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/logout">Logout</a>
+          <a class="nav-link" (click)="logout()">Logout</a>
         </li>
       </ul>
       </div>
@@ -14,7 +14,7 @@
     <br>
     <div class="row">
       <div class="col-xs-12 col-md-12">
-        <h2>Exercise: {{name}}</h2>
+        <h2>{{name}}</h2>
         <div class="media">
           <iframe class="video" [src]="trustedUrl"></iframe>
         </div>
