@@ -19,10 +19,10 @@ export class DietaryRestrictionsComponent implements OnInit {
   onClick(value){
     console.log(value);
     if(!this.restrictions[value]){
-      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B73A58";
+      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#729085";
       this.restrictions[value] = true;
     } else {
-      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B3B3FF";
+      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B73A58";
       this.restrictions[value] = false;
     }
   }
