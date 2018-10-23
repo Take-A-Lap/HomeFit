@@ -99,8 +99,7 @@ export class HomeComponent implements OnInit {
           error => {
             console.error(error, 'error');
           })
-    })
-    
+    })  
   }
   getCompletedWorkouts(email) {
     return new Promise((resolve, reject)=>{

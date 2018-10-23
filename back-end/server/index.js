@@ -14,7 +14,6 @@ const google = require('../googleAssHelpers/helpers');
 const bcrypt = require('bcrypt');
 const alexaRouter = express.Router()
 
-
 app.use('/alexa', alexaRouter);
 app.use(express.static('dist/HomeFit'));
 

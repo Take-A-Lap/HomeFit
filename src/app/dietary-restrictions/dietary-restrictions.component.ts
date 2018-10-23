@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { UsernameService } from '../username.service';
-import { SettingsPersonalInfoComponent } from '../settings-personal-info/settings-personal-info.component';
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-dietary-restrictions',
@@ -11,15 +11,41 @@ import { SettingsPersonalInfoComponent } from '../settings-personal-info/setting
 export class DietaryRestrictionsComponent implements OnInit {
 
   username: string;
+  user;
+  userId: number;
 
-  constructor(private data: UsernameService) { }
+  constructor(private data: UsernameService, private httpClient: HttpClient,) { }
 
-  ngAfterViewInit() {
-    // this.username = this.SettingsPersonalInfoComponent.username;
-    // this.printUsername();
+  getCookieInfo() {
+    //function to get username added to getCookieInfo
+    return new Promise((resolve, reject) => {
+      let cookie = document.cookie;
+      const emailArr = cookie.split('=');
+      const email = emailArr[emailArr.length - 1];
+      return this.httpClient.get('/username', {
+        params: {
+          user: email
+        }
+      })
+        .subscribe(user => {
+          this.user = user;
+          if (user) {
+            resolve(user)
+          } else {
+            reject('user rejection')
+          }
+        },
+          error => {
+            console.error(error, 'error');
+          })
+    })
   }
   ngOnInit() {
-    this.data.currentUsername.subscribe(username => this.username = username)
+    this.getCookieInfo().then(user=>{
+      this.user = user;
+      this.userId = this.user.id;
+      this.username = this.user.preferred_username;
+    })
   }
 
 }
