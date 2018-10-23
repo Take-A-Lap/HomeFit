@@ -30,6 +30,19 @@ app.use(bodyParser.urlencoded({
 
 app.post('/fulfillment', google);
 
+app.post('/diet', (req,res)=>{
+  let restrictions = req.body.params.restrictions;
+  let user = JSON.parse(req.body.params.user);
+  restrictions.forEach(restriction=>{
+    db.getDietaryRestrictionsIdByName(restriction)
+    .then(result=>{
+      db.insertIntoUserDiet(user.id, result.id)
+    })
+    .catch(err=>console.error(err))    
+  })
+  res.send('coming from server')
+})
+
 app.get('/generateWO', (req, res)=> {
   wo_num = req.query.wo_num;
   diff = req.query.diff;

@@ -28,17 +28,23 @@ export class DietaryRestrictionsComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log('in function')
     let restArray = [];
     for(var key in this.restrictions){
       if(this.restrictions[key]){
         restArray.push(key)
       }
     }
-    this.httpClient.post('/diet', {
-      params: {
-        restrictions: restArray
-      }
-    }).subscribe()
+    this.getCookieInfo()
+    .then(user=>{
+      let client = user;
+      this.httpClient.post('/diet', {
+        params: {
+          user: JSON.stringify(user),
+          restrictions: restArray
+        }
+      }).subscribe()
+    }) 
   }
 
   getCookieInfo() {
