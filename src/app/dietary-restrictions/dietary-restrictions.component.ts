@@ -13,8 +13,33 @@ export class DietaryRestrictionsComponent implements OnInit {
   username: string;
   user;
   userId: number;
-
+  restrictions = {};
   constructor(private data: UsernameService, private httpClient: HttpClient,) { }
+
+  onClick(value){
+    console.log(value);
+    if(!this.restrictions[value]){
+      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B73A58";
+      this.restrictions[value] = true;
+    } else {
+      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B3B3FF";
+      this.restrictions[value] = false;
+    }
+  }
+
+  onSubmit(){
+    let restArray = [];
+    for(var key in this.restrictions){
+      if(this.restrictions[key]){
+        restArray.push(key)
+      }
+    }
+    this.httpClient.post('/diet', {
+      params: {
+        restrictions: restArray
+      }
+    }).subscribe()
+  }
 
   getCookieInfo() {
     //function to get username added to getCookieInfo
