@@ -18,6 +18,7 @@ const errorResponses = [`
       </s> 
     </p> 
   </speak>`,
+
   `<speak> 
     <prosody rate="fast" volume="-1db" > 
       <p> 
@@ -41,6 +42,7 @@ const errorResponses = [`
       </p> 
     </prosody> 
   </speak>`,
+
   `<speak>
     <s>
       This is embarrassing for me 
@@ -80,6 +82,7 @@ const linkAccountObjResponses = [
       </prosody>
     </speak>`
   },
+
   {
     before: `
     <speak>
@@ -103,6 +106,7 @@ const linkAccountObjResponses = [
       </prosody> 
     </speak>`
   },
+
   {
     before: `
     <speak> 
@@ -127,6 +131,7 @@ const linkAccountObjResponses = [
       </prosody> 
     </speak>`
   },
+
   {
     before: `
     <speak> 
@@ -153,14 +158,17 @@ const startWorkoutObjResponses = [
     before: '<speak> <prosody volume="+3db" pitch="+20%"> <s> Let me know when you are ready to begin your ',
     after: ' and are in position. </s> </prosody> </speak>'
   },
+
   {
     before: '<speak> <prosody volume="loud" pitch="+20%"> <s> Lets do some',
     after: '</s> <s> Let me know when you are ready</s> </prosody> </speak>'
   },
+
   {
     before: '<speak> <prosody rate="fast" volume="loud" pitch="+20%"> <s> <emphasis level="reduced"> cowabunga  </emphasis></s><s>lets do some',
     after: '</s> <break time="500ms" /> Come on <break time="5ms" /> Are you ready? </prosody> </speak>'
   },
+
   {
     before: '<speak> <prosody rate="fast" volume="loud" pitch="+20%"> <s> Alright it is ',
     after: ' time </s> <s> Let\'s get going! </s> <s> You ready? </s> </prosody>  </speak>'
@@ -179,6 +187,7 @@ const nextExerObjResponses = [
       after: ', we can do that as well</s> </prosody> </speak>'
     }
   },
+
   {
     part1:{
       before: `
@@ -317,24 +326,22 @@ const greetings = [
   </speak>`,
 
   `<speak> 
-  <voice gender="female" languages="es-ES" age="21" required="age languages gender variant">
-    <p> 
-      <s>
-        <prosody rate="" volume="+3db" pitch="+25%" >
-          Welcome to Home Fit trainer
-        </prosody>
-      </s>
-      <s> 
-        To begin, you must link your account to our current session. 
-      </s>
-      <s> 
-        To achieve this, simply say link my account and your username.
-      </s>
-    </p>
-  </voice>
-  </speak>`,
-
-  
+    <voice gender="female" languages="es-ES" age="21" required="age languages gender variant">
+      <p> 
+        <s>
+          <prosody rate="" volume="+3db" pitch="+25%" >
+            Welcome to Home Fit trainer
+          </prosody>
+        </s>
+        <s> 
+          To begin, you must link your account to our current session. 
+        </s>
+        <s> 
+          To achieve this, simply say link my account and your username.
+        </s>
+      </p>
+    </voice>
+  </speak>`
 ];
 
 module.exports = {
