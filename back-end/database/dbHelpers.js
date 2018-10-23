@@ -57,7 +57,7 @@ module.exports = {
     SELECT name, type FROM dietary_restrictions 
     INNER JOIN user_dietary ON (dietary_restrictions.id = user_dietary.id_dietary_restrictions 
     AND user_dietary.id_user = $1)
-    `, [userId]).then(([userDiet]) => userDiet),
+    `, [userId]),
 
   getWeatherImages: (text, time) => db.any(`
     SELECT url FROM weather_images
