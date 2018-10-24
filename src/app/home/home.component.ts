@@ -99,8 +99,7 @@ export class HomeComponent implements OnInit {
           error => {
             console.error(error, 'error');
           })
-    })
-    
+    })  
   }
   getCompletedWorkouts(email) {
     return new Promise((resolve, reject)=>{
@@ -170,7 +169,7 @@ export class HomeComponent implements OnInit {
     return new Promise((resolve, reject)=>{
       this.httpClient.get('/dinner', {
         params: {
-          calorieProfile: cal, dietaryRestrictions
+          calorieProfile: cal, dietaryRestrictions, user: JSON.stringify(this.user)
         }
       })
         .subscribe(dinnerFood => {
@@ -219,28 +218,43 @@ export class HomeComponent implements OnInit {
     })
   }
   splash() {
-    this.router.navigate(['/signup']);
+    return this.router.navigate(['/signup']);
   }
   deleteCookie(name){
     return new Promise((resolve,reject)=>{
         document.cookie = name +
           '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
-       
-      if (!document.cookie){
+      if (document.cookie !== ''){
         reject('Could not delete cookie')
       } else {
         resolve('success')
       }
     })
   }
+  removeSession(){
+    return new Promise((resolve, reject)=>{
+      this.httpClient.post('/logout', {
+        params: {
+          user: JSON.stringify(this.user)
+        }
+      }).subscribe(message=>{
+        if(message){
+          resolve(message)
+        } else {
+          reject('Could not remove Cookies')
+        }
+      })
+    })
+  }
   logout(){
     const cookie = document.cookie
     if(cookie){
-      this.deleteCookie(cookie).then(() => this.splash())
+      Promise.all([this.deleteCookie(cookie), this.removeSession(), this.splash()])
+      .then(response=>console.log(response))
+      .catch(err=>console.error(err))
     } else {
       this.splash();
     }
-    
   }
   
   testClick(){
