@@ -235,7 +235,7 @@ export class HomeComponent implements OnInit {
   logout(){
     const cookie = document.cookie
     if(cookie){
-      this.deleteCookie(cookie).then(() => this.splash())
+      this.deleteCookie(cookie).then(() => this.splash()).catch(err=>console.error(err))
     } else {
       this.splash();
     }
