@@ -25,6 +25,7 @@ export class UpdateComponent implements OnInit {
   miles: number;
   username: string;
   sex: string;
+  user;
 
   updateSex() {
     var inputValue = (<HTMLInputElement>document.getElementById('sex')).value;
@@ -100,16 +101,22 @@ export class UpdateComponent implements OnInit {
     this.router.navigate(['/diet']);
   }
 
-  getCookie(){
-
-  }
-
   launch(){
-    this.httpClient.get('/user')
+    this.getCookieInfo()
+    .then(user=>{
+      this.user = user
+      this.age = this.user.age;
+      this.weight = this.user.weight;
+      this.goals = this.user.goals;
+      this.push_ups = this.user.num_push_ups;
+      this.squats = this.user.squat_comf;
+      this.miles = this.user.jog_dist;
+      this.username = this.user.preferred_username;
+    })
   }
 
   ngOnInit() {
-    this.data.currentUsername.subscribe(username => this.username = username);
+    this.launch()
   }
 
   newUsername() {
