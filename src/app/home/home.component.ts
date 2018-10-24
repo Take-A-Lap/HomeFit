@@ -225,7 +225,7 @@ export class HomeComponent implements OnInit {
         document.cookie = name +
           '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
        
-      if (!document.cookie){
+      if (document.cookie){
         reject('Could not delete cookie')
       } else {
         resolve('success')
@@ -234,10 +234,8 @@ export class HomeComponent implements OnInit {
   }
   logout(){
     const cookie = document.cookie
-    console.log(cookie)
     if(cookie){
       this.deleteCookie(cookie).then(() => this.splash())
-      console.log(document.cookie)
     } else {
       this.splash();
     }
