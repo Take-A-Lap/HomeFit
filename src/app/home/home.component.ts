@@ -234,8 +234,10 @@ export class HomeComponent implements OnInit {
   }
   logout(){
     const cookie = document.cookie
+    console.log(cookie)
     if(cookie){
       this.deleteCookie(cookie).then(() => this.splash())
+      console.log(document.cookie)
     } else {
       this.splash();
     }
