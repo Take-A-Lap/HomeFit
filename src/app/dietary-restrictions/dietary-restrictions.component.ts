@@ -14,7 +14,7 @@ export class DietaryRestrictionsComponent implements OnInit {
   user;
   userId: number;
   restrictions = {};
-  constructor(private data: UsernameService, private httpClient: HttpClient,) { }
+  constructor(private data: UsernameService, private httpClient: HttpClient) { }
 
   onClick(value){
     console.log(value);
@@ -22,7 +22,7 @@ export class DietaryRestrictionsComponent implements OnInit {
       (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#729085";
       this.restrictions[value] = true;
     } else {
-      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B73A58";
+      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B3B3FF";
       this.restrictions[value] = false;
     }
   }
