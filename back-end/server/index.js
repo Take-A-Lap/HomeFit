@@ -222,19 +222,19 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
-
-  // bcrypt.hash(password, (err, hash) => {
   bcrypt.genSalt(10, function (err, salt) {
-    bcrypt.hash(password, salt, function (err, hash) {
-      // Store hash in your password DB.
+    bcrypt.hash(password, salt, (err, hash)=> {
       db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, hash)
-        .then((user)=>{
-          return Promise.all([db.getUserIdByEmail(user.email)])
-            .catch(err=>console.error(err));
+        .then(()=>{
+          return db.getUserInfoByEmail(email)
         })
-    .catch(err=>console.error(err));
-  res.end();
-});
+        .then(user=>{
+          db.updateSessionOfUserById(user.id, true)
+          return user;
+        })
+        .catch(err=>console.error(err));
+    res.end();
+    });
   });
 })
 
