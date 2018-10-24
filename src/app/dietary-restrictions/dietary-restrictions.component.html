@@ -24,62 +24,58 @@
         <table class="table">
           <tbody>
             <tr>
-              <td><input type="checkbox" /> Balanced</td>
-              <td><input type="checkbox" /> High-Protein</td>
-              <td><input type="checkbox" /> Sesame-Free</td>    
+              <td><button class="input" id="balanced" value="balanced" (click)="onClick($event.target.value)"> Balanced</button></td>
+              <td><button class="input" id="high-protein" value="high-protein" (click)="onClick($event.target.value)"> High-Protein</button></td>
+              <td><button class="input" id="sesame-free" value="sesame-free" (click)="onClick($event.target.value)"> Sesame-Free</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> High-Fiber</td>
-              <td><input type="checkbox" /> Low-Carb</td>
-              <td><input type="checkbox" /> High-Carb</td>
+              <td><button class="input" id="high-fiber" value="high-fiber" (click)="onClick($event.target.value)"> High-fiber</button></td>
+              <td><button class="input" id="low-carb" value="low-carb" (click)="onClick($event.target.value)"> Low-Carb</button></td>
+              <td><button class="input" id="high-carb" value="high-carb" (click)="onClick($event.target.value)"> High-Carb</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Low-sodium</td>
-              <td><input type="checkbox" /> Alcohol-Free</td>
-              <td><input type="checkbox" /> Pork-Free</td>
-             
+              <td><button class="input" id="low-sodium" value="low-sodium" (click)="onClick($event.target.value)"> Low-Sodium</button></td>
+              <td><button class="input" id="alcohol-free" value="alcohol-free" (click)="onClick($event.target.value)"> Alcohol-Free</button></td>
+              <td><button class="input" id="pork-free" value="pork-free" (click)="onClick($event.target.value)"> Pork-Free</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Celery-Free</td>
-              <td><input type="checkbox" /> Crustacean-Free</td>
-              <td><input type="checkbox" /> Red-Meat-Free</td>
+              <td><button class="input" id="celery-free" value="celery-free" (click)="onClick($event.target.value)">Celery-Free</button></td>
+              <td><button class="input" id="crustacean-free" value="crustacean-free" (click)="onClick($event.target.value)">Crustacean-Free</button></td>
+              <td><button class="input" id="red-meat-free" value="red-meat-free" (click)="onClick($event.target.value)">Red-Meat-Free</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Shellfish-Free</td>
-              <td><input type="checkbox" /> Lactose-Free</td>
-              <td><input type="checkbox" /> Peanut-Free</td>
-              
+              <td><button class="input" id="shellfish-free" value="shellfish-free" (click)="onClick($event.target.value)">Shellfish-Free</button></td>
+              <td><button class="input" id="lactose-free" value="lactose-free" (click)="onClick($event.target.value)">Lactose-Free</button></td>
+              <td><button class="input" id="peanut-free" value="peanut-free" (click)="onClick($event.target.value)">Peanut-Free</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Soy-Free</td>
-              <td><input type="checkbox" /> Tree-Nut-Free</td>
-              <td><input type="checkbox" /> Pescatarian</td>
+              <td><button class="input" id="soy-free" value="soy-free" (click)="onClick($event.target.value)">Soy-Free</button></td>
+              <td><button class="input" id="tree-nut-free" value="tree-nut-free" (click)="onClick($event.target.value)">Tree-Nut-Free</button></td>
+              <td><button class="input" id="pescatarian" value="pescatarian" (click)="onClick($event.target.value)">Pescatarian</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Sugar-Conscious</td>
-              <td><input type="checkbox" /> Wheat-Free</td>
-              <td><input type="checkbox" /> Low-Sugar</td>
-              
+              <td><button class="input" id="sugar-conscious" value="sugar-conscious" (click)="onClick($event.target.value)">Sugar-Conscious</button></td>
+              <td><button class="input" id="wheat-free" value="wheat-free" (click)="onClick($event.target.value)">Wheat-Free</button></td>
+              <td><button class="input" id="low-sugar" value="low-sugar" (click)="onClick($event.target.value)">Low-Sugar</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Vegan</td>
-              <td><input type="checkbox" /> Vegetarian</td>
-              <td><input type="checkbox" /> Paleo</td>
+              <td><button class="input" id="vegan" value="vegan" (click)="onClick($event.target.value)">Vegan</button></td>
+              <td><button class="input" id="vegetarian" value="vegetarian" (click)="onClick($event.target.value)">Vegetarian</button></td>
+              <td><button class="input" id="paleo" value="paleo" (click)="onClick($event.target.value)">Paleo</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Egg-Free</td>
-              <td><input type="checkbox" /> Fish-Free</td>
-              <td><input type="checkbox" /> Mustard-Free</td>
-              
+              <td><button class="input" id="egg-free" value="egg-free" (click)="onClick($event.target.value)">Egg-Free</button></td>
+              <td><button class="input" id="fish-free" value="fish-free" (click)="onClick($event.target.value)">Fish-Free</button></td>
+              <td><button class="input" id="mustard-free" value="mustard-free" (click)="onClick($event.target.value)">Mustard-Free</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Gluten-Free</td>
-              <td><input type="checkbox" /> Kidney-Friendly</td>
-              <td><input type="checkbox" /> No-Oil-Added</td>
+              <td><button class="input" id="gluten-free" value="gluten-free" (click)="onClick($event.target.value)">Gluten-Free</button></td>
+              <td><button class="input" id="kidney-friendly" value="kidney-friendly" (click)="onClick($event.target.value)">Kidney-Friendly</button></td>
+              <td><button class="input" id="no-oil-added" value="no-oil-added" (click)="onClick($event.target.value)">No Oil Added</button></td>
             </tr>
             <tr>
-              <td><input type="checkbox" /> Kosher</td>
-              <td><input type="checkbox" /> Low-Potassium</td>
+              <td><button class="input" id="kosher" value="kosher" (click)="onClick($event.target.value)">Kosher</button></td>
+              <td><button class="input" id="low-potassium" value="low-potassium" (click)="onClick($event.target.value)">Low-Potassium</button></td>
             </tr>
           </tbody>
         </table>
@@ -88,115 +84,8 @@
     <div class="row">
       <div class="col-md-12">
         <a routerLink="/home">
-          <button class="submit_button">Submit</button>
+          <button class="submit_button" (click)="onSubmit()">Submit</button>
         </a>
       </div>
     </div>
   </div>
-  <!-- <div class="row">
-    <div class="col-md-6">
-      <ul>
-        <li class="list-item">
-          <input type="checkbox" />Balanced
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />High-Fiber
-        </li>
-        <li class="list-item">
-        <input type="checkbox" />High-Protein
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Low-Carb
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Low-Sodium
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Alcohol-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Celery-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Crustacean-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Shellfish-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Soy-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Tree-Nut-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Sugar-Conscious
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Wheat-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Vegan-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Vegetarian
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-6">
-      <ul>
-        <li class="list-item">
-        <input type="checkbox" />Dairy-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Egg-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Fish-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Gluten-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Kidney-Friendly
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Kosher
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Low-Potassium
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Mustard-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />No-Add-Oil
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Low-Sugar
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Paleo
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Peanut-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Pescatarian
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Pork-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Red-Meat-Free
-        </li>
-        <li class="list-item">
-          <input type="checkbox" />Sesame-Free
-        </li>
-      </ul>
-      <button type="button" class="btn btn-success">
-        Button
-      </button>
-    </div>
-  </div>
-</div> -->

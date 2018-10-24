@@ -93,12 +93,12 @@ export class SettingsPersonalInfoComponent implements OnInit {
         password: this.password,
       }
     
-    }).subscribe(()=>this.splash())
+    }).subscribe(()=>this.nutritional())
   }
   }
 
-  splash() {
-    this.router.navigate(['/signup']);
+  nutritional() {
+    this.router.navigate(['/diet']);
   }
 
   ngOnInit() {

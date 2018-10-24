@@ -14,7 +14,6 @@ const google = require('../googleAssHelpers/helpers');
 const bcrypt = require('bcrypt');
 const alexaRouter = express.Router()
 
-
 app.use('/alexa', alexaRouter);
 app.use(express.static('dist/HomeFit'));
 
@@ -30,6 +29,19 @@ app.use(bodyParser.urlencoded({
   let current;
 
 app.post('/fulfillment', google);
+
+app.post('/diet', (req,res)=>{
+  let restrictions = req.body.params.restrictions;
+  let user = JSON.parse(req.body.params.user);
+  restrictions.forEach(restriction=>{
+    db.getDietaryRestrictionsIdByName(restriction)
+    .then(result=>{
+      db.insertIntoUserDiet(user.id, result.id)
+    })
+    .catch(err=>console.error(err))    
+  })
+  res.send('coming from server')
+})
 
 app.get('/generateWO', (req, res)=> {
   wo_num = req.query.wo_num;
@@ -160,11 +172,13 @@ app.get('/username', (req, res) => {
   })
 
 app.get('/dinner', (req,res)=>{
+  const user = JSON.parse(req.query.user)
   const cal = JSON.parse(req.query.calorieProfile)
-  meal.getDinner(cal.lunchMin, cal.lunchMax, '')
+  db.getUserDietByUserId(user.id)
+  .then(diet => meal.getDinner(cal.lunchMin, cal.lunchMax, diet))
   .then(recipes=> recipes.map(recipe=>recipe.recipe))
-    .then(dinner=>res.send(dinner))
-    .catch(err=>console.error(err));
+  .then(dinner=>res.send(dinner))
+  .catch(err=>console.error(err));
 })
 
 app.get('/lunch', (req,res) => {

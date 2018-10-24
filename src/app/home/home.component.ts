@@ -99,8 +99,7 @@ export class HomeComponent implements OnInit {
           error => {
             console.error(error, 'error');
           })
-    })
-    
+    })  
   }
   getCompletedWorkouts(email) {
     return new Promise((resolve, reject)=>{
@@ -170,7 +169,7 @@ export class HomeComponent implements OnInit {
     return new Promise((resolve, reject)=>{
       this.httpClient.get('/dinner', {
         params: {
-          calorieProfile: cal, dietaryRestrictions
+          calorieProfile: cal, dietaryRestrictions, user: JSON.stringify(this.user)
         }
       })
         .subscribe(dinnerFood => {
@@ -235,8 +234,10 @@ export class HomeComponent implements OnInit {
   }
   logout(){
     const cookie = document.cookie
+    console.log(cookie)
     if(cookie){
       this.deleteCookie(cookie).then(() => this.splash())
+      console.log(document.cookie)
     } else {
       this.splash();
     }
