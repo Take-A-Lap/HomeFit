@@ -180,6 +180,17 @@ module.exports = {
   user_email = $1
   `, [email, alexaId]),
 
+  //set the session to either true or false based on when this method is invoked
+  //if invoked on the login status we set session to true, if we logout we set session to false
+  //cookie will still be needed to verify you are you
+  updateSessionOfUserById: (userId, session) => db.any(`
+  UPDATE users
+  SET
+  session = $2
+  WHERE
+  id = $1
+  `, [userId, session]),
+
   undoUserDietaryRestrictionByIds: (userId, dietId) => db.any(`
     DELETE FROM user_dietary
     WHERE id_user = $1 AND id_dietary_restrictions = $2
