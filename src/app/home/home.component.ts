@@ -224,7 +224,6 @@ export class HomeComponent implements OnInit {
     return new Promise((resolve,reject)=>{
         document.cookie = name +
           '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
-       console.log(document.cookie)
       if (document.cookie !== ''){
         reject('Could not delete cookie')
       } else {
@@ -250,9 +249,8 @@ export class HomeComponent implements OnInit {
   logout(){
     const cookie = document.cookie
     if(cookie){
-      this.deleteCookie(cookie)
-      .then(()=>this.removeSession())
-      .then(() => this.splash())
+      Promise.all([this.deleteCookie(cookie), this.removeSession(), this.splash()])
+      .then(response=>console.log(response))
       .catch(err=>console.error(err))
     } else {
       this.splash();
