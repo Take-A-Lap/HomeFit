@@ -218,7 +218,7 @@ export class HomeComponent implements OnInit {
     })
   }
   splash() {
-    this.router.navigate(['/signup']);
+    return this.router.navigate(['/signup']);
   }
   deleteCookie(name){
     return new Promise((resolve,reject)=>{
@@ -238,8 +238,13 @@ export class HomeComponent implements OnInit {
         params: {
           user: JSON.stringify(this.user)
         }
+      }).subscribe(message=>{
+        if(message){
+          resolve(message)
+        } else {
+          reject('Could not remove Cookies')
+        }
       })
-
     })
   }
   logout(){
@@ -252,7 +257,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.splash();
     }
-    
   }
   
   testClick(){

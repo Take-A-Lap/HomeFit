@@ -44,7 +44,15 @@ app.post('/diet', (req,res)=>{
 })
 app.post('/logout', (req, res)=>{
   const user = JSON.parse(req.body.params.user)
-  d
+  db.updateSessionOfUserById(user.id, false)
+  .then(()=>res.send('You have been logged out'))
+  .catch(err=>console.error(err))
+})
+app.post('/login', (req,res)=>{
+  const user = JSON.parse(req.body.params.user)
+  db.updateSessionOfUserById(user.id, true)
+  .then(() => res.send('You have been logged in'))
+  .catch(err => console.error(err))
 })
 
 app.get('/generateWO', (req, res)=> {
@@ -110,12 +118,13 @@ app.get('/getCompletedWO', (req, res) => {
 });
 
 app.get('/homeFitAuth', (req, res) => {
-  db.getPasswordByEmail(req.query.email)
-  .then(password=> {
-    bcrypt.compare(req.query.password, password.password, (err, result) => {
+  db.getUserInfoByEmail(req.query.email)
+  .then(user=> {
+    bcrypt.compare(req.query.password, user.password, (err, result) => {
       if (err) {
         console.error(err);
       } else {
+        db.updateSessionOfUserById(user.id, true)
         res.send(result);
       }
     })
