@@ -11,6 +11,7 @@ import { WorkoutComponent } from './workout/workout.component';
 import { MealsComponent } from './meals/meals.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { UpdateComponent } from './update/update.component';
 
 const routes: Routes = [
   // { path: '', component: AppComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'meals', component: MealsComponent},
   { path: 'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
+  { path: 'update', component: UpdateComponent},
   { path: "**", component: ErrorComponent}
 ];
 
@@ -45,5 +47,6 @@ export const routingComponents = [
   MealsComponent,
   ErrorComponent,
   LoginComponent,
-  LogoutComponent
+  LogoutComponent,
+  UpdateComponent
 ]
