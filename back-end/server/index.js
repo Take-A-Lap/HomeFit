@@ -44,6 +44,7 @@ app.post('/diet', (req,res)=>{
 })
 app.post('/logout', (req, res)=>{
   const user = JSON.parse(req.body.params.user)
+  console.log(user.id)
   db.updateSessionOfUserById(user.id, false)
   .then(()=>res.send('You have been logged out'))
   .catch(err=>console.error(err))
