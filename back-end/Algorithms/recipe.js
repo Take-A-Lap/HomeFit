@@ -8,13 +8,8 @@ const app = express();
 const axios = require('axios');
 
 const getMeal = function (meat, calorieMin, calorieMax, dietaryRestrictions) {
-  let diet = [];
-  dietaryRestrictions.forEach(restriction=>{
-    diet.push(`&${restriction.type}=${restriction.name}`)
-  })
-  const adjustment = dietaryRestrictions ? diet.reduce((acc, curr) => {
-    return acc.concat(curr);
-  }, '') : '';
+  const adjustment = dietaryRestrictions ? dietaryRestrictions.map(restriction => `&${restriction.type}=${restriction.name}`).reduce((acc, curr) => acc.concat(curr), '') : '';
+  console.log(adjustment);
   return axios.get(`https://api.edamam.com/search?q=${meat}&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=30&calories=${calorieMin}-${calorieMax}${adjustment}`)
     .then(recipes => recipes.data.hits)
 };
