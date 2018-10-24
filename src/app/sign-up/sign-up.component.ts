@@ -16,6 +16,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SignUpComponent implements OnInit {
 
+  user;
+
   constructor(private router: Router, 
               private httpClient: HttpClient,
               private socialAuthService: AuthService) { }
@@ -76,7 +78,8 @@ export class SignUpComponent implements OnInit {
   checkCredentials(){
     if(document.cookie){
       this.getCookieInfo().then(user=>{
-        if(user){
+        this.user = user
+        if(this.user.session){
           this.home();
         }
       })

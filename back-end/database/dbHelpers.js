@@ -155,7 +155,7 @@ module.exports = {
     SET
     voice_interface_sets = $2
     WHERE id = $1
-  `,[userId, sets])
+  `,[userId, sets]),
 
   updateLastWO: (userID, last)=> db.any(`
       UPDATE users

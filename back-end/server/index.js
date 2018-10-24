@@ -42,6 +42,18 @@ app.post('/diet', (req,res)=>{
   })
   res.send('coming from server')
 })
+app.post('/logout', (req, res)=>{
+  const user = JSON.parse(req.body.params.user)
+  db.updateSessionOfUserById(user.id, false)
+  .then(()=>res.send('You have been logged out'))
+  .catch(err=>console.error(err))
+})
+app.post('/login', (req,res)=>{
+  const user = JSON.parse(req.body.params.user)
+  db.updateSessionOfUserById(user.id, true)
+  .then(() => res.send('You have been logged in'))
+  .catch(err => console.error(err))
+})
 
 app.get('/generateWO', (req, res)=> {
   wo_num = req.query.wo_num;
@@ -106,12 +118,13 @@ app.get('/getCompletedWO', (req, res) => {
 });
 
 app.get('/homeFitAuth', (req, res) => {
-  db.getPasswordByEmail(req.query.email)
-  .then(password=> {
-    bcrypt.compare(req.query.password, password.password, (err, result) => {
+  db.getUserInfoByEmail(req.query.email)
+  .then(user=> {
+    bcrypt.compare(req.query.password, user.password, (err, result) => {
       if (err) {
         console.error(err);
       } else {
+        db.updateSessionOfUserById(user.id, true)
         res.send(result);
       }
     })
@@ -209,19 +222,19 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
-
-  // bcrypt.hash(password, (err, hash) => {
   bcrypt.genSalt(10, function (err, salt) {
-    bcrypt.hash(password, salt, function (err, hash) {
-      // Store hash in your password DB.
+    bcrypt.hash(password, salt, (err, hash)=> {
       db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, hash)
-        .then((user)=>{
-          return Promise.all([db.getUserIdByEmail(user.email)])
-            .catch(err=>console.error(err));
+        .then(()=>{
+          return db.getUserInfoByEmail(email)
         })
-    .catch(err=>console.error(err));
-  res.end();
-});
+        .then(user=>{
+          db.updateSessionOfUserById(user.id, true)
+          return user;
+        })
+        .catch(err=>console.error(err));
+    res.end();
+    });
   });
 })
 
