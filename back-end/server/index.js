@@ -138,6 +138,19 @@ app.post('/completed', (req, res)=> {
   .then(()=>res.send('tallied!'))
 })
 
+app.post('/update', (req, res)=>{
+  let weight = req.body.params.weight;
+  let numPushUps = req.body.params.push_ups;
+  let jogDist = req.body.params.miles;
+  let age = req.body.params.age;
+  let squatComf = req.body.params.squats;
+  let goals  = req.body.params.goals;
+  let username = req.body.params.userName;
+  let id = req.body.params.id;
+  db.updateUser(weight,numPushUps,jogDist,age,squatComf,goals,username,id)
+  .then(()=>res.end())
+})
+
 app.post('/updateWorkouts', (req, res)=>{
   db.updateNoWO(req.body.params.id, req.body.params.value)
   .then(()=>res.send('workouts updated'))
