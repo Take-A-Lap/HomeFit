@@ -42,6 +42,10 @@ app.post('/diet', (req,res)=>{
   })
   res.send('coming from server')
 })
+app.post('/logout', (req, res)=>{
+  const user = JSON.parse(req.body.params.user)
+  d
+})
 
 app.get('/generateWO', (req, res)=> {
   wo_num = req.query.wo_num;

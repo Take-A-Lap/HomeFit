@@ -232,10 +232,23 @@ export class HomeComponent implements OnInit {
       }
     })
   }
+  removeSession(){
+    return new Promise((resolve, reject)=>{
+      this.httpClient.post('/logout', {
+        params: {
+          user: JSON.stringify(this.user)
+        }
+      })
+
+    })
+  }
   logout(){
     const cookie = document.cookie
     if(cookie){
-      this.deleteCookie(cookie).then(() => this.splash()).catch(err=>console.error(err))
+      this.deleteCookie(cookie)
+      .then(()=>this.removeSession())
+      .then(() => this.splash())
+      .catch(err=>console.error(err))
     } else {
       this.splash();
     }
