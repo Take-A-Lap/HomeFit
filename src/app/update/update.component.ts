@@ -1,6 +1,5 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UsernameService } from '../username.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,41 +10,20 @@ import { Router } from '@angular/router';
 export class UpdateComponent implements OnInit {
 
   constructor(private httpClient: HttpClient,
-              private router: Router,
-              private data: UsernameService) { }
+              private router: Router) { }
 
-  email: string;
-  password: string;
   age: number;
-  height: number;
   weight: number;
   goals: number;
   push_ups: number;
   squats: number;
   miles: number;
   username: string;
-  sex: string;
+  id;
   user;
-
-  updateSex() {
-    var inputValue = (<HTMLInputElement>document.getElementById('sex')).value;
-    this.sex = inputValue;
-  }
-
-  updateEmail(e) {
-    this.email = e.target.value;
-  }
-
-  updatePassword(e) {
-    this.password = e.target.value;
-  }
 
   updateAge(e) {
     this.age = e.target.value;
-  }
-
-  updateHeight(e) {
-    this.height = e.target.value;
   }
 
   updateWeight(e) {
@@ -72,6 +50,21 @@ export class UpdateComponent implements OnInit {
 
   updateUsername(e) {
     this.username = e.target.value;
+  }
+
+  updateUser() {
+    this.httpClient.post('/update', {
+      params: {
+        id: this.id,
+        weight: this.weight,
+        push_ups: this.push_ups,
+        age: this.age,
+        miles: this.miles,
+        squats: parseInt((<HTMLInputElement>document.getElementById('squats')).value),
+        goals: parseInt((<HTMLInputElement>document.getElementById('goalId')).value),
+        userName: this.username === 'What name do you go by ?' ? '' : this.username,
+      }
+    }).subscribe(()=>this.nutritional())
   }
 
   getCookieInfo() {
@@ -112,15 +105,12 @@ export class UpdateComponent implements OnInit {
       this.squats = this.user.squat_comf;
       this.miles = this.user.jog_dist;
       this.username = this.user.preferred_username;
+      this.id = this.user.id;
     })
   }
 
   ngOnInit() {
     this.launch()
-  }
-
-  newUsername() {
-    this.data.changeUsername(this.username);
   }
 }
 
