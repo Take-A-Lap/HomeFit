@@ -206,7 +206,7 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
-      console.log(weatherInfo)
+      // console.log(weatherInfo)
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)
@@ -287,8 +287,14 @@ app.post('/signUp', (req, res) =>{
 
 //function to dietary restrictions from db to display on savedDiet page
 app.get('/userDiet', (req, res) => {
-  console.log(req);
-  Promise.all()
+  console.log(req.query.user);
+  const user = req.query.user;
+  db.getUserIdByEmail(user)
+    .then(user => {
+      console.log(user, 'line 294');
+      db.getUserDietByUserId(user.id)
+        .then(diet => res.send(diet));
+    })
 })
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
