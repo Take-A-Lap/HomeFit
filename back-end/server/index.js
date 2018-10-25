@@ -33,21 +33,27 @@ app.post('/fulfillment', google);
 app.post('/diet', (req,res)=>{
   let restrictions = req.body.params.restrictions;
   let user = JSON.parse(req.body.params.user);
-  let userDiet={};
+  
   db.getUserDietByUserId(user.id)
   .then(diet=>{
+    let userDiet = {};
     diet.forEach(restriction=>{
-      console.log(restriction)
       userDiet[restriction.name]=true;
     })
+    console.log(userDiet)
     return userDiet;
   })
   .then(diet=>{
     restrictions.forEach(restriction=>{
-      if(!diet[restriction]){
-        diet[restriction] = true;
+      if(diet[restriction]){
+        diet[restriction] = false;
+        db.getDietaryRestrictionsIdByName(restriction)
+        .then(id=>{
+          console.log(id)
+          db.undoUserDietaryRestrictionByIds(user.id,id.id)
+        })
       } else {
-        diet[restriction] === false;
+        diet[restriction] = true;
       }
     })
     console.log(diet)    
