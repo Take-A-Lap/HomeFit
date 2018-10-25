@@ -135,6 +135,12 @@ module.exports = {
     id = $8
   `, [weight, numPushUps, jogDist, age, squatComf, goals, preferredUsername, id]),
   
+  updateDiet: (userId, dietId) => db.any(`
+      INSERT INTO user_dietary
+      (id_user, id_dietary_restrictions)
+      VALUES
+      ($1, $2)
+  `, [userId], [dietId]),
   // will most likely need to call this within a loop over the different diet ids
   insertIntoUserDiet: (userId, dietId) => db.any(`
     INSERT INTO user_dietary

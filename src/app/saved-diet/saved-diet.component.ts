@@ -37,6 +37,7 @@ export class SavedDietComponent implements OnInit {
         .subscribe(user => {
           if (user) {
             resolve(user)
+            
           } else {
             reject('user rejection')
           }
@@ -50,7 +51,6 @@ export class SavedDietComponent implements OnInit {
   displaySavedDietInfo() {
     this.getCookieInfo()
       .then(diet => {
-        console.log(diet);
         for (let key in diet[0]) {
           this.restrictions[key] = diet[0][key];
         }
@@ -89,16 +89,17 @@ export class SavedDietComponent implements OnInit {
       }
     }
     this.getCookieInfo()
-      .then(user => {
-        this.httpClient.post('/updateDiet', {
+      .then((user: any) => {
+      this.httpClient.post('/updateDiet', {
           params: {
-            user: JSON.stringify(user),
+            user: user.user,
             restrictions: restArray
           }
         }).subscribe()
       })
   }
   ngOnInit() {
+    // this.getCookieInfo();
     this.displaySavedDietInfo();
     // this.onLaunch();
   }

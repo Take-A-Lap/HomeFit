@@ -289,12 +289,30 @@ app.post('/signUp', (req, res) =>{
 app.get('/userDiet', (req, res) => {
   console.log(req.query.user);
   const user = req.query.user;
+  const userObj = {
+    user: req.query.user
+  };
+
   db.getUserIdByEmail(user)
     .then(user => {
-      console.log(user, 'line 294');
       db.getUserDietByUserId(user.id)
-        .then(diet => res.send(diet));
+        .then(diet => {
+          diet.forEach(dietObj => {
+            console.log(dietObj.name);
+            for (let key in dietObj) {
+              if (key === 'name') {
+                userObj[key] = dietObj[key];
+              }
+            }
+          })
+          res.send(userObj)
+        });
     })
+})
+
+app.post('/updateDiet', (req, res) => {
+  console.log(req.body, 'line 314');
+
 })
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
