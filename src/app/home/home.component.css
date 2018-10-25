@@ -86,9 +86,9 @@ h3 {
   color: #F5F4F3;
   font-weight: 900;
   font-size: 2em;
-  position: absolute;
+  position: relative;
   width: 100%;
-  height: 30%;
+  height: 100%;
 }
 
 .welcome {
