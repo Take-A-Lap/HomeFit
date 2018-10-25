@@ -101,6 +101,10 @@ h3 {
   table-layout: fixed;
 }
 
+.rowC {
+  line-height: 30px
+}
+
 .jumbotron {
   background-color: #729085;
   width: 90%;
