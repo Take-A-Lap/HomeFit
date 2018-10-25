@@ -357,6 +357,7 @@ app.intent('next exercise', conv => {
             text: `Try and keep pace`,
             speech: cadence
           }));
+          return db.updateVoiceInterfaceSets(user.id, user.voice_interface_sets + 1);
         } else {
           conv.ask(`
           <speak>
@@ -375,6 +376,9 @@ app.intent('next exercise', conv => {
           speech: `<speak> <p> I am sorry but we need to connect you to your account. </p> <p> All you have to do is say link my account <break time"50ms"/> followed by your account name </p> </speak>`
         }));
       }
+    })
+    .then(()=>{
+      console.log('voice_interface_sets has been updated')
     })
     .catch(err => {
       let index = randomNumGen(errorResponses);
