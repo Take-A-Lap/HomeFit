@@ -246,6 +246,7 @@ export class WorkoutComponent implements OnInit {
     })
   }
   removeSession() {
+    console.log('session')
     return new Promise((resolve, reject) => {
       this.httpClient.post('/logout', {
         params: {

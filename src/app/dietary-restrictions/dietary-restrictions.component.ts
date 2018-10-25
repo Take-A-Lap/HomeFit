@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 
 export class DietaryRestrictionsComponent implements OnInit {
 
+  
   username: string;
   user;
   userId: number;
