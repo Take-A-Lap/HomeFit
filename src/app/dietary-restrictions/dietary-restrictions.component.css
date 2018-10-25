@@ -20,6 +20,10 @@
   color: #F5F4F3;
 }
 
+.table {
+  width: 100%;
+  /* height: 100%; */
+}
 h1 {
   color: #F5F4F3;
 }
@@ -39,9 +43,9 @@ td {
 }
 
 .input {
-  width: 100%;
+  width: 97%;
   height: 200%;
-  border-radius: 15px;
+  border-radius: 5px;
   background-color: #B3B3FF;
   text-align: center;
   color: #F5F4F3;

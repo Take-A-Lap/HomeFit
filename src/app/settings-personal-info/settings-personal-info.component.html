@@ -8,6 +8,9 @@
           <a class="nav-link active" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="/diet">Diet</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="/logout">Logout</a>
         </li>
       </ul>
@@ -19,7 +22,7 @@
           <input  type="text"
                   class="form-control" 
                   id="username"
-                  placeholder="placeholder"
+                  placeholder="Enter Name"
                   (input)="updateUsername($event)"/>
         </div>
         <div class="form-group">
@@ -51,6 +54,7 @@
                   class="form-control" 
                   id="age" 
                   [value]="text"
+                  placeholder="Enter Age in Years"
                   (input)="updateAge($event)"/>
         </div>
         <div class="form-group">
@@ -59,6 +63,7 @@
                   class="form-control" 
                   id="height" 
                   [value]="number"
+                  placeholder="Enter Height in Inches"
                   (input)="updateHeight($event)"/>
         </div>
         <div class="form-group">
@@ -67,6 +72,7 @@
                   class="form-control" 
                   id="weight" 
                   [value]="text"
+                  placeholder="Enter Weight in Pounds"
                   (input)="updateWeight($event)"/>
         </div>
         <div class="form-group">
@@ -83,6 +89,7 @@
                   class="form-control" 
                   id="pushups" 
                   [value]="text"
+                  placeholder="Enter Number of Pushups"
                   (input)="updatePushUps($event)"/>
         </div>
         <div class="form-group">
@@ -99,6 +106,7 @@
                   class="form-control" 
                   id="miles"
                   [value]="text"
+                  placeholder="Enter Distance in Miles"
                   (input)="updateMiles($event)"/>
         </div>
       </form>
