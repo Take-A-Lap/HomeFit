@@ -11,14 +11,14 @@
 }
 
 .scrollable-menu {
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
   background-color:#729085;
   color: #F5F4F3;
   width: 100%
 }
 
 label {
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
   color: #F5F4F3;
 }
 
@@ -29,13 +29,13 @@ label {
 }
 
 .nav a {
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
   color: #F5F4F3;
 }
 
 .next_button {
   width: 100%;
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
   text-transform: uppercase;
   background-color: #B73A58;
   text-align: center;
