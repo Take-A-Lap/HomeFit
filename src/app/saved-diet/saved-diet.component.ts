@@ -14,16 +14,6 @@ export class SavedDietComponent implements OnInit {
 
   constructor(private httpClient: HttpClient) { }
 
-  
-    
-    // if (!this.restrictions[value]) {
-    //   (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#729085";
-    //   this.restrictions[value] = true;
-    // } else {
-    //   (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B3B3FF";
-    //   this.restrictions[value] = false;
-    // }
-  // }
   getCookieInfo() {
     return new Promise((resolve, reject) => {
       const cookie = document.cookie;
@@ -55,7 +45,7 @@ export class SavedDietComponent implements OnInit {
         diet.diet.forEach(restriction => {
           this.restrictions[restriction] = restriction;
         })
-        this.onLaunch();
+       this.onLaunch();
       })
   }
 

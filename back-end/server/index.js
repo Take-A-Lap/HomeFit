@@ -322,6 +322,7 @@ app.post('/updateDiet', (req, res) => {
       db.getUserDietByUserId(user.id)
         .then(diet => {
           if (diet.length > 0) {
+            console.log(diet, 'line 325')
             diet.forEach(currRestrict => {
               userObj[currRestrict.name] = currRestrict.name;
             })
@@ -334,7 +335,9 @@ app.post('/updateDiet', (req, res) => {
                       .then(() => {
                         restrictions.forEach(restriction => {
                           db.getDietaryRestrictionsIdByName(restriction)
-                            .then(newRestrictions => {
+                            .then(newRestriction => {
+                              db.insertIntoUserDiet(userObj.id, newRestriction.id)
+                                .then(() => res.end());
                             })
                         })
                       })
