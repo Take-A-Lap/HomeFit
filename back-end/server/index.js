@@ -311,9 +311,7 @@ app.get('/userDiet', (req, res) => {
 })
 
 app.post('/updateDiet', (req, res) => {
-  console.log(req.body, 'line 314');
   const restrictions = req.body.params.restrictions;
-  // console.log(restrictions);
   const userObj = {
     email: req.body.params.email
   };
@@ -324,33 +322,29 @@ app.post('/updateDiet', (req, res) => {
         .then(diet => {
           if (diet.length > 0) {
             diet.forEach(currRestrict => {
-              console.log(currRestrict, 'line 327');
-              //need to extract name from currRestrict
-              userObj[currRestrict] = currRestrict;
-              console.log(userObj, 'line 328');
+              userObj[currRestrict.name] = currRestrict.name;
             })
             for (let key in userObj) {
-              console.log(userObj[key], 'line 330');
-            db.getDietaryRestrictionsIdByName(userObj[key])
-              .then(dietId => {
-                console.log(dietId);
-                userObj.dietId = dietId.id;
-                db.undoUserDietaryRestrictionByIds(userObj.id, userObj.dietId)
-                  .then(() => {
-                    restrictions.forEach(restriction => {
-                      db.getDietaryRestrictionsIdByName(restriction)
-                        .then(newRestrictions => {
-                          console.log(newRestrictions, 'line 335')
+              if (key === userObj[key]) {
+                db.getDietaryRestrictionsIdByName(userObj[key])
+                  .then(dietId => {
+                    userObj.dietId = dietId.id;
+                    db.undoUserDietaryRestrictionByIds(userObj.id, userObj.dietId)
+                      .then(() => {
+                        restrictions.forEach(restriction => {
+                          db.getDietaryRestrictionsIdByName(restriction)
+                            .then(newRestrictions => {
+                            })
                         })
-                    })
+                      })
                   })
-              })
+                }
             }
           } else {
             restrictions.forEach(restriction => {
               db.getDietaryRestrictionsIdByName(restriction)
                 .then(newRestrict => {
-                  console.log(userObj, newRestrict.id);
+                  console.log(userObj, newRestrict.id, 'line 355');
                   db.insertIntoUserDiet(userObj.id, newRestrict.id)
                   .then(() => res.end());
                 })

@@ -51,6 +51,7 @@ export class SavedDietComponent implements OnInit {
   displaySavedDietInfo() {
     this.getCookieInfo()
       .then(diet => {
+        console.log(diet, 'line 54')
         for (let key in diet[0]) {
           this.restrictions[key] = diet[0][key];
         }
