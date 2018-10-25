@@ -285,6 +285,12 @@ app.post('/signUp', (req, res) =>{
   });
 })
 
+//function to dietary restrictions from db to display on savedDiet page
+app.get('/userDiet', (req, res) => {
+  console.log(req);
+  Promise.all()
+})
+
 alexaRouter.post('/fitnessTrainer', (req, res) => {
   if (req.body.request.type === 'LaunchRequest') {
     db.getUserInfoByAlexUserId(req.body.session.user.userId)
