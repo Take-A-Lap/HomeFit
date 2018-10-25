@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 col-md-12">
       <ul class="nav">
@@ -19,20 +19,28 @@
           <iframe class="video" [src]="trustedUrl"></iframe>
         </div>
         <br>
-<button class="rep_button" (click)="workinDatBody()" *ngIf="start">Start Rep Count</button>
-<button class="rep_button" (click)="answer()" *ngIf="clickMessage">{{clickMessage}}</button>
+        <button class="rep_button" (click)="workinDatBody()" *ngIf="start">Start Rep Count</button>
+        <button class="rep_button" (click)="answer()" *ngIf="clickMessage">{{clickMessage}}</button>
       </div>
     </div>
     <br>
     <br>
     <br>
     <br>
-  <div class="row">
-      <div class="jumbotron text-center col-mid-6">
-        <h3>Set:<br /> {{set}}</h3>
-      </div>
-      <div class="jumbotron text-center col-mid-6">
-        <h3>Rep:<br /> {{rep}}</h3>
-      </div>
-  </div>
+    <div class="row">
+		  <div class="col-md-12">
+			  <table class="table-responsive">  
+			  	<tbody>
+			  		<tr>
+			  			<td class="jumbotron text-center">
+                  <h3>Set:<br /> {{set}}</h3>
+			  			</td>
+			  			<td class="jumbotron text-center">
+                  <h3>Rep:<br /> {{rep}}</h3>
+			  			</td>	
+			  		</tr>
+			  	</tbody>
+			  </table>
+		</div>
+	</div>
 </div>
