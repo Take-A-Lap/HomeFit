@@ -218,7 +218,7 @@ export class HomeComponent implements OnInit {
     })
   }
   splash() {
-    return this.router.navigate(['/signup']);
+    return this.router.navigate(['/logout']);
   }
   deleteCookie(name){
     return new Promise((resolve,reject)=>{

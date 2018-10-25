@@ -77,8 +77,8 @@ app.post('/diet', (req,res)=>{
   res.send('coming from server')
 })
 app.post('/logout', (req, res)=>{
-  const user = JSON.parse(req.body.params.user)
-  db.updateSessionOfUserById(user.id, false)
+  // const user = JSON.parse(req.body.params.user)
+  db.updateSessionOfUserById(req.body.params.user.id, false)
   .then(()=>res.send('You have been logged out'))
   .catch(err=>console.error(err))
 })
@@ -206,6 +206,7 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
+      console.log(weatherInfo)
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)

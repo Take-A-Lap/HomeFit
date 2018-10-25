@@ -6,7 +6,7 @@
           <a class="nav-link active" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/logout">Logout</a>
+          <a class="nav-link" routerLink="/logout" (click)="logout()">Logout</a>
         </li>
       </ul>
       </div>
@@ -16,9 +16,7 @@
           <div class="col-md-12">
             <h2>Dietary Restrictions</h2>
             <p>Choose what types of food to exclude from your dietary recommendations</p>
-            <a routerLink="/home">
-              <button class="submit_button" (click)="onSubmit()">Submit</button>
-            </a>
+            
             <table class="table-responsive">
       				<tbody>
       					<tr>
@@ -76,7 +74,10 @@
                   <td><button class="input" id="low-potassium" value="low-potassium" (click)="onClick($event.target.value)">Low-Potassium</button></td>
                 </tr>
       				</tbody>
-      			</table>
+            </table>
+            <a routerLink="/home">
+              <button class="submit_button" (click)="onSubmit()">Submit</button>
+            </a>
       		</div>
     </div>
     <br>
@@ -86,9 +87,5 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
   </div>

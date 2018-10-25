@@ -30,6 +30,7 @@ export class WorkoutComponent implements OnInit {
   rep = 0;
   set = 1;
   email;
+  user;
   options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   beep = new Audio('../../assets/sound/beep.wav');
   kudos = new Audio('../../assets/sound/8bit-coin.wav');
@@ -230,26 +231,40 @@ export class WorkoutComponent implements OnInit {
         }).subscribe()
       })
     }
-    splash() {
-      this.router.navigate(['/signup']);
-    }
+  splash() {
+    return this.router.navigate(['/logout']);
+  }
   deleteCookie(name) {
     return new Promise((resolve, reject) => {
-      function del_cookie(name) {
-        document.cookie = 'roundcube_sessauth' +
-          '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
-      }
-      if (!document.cookie) {
+      document.cookie = name +
+        '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+      if (document.cookie !== '') {
         reject('Could not delete cookie')
       } else {
         resolve('success')
       }
     })
   }
+  removeSession() {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post('/logout', {
+        params: {
+          user: JSON.stringify(this.user)
+        }
+      }).subscribe(message => {
+        if (message) {
+          resolve(message)
+        } else {
+          reject('Could not remove Cookies')
+        }
+      })
+    })
+  }
   logout() {
     const cookie = document.cookie
     if (cookie) {
-      this.deleteCookie(cookie).then(() => this.splash())
+      Promise.all([this.deleteCookie(cookie), this.removeSession(), this.splash()])
+        .catch(err => console.error(err))
     } else {
       this.splash();
     }
