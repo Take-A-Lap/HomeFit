@@ -16,7 +16,9 @@
           <div class="col-md-12">
             <h2>Dietary Restrictions</h2>
             <p>Choose what types of food to exclude from your dietary recommendations</p>
-            
+            <a routerLink="/home">
+              <button class="submit_button" (click)="onSubmit()">Submit</button>
+            </a>
             <table class="table-responsive">
       				<tbody>
       					<tr>
@@ -75,9 +77,6 @@
                 </tr>
       				</tbody>
             </table>
-            <a routerLink="/home">
-              <button class="submit_button" (click)="onSubmit()">Submit</button>
-            </a>
       		</div>
     </div>
     <br>
