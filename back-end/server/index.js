@@ -33,18 +33,46 @@ app.post('/fulfillment', google);
 app.post('/diet', (req,res)=>{
   let restrictions = req.body.params.restrictions;
   let user = JSON.parse(req.body.params.user);
-  restrictions.forEach(restriction=>{
-    db.getDietaryRestrictionsIdByName(restriction)
-    .then(result=>{
-      db.insertIntoUserDiet(user.id, result.id)
+  let userDiet={};
+  db.getUserDietByUserId(user.id)
+  .then(diet=>{
+    diet.forEach(restriction=>{
+      userDiet[restriction]=true;
     })
-    .catch(err=>console.error(err))    
+    return userDiet;
   })
+  .then(diet=>{
+    restrictions.forEach(restriction=>{
+      if(!diet[restriction]){
+        diet[restriction] = true;
+      } else {
+        diet[restriction] === false;
+      }
+    })    
+    return diet
+  })
+  .then(diet=>{
+    const solution = [];
+    for(var key in diet){
+      if(diet[key]){
+        solution.push(key)
+      }
+    }
+    return solution;
+  })
+  .then(solution=>{
+    solution.forEach(noNo=>{
+      db.getDietaryRestrictionsIdByName(noNo)
+      .then(result=>{
+        db.insertIntoUserDiet(user.id, parseInt(result.id))
+      })
+    })
+  })
+  .catch(err=>console.error(err))
   res.send('coming from server')
 })
 app.post('/logout', (req, res)=>{
   const user = JSON.parse(req.body.params.user)
-  console.log(user.id)
   db.updateSessionOfUserById(user.id, false)
   .then(()=>res.send('You have been logged out'))
   .catch(err=>console.error(err))
@@ -138,6 +166,19 @@ app.post('/completed', (req, res)=> {
   .then(()=>res.send('tallied!'))
 })
 
+app.post('/update', (req, res)=>{
+  let weight = req.body.params.weight;
+  let numPushUps = req.body.params.push_ups;
+  let jogDist = req.body.params.miles;
+  let age = req.body.params.age;
+  let squatComf = req.body.params.squats;
+  let goals  = req.body.params.goals;
+  let username = req.body.params.userName;
+  let id = req.body.params.id;
+  db.updateUser(weight,numPushUps,jogDist,age,squatComf,goals,username,id)
+  .then(()=>res.end())
+})
+
 app.post('/updateWorkouts', (req, res)=>{
   db.updateNoWO(req.body.params.id, req.body.params.value)
   .then(()=>res.send('workouts updated'))
@@ -145,7 +186,6 @@ app.post('/updateWorkouts', (req, res)=>{
 
 app.post('/weather', (req, res) => {
   let weatherInfo = {};
-  console.log(req.body.params.timeStamp);
   Promise.all([
       weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
       weather.createDayNightLabel(req.body.params.timeStamp),
