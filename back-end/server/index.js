@@ -40,7 +40,6 @@ app.post('/diet', (req,res)=>{
     diet.forEach(restriction=>{
       userDiet[restriction.name]=true;
     })
-    console.log(userDiet)
     return userDiet;
   })
   .then(diet=>{
@@ -49,14 +48,12 @@ app.post('/diet', (req,res)=>{
         diet[restriction] = false;
         db.getDietaryRestrictionsIdByName(restriction)
         .then(id=>{
-          console.log(id)
           db.undoUserDietaryRestrictionByIds(user.id,id.id)
         })
       } else {
         diet[restriction] = true;
       }
-    })
-    console.log(diet)    
+    })   
     return diet
   })
   .then(diet=>{
@@ -72,7 +69,6 @@ app.post('/diet', (req,res)=>{
     solution.forEach(noNo=>{
       db.getDietaryRestrictionsIdByName(noNo)
       .then(result=>{
-        console.log(result.id, user.id)
         db.insertIntoUserDiet(user.id, parseInt(result.id))
       })
     })
