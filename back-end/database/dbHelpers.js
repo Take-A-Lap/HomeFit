@@ -121,7 +121,20 @@ module.exports = {
     ($1, $2, $3, $4, $5, $6, $7, 0, $8, $9, $10, $11)
   `, [weight, numPushUps, jogDist, age, sex, height, squatComf, goals, preferredUsername, email, password]),
 
-
+  updateUser: (weight, numPushUps, jogDist, age, squatComf, goals, preferredUsername, id) => db.any(`
+    UPDATE users
+    SET  
+    weight = $1, 
+    num_push_ups = $2, 
+    jog_dist = $3, 
+    age = $4, 
+    squat_comf = $5, 
+    goals = $6, 
+    preferred_username = $7
+    WHERE
+    id = $8
+  `, [weight, numPushUps, jogDist, age, squatComf, goals, preferredUsername, id]),
+  
   // will most likely need to call this within a loop over the different diet ids
   insertIntoUserDiet: (userId, dietId) => db.any(`
     INSERT INTO user_dietary

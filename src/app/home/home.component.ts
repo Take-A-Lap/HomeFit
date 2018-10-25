@@ -279,7 +279,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/personalInfo']);
+    this.router.navigate(['/update']);
   }
 
   setCalories(user, completes, today){
