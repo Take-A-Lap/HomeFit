@@ -218,7 +218,7 @@ export class HomeComponent implements OnInit {
     })
   }
   splash() {
-    return this.router.navigate(['/signup']);
+    return this.router.navigate(['/logout']);
   }
   deleteCookie(name){
     return new Promise((resolve,reject)=>{
@@ -250,7 +250,6 @@ export class HomeComponent implements OnInit {
     const cookie = document.cookie
     if(cookie){
       Promise.all([this.deleteCookie(cookie), this.removeSession(), this.splash()])
-      .then(response=>console.log(response))
       .catch(err=>console.error(err))
     } else {
       this.splash();
@@ -280,7 +279,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/personalInfo']);
+    this.router.navigate(['/update']);
   }
 
   setCalories(user, completes, today){

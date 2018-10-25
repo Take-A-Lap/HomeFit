@@ -5,7 +5,10 @@
     <div class="col-md-12">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/signup">Back</a>
+          <a class="nav-link active" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/logout" (click)="logout()">Logout</a>
         </li>
       </ul>
   <div class="row">
@@ -16,57 +19,23 @@
           <input  type="text"
                   class="form-control" 
                   id="username"
-                  placeholder="Enter Name"
+                  placeholder={{username}}
                   (input)="updateUsername($event)"/>
-        </div>
-        <div class="form-group">
-          <label for="sex">Sex</label>
-            <select class="scrollable-menu" id="sex" (click)="updateSex()">
-              <option value="f">Female</option>
-              <option value="m">Male</option>
-            </select>
-        </div>
-        <div class="form-group">
-          <label for="emailInput">Email</label>
-          <input  type="email" 
-                  class="form-control" 
-                  id="email" 
-                  placeholder="Email"
-                  (input)="updateEmail($event)"/>
-        </div>
-        <div class="form-group">
-          <label for="passwordInput">Password</label>
-          <input  type="password" 
-                  class="form-control" 
-                  id="password" 
-                  [value]="text"
-                  (input)="updatePassword($event)"/>
         </div>
         <div class="form-group">
           <label for="ageInput">Age</label>
           <input  type="number" 
                   class="form-control" 
                   id="age" 
-                  [value]="text"
-                  placeholder="Enter Age in Years"
+                  placeholder={{age}}
                   (input)="updateAge($event)"/>
-        </div>
-        <div class="form-group">
-          <label for="heightInput">Height</label>
-          <input  type="number" 
-                  class="form-control" 
-                  id="height" 
-                  [value]="number"
-                  placeholder="Enter Height in Inches"
-                  (input)="updateHeight($event)"/>
         </div>
         <div class="form-group">
           <label for="weightInput">Weight</label>
           <input  type="number" 
                   class="form-control" 
                   id="weight" 
-                  [value]="text"
-                  placeholder="Enter Weight in Pounds"
+                  placeholder={{weight}}
                   (input)="updateWeight($event)"/>
         </div>
         <div class="form-group">
@@ -78,12 +47,11 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="pushups">Pushups</label>
+          <label for="pushups">How many pushups can you do?</label>
           <input  type="number" 
                   class="form-control" 
                   id="pushups" 
-                  [value]="text"
-                  placeholder="Enter Number of Pushups"
+                  placeholder={{push_ups}}
                   (input)="updatePushUps($event)"/>
         </div>
         <div class="form-group">
@@ -95,12 +63,11 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="miles">Jogging</label>
+          <label for="miles">How far can you comfortably jog?</label>
           <input  type="number" 
                   class="form-control" 
                   id="miles"
-                  [value]="text"
-                  placeholder="Enter Distance in Miles"
+                  placeholder={{miles}}
                   (input)="updateMiles($event)"/>
         </div>
       </form>
@@ -109,10 +76,7 @@
   <div class="row">
     <div class="col-md-12">
       
-        <button type="button" 
-                class="next_button" 
-                (click)="addUser()" 
-                (click)="newUsername()">Submit</button>
+        <button type="button" class="next_button" (click)="updateUser()">Submit</button>
       
     </div>
     <br>
@@ -120,4 +84,3 @@
     <br>
   </div>
 </div>
-
