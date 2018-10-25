@@ -34,7 +34,6 @@ app.post('/diet', (req,res)=>{
   let restrictions = req.body.params.restrictions;
   let user = JSON.parse(req.body.params.user);
   let userDiet={};
-  console.log(restrictions)
   db.getUserDietByUserId(user.id)
   .then(diet=>{
     diet.forEach(restriction=>{
@@ -43,7 +42,6 @@ app.post('/diet', (req,res)=>{
     return userDiet;
   })
   .then(diet=>{
-    console.log('restrictions', restrictions)
     restrictions.forEach(restriction=>{
       if(!diet[restriction]){
         diet[restriction] = true;
@@ -51,23 +49,19 @@ app.post('/diet', (req,res)=>{
         diet[restriction] === false;
       }
     })    
-    console.log('diet', diet)
     return diet
   })
   .then(diet=>{
     const solution = [];
-    console.log(diet)
     for(var key in diet){
       if(diet[key]){
         solution.push(key)
       }
     }
-    console.log(solution)
     return solution;
   })
   .then(solution=>{
     solution.forEach(noNo=>{
-      console.log(noNo)
       db.getDietaryRestrictionsIdByName(noNo)
       .then(result=>{
         db.insertIntoUserDiet(user.id, parseInt(result.id))
@@ -79,7 +73,6 @@ app.post('/diet', (req,res)=>{
 })
 app.post('/logout', (req, res)=>{
   const user = JSON.parse(req.body.params.user)
-  console.log(user.id)
   db.updateSessionOfUserById(user.id, false)
   .then(()=>res.send('You have been logged out'))
   .catch(err=>console.error(err))
@@ -193,7 +186,6 @@ app.post('/updateWorkouts', (req, res)=>{
 
 app.post('/weather', (req, res) => {
   let weatherInfo = {};
-  console.log(req.body.params.timeStamp);
   Promise.all([
       weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
       weather.createDayNightLabel(req.body.params.timeStamp),

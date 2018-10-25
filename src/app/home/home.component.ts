@@ -250,7 +250,6 @@ export class HomeComponent implements OnInit {
     const cookie = document.cookie
     if(cookie){
       Promise.all([this.deleteCookie(cookie), this.removeSession(), this.splash()])
-      .then(response=>console.log(response))
       .catch(err=>console.error(err))
     } else {
       this.splash();
