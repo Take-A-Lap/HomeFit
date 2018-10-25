@@ -33,13 +33,48 @@ app.post('/fulfillment', google);
 app.post('/diet', (req,res)=>{
   let restrictions = req.body.params.restrictions;
   let user = JSON.parse(req.body.params.user);
-  restrictions.forEach(restriction=>{
-    db.getDietaryRestrictionsIdByName(restriction)
-    .then(result=>{
-      db.insertIntoUserDiet(user.id, result.id)
+  let userDiet={};
+  console.log(restrictions)
+  db.getUserDietByUserId(user.id)
+  .then(diet=>{
+    diet.forEach(restriction=>{
+      userDiet[restriction]=true;
     })
-    .catch(err=>console.error(err))    
+    return userDiet;
   })
+  .then(diet=>{
+    console.log('restrictions', restrictions)
+    restrictions.forEach(restriction=>{
+      if(!diet[restriction]){
+        diet[restriction] = true;
+      } else {
+        diet[restriction] === false;
+      }
+    })    
+    console.log('diet', diet)
+    return diet
+  })
+  .then(diet=>{
+    const solution = [];
+    console.log(diet)
+    for(var key in diet){
+      if(diet[key]){
+        solution.push(key)
+      }
+    }
+    console.log(solution)
+    return solution;
+  })
+  .then(solution=>{
+    solution.forEach(noNo=>{
+      console.log(noNo)
+      db.getDietaryRestrictionsIdByName(noNo)
+      .then(result=>{
+        db.insertIntoUserDiet(user.id, parseInt(result.id))
+      })
+    })
+  })
+  .catch(err=>console.error(err))
   res.send('coming from server')
 })
 app.post('/logout', (req, res)=>{
