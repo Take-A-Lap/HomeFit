@@ -9,6 +9,7 @@ const axios = require('axios');
 
 const getMeal = function (meat, calorieMin, calorieMax, dietaryRestrictions) {
   const adjustment = dietaryRestrictions ? dietaryRestrictions.map(restriction => `&${restriction.type}=${restriction.name}`).reduce((acc, curr) => acc.concat(curr), '') : '';
+  console.log([meat, adjustment])
   return axios.get(`https://api.edamam.com/search?q=${meat}&app_id=${config.EDAMAM_API_ID}&app_key=${config.EDAMAM_API_KEY}&from=0&to=30&calories=${calorieMin}-${calorieMax}${adjustment}`)
     .then(recipes => recipes.data.hits)
 };
@@ -17,12 +18,12 @@ const narrowDown = function (array) {
   const meals = [];
   return new Promise((resolve, reject) => {
     let i = 1;
-    while (i <= 7) {
+    while (i <= 12) {
       randomNumberArray.push(Math.floor(Math.random() * array.length));
       i++;
     }
     randomNumberArray.map(num => meals.push(array[num]), [])
-    if (meals.length === 7) {
+    if (meals.length === 12) {
       resolve(meals)
     } else {
       reject('narrowing rejection')
@@ -42,7 +43,7 @@ module.exports = {
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
   },
   getDinner: (calorieMin, calorieMax, dietaryRestrictions) => {
-    const meats = ['steak', 'chicken', 'beef', 'fish']
+    const meats = ['steak', 'chicken', 'beef', 'fish', 'pork', 'ham', 'tuna', 'salad']
     return bluebird.map(meats, meat=>getMeal(meat, calorieMin, calorieMax, dietaryRestrictions))
       .then(meals => narrowDown(meals.reduce((all, curr)=> all.concat(curr), [])))
   },
