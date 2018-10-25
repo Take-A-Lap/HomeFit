@@ -16,8 +16,9 @@
                 type="email" 
                 class="form-control" 
                 id="username" 
-                placeholder="placeholder" 
-                (input)="updateEmail($event)" 
+                placeholder="Enter Email Address" 
+                (input)="updateEmail($event)"
+                (keyup.enter)="onEnter(authenticate())"
               />
             </div>
             <div class="form-group">
@@ -26,13 +27,18 @@
                 type="password" 
                 class="form-control" 
                 id="password" 
+                placeholder="Enter Password"
                 [value]="password" 
-                (input)="updatePassword($event)" 
+                (input)="updatePassword($event)"
+                (keyup.enter)="onEnter(authenticate())"
               />
               <br>
               <br>
           <!-- <a routerLink="/dietaryRestrictions"> -->
-            <button type="button" class="button" (click)="authenticate()">Authenticate</button>
+            <button type="button" 
+                    class="btnAuthenticate" 
+                    (click)="authenticate()"
+                    onkeypress="searchKeyPress(event)">Authenticate</button>
           <!-- </a> -->
           <br>
           <br>
