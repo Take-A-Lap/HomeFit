@@ -4,6 +4,9 @@
       padding-left: 200px;
       padding-right: 200px;
     }
+    .sign-in_button {
+      font-size: 1.5vw;
+    }
 }
 
 .container {
@@ -28,7 +31,7 @@
   color: #F5F4F3;
   font-family: 'Josefin Sans', sans-serif;
   text-transform: uppercase;
-  font-size: 1.5vw;
+  /* font-size: 1.5vw; */
 }
 
 .op_spark_logo {
