@@ -5,6 +5,9 @@
       padding-left: 200px;
       padding-right: 200px;
     }
+    .rep_button {
+      font-size: 1.5vw;
+    }
 }
 
 @font-face {
@@ -14,6 +17,10 @@
 
 .container {
   background-color: #27213B;
+  background-size: contain;
+  min-width: 100%;
+  min-height: 100%;
+  height: 100%;
 }
 
 .nav {
@@ -43,30 +50,16 @@ iframe {
   width: 100%;
   height: 100%;
 }
-.row {
+/* .row {
   display: flex
-}
+} */
 
-.jumbotron {
-  background-color: #729085;
-  /* background-color: #638493; */
-  max-width: 50%;
-  max-height: 100%;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  margin-top: 20x;
-  margin-bottom: 10px;
-  margin-left: 17px;
-  margin-right: 15px
-}
+
 .jumbotronSet {
   background-color: #729085;
-  /* background-color: #638493; */
-  max-width: 100%;
+  width: 100%;
   display: flex;
-  max-height: 100%;
+  height: 100%;
   text-align: center;
   align-items: center;
   border-radius: 10px;
@@ -96,7 +89,26 @@ h3 {
   color: #F5F4F3;
   font-size: 2em;
   /* font-weight: bold; */
-  position: absolute;
-  width: 93%;
-  height: 30%;
+  position: relative;
+  width: 100%;
+  height:100%;
+}
+
+.table-responsive {
+  height: 100%;
+  width: 100%;
+  display: inline-table;
+  table-layout: fixed;
+}
+
+.jumbotron {
+  background-color: #729085;
+  width: 90%;
+  min-height: 100%;
+  text-align: center;
+  display: table-cell;
+  border: 3px;
+  border-radius: 11px;
+  border-color: #27213B;
+  border-style: solid
 }
