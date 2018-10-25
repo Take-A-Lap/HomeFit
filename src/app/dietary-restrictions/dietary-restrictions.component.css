@@ -51,7 +51,7 @@ td {
 
   background-color: #B73A58;
   text-align: center;
-  position: relative;
+  position: sticky;
   top: 5px;
   color: #F5F4F3;
   font-family: 'Ubuntu'
