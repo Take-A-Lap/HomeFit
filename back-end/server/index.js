@@ -33,22 +33,30 @@ app.post('/fulfillment', google);
 app.post('/diet', (req,res)=>{
   let restrictions = req.body.params.restrictions;
   let user = JSON.parse(req.body.params.user);
-  let userDiet={};
+  
   db.getUserDietByUserId(user.id)
   .then(diet=>{
+    let userDiet = {};
     diet.forEach(restriction=>{
-      userDiet[restriction]=true;
+      userDiet[restriction.name]=true;
     })
+    console.log(userDiet)
     return userDiet;
   })
   .then(diet=>{
     restrictions.forEach(restriction=>{
-      if(!diet[restriction]){
-        diet[restriction] = true;
+      if(diet[restriction]){
+        diet[restriction] = false;
+        db.getDietaryRestrictionsIdByName(restriction)
+        .then(id=>{
+          console.log(id)
+          db.undoUserDietaryRestrictionByIds(user.id,id.id)
+        })
       } else {
-        diet[restriction] === false;
+        diet[restriction] = true;
       }
-    })    
+    })
+    console.log(diet)    
     return diet
   })
   .then(diet=>{
@@ -64,6 +72,7 @@ app.post('/diet', (req,res)=>{
     solution.forEach(noNo=>{
       db.getDietaryRestrictionsIdByName(noNo)
       .then(result=>{
+        console.log(result.id, user.id)
         db.insertIntoUserDiet(user.id, parseInt(result.id))
       })
     })
