@@ -24,11 +24,13 @@
   max-width: 100%;
   /* height: 100%; */
 }
-h1 {
+h2 {
+  font-family: 'Josefin Sans', sans-serif;
   color: #F5F4F3;
 }
 
 p {
+  font-family: 'Josefin Sans', sans-serif;
   color: #F5F4F3;
 }
 td {
@@ -38,6 +40,7 @@ td {
 .submit_button {
   width: 100%;
   height: 7%;
+  font-family: 'Josefin Sans', sans-serif;
   border-radius: 5px;
   background-color: #B73A58;
   text-align: center;
@@ -47,6 +50,7 @@ td {
 }
 
 .input {
+  font-family: 'Josefin Sans', sans-serif;
   width: 100%;
   min-height: 100%;
   display: table-cell;
