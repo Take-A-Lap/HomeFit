@@ -10,9 +10,7 @@ export class SavedDietComponent implements OnInit {
 
   user: string;
   diet;
-  restrictions = {
-
-  };
+  restrictions = {};
 
   constructor(private httpClient: HttpClient) { }
 
@@ -61,17 +59,27 @@ export class SavedDietComponent implements OnInit {
       })
   }
 
-onLaunch() {
- for (let key in this.restrictions) {
-    console.log(key, 'key')
-    if (this.restrictions[key] !== null) {
-      console.log(this.restrictions[key]);
-      (<HTMLInputElement>document.getElementById(this.restrictions[key])).style.backgroundColor = "#729085";
-    } else {
-      (<HTMLInputElement>document.getElementById(this.restrictions[key])).style.backgroundColor = "#B3B3FF";
+  onLaunch() {
+  for (let key in this.restrictions) {
+      console.log(key, 'key')
+      if (this.restrictions[key] !== null) {
+        console.log(this.restrictions[key]);
+        (<HTMLInputElement>document.getElementById(this.restrictions[key])).style.backgroundColor = "#729085";
+      } else {
+        (<HTMLInputElement>document.getElementById(this.restrictions[key])).style.backgroundColor = "#B3B3FF";
+      }
     }
   }
-}
+
+  onClick(value) {
+    if (!this.restrictions[value]) {
+      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#729085";
+      this.restrictions[value] = true;
+    } else {
+      (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#B3B3FF";
+      this.restrictions[value] = false;
+    }
+  }
 
   onSubmit() {
     let restArray = [];
@@ -82,8 +90,7 @@ onLaunch() {
     }
     this.getCookieInfo()
       .then(user => {
-        let client = user;
-        this.httpClient.post('/diet', {
+        this.httpClient.post('/updateDiet', {
           params: {
             user: JSON.stringify(user),
             restrictions: restArray
