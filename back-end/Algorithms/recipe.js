@@ -17,12 +17,12 @@ const narrowDown = function (array) {
   const meals = [];
   return new Promise((resolve, reject) => {
     let i = 1;
-    while (i <= 7) {
+    while (i <= 12) {
       randomNumberArray.push(Math.floor(Math.random() * array.length));
       i++;
     }
     randomNumberArray.map(num => meals.push(array[num]), [])
-    if (meals.length === 7) {
+    if (meals.length === 12) {
       resolve(meals)
     } else {
       reject('narrowing rejection')
@@ -42,7 +42,7 @@ module.exports = {
       .then(meals => narrowDown(meals.reduce((all, curr) => all.concat(curr), [])))
   },
   getDinner: (calorieMin, calorieMax, dietaryRestrictions) => {
-    const meats = ['steak', 'chicken', 'beef', 'fish']
+    const meats = ['steak', 'chicken', 'beef', 'fish', 'pork', 'ham', 'tuna', 'salad']
     return bluebird.map(meats, meat=>getMeal(meat, calorieMin, calorieMax, dietaryRestrictions))
       .then(meals => narrowDown(meals.reduce((all, curr)=> all.concat(curr), [])))
   },
