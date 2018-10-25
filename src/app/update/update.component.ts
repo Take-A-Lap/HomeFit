@@ -91,7 +91,7 @@ export class UpdateComponent implements OnInit {
   }
 
   nutritional() {
-    this.router.navigate(['/diet']);
+    this.router.navigate(['/home']);
   }
 
   launch(){
