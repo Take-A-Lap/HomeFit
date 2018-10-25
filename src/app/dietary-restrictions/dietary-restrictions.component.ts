@@ -17,7 +17,6 @@ export class DietaryRestrictionsComponent implements OnInit {
   constructor(private data: UsernameService, private httpClient: HttpClient) { }
 
   onClick(value){
-    console.log(value);
     if(!this.restrictions[value]){
       (<HTMLInputElement>document.getElementById(value)).style.backgroundColor = "#729085";
       this.restrictions[value] = true;
@@ -28,7 +27,6 @@ export class DietaryRestrictionsComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log('in function')
     let restArray = [];
     for(var key in this.restrictions){
       if(this.restrictions[key]){

@@ -44,7 +44,6 @@ app.post('/diet', (req,res)=>{
 })
 app.post('/logout', (req, res)=>{
   const user = JSON.parse(req.body.params.user)
-  console.log(user.id)
   db.updateSessionOfUserById(user.id, false)
   .then(()=>res.send('You have been logged out'))
   .catch(err=>console.error(err))
@@ -145,7 +144,6 @@ app.post('/updateWorkouts', (req, res)=>{
 
 app.post('/weather', (req, res) => {
   let weatherInfo = {};
-  console.log(req.body.params.timeStamp);
   Promise.all([
       weather.getWeatherDarkSky(req.body.params.latitude, req.body.params.longitude),
       weather.createDayNightLabel(req.body.params.timeStamp),
