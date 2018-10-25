@@ -14,6 +14,7 @@
   border-radius: 0px;
   background-color:#729085;
   text-align: center;
+  font-family: 'Ubuntu'
 }
 
 .nav a {
@@ -24,12 +25,14 @@
   max-width: 100%;
   /* height: 100%; */
 }
-h1 {
+h2 {
   color: #F5F4F3;
+  font-family: 'Ubuntu';
 }
 
 p {
   color: #F5F4F3;
+  font-family: 'Ubuntu';
 }
 td {
   color: #F5F4F3;
@@ -44,6 +47,7 @@ td {
   position: relative;
   top: 5px;
   color: #F5F4F3;
+  font-family: 'Ubuntu'
 }
 
 .input {
@@ -54,6 +58,7 @@ td {
   background-color: #B3B3FF;
   text-align: center;
   color: #F5F4F3;
+  font-family: 'Ubuntu'
 }
 
 .table-responsive {
