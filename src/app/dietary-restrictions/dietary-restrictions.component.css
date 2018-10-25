@@ -14,6 +14,7 @@
   border-radius: 0px;
   background-color:#729085;
   text-align: center;
+  font-family: 'Ubuntu'
 }
 
 .nav a {
@@ -25,13 +26,17 @@
   /* height: 100%; */
 }
 h2 {
+
   font-family: 'Josefin Sans', sans-serif;
+
   color: #F5F4F3;
+  font-family: 'Ubuntu';
 }
 
 p {
   font-family: 'Josefin Sans', sans-serif;
   color: #F5F4F3;
+  font-family: 'Ubuntu';
 }
 td {
   color: #F5F4F3;
@@ -39,14 +44,17 @@ td {
 
 .submit_button {
   width: 100%;
+
   height: 7%;
   font-family: 'Josefin Sans', sans-serif;
   border-radius: 5px;
+
   background-color: #B73A58;
   text-align: center;
-  position: sticky;
+  position: relative;
   top: 5px;
   color: #F5F4F3;
+  font-family: 'Ubuntu'
 }
 
 .input {
@@ -58,6 +66,7 @@ td {
   background-color: #B3B3FF;
   text-align: center;
   color: #F5F4F3;
+  font-family: 'Ubuntu'
 }
 
 .table-responsive {

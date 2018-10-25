@@ -8,7 +8,7 @@
           <a class="nav-link active" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/logout">Logout</a>
+          <a class="nav-link" routerLink="/logout" (click)="logout()">Logout</a>
         </li>
       </ul>
   <div class="row">
@@ -79,5 +79,8 @@
         <button type="button" class="next_button" (click)="updateUser()">Submit</button>
       
     </div>
+    <br>
+    <br>
+    <br>
   </div>
 </div>

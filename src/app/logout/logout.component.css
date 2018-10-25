@@ -7,15 +7,21 @@
 }
 
 .container {
-  background-color: #000000;
+  background-color: #27213B;
 }
 
 .card-header {
-  background-color:#CCCCFF;
+  background-color:#729085;
   color: white;
+  font-family: 'Ubuntu';
+}
+
+.card-footer {
+  background-color: #729085;
 }
 
 .button {
-  background-color:#CCCCFF;
+  background-color:#B73A58;
   color: white;
+  font-family: 'Ubuntu';
 }
