@@ -202,6 +202,7 @@ export class WorkoutComponent implements OnInit {
           params: { email: this.email }
         }).subscribe(id => {
           result = id;
+          this.user = result;
           this.id = result.id;
           this.wo_num = result.workout_completes;
           this.index = result.current_workout_index || 0;
@@ -264,8 +265,11 @@ export class WorkoutComponent implements OnInit {
   logout() {
     const cookie = document.cookie
     if (cookie) {
-      Promise.all([this.deleteCookie(cookie), this.removeSession(), this.splash()])
-        .catch(err => console.error(err))
+      this.getUserInfo()
+      .then(()=>{
+        return Promise.all([this.deleteCookie(cookie), this.removeSession(), this.splash()])
+      })
+      .catch(err => console.error(err))
     } else {
       this.splash();
     }
@@ -278,7 +282,7 @@ export class WorkoutComponent implements OnInit {
     }
     
     ngOnInit() {
-      this.getCookieInfo();
+      this.getCookieInfo()
       this.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.youtube}?autoplay=1&loop=1`);
       // this.generateWO();
       this.searchAndGenerate();
