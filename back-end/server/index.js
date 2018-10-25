@@ -312,7 +312,52 @@ app.get('/userDiet', (req, res) => {
 
 app.post('/updateDiet', (req, res) => {
   console.log(req.body, 'line 314');
-
+  const restrictions = req.body.params.restrictions;
+  // console.log(restrictions);
+  const userObj = {
+    email: req.body.params.email
+  };
+  db.getUserIdByEmail(req.body.params.email)
+    .then(user => {
+      userObj.id = user.id;
+      db.getUserDietByUserId(user.id)
+        .then(diet => {
+          if (diet.length > 0) {
+            diet.forEach(currRestrict => {
+              console.log(currRestrict, 'line 327');
+              //need to extract name from currRestrict
+              userObj[currRestrict] = currRestrict;
+              console.log(userObj, 'line 328');
+            })
+            for (let key in userObj) {
+              console.log(userObj[key], 'line 330');
+            db.getDietaryRestrictionsIdByName(userObj[key])
+              .then(dietId => {
+                console.log(dietId);
+                userObj.dietId = dietId.id;
+                db.undoUserDietaryRestrictionByIds(userObj.id, userObj.dietId)
+                  .then(() => {
+                    restrictions.forEach(restriction => {
+                      db.getDietaryRestrictionsIdByName(restriction)
+                        .then(newRestrictions => {
+                          console.log(newRestrictions, 'line 335')
+                        })
+                    })
+                  })
+              })
+            }
+          } else {
+            restrictions.forEach(restriction => {
+              db.getDietaryRestrictionsIdByName(restriction)
+                .then(newRestrict => {
+                  console.log(userObj, newRestrict.id);
+                  db.insertIntoUserDiet(userObj.id, newRestrict.id)
+                  .then(() => res.end());
+                })
+            })
+          }
+        })
+    })
 })
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {

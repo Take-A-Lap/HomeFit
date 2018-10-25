@@ -92,7 +92,7 @@ export class SavedDietComponent implements OnInit {
       .then((user: any) => {
       this.httpClient.post('/updateDiet', {
           params: {
-            user: user.user,
+            email: user.user,
             restrictions: restArray
           }
         }).subscribe()
