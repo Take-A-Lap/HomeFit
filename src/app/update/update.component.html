@@ -1,0 +1,83 @@
+<router-outlet></router-outlet>
+<script src="js/bootstrap.min.js"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/logout">Logout</a>
+        </li>
+      </ul>
+  <div class="row">
+    <div class="col-md-12">
+      <form role="form">
+        <div class="form-group">
+          <label for="username">Preferred Name</label>
+          <input  type="text"
+                  class="form-control" 
+                  id="username"
+                  placeholder={{username}}
+                  (input)="updateUsername($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="ageInput">Age</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="age" 
+                  placeholder={{age}}
+                  (input)="updateAge($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="weightInput">Weight</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="weight" 
+                  placeholder={{weight}}
+                  (input)="updateWeight($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="goals">Goals<br /></label>
+          <select class="scrollable-menu" id="goalId" (click)="updateGoals()">
+            <option value="2">Stay Active</option>
+            <option value="1">Lose Weight</option>
+            <option value="3">Gain Mass</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="pushups">How many pushups can you do?</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="pushups" 
+                  placeholder={{push_ups}}
+                  (input)="updatePushUps($event)"/>
+        </div>
+        <div class="form-group">
+          <label for="squats">How comfortable are you with squats?</label>
+          <select class="scrollable-menu" id="squats" (click)="updateSquats()">
+            <option value="2">Moderately Comfortable</option>
+            <option value="1">Not At All</option>
+            <option value="3">Very Comfortable</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="miles">How far can you comfortably jog?</label>
+          <input  type="number" 
+                  class="form-control" 
+                  id="miles"
+                  placeholder={{miles}}
+                  (input)="updateMiles($event)"/>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      
+        <button type="button" class="next_button" (click)="updateUser()">Submit</button>
+      
+    </div>
+  </div>
+</div>

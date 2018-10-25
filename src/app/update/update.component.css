@@ -1,0 +1,43 @@
+@media (min-width: 769px) {
+    /* CSS in here for desktop only */
+    .container {
+      padding-left: 200px;
+      padding-right: 200px;
+    }
+}
+
+.container {
+  background-color: #27213B;
+}
+
+.scrollable-menu {
+  font-family: 'Ubuntu';
+  background-color:#729085;
+  color: #F5F4F3;
+  width: 100%
+}
+
+label {
+  font-family: 'Ubuntu';
+  color: #F5F4F3;
+}
+
+.nav {
+  border-radius: 0px;
+  background-color:#729085;
+  text-align: center;
+}
+
+.nav a {
+  font-family: 'Ubuntu';
+  color: #F5F4F3;
+}
+
+.next_button {
+  width: 100%;
+  font-family: 'Ubuntu';
+  text-transform: uppercase;
+  background-color: #B73A58;
+  text-align: center;
+  color: #F5F4F3;
+}
