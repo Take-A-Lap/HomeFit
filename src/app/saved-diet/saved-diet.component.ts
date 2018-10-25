@@ -50,12 +50,11 @@ export class SavedDietComponent implements OnInit {
 
   displaySavedDietInfo() {
     this.getCookieInfo()
-      .then(diet => {
+      .then((diet: any) => {
         console.log(diet, 'line 54')
-        for (let key in diet[0]) {
-          this.restrictions[key] = diet[0][key];
-        }
-        console.log(this.restrictions)
+        diet.diet.forEach(restriction => {
+          this.restrictions[restriction] = restriction;
+        })
         this.onLaunch();
       })
   }

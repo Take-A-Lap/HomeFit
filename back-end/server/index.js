@@ -285,12 +285,13 @@ app.post('/signUp', (req, res) =>{
   });
 })
 
-//function to dietary restrictions from db to display on savedDiet page
+//function to get dietary restrictions from db to display on savedDiet page
 app.get('/userDiet', (req, res) => {
   console.log(req.query.user);
   const user = req.query.user;
   const userObj = {
-    user: req.query.user
+    user: req.query.user,
+    diet: []
   };
 
   db.getUserIdByEmail(user)
@@ -301,7 +302,7 @@ app.get('/userDiet', (req, res) => {
             console.log(dietObj.name);
             for (let key in dietObj) {
               if (key === 'name') {
-                userObj[key] = dietObj[key];
+                userObj.diet.push(dietObj[key])
               }
             }
           })
