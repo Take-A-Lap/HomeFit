@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http'
 
 export class DietaryRestrictionsComponent implements OnInit {
 
+  
   username: string;
   user;
   userId: number;
