@@ -12,6 +12,7 @@ import { MealsComponent } from './meals/meals.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UpdateComponent } from './update/update.component';
+import { SavedDietComponent } from './saved-diet/saved-diet.component';
 
 const routes: Routes = [
   // { path: '', component: AppComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'logout', component: LogoutComponent},
   { path: 'update', component: UpdateComponent},
+  { path: 'savedDiet', component: SavedDietComponent},
   { path: "**", component: ErrorComponent}
 ];
 
@@ -48,5 +50,6 @@ export const routingComponents = [
   ErrorComponent,
   LoginComponent,
   LogoutComponent,
-  UpdateComponent
+  UpdateComponent,
+  SavedDietComponent
 ]
