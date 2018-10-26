@@ -336,6 +336,7 @@ app.post('/updateDiet', (req, res) => {
                         restrictions.forEach(restriction => {
                           db.getDietaryRestrictionsIdByName(restriction)
                             .then(newRestriction => {
+                              console.log(userObj.id, newRestriction.id, 'line 339')
                               db.insertIntoUserDiet(userObj.id, newRestriction.id)
                                 .then(() => res.end());
                             })
