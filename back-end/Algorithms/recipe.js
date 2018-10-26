@@ -135,6 +135,6 @@ module.exports = {
     })
   },
   testGet: ()=>{
-    return getMeal('steak', 0, 1000, '')
+    return getMeal('salad', 0, 1000, ['vegetarian', 'high-protein'])
   }
 }
