@@ -206,7 +206,7 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
-      console.log(weatherInfo)
+      // console.log(weatherInfo)
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)
@@ -283,6 +283,80 @@ app.post('/signUp', (req, res) =>{
     res.end();
     });
   });
+})
+
+//function to get dietary restrictions from db to display on savedDiet page
+app.get('/userDiet', (req, res) => {
+  console.log(req.query.user);
+  const user = req.query.user;
+  const userObj = {
+    user: req.query.user,
+    diet: []
+  };
+
+  db.getUserIdByEmail(user)
+    .then(user => {
+      db.getUserDietByUserId(user.id)
+        .then(diet => {
+          diet.forEach(dietObj => {
+            console.log(dietObj.name);
+            for (let key in dietObj) {
+              if (key === 'name') {
+                userObj.diet.push(dietObj[key])
+              }
+            }
+          })
+          res.send(userObj)
+        });
+    })
+})
+
+app.post('/updateDiet', (req, res) => {
+  const restrictions = req.body.params.restrictions;
+  const userObj = {
+    email: req.body.params.email
+  };
+  db.getUserIdByEmail(req.body.params.email)
+    .then(user => {
+      userObj.id = user.id;
+      db.getUserDietByUserId(user.id)
+        .then(diet => {
+          if (diet.length > 0) {
+            console.log(diet, 'line 325')
+            diet.forEach(currRestrict => {
+              userObj[currRestrict.name] = currRestrict.name;
+            })
+            for (let key in userObj) {
+              if (key === userObj[key]) {
+                db.getDietaryRestrictionsIdByName(userObj[key])
+                  .then(dietId => {
+                    userObj.dietId = dietId.id;
+                    db.undoUserDietaryRestrictionByIds(userObj.id, userObj.dietId)
+                      .then(() => {
+                        restrictions.forEach(restriction => {
+                          db.getDietaryRestrictionsIdByName(restriction)
+                            .then(newRestriction => {
+                              console.log(userObj.id, newRestriction.id, 'line 339')
+                              db.insertIntoUserDiet(userObj.id, newRestriction.id)
+                                .then(() => res.end());
+                            })
+                        })
+                      })
+                  })
+                }
+            }
+          } else {
+            restrictions.forEach(restriction => {
+              db.getDietaryRestrictionsIdByName(restriction)
+                .then(newRestrict => {
+                  console.log(userObj, newRestrict.id, 'line 355');
+                  db.insertIntoUserDiet(userObj.id, newRestrict.id)
+                  .then(() => res.end());
+                })
+            })
+          }
+        })
+    })
 })
 
 alexaRouter.post('/fitnessTrainer', (req, res) => {
