@@ -182,7 +182,7 @@ const nextExerObjResponses = [
     },
     part2: {
       before: ' <s> Let\'s take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
-      after: ', we can do that as well</s> </prosody> </speak>'
+      after: ', we can start that exercise as well</s> </prosody> </speak>'
     }
   },
 
@@ -215,7 +215,7 @@ const nextExerObjResponses = [
             </p>
             <p>
               <s>
-                or if you feel ready to begin
+                or if you feel want to begin
 
       `,
       after: `
