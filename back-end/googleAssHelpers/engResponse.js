@@ -205,9 +205,9 @@ const nextExerObjResponses = [
       before: `
             <p>
               <s>
-                <prosody pitch="+5%" rate="slow">
+                <prosody pitch="+5%" rate="moderate">
                   <emphasis>
-                    <s> wooh wee </s>
+                    <s> wooh who wee </s>
                   </emphasis>
                 </prosody>
                 let's take a break before the next set
