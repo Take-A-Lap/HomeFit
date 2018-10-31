@@ -1,6 +1,6 @@
 const spanishErrorResponse = [`<speak> <p> <s> Lo siento mucho, no le puedo entender. </s> <s> Podría preguntarme otra vez?  </s> </p> </speak>`,
 `<speak> <p> <s> Perdóname, no le entiendo. </s> <s> Puede repetirlo, por favor? </s> </p> </speak>`,
-`<speak> <p> <s> Disculpe, pero sign sin entenderle </s> <s> Repitalo, por favor. </s> </p> </speak>`,
+`<speak> <p> <s> Disculpe, pero sigo sin entenderle </s> <s> Repitalo, por favor. </s> </p> </speak>`,
 `<speak> <p> <s> Perdón, </s> <s> dígamelo otra vez. </s> </p> </speak>`];
 
 const spanishLinkAccountObjResponsesMasculine = [
