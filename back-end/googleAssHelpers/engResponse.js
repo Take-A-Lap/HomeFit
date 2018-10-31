@@ -110,11 +110,9 @@ const linkAccountObjResponses = [
   {
     before: `
     <speak> 
-      <s> 
-        <prosody pitch="-5%" rate="slow">
-          Well 
-        </prosody> 
-      </s> 
+      <prosody pitch="-5%" rate="slow">
+        Hello again
+      </prosody> 
       <p> 
         <s>`,
     after: `
