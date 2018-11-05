@@ -37,15 +37,11 @@
                 </select>
                 <input type="question" class="form-control" id="securityQuestion" [value]="text" (input)="updateSecurityQuestionAnswer($event)" />
               </div>
-              <div>
-                <button class="submit" (click)="getSecurityQuestionAnswer()">Submit</button>
-              </div>
+              
             </div>
             <div class="card-footer">
               <div>
-                <a routerLink="/login">
-                  <button class="button">Return to Sign In</button>
-                </a>
+                <button class="submit" (click)="getSecurityQuestionAnswer()">Submit</button>
               </div>
             </div>
           </div>

@@ -293,6 +293,14 @@ app.post('/signUp', (req, res) =>{
 
 app.post('/reset', (req, res) => {
   console.log(req.body.params);
+  db.getUserInfoByEmail(req.body.params.email)
+    .then(user => {
+      const securityObject = {
+        question: user.security_question,
+        answer: user.security_answer
+      }
+      res.send(securityObject);
+    })
 })
 //function to get dietary restrictions from db to display on savedDiet page
 app.get('/userDiet', (req, res) => {

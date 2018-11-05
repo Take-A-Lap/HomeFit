@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent},
   { path: 'update', component: UpdateComponent},
   { path: 'savedDiet', component: SavedDietComponent},
-  { path: 'passwordReset', component: RetrieveLoginComponent},
+  { path: 'securityCheck', component: RetrieveLoginComponent},
   { path: "**", component: ErrorComponent}
 ];
 
