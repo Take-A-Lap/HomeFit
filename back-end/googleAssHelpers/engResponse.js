@@ -89,7 +89,7 @@ const linkAccountObjResponses = [
       <prosody rate="fast"> 
         <s> 
           <prosody pitch="+10%"> 
-            We apologize for the inconvenience 
+            Welcome back
           </prosody> 
         </s> 
         <p> 
@@ -110,11 +110,9 @@ const linkAccountObjResponses = [
   {
     before: `
     <speak> 
-      <s> 
-        <prosody pitch="-5%" rate="slow">
-          Well 
-        </prosody> 
-      </s> 
+      <prosody pitch="-5%" rate="slow">
+        Hello again
+      </prosody> 
       <p> 
         <s>`,
     after: `
@@ -184,7 +182,7 @@ const nextExerObjResponses = [
     },
     part2: {
       before: ' <s> Let\'s take a break.</s> <s> Let me know when you are ready to do another set </s> <s> Or if you want to start ',
-      after: ', we can do that as well</s> </prosody> </speak>'
+      after: ', we can start that exercise as well</s> </prosody> </speak>'
     }
   },
 
@@ -209,7 +207,7 @@ const nextExerObjResponses = [
               <s>
                 <prosody pitch="+5%" rate="slow">
                   <emphasis>
-                    woo
+                    <s> wooh wee </s>
                   </emphasis>
                 </prosody>
                 let's take a break before the next set
@@ -217,7 +215,7 @@ const nextExerObjResponses = [
             </p>
             <p>
               <s>
-                or if you feel ready to begin
+                or if you feel want to begin
 
       `,
       after: `
