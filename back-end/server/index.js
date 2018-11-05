@@ -313,11 +313,17 @@ app.get('/userPassword', (req, res) => {
 
 app.post('/newPassword', (req, res) => {
   console.log(req.body.params, 'line 315')
-  db.getUserInfoByEmail(req.body.params.email)
+  const email = req.body.params.email;
+  const password = req.body.params.newPassword;
+  db.getUserInfoByEmail(email)
     .then(user => {
       console.log(user)
-      db.updatePassword(req.body.params.newPassword, user.id);
-      res.end();
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+          db.updatePassword(hash, user.id);
+          res.end();
+        })
+      })
     })
 })
 //function to get dietary restrictions from db to display on savedDiet page
