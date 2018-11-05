@@ -289,6 +289,11 @@ app.post('/signUp', (req, res) =>{
   });
 })
 
+//function to test user security question answer against saved answer in db
+
+app.post('/reset', (req, res) => {
+  console.log(req.body.params);
+})
 //function to get dietary restrictions from db to display on savedDiet page
 app.get('/userDiet', (req, res) => {
   console.log(req.query.user);
