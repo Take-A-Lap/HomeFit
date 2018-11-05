@@ -46,8 +46,20 @@ export class PasswordResetComponent implements OnInit {
 
   verifyPasswords() {
     if (this.password === this.password2) {
+      this.updatePasswordInDatabase();
       this.router.navigate(['/login']);
+    } else {
+      console.log('Passwords don\'t match');
     }
+  }
+
+  updatePasswordInDatabase() {
+    this.httpClient.post('/newPassword', {
+      params: {
+        email: this.email,
+        newPassword: this.password
+      }
+    }).subscribe(() => {})
   }
 
   ngOnInit() {

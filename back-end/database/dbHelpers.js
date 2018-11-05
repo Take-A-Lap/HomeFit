@@ -141,6 +141,15 @@ module.exports = {
       VALUES
       ($1, $2)
   `, [userId], [dietId]),
+
+  //new function to update Password
+  updatePassword: (password, id) => db.any(`
+      UPDATE users
+      SET
+      password = $1
+      WHERE
+      id = $2
+  `, [password, id]),
   // will most likely need to call this within a loop over the different diet ids
   insertIntoUserDiet: (userId, dietId) => db.any(`
     INSERT INTO user_dietary

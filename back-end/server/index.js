@@ -305,10 +305,19 @@ app.post('/security', (req, res) => {
 
 //function to reset password
 app.get('/userPassword', (req, res) => {
-  console.log(req.query.user)
   db.getUserInfoByEmail(req.query.user)
     .then(user => {
       res.send(user);
+    })
+})
+
+app.post('/newPassword', (req, res) => {
+  console.log(req.body.params, 'line 315')
+  db.getUserInfoByEmail(req.body.params.email)
+    .then(user => {
+      console.log(user)
+      db.updatePassword(req.body.params.newPassword, user.id);
+      res.end();
     })
 })
 //function to get dietary restrictions from db to display on savedDiet page
