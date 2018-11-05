@@ -291,7 +291,7 @@ app.post('/signUp', (req, res) =>{
 
 //function to test user security question answer against saved answer in db
 
-app.post('/reset', (req, res) => {
+app.post('/security', (req, res) => {
   console.log(req.body.params);
   db.getUserInfoByEmail(req.body.params.email)
     .then(user => {
@@ -301,6 +301,11 @@ app.post('/reset', (req, res) => {
       }
       res.send(securityObject);
     })
+})
+
+//function to reset password
+app.get('/userPassword', (req, res) => {
+  console.log(req.query.user)
 })
 //function to get dietary restrictions from db to display on savedDiet page
 app.get('/userDiet', (req, res) => {

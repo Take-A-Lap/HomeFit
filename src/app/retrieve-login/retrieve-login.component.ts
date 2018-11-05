@@ -26,6 +26,7 @@ export class RetrieveLoginComponent implements OnInit {
   updateSecurityQuestion() {
     let input = parseInt((<HTMLInputElement>document.getElementById('question')).value);
     this.securityQuestion = input;
+    console.log(this.securityQuestion)
   }
 
   updateSecurityQuestionAnswer(e) {
@@ -33,24 +34,30 @@ export class RetrieveLoginComponent implements OnInit {
   }
 
   getSecurityQuestionAnswer() {
-    this.httpClient.post('/reset', {
+    this.httpClient.post('/security', {
       params: {
         email: this.email,
         securityQuestion: this.securityQuestion,
         securityQuestionAnswer: this.securityQuestionAnswer
       }
     }).subscribe((answer) => {
-      console.log(answer);
       this.securityInfoFromDatabase = answer;
+      this.verifySecurityInfo();
     })
   }
 
   verifySecurityInfo() {
-    if (this.securityQuestion === this.securityInfoFromDatabase.question) {
+    if (this.securityQuestion === Number(this.securityInfoFromDatabase.question)) {
       if (this.securityQuestionAnswer === this.securityInfoFromDatabase.answer) {
+        console.log('question and answer match')
         document.cookie = `emailForPasswordReset=${this.email}`
         this.router.navigate(['/resetPassword']);
+        
+      } else {
+        console.log('Security Answer does not match saved information')
       }
+    } else {
+      console.log('Security Question does not match saved information')
     }
   }
 
