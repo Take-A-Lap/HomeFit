@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-password-reset',
@@ -13,7 +14,8 @@ export class PasswordResetComponent implements OnInit {
   password: string;
   password2: string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private router: Router) { }
 
   getCookieInfo() {
     return new Promise((resolve, reject) => {
@@ -40,6 +42,12 @@ export class PasswordResetComponent implements OnInit {
 
   updatePassword2(e) {
     this.password2 = e.target.value;
+  }
+
+  verifyPasswords() {
+    if (this.password === this.password2) {
+      this.router.navigate(['/login']);
+    }
   }
 
   ngOnInit() {
