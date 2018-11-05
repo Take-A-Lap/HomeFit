@@ -258,6 +258,7 @@ app.get('/breakfast', (req, res) => {
 })
 
 app.post('/signUp', (req, res) =>{
+  console.log(req.body.params)
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;
   let jogDist = req.body.params.miles;
@@ -269,9 +270,12 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
+  let securityQuestion = req.body.params.securityQuestion;
+  let securityQuestionAnswer = req.body.params.securityQuestionAnswer;
+
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(password, salt, (err, hash)=> {
-      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, hash)
+      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, securityQuestion, securityQuestionAnswer, hash)
         .then(()=>{
           return db.getUserInfoByEmail(email)
         })

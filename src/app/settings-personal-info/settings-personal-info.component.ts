@@ -25,6 +25,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
   miles: number;
   username: string;
   sex: string;
+  securityQuestion: any;
+  securityQuestionAnswer: string;
 
   updateSex() {
     var inputValue = (<HTMLInputElement>document.getElementById('sex')).value;
@@ -73,6 +75,15 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.username = e.target.value;
   }
 
+  updateSecurityQuestion(e) {
+    let input = parseInt((<HTMLInputElement>document.getElementById('question')).value);
+    this.securityQuestion = input;
+    console.log(this.securityQuestion)
+  }
+
+  updateSecurityQuestionAnswer(e) {
+    this.securityQuestionAnswer = e.target.value;
+  }
   addUser() {
     document.cookie = `homeFit=${this.email}`
     if(this.email === '???'){
@@ -91,6 +102,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
         email: this.email === 'Enter email' ? '' : this.email,
         userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
+        securityQuestion: this.securityQuestion,
+        securityQuestionAnswer: this.securityQuestionAnswer
       }
     
     }).subscribe(()=>this.nutritional())

@@ -44,6 +44,19 @@
                   (input)="updatePassword($event)"/>
         </div>
         <div class="form-group">
+          <label for="questionInput">Security Question</label>
+          <select class="scrollable-menu" id="question" (click)="updateSecurityQuestion()">
+            <option value="1">What is your mother's maiden name?</option>
+            <option value="2">What was the name of the high school you attended?</option>
+            <option value="3">What is the name of your favorite pet?</option>
+          </select>
+          <input  type="question"  
+                  class="form-control" 
+                  id="securityQuestion" 
+                  [value]="text" 
+                  (input)="updateSecurityQuestionAnswer($event)"/>
+        </div>
+        <div class="form-group">
           <label for="ageInput">Age</label>
           <input  type="number" 
                   class="form-control" 
