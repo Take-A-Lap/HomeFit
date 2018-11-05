@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PasswordResetComponent implements OnInit {
 
+  userInfo: any;
   email: string;
   password: string;
   password2: string;
@@ -24,11 +25,8 @@ export class PasswordResetComponent implements OnInit {
           user: email
         }
       }).subscribe(user => {
-          if (user) {
-            resolve(user)
-          } else {
-            reject('user rejection')
-          }
+          this.userInfo = user;
+          this.email = this.userInfo.user_email;
         },
           error => {
             console.error(error, 'error');

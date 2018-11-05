@@ -306,6 +306,10 @@ app.post('/security', (req, res) => {
 //function to reset password
 app.get('/userPassword', (req, res) => {
   console.log(req.query.user)
+  db.getUserInfoByEmail(req.query.user)
+    .then(user => {
+      res.send(user);
+    })
 })
 //function to get dietary restrictions from db to display on savedDiet page
 app.get('/userDiet', (req, res) => {
