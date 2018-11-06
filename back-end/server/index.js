@@ -305,6 +305,7 @@ app.post('/security', (req, res) => {
 
 //function to reset password
 app.get('/userPassword', (req, res) => {
+  console.log(req.query.user)
   db.getUserInfoByEmail(req.query.user)
     .then(user => {
       res.send(user);

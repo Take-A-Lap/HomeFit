@@ -14,7 +14,7 @@
   border-radius: 0px;
   background-color:#729085;
   text-align: center;
-  font-family: 'Ubuntu'
+  font-family: 'Josefin Sans', sans-serif
 }
 
 .nav a {
@@ -30,13 +30,13 @@ h2 {
   font-family: 'Josefin Sans', sans-serif;
 
   color: #F5F4F3;
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 p {
   font-family: 'Josefin Sans', sans-serif;
   color: #F5F4F3;
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
 }
 td {
   color: #F5F4F3;
@@ -54,7 +54,7 @@ td {
   position: sticky;
   top: 5px;
   color: #F5F4F3;
-  font-family: 'Ubuntu'
+  font-family: 'Josefin Sans', sans-serif
 }
 
 .input {
@@ -66,7 +66,7 @@ td {
   background-color: #B3B3FF;
   text-align: center;
   color: #F5F4F3;
-  font-family: 'Ubuntu'
+  font-family: 'Josefin Sans', sans-serif
 }
 
 .table-responsive {

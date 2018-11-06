@@ -13,11 +13,11 @@
 .card-header {
   background-color:#729085;
   color: white;
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .card-body {
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .card-footer {
@@ -27,5 +27,5 @@
 .button {
   background-color:#B73A58;
   color: white;
-  font-family: 'Ubuntu';
+  font-family: 'Josefin Sans', sans-serif;
 }

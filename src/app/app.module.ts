@@ -25,6 +25,9 @@ import {SlideshowModule} from 'ng-simple-slideshow';
 import { LoginComponent } from './login/login.component'
 import { UsernameService } from './username.service';
 import { LogoutComponent } from './logout/logout.component';
+import { ResetSuccessfulComponent } from './reset-successful/reset-successful.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { RetrieveLoginComponent } from './retrieve-login/retrieve-login.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -57,7 +60,10 @@ export function getAuthServiceConfigs() {
     BreakfastComponent,
     MealsComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    ResetSuccessfulComponent,
+    PasswordResetComponent,
+    RetrieveLoginComponent
   ],
   imports: [
     SocialLoginModule,

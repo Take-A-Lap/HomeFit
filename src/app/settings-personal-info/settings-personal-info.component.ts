@@ -2,6 +2,7 @@ import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsernameService } from '../username.service';
 import { Router } from '@angular/router';
+// import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -31,6 +32,7 @@ export class SettingsPersonalInfoComponent implements OnInit {
   updateSex() {
     var inputValue = (<HTMLInputElement>document.getElementById('sex')).value;
     this.sex = inputValue;
+    console.log(this.sex);
   }
 
   updateEmail(e) {
