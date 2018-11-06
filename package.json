@@ -42,7 +42,6 @@
     "ng-bootstrap": "^1.6.3",
     "ng-simple-slideshow": "^1.2.5",
     "passport": "^0.4.0",
-    "passport-google-oauth": "^1.0.0",
     "pg-promise": "^8.4.6",
     "pug": "^2.0.3",
     "request": "^2.88.0",

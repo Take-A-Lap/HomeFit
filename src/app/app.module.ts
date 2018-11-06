@@ -1,10 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {
-  SocialLoginModule,
-  AuthServiceConfig,
-  GoogleLoginProvider,
-  FacebookLoginProvider,
+  AuthServiceConfig
 } from "angular-6-social-login";
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -29,26 +26,6 @@ import { ResetSuccessfulComponent } from './reset-successful/reset-successful.co
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { RetrieveLoginComponent } from './retrieve-login/retrieve-login.component';
 
-export function getAuthServiceConfigs() {
-  let config = new AuthServiceConfig(
-    [
-      // {
-      //   id: FacebookLoginProvider.PROVIDER_ID,
-      //   provider: new FacebookLoginProvider("Your-Facebook-app-id")
-      // },
-      {
-        id: GoogleLoginProvider.PROVIDER_ID,
-        provider: new GoogleLoginProvider("769076485717-aldiftq59isia5tai1hsirghmcbt8uis.apps.googleusercontent.com")
-      },
-      // {
-      //   id: LinkedinLoginProvider.PROVIDER_ID,
-      //   provider: new LinkedinLoginProvider("1098828800522-m2ig6bieilc3tpqvmlcpdvrpvn86q4ks.apps.googleusercontent.com")
-      // },
-    ]
-  );
-  return config;
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +43,6 @@ export function getAuthServiceConfigs() {
     RetrieveLoginComponent
   ],
   imports: [
-    SocialLoginModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -76,7 +52,7 @@ export function getAuthServiceConfigs() {
   providers: [
     FoodService,
     UsernameService,
-    {provide: AuthServiceConfig, useFactory: getAuthServiceConfigs},
+    {provide: AuthServiceConfig},
     WindowRef
   ],
   bootstrap: [AppComponent]
