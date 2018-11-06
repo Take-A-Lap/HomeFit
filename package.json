@@ -39,10 +39,17 @@
     "html": "^1.0.0",
     "jest-preset-angular": "^6.0.1",
     "jquery": "^3.3.1",
+<<<<<<< HEAD
     "ng-simple-slideshow": "^1.2.6",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "pg-promise": "^8.5.1",
+=======
+    "ng-bootstrap": "^1.6.3",
+    "ng-simple-slideshow": "^1.2.5",
+    "passport": "^0.4.0",
+    "pg-promise": "^8.4.6",
+>>>>>>> 484594c13dbe452a7053ad3f5a7ec4f88455f1d1
     "pug": "^2.0.3",
     "request": "^2.88.0",
     "rxjs": "~6.2.0",
