@@ -212,7 +212,7 @@ app.intent('describe exercise', conv => {
   } else {
     if(current !== undefined){
 
-      conv.ask('<speak> <prosody pitch="+16%"> ' + current.description + " </prosody> </speak>");
+      conv.ask('<speak> <prosody pitch="+16%"> ' + current.description + ' </prosody> <p><prosody pitch="+12%"><s> Now that you know how to do ' + current.name + '</s><s> We can get going whenever you are ready or we can go over how to perform the workout again. </s> </prosody></p></speak>');
     } else {
       conv.ask(`
       <speak>

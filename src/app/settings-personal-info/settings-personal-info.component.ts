@@ -2,6 +2,7 @@ import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsernameService } from '../username.service';
 import { Router } from '@angular/router';
+// import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-settings-personal-info',
@@ -25,10 +26,13 @@ export class SettingsPersonalInfoComponent implements OnInit {
   miles: number;
   username: string;
   sex: string;
+  securityQuestion: any;
+  securityQuestionAnswer: string;
 
   updateSex() {
     var inputValue = (<HTMLInputElement>document.getElementById('sex')).value;
     this.sex = inputValue;
+    console.log(this.sex);
   }
 
   updateEmail(e) {
@@ -73,6 +77,15 @@ export class SettingsPersonalInfoComponent implements OnInit {
     this.username = e.target.value;
   }
 
+  updateSecurityQuestion(e) {
+    let input = parseInt((<HTMLInputElement>document.getElementById('question')).value);
+    this.securityQuestion = input;
+    console.log(this.securityQuestion)
+  }
+
+  updateSecurityQuestionAnswer(e) {
+    this.securityQuestionAnswer = e.target.value;
+  }
   addUser() {
     document.cookie = `homeFit=${this.email}`
     if(this.email === '???'){
@@ -91,6 +104,8 @@ export class SettingsPersonalInfoComponent implements OnInit {
         email: this.email === 'Enter email' ? '' : this.email,
         userName: this.username === 'What name do you go by ?' ? '' : this.username,
         password: this.password,
+        securityQuestion: this.securityQuestion,
+        securityQuestionAnswer: this.securityQuestionAnswer
       }
     
     }).subscribe(()=>this.nutritional())
