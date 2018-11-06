@@ -258,6 +258,7 @@ app.get('/breakfast', (req, res) => {
 })
 
 app.post('/signUp', (req, res) =>{
+  console.log(req.body.params)
   let weight = req.body.params.weight;
   let numPushUps = req.body.params.push_ups;
   let jogDist = req.body.params.miles;
@@ -269,9 +270,12 @@ app.post('/signUp', (req, res) =>{
   let email  = req.body.params.email;
   let username = req.body.params.userName;
   let password = req.body.params.password;
+  let securityQuestion = req.body.params.securityQuestion;
+  let securityQuestionAnswer = req.body.params.securityQuestionAnswer;
+
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(password, salt, (err, hash)=> {
-      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, hash)
+      db.addNewUser(weight, numPushUps, jogDist, age, sex, height, squatComf, goals, username, email, securityQuestion, securityQuestionAnswer, hash)
         .then(()=>{
           return db.getUserInfoByEmail(email)
         })
@@ -285,6 +289,44 @@ app.post('/signUp', (req, res) =>{
   });
 })
 
+//function to test user security question answer against saved answer in db
+
+app.post('/security', (req, res) => {
+  console.log(req.body.params);
+  db.getUserInfoByEmail(req.body.params.email)
+    .then(user => {
+      const securityObject = {
+        question: user.security_question,
+        answer: user.security_answer
+      }
+      res.send(securityObject);
+    })
+})
+
+//function to reset password
+app.get('/userPassword', (req, res) => {
+  console.log(req.query.user)
+  db.getUserInfoByEmail(req.query.user)
+    .then(user => {
+      res.send(user);
+    })
+})
+
+app.post('/newPassword', (req, res) => {
+  console.log(req.body.params, 'line 315')
+  const email = req.body.params.email;
+  const password = req.body.params.newPassword;
+  db.getUserInfoByEmail(email)
+    .then(user => {
+      console.log(user)
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+          db.updatePassword(hash, user.id);
+          res.end();
+        })
+      })
+    })
+})
 //function to get dietary restrictions from db to display on savedDiet page
 app.get('/userDiet', (req, res) => {
   console.log(req.query.user);

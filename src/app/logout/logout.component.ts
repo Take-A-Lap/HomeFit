@@ -13,6 +13,7 @@ export class LogoutComponent implements OnInit {
 
   getEmail() {
     let emailArr = document.cookie.split('=');
+    console.log(emailArr)
     this.email = emailArr[emailArr.length -1];
   }
 
