@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  AuthService,
-  FacebookLoginProvider,
-  GoogleLoginProvider
-} from 'angular-6-social-login';
 // import { homedir } from 'os';
 import { HttpClient } from '@angular/common/http';
 
@@ -19,29 +14,9 @@ export class SignUpComponent implements OnInit {
   user;
 
   constructor(private router: Router, 
-              private httpClient: HttpClient,
-              private socialAuthService: AuthService) { }
+              private httpClient: HttpClient) { }
 
   onSignIn() {
-  }
-
-  socialSignIn(/*socialPlatform: string*/) {
-    let socialPlatformProvider;
-    // if (socialPlatform == "facebook") {
-    //   socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    // } else if (socialPlatform == "google") {
-      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
-    // } else if (socialPlatform == "linkedin") {
-    //   socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
-    // }
-
-    this.socialAuthService.signIn(socialPlatformProvider).then(
-      (userData) => {
-        // Now sign-in with userData
-        // ...
-
-      }
-    );
   }
   
   changePage() {
