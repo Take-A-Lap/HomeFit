@@ -15,10 +15,7 @@
   <div class="row">
     <div class="col-md-12">
       <h2>Dietary Restrictions</h2>
-      <p>Choose what types of food to exclude from your dietary recommendations</p>
-      <a routerLink="/home">
-        <button class="submit_button" (click)="onSubmit()">Submit</button>
-      </a>
+      <!-- <p>Choose what types of food to exclude from your dietary recommendations</p> -->
       <table class="table-responsive">
         <tbody>
           <tr>
@@ -29,19 +26,15 @@
                 Sesame-Free</button></td>
           </tr>
           <tr>
-            <td><button class="input" id="high-fiber" value="high-fiber" (click)="onClick($event.target.value)">
-                High-fiber</button></td>
+            <td><button class="input" id="high-fiber" value="high-fiber" (click)="onClick($event.target.value)"> High-fiber</button></td>
             <td><button class="input" id="low-carb" value="low-carb" (click)="onClick($event.target.value)"> Low-Carb</button></td>
-            <td><button class="input" id="high-carb" value="high-carb" (click)="onClick($event.target.value)">
-                High-Carb</button></td>
+            <td><button class="input" id="high-carb" value="high-carb" (click)="onClick($event.target.value)"> High-Carb</button></td>
           </tr>
           <tr>
-            <td><button class="input" id="low-sodium" value="low-sodium" (click)="onClick($event.target.value)">
-                Low-Sodium</button></td>
+            <td><button class="input" id="low-sodium" value="low-sodium" (click)="onClick($event.target.value)"> Low-Sodium</button></td>
             <td><button class="input" id="alcohol-free" value="alcohol-free" (click)="onClick($event.target.value)">
                 Alcohol-Free</button></td>
-            <td><button class="input" id="pork-free" value="pork-free" (click)="onClick($event.target.value)">
-                Pork-Free</button></td>
+            <td><button class="input" id="pork-free" value="pork-free" (click)="onClick($event.target.value)"> Pork-Free</button></td>
           </tr>
           <tr>
             <td><button class="input" id="celery-free" value="celery-free" (click)="onClick($event.target.value)">Celery-Free</button></td>
@@ -56,7 +49,8 @@
           <tr>
             <td><button class="input" id="soy-free" value="soy-free" (click)="onClick($event.target.value)">Soy-Free</button></td>
             <td><button class="input" id="tree-nut-free" value="tree-nut-free" (click)="onClick($event.target.value)">Tree-Nut-Free</button></td>
-            <td><button class="input" id="pescatarian" value="pescatarian" (click)="onClick($event.target.value)">Pescatarian</button></td>
+      
+            <td><button class="input" id="kosher" value="kosher" (click)="onClick($event.target.value)">Kosher</button></td><!-- <td><button class="input" id="pescatarian" value="pescatarian" (click)="onClick($event.target.value)">Pescatarian</button></td> -->
           </tr>
           <tr>
             <td><button class="input" id="sugar-conscious" value="sugar-conscious" (click)="onClick($event.target.value)">Sugar-Conscious</button></td>
@@ -64,27 +58,23 @@
             <td><button class="input" id="low-sugar" value="low-sugar" (click)="onClick($event.target.value)">Low-Sugar</button></td>
           </tr>
           <tr>
-            <td><button class="input" id="vegan" value="vegan" (click)="onClick($event.target.value)">Vegan</button></td>
-            <td><button class="input" id="vegetarian" value="vegetarian" (click)="onClick($event.target.value)">Vegetarian</button></td>
-            <td><button class="input" id="paleo" value="paleo" (click)="onClick($event.target.value)">Paleo</button></td>
-          </tr>
-          <tr>
+            <td><button class="input" id="low-potassium" value="low-potassium" (click)="onClick($event.target.value)">Low-Potassium</button></td>
+            <!-- <td><button class="input" id="vegan" value="vegan" (click)="onClick($event.target.value)">Vegan</button></td> -->
             <td><button class="input" id="egg-free" value="egg-free" (click)="onClick($event.target.value)">Egg-Free</button></td>
-            <td><button class="input" id="fish-free" value="fish-free" (click)="onClick($event.target.value)">Fish-Free</button></td>
-            <td><button class="input" id="mustard-free" value="mustard-free" (click)="onClick($event.target.value)">Mustard-Free</button></td>
+            <!-- <td><button class="input" id="vegetarian" value="vegetarian" (click)="onClick($event.target.value)">Vegetarian</button></td> -->
+            <td><button class="input" id="paleo" value="paleo" (click)="onClick($event.target.value)">Paleo</button></td>
           </tr>
           <tr>
             <td><button class="input" id="gluten-free" value="gluten-free" (click)="onClick($event.target.value)">Gluten-Free</button></td>
             <td><button class="input" id="kidney-friendly" value="kidney-friendly" (click)="onClick($event.target.value)">Kidney-Friendly</button></td>
-            <td><button class="input" id="no-oil-added" value="no-oil-added" (click)="onClick($event.target.value)">No
-                Oil Added</button></td>
-          </tr>
-          <tr>
-            <td><button class="input" id="kosher" value="kosher" (click)="onClick($event.target.value)">Kosher</button></td>
-            <td><button class="input" id="low-potassium" value="low-potassium" (click)="onClick($event.target.value)">Low-Potassium</button></td>
+            <td><button class="input" id="no-oil-added" value="no-oil-added" (click)="onClick($event.target.value)">No Oil
+                Added</button></td>
           </tr>
         </tbody>
       </table>
+      <a routerLink="/home">
+        <button class="submit_button" (click)="onSubmit()">Submit</button>
+      </a>
     </div>
   </div>
   <br>
