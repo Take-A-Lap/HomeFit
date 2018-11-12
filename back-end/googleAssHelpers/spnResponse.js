@@ -9,7 +9,7 @@ const spanishLinkAccountObjResponsesMasculine = [
     after: '</s>, <s> por conectar a su cuenta a la sesión actual. </s> <s> Empezamos. </s> </speak>'
   },
   {
-    before: '<speak> <s> Disculpa, por la molestia, </s> <p> <s>',
+    before: '<speak> <s> OK, </s> <p> <s>',
     after: '</s> </p> <break time="750ms" /> <s> Hemos conectado su cuenta a la sesión actual con nosotros. </s> <s> Empezaremos con la sesión de entrenamiento de hoy. </s> </speak>'
   },
   {
@@ -17,7 +17,7 @@ const spanishLinkAccountObjResponsesMasculine = [
     after: '</s> </p> <s> Todo bien, </s> <s> Empezamos con el entrenamiento. </s> </speak>'
   },
   {
-    before: '<speak> <s> Me alegra saber de usted',
+    before: '<speak> <s> Bienvenidos',
     after: '</s> <s> si está listo, podemos empezar con el entrenamiento de hoy. </s> </speak>'
   }
 ];
