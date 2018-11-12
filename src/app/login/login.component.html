@@ -31,6 +31,7 @@
                 (input)="updatePassword($event)"
                 (keyup.enter)="onEnter(authenticate())"
               />
+              <div class="failureMessage" *ngIf="failedMessage">{{ failedMessage }}</div>
               <br>
               <br>
           <!-- <a routerLink="/dietaryRestrictions"> -->
