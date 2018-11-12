@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   email = '';
   password = '';
+  failedMessage = '';
   
   updateEmail(e) {
     this.email = e.target.value;
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
         document.cookie = `homeFit=${this.email}`;
         this.goHome();
       } else {
-        this.joinUs();
+        this.failedMessage = 'Password Incorrect';
       }
     })
   }

@@ -24,7 +24,7 @@
             <select class="scrollable-menu" id="sex" (click)="updateSex()">
               <option value="f">Female</option>
               <option value="m">Male</option>
-              <option value="n/a">Prefer Not to Answer</option>
+              <!-- <option value="n/a">Prefer Not to Answer</option> -->
             </select>
         </div>
         <div class="form-group">
@@ -53,7 +53,7 @@
           <input  type="question"  
                   class="form-control" 
                   id="securityQuestion" 
-                  [value]="text" 
+                  placeholder="Answer to Security Question"
                   (input)="updateSecurityQuestionAnswer($event)"/>
         </div>
         <!-- <div class="dropdown">
