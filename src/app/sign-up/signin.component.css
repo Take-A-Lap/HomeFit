@@ -49,3 +49,8 @@
 .forgot {
   text-align: center;
 }
+
+#copyright {
+  font-family: 'Josefin Sans', sans-serif;
+  color: #B3B3FF;
+}
