@@ -16,7 +16,7 @@
 }
 
 .container {
-  background-color: #27213B;
+  background-color: #b0c4de;
   background-size: contain;
   min-width: 100%;
   min-height: 100%;
@@ -66,7 +66,7 @@ iframe {
 }
 
 h2 {
-  color: #F5F4F3;
+  color: #27213B;
   font-size: 35px;
   text-align: center;
   font-family: 'Josefin Sans', sans-serif;

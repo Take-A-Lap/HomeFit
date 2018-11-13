@@ -206,7 +206,7 @@ app.post('/weather', (req, res) => {
       weatherInfo.city = response[2].City;
       weatherInfo.state = response[2].State;
       weatherInfo.country = response[2].Country;
-      // console.log(weatherInfo)
+      console.log(weatherInfo)
     })
     .then(() => {
       return weather.runningRecommendations(weatherInfo)
